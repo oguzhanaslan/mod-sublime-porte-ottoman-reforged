@@ -1,0 +1,31 @@
+# Operating systems
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.code-workspace
+*.suo
+*.user
+*~
+*.swp
+
+# Temporary files and caches
+*.tmp
+*.temp
+*.bak
+*.cache
+.cache/
+
+# Local logs and validator output
+*.log
+logs/
+tiger-output/
+validation-output/
+
+# Local environment files
+.env
+.env.*
+!.env.example

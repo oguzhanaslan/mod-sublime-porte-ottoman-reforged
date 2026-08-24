@@ -1,0 +1,14 @@
+* text=auto
+
+*.txt text eol=crlf
+*.yml text eol=crlf
+*.mod text eol=crlf
+*.md text eol=lf
+*.json text eol=lf
+
+*.dds binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ogg binary
+*.wav binary
