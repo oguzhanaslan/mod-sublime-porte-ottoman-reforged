@@ -44,6 +44,8 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Great Power Diplomacy
 
+- **R-08 — Great Eastern Crisis reproduction matrix:** [`docs/research/R08_gec_reproduction_matrix.md`](docs/research/R08_gec_reproduction_matrix.md). Victoria 3 1.13.11 vanilla and current-mod script/scope audit completed for GEC-01–08. The approved four-fix minimum slice was implemented as I-04 in `53e870d`; controlled runtime validation, player/AI comparison, and SME exact-0.5 reproduction remain pending/unproduced. **COMPLETE — USED IN I-04; TIGER CLEAN FOR I-04; RUNTIME SMOKE TEST PENDING.**
+
 ## Crimean War
 
 ## Ottomanism
