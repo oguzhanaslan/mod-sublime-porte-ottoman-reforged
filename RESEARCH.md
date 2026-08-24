@@ -66,6 +66,8 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Historical Characters
 
+- **Ottoman Characters & Naming Audit — Victoria 3 1.13.11:** [`docs/audits/ottoman-characters-naming-audit.md`](docs/audits/ottoman-characters-naming-audit.md). Vanilla Turkish name pools, rulers/heirs, starting and generated commanders, and existing mod overlap audited against 19th-century register studies and commander biographies; final proposal retains five day-one commanders by replacing Abdülkerim Nâdir with Dârendeli İzzet Mehmed Paşa. **APPROVED AND IMPLEMENTED IN I-04; RUNTIME SMOKE TEST PENDING.**
+
 ## Historical Companies
 
 ## Alternative History

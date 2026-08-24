@@ -1,0 +1,35 @@
+﻿# NOTE: "Pasha" is a title, not a name. However, due to some Ottoman Turkish names lacking a last name, it is used in place of one
+
+CHARACTERS = {
+	c:TUR ?= {
+		create_character = {
+			template = tur_mahmut_osmanoglu_template
+		}
+
+		create_character = {
+			template = tur_abdulmecid_osmanoglu_template
+		}
+
+		create_character = {
+			template = TUR_mehmet_emin_rauf_pasha
+		}
+
+		create_character = {
+			template = TUR_mustafa_reshid_pasha
+		}
+
+		create_character = {
+			template = TUR_mustafa_bushatli
+		}
+
+		create_character = {
+			template = TUR_koca_huesrev_pasha
+		}
+
+		create_character = {
+			template = TUR_mustafa_asim_mekkizade
+		}
+
+		# Opening commanders are created and assigned with their formations.
+	}
+}

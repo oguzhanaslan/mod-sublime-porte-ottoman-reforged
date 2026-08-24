@@ -1,0 +1,61 @@
+﻿# Complete late-loading culture definition: Victoria 3 culture entries do not expose additive name-pool extension.
+REPLACE:turkish = {
+	color = hsv{ 0.99 0.48 0.80 }
+	religion = sunni
+	heritage = heritage_anatolian
+	language = language_oghuz
+	obsessions = { coffee }
+	traditions = { tradition_rumelian }
+
+	male_common_first_names = {
+		Abdurrahman Abdulaziz Abdulhamid Abdulkadir Abdulkerim Abdullatif Abdulmecid Abdulrahim Abdullah Ahmed
+		Akif Ali Arif Aziz Bahaeddin Bekir Celaleddin Daud Edhem Emin Feyzullah Halil Hamza Hasan Hayrullah
+		Hueseyin Huesrev Ibrahim Ismail Izzet Kamil Mahmud Mehmed Mehmed_Ali Mehmed_Emin Mehmed_Said Mehmed_Shakir
+		Murad Musa Mustafa Numan Osman Omer Reshid Riza Said Salih Selim Suleyman Yusuf
+	}
+
+	female_common_first_names = {
+		Adile Afife Aliye Arife Asiye Atike Ayse Emine Emetullah Esma Fatma Hafize Halime Hanife Hatice Havva
+		Meryem Munise Naime Nefise Rabia Raziye Rukiye Safiye Saliha Sherife UEmmue_Guelsuem Zahide Zehra Zeynep
+	}
+
+	common_last_names = {
+		sp_ahmedoglu sp_alioglu sp_bekiroglu sp_hasanoglu sp_hueseyinoglu sp_ibrahimoglu sp_ismailoglu sp_mahmudoglu
+		sp_mehmedoglu sp_mustafaoglu sp_osmanoglu sp_omeroglu sp_salihoglu sp_selimoglu sp_suleymanoglu sp_yusufoglu
+		sp_ahmedzade sp_halilzade sp_mehmedzade sp_mustafazade
+		sp_abaci sp_arabaci sp_bakirci sp_berber sp_bicakci sp_boyaci sp_cizmeci sp_debbag sp_degirmenci sp_demirci
+		sp_ekmekci sp_hallac sp_hattat sp_helvaci sp_kahveci sp_kalayci sp_kasap sp_nalbant sp_sarac sp_semerci
+		sp_terzi sp_tufekci sp_yagci sp_yorganci sp_zurnaci
+		sp_akhisarli sp_amasyali sp_ankarali sp_benderli sp_bolulu sp_bosnali sp_bursali sp_diyarbekirli sp_edirneli
+		sp_erzurumlu sp_filibeli sp_giritli sp_istanbullu sp_karamanli sp_kastamonulu sp_kibrisli sp_kutahyali
+		sp_manastirli sp_prizrenli sp_ruscuklu sp_selanikli sp_sumnulu sp_trabzonlu sp_uskudarli sp_vidinli
+	}
+
+	noble_last_names = {
+		sp_alemdarzade sp_arabzade sp_azmzade sp_babanzade sp_bostanzade sp_bushatli sp_canboladzade sp_caniklizade
+		sp_candarli sp_capanoglu sp_celebizade sp_cengeloglu sp_durrizade sp_ebussuudzade sp_hazinedaroglu
+		sp_ivazpasazade sp_karaosmanzade sp_kavalali sp_kopruluzade sp_mekkizade sp_menemenlizade sp_pasmakcizade
+		sp_pirizade sp_ramazanizade sp_tekelioglu sp_tepedelenlizade sp_tirsiniklizade sp_tuzcuoglu sp_zaimzade
+		sp_zulfikarzade
+	}
+
+	male_regal_first_names = {
+		Abdulaziz Abdulhamid Abdulmecid Ahmed Alaeddin Bayezid Burhaneddin Cem Kemaleddin Mahmud Mehmed Murad
+		Nizameddin Nureddin Osman Selim Suleyman Vahideddin Yusuf_Izzeddin Mehmed_Reshad
+	}
+
+	female_regal_first_names = {
+		Adile Adviye Atiye Behiye Cemile DU_zdidil Emine Esma Fatma Fehime Hatice Mediha Mihrimah Munire Naile
+		Refia Saliha Seniha Sadiye Zeynep
+	}
+
+	regal_last_names = { Osmanoglu }
+
+	ethnicities = {
+		1 = arab
+		2 = north_caucasian
+		1 = slavic
+	}
+	graphics = arabic
+	seal_and_signature_texture = "gfx/interface/diplomatic_treaties/seal_and_signature_cultures/diplomatic_treaties_seal_and_signature_ottoman.dds"
+}

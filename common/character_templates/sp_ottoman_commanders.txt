@@ -1,0 +1,105 @@
+﻿sp_tur_darendeli_izzet_mehmed_pasha = {
+	is_general = yes
+	first_name = sp_darendeli_izzet_mehmed
+	last_name = Pasha
+	historical = yes
+	culture = cu:turkish
+	religion = rel:sunni
+	interest_group = ig_armed_forces
+	ideology = ideology_royalist
+	birth_date = 1792.1.1 # Only the 1792-93 birth year range is known.
+	home_region = STATE_ANKARA
+	hq = region_near_east
+	commander_rank = commander_rank_3
+	traits = {
+		basic_defensive_strategist
+	}
+}
+
+sp_tur_cengeloglu_tahir_mehmed_pasha = {
+	is_admiral = yes
+	first_name = sp_cengeloglu_tahir_mehmed
+	last_name = Pasha
+	historical = yes
+	culture = cu:turkish
+	religion = rel:sunni
+	interest_group = ig_armed_forces
+	ideology = ideology_royalist
+	age = 50 # Exact birth date is not established; conservative approximate age.
+	home_region = STATE_EASTERN_THRACE
+	hq = region_near_east
+	commander_rank = commander_rank_3
+	traits = {
+		basic_naval_commander
+	}
+}
+
+sp_tur_yaver_pasha_later = {
+	first_name = Baldwin_Wake
+	last_name = Walker
+	historical = yes
+	culture = cu:british
+	religion = rel:protestant
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1802.1.6
+	home_region = STATE_EASTERN_THRACE
+	commander_rank = default
+	traits = {
+		basic_naval_commander
+		basic_diplomat
+	}
+	commander_usage = {
+		country_trigger = {
+			c:TUR ?= THIS
+		}
+		role = admiral
+		earliest_usage_date = 1840.8.6
+		latest_usage_date = 1844.12.31
+		chance = 50
+	}
+}
+
+sp_tur_abdulkerim_nadir_pasha_later = {
+	first_name = Abdulkerim_Nadir
+	last_name = Pasha
+	historical = yes
+	culture = cu:turkish
+	religion = rel:sunni
+	interest_group = ig_armed_forces
+	ideology = ideology_royalist
+	birth_date = 1807.1.1 # Only the birth year is established.
+	home_region = STATE_EASTERN_THRACE
+	commander_rank = default
+	traits = {
+		basic_offensive_planner
+	}
+	commander_usage = {
+		country_trigger = {
+			c:TUR ?= THIS
+		}
+		role = general
+		earliest_usage_date = 1847.1.1
+		latest_usage_date = 1882.12.31
+		chance = 50
+	}
+}
+
+sp_tur_resid_mehmed_pasha = {
+	is_general = yes
+	first_name = Resid_Mehmed
+	last_name = Pasha
+	historical = yes
+	culture = cu:turkish
+	religion = rel:sunni
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+	age = 59 # Estimated from a reported age of about sixty at his November 1836 death.
+	home_region = STATE_DIYARBAKIR
+	hq = region_near_east
+	commander_rank = commander_rank_3
+	traits = {
+		mountain_commander
+		cruel
+	}
+}
