@@ -13,6 +13,13 @@
       "display_name": "Community Mod Framework",
       "resource_type": "mod",
       "version": "1.*"
+    },
+    {
+      "rel_type": "dependency",
+      "id": "com.github.Victoria-3-Modding-Co-op.Community-State-Framework",
+      "display_name": "Community State Framework",
+      "resource_type": "mod",
+      "version": "1.*"
     }
   ],
   "game_custom_data": { "multiplayer_synchronized": true }
