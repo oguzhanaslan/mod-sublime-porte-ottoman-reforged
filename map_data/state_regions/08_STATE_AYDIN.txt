@@ -1,0 +1,19 @@
+﻿STATE_AYDIN = {
+    id = 425
+    subsistence_building = "building_subsistence_farm"
+    traits = { "state_trait_natural_harbors" }
+    provinces = { "x15CC91" "x205020" "x20AAE2" "x6E8DF4" "x95ABDB" "xA090A0" "xABD1D0" "xB020E0" "xBEA226" "xC0FCA9" "xE8A5DB" "xFD1F86" }
+    city = "xE8A5DB"
+    port = "xB020E0"
+    farm = "x15CC91"
+    mine = "xABD1D0"
+    wood = "x205020"
+    arable_land = 45
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_cotton_plantation" "building_silk_plantation" "building_tobacco_plantation" "building_vineyard" }
+    capped_resources = {
+        building_coal_mine = 48
+        building_logging_camp = 5
+        building_fishing_wharf = 15
+    }
+    naval_exit_id = 3035
+}

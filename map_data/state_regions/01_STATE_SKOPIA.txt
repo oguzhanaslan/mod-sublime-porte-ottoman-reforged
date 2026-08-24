@@ -1,0 +1,16 @@
+﻿STATE_SKOPIA = {
+    id = 126
+    subsistence_building = "building_subsistence_farm"
+    provinces = { "x11E0A0" "x419E6F" "x494421" "x596DE2" "x7CF777" "x800FE7" "xE0118B" }
+    city = "x7CF777"
+    farm = "x11E0A0"
+    mine = "x596DE2"
+    wood = "x494421"
+    arable_land = 30
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_tobacco_plantation" "building_vineyard" }
+    capped_resources = {
+        building_iron_mine = 36
+        building_lead_mine = 18
+        building_logging_camp = 16
+    }
+}

@@ -1,0 +1,19 @@
+﻿STATE_MOSUL = {
+    id = 411
+    subsistence_building = "building_subsistence_orchard"
+    provinces = { "x00B0A0" "x029A2B" "x07BB1D" "x0A79A0" "x111137" "x130A78" "x1F3350" "x2090E0" "x2F0CE8" "x389F34" "x4BE9F1" "x6F55BA" "xA2BD38" "xB09D9C" "xBAF0C7" "xC11149" "xD097E1" "xE4E63B" }
+    traits = { "state_trait_tigris_river" }
+    city = "x6F55BA"
+    farm = "x07BB1D"
+    mine = "xE4E63B"
+    wood = "x4BE9F1"
+    arable_land = 30
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_cotton_plantation" "building_tobacco_plantation" }
+    capped_resources = {
+        building_sulfur_mine = 36
+    }
+    resource = {
+        type = "building_oil_rig"
+        undiscovered_amount = 60
+    }
+}

@@ -1,0 +1,20 @@
+﻿STATE_HUDAVENDIGAR = {
+    id = 424
+    subsistence_building = "building_subsistence_farm"
+    provinces = { "x13886D" "x2F78D7" "x3020E0" "x30A060" "x31CD7B" "x34C810" "x3F1505" "x809000" "xB0A060" "xB4D60B" "xB8FEBB" }
+    city = "x13886D"
+    port = "xB0A060"
+    farm = "x3F1505"
+    mine = "xB8FEBB"
+    wood = "xB4D60B"
+    arable_land = 40
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_cotton_plantation" "building_silk_plantation" "building_tobacco_plantation" "building_vineyard" }
+    capped_resources = {
+        building_coal_mine = 16
+        building_iron_mine = 18
+        building_lead_mine = 18
+        building_logging_camp = 9
+        building_fishing_wharf = 8
+    }
+    naval_exit_id = 3035
+}

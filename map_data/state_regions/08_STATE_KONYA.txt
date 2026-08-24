@@ -1,0 +1,19 @@
+﻿STATE_KONYA = {
+    id = 426
+    subsistence_building = "building_subsistence_farm"
+    traits = { "state_trait_anatolian_plateau" }
+    provinces = { "x02FE8B" "x04C595" "x0EABBE" "x1D4A61" "x375BA2" "x401060" "x472F2C" "x47B8CA" "x4CEBB4" "x547B95" "x55148F" "x56087A" "x601020" "x602629" "x65DE76" "x661DB3" "x669397" "x6DB349" "x70373E" "x76099B" "x76C0DF" "x802F12" "x8505DE" "x8F7C3D" "x93F78F" "x9E386C" "x9FFCAB" "xA4ED5C" "xB54481" "xBACCB8" "xBB0729" "xBC2D46" "xC0A9EB" "xC1905F" "xCB2093" "xCCE5E0" "xDE59BB" "xE01020" "xE090A0" "xE8D503" "xEB98F3" "xF28CC2" "xF7871B" "xFA1AEF" }
+    city = "x547B95"
+    port = "x04C595"
+    farm = "x669397"
+    mine = "xFA1AEF"
+    wood = "x1D4A61"
+    arable_land = 40
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_cotton_plantation" "building_tobacco_plantation" "building_opium_plantation" "building_vineyard" }
+    capped_resources = {
+        building_sulfur_mine = 12
+        building_logging_camp = 4
+        building_fishing_wharf = 6
+    }
+    naval_exit_id = 3034
+}

@@ -1,0 +1,19 @@
+﻿STATE_BULGARIA = {
+    id = 113
+    subsistence_building = "building_subsistence_farm"
+    provinces = { "x2038F6" "x52BF3E" "x64275F" "x6768DB" "x71A0A0" "xB4F1D6" "xB55757" "xC2E2B9" "xC59A98" "xC866AF" "xCDD237" "xD06121" "xE8D59C" "xEC96F3" "xEFEAA0" "xF0A0A0" }
+    traits = { "state_trait_danube_river" }
+    city = "xC59A98"
+    port = "xF0A0A0"
+    farm = "x64275F"
+    mine = "x71A0A0"
+    wood = "x6768DB"
+    arable_land = 45
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_tobacco_plantation" "building_vineyard" }
+    capped_resources = {
+        building_coal_mine = 24
+        building_logging_camp = 14
+        building_fishing_wharf = 2
+    }
+    naval_exit_id = 3036
+}

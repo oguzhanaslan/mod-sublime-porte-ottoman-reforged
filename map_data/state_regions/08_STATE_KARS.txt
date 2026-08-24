@@ -1,0 +1,17 @@
+﻿STATE_KARS = {
+    id = 991
+    subsistence_building = "building_subsistence_farm"
+    provinces = { "x009000" "x327755" "x467F92" "x809001" "x8A9689" "xB8481F" "xC09080" }
+    city = "x467F92"
+    port = "x809001"
+    farm = "x8A9689"
+    mine = "x327755"
+    wood = "x8A9689"
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 9
+        building_fishing_wharf = 5
+    }
+    naval_exit_id = 3094
+}

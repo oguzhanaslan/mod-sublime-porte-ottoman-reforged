@@ -1,0 +1,19 @@
+﻿STATE_KASTAMONU = {
+    id = 427
+    subsistence_building = "building_subsistence_farm"
+    traits = { "state_trait_pontus" "state_trait_zonguldak_basin" }
+    provinces = { "x1D8401" "x312F4B" "x415C04" "x449057" "x6089D1" "x747BB5" "x7A7E06" "xB82B24" "xBEBB3F" "xC01000" "xC1C893" "xE1E090" "xF040E0" }
+    city = "x415C04"
+    port = "x7A7E06"
+    farm = "x747BB5"
+    mine = "xC01000"
+    wood = "xBEBB3F"
+    arable_land = 40
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_tobacco_plantation" "building_opium_plantation" "building_vineyard" }
+    capped_resources = {
+        building_coal_mine = 72
+        building_logging_camp = 11
+        building_fishing_wharf = 10
+    }
+    naval_exit_id = 3036
+}
