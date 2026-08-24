@@ -1,4 +1,4 @@
-POPS = {
+﻿POPS = {
 	s:STATE_NEJD = {
 		region_state:NEJ = {
 			create_pop = {
