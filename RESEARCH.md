@@ -107,4 +107,8 @@ Do not place unverified historical claims in this file. Cite sources when resear
 - **R-19 — Ottoman companies/institutions inventory:** canonical dossier [`docs/research/R19_ottoman_companies_institutions_inventory.md`](docs/research/R19_ottoman_companies_institutions_inventory.md). Do not confuse with [`docs/research/R19_tanzimat_gameplay_design.md`](docs/research/R19_tanzimat_gameplay_design.md), which is the I-05 Tanzimat design file under a colliding filename. **COMPLETE AND USED IN I-14.**
 - **I-14 — Ottoman company/institution flavor:** proposal [`docs/research/I14_ottoman_company_institution_proposal.md`](docs/research/I14_ottoman_company_institution_proposal.md); implementation [`docs/implementation/I14_ottoman_company_institution_flavor.md`](docs/implementation/I14_ottoman_company_institution_flavor.md). Hayriye company + Ottoman Bank one-shot event in `77397d5`. **IMPLEMENTED; TIGER CLEAN FOR I-14; RUNTIME PENDING.**
 
+## Validation & Release
+
+- **I-15 — v1.0 release validation matrix:** [`docs/research/I15_release_validation_matrix.md`](docs/research/I15_release_validation_matrix.md). Single test matrix for I-01–I-14. **STATIC PASS 2026-08-25:** A-ST-01–13 and A-ST-15–16 plus D-RC-12; Tiger reconfirmed `fatal 0 / error 1 / warning 10`. Runtime rows **NOT RUN**. I-15 gameplay/fix pass not started.
+
 ## Alternative History
