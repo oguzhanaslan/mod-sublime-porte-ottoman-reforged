@@ -44,6 +44,8 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Egypt
 
+- **R-09 — Egypt / Eastern Question audit and I-07 proposal:** [`docs/research/R09_egypt_eastern_question.md`](docs/research/R09_egypt_eastern_question.md), [`docs/research/I07_egypt_eastern_question_gameplay_proposal.md`](docs/research/I07_egypt_eastern_question_gameplay_proposal.md). Victoria 3 1.13.11 vanilla ve mevcut mod üzerinden setup, Levant/Adana, aktif kriz internationalization, Nizip/London settlement boşluğu, GP alignment, subject/peace/front riskleri ve I-05/I-06 sınırları denetlendi. Onaylanan üç-outcome proposal değiştirilmeden I-07 olarak uygulandı. **R-09 COMPLETE AND USED; I-07 IMPLEMENTED IN `f4a8634`; TIGER CLEAN FOR I-07; RUNTIME AI/FRONT TESTS PENDING.**
+
 ## Balkans
 
 ## Kurdish Regions & Tribes
