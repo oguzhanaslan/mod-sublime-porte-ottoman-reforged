@@ -2049,8 +2049,6 @@
 						levels=1
 						region="STATE_NEW_CASTILE"
 					}
-				}
-				add_ownership={
 					building={
 						type="building_wheat_farm"
 						country="c:SPA"
@@ -2394,8 +2392,6 @@
 						levels=1
 						region="STATE_OLD_CASTILE"
 					}
-				}
-				add_ownership={
 					building={
 						type="building_livestock_ranch"
 						country="c:SPA"
