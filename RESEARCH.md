@@ -65,7 +65,7 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 - **I-12 — Muhacir migration slice:** [`docs/research/I12_muhacir_gameplay_proposal.md`](docs/research/I12_muhacir_gameplay_proposal.md); dossier [`docs/implementation/I12_muhacir_migration.md`](docs/implementation/I12_muhacir_migration.md). **IMPLEMENTED** in `c99a081` (Waves A/B/C, commission JEs, B9 provenance stamps, EN/TR). Tiger clean for I-12; runtime pending. No Circassian `create_pop`; no `create_mass_migration`; no I-01–I-11 gameplay edits.
 
-- **I-13 — Muhacir settlement flavor:** [`docs/research/I13_muhacir_settlement_flavor_proposal.md`](docs/research/I13_muhacir_settlement_flavor_proposal.md). Four one-shot vanilla-style events bound to wired I-12 identifiers. No pop movement, no new JE/system, no I-12 retune. **COMPLETE — RESEARCH/PROPOSAL ONLY; NOT IMPLEMENTED — EXPLICIT APPROVAL REQUIRED.**
+- **I-13 — Muhacir settlement flavor:** [`docs/research/I13_muhacir_settlement_flavor_proposal.md`](docs/research/I13_muhacir_settlement_flavor_proposal.md); dossier [`docs/implementation/I13_muhacir_settlement_flavor.md`](docs/implementation/I13_muhacir_settlement_flavor.md). Four one-shot vanilla-style events bound to wired I-12 identifiers. No pop movement, no new JE/system, no I-12 retune. **IMPLEMENTED — TIGER CLEAN FOR I-13; RUNTIME PENDING.**
 
 ## Settlement Policies
 
