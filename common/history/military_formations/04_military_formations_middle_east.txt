@@ -8,25 +8,25 @@
 			combat_unit = {
 				type = unit_type:combat_unit_type_line_infantry
 				state_region = s:STATE_BULGARIA
-				count = 10
+				count = 24
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_irregular_infantry
 				state_region = s:STATE_WESTERN_THRACE
-				count = 10
+				count = 4
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_hussars
 				state_region = s:STATE_BOSNIA
-				count = 5
+				count = 4
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_cannon_artillery
 				state_region = s:STATE_NORTHERN_THRACE
-				count = 5
+				count = 4
 			}
 			save_scope_as = hassa_ordusu
 		}
@@ -48,43 +48,31 @@
 			combat_unit = {
 				type = unit_type:combat_unit_type_line_infantry
 				state_region = s:STATE_THESSALIA
-				count = 15
+				count = 20
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_irregular_infantry
 				state_region = s:STATE_EASTERN_SERBIA
-				count = 10
-			}
-
-			combat_unit = {
-				type = unit_type:combat_unit_type_irregular_infantry
-				state_region = s:STATE_BAGHDAD
-				count = 10
-			}
-
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				state_region = s:STATE_ANKARA
-				count = 10
+				count = 8
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_irregular_infantry
 				state_region = s:STATE_MACEDONIA
-				count = 5
+				count = 4
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_hussars
 				state_region = s:STATE_SKOPIA
-				count = 5
+				count = 8
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_cannon_artillery
 				state_region = s:STATE_SKOPIA
-				count = 2
+				count = 4
 			}
 
 			save_scope_as = rumeli_ordusu
@@ -107,13 +95,19 @@
 			combat_unit = {
 				type = unit_type:combat_unit_type_line_infantry
 				state_region = s:STATE_EASTERN_THRACE
-				count = 20
+				count = 28
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_WESTERN_THRACE
+				count = 4
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_cannon_artillery
-				state_region = s:STATE_ANKARA
-				count = 2
+				state_region = s:STATE_NORTHERN_THRACE
+				count = 4
 			}
 			save_scope_as = konstantiniyye_ordusu
 		}
@@ -126,43 +120,49 @@
 			combat_unit = {
 				type = unit_type:combat_unit_type_irregular_infantry
 				state_region = s:STATE_DIYARBAKIR
-				count = 10
+				count = 8
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_irregular_infantry
 				state_region = s:STATE_ERZURUM
-				count = 5
+				count = 4
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_irregular_infantry
 				state_region = s:STATE_KARS
-				count = 5
+				count = 4
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_HUDAVENDIGAR
+				count = 8
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_irregular_infantry
-				state_region = s:STATE_HUDAVENDIGAR
-				count = 15
+				state_region = s:STATE_BAGHDAD
+				count = 10
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_irregular_infantry
 				state_region = s:STATE_AYDIN
-				count = 10
+				count = 2
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_hussars
 				state_region = s:STATE_KONYA
-				count = 5
+				count = 4
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_cannon_artillery
 				state_region = s:STATE_KASTAMONU
-				count = 3
+				count = 4
 			}
 			save_scope_as = anadolu_ordusu
 		}
