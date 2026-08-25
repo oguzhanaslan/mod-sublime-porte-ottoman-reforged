@@ -1,0 +1,60 @@
+﻿# I-23 Imperial Periphery. Reused gates only. No scripted rules.
+
+sp_i23_pulse_open = {
+	c:TUR ?= this
+	NOT = { has_variable = sp_i23_pulse_closed }
+}
+
+sp_i23_tri_is_ottoman_puppet = {
+	exists = c:TRI
+	c:TRI = {
+		is_direct_subject_of = ROOT
+		is_subject_type = subject_type_puppet
+	}
+}
+
+sp_i23_tun_is_ottoman_protectorate = {
+	exists = c:TUN
+	c:TUN = {
+		is_direct_subject_of = ROOT
+		is_subject_type = subject_type_protectorate
+	}
+}
+
+sp_i23_tun_is_direct_subject = {
+	exists = c:TUN
+	c:TUN = {
+		is_direct_subject_of = ROOT
+	}
+}
+
+sp_i23_fra_tunis_relevant = {
+	exists = c:FRA
+	c:FRA = {
+		country_rank >= rank_value:great_power
+		OR = {
+			has_claim = s:STATE_TUNISIA
+			has_interest_marker_in_region = sr:region_north_africa
+			has_state_in_state_region = STATE_ALGIERS
+			has_state_in_state_region = STATE_ORAN
+			has_state_in_state_region = STATE_CONSTANTINE
+		}
+	}
+}
+
+sp_i23_fra_has_tunisia_designs = {
+	exists = c:FRA
+	c:FRA = {
+		has_claim = s:STATE_TUNISIA
+	}
+}
+
+sp_i23_gbr_red_sea_present = {
+	exists = c:GBR
+	c:GBR = {
+		OR = {
+			has_interest_marker_in_region = sr:region_arabia
+			has_state_in_state_region = STATE_YEMEN
+		}
+	}
+}

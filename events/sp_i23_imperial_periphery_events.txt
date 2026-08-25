@@ -1,0 +1,235 @@
+﻿namespace = sp_i23
+
+# I-23 Imperial Periphery. Four one-shot TUR events. No JE, no subject rewrite.
+
+# 1 — Authority Restored in Tripoli, 1836–1840. Informational only.
+sp_i23.1 = {
+	type = country_event
+	placement = root
+	title = sp_i23.1.t
+	desc = sp_i23.1.d
+	flavor = sp_i23.1.f
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+	event_image = {
+		video = "africa_city_center"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i23_pulse_open = yes
+		NOT = { has_variable = sp_i23_tripoli_fired }
+		game_date >= 1836.1.1
+		game_date < 1841.1.1
+		sp_i23_tri_is_ottoman_puppet = yes
+	}
+
+	immediate = {
+		set_variable = sp_i23_tripoli_fired
+		c:TRI ?= {
+			save_scope_as = sp_i23_tri_scope
+		}
+	}
+
+	option = {
+		name = sp_i23.1.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# 2 — The Bey and the Porte, 1836.6.1–1838. Main player choice.
+sp_i23.2 = {
+	type = country_event
+	placement = root
+	title = sp_i23.2.t
+	desc = sp_i23.2.d
+	flavor = sp_i23.2.f
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	event_image = {
+		video = "africa_diplomats_negotiating"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i23_pulse_open = yes
+		NOT = { has_variable = sp_i23_tunis_bey_fired }
+		game_date >= 1836.6.1
+		game_date < 1839.1.1
+		sp_i23_tun_is_ottoman_protectorate = yes
+	}
+
+	immediate = {
+		set_variable = sp_i23_tunis_bey_fired
+		c:TUN ?= {
+			save_scope_as = sp_i23_tun_scope
+		}
+	}
+
+	option = {
+		name = sp_i23.2.a
+		set_variable = sp_i23_tunis_pressed
+		c:TUN ?= {
+			add_liberty_desire = 10
+		}
+		change_relations = {
+			country = c:TUN
+			value = -10
+		}
+		ai_chance = {
+			base = 40
+		}
+	}
+
+	option = {
+		name = sp_i23.2.b
+		default_option = yes
+		set_variable = sp_i23_tunis_accommodated
+		change_relations = {
+			country = c:TUN
+			value = 10
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+}
+
+# 3 — French Pressure in Tunis, 1838.6.1–1840. DLC-independent FRA gate.
+sp_i23.3 = {
+	type = country_event
+	placement = root
+	title = sp_i23.3.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					sp_i23_fra_has_tunisia_designs = yes
+				}
+				desc = sp_i23.3.d.pretension
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i23_tunis_pressed
+				}
+				desc = sp_i23.3.d.pressed
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i23_tunis_accommodated
+				}
+				desc = sp_i23.3.d.accommodated
+			}
+			desc = sp_i23.3.d
+		}
+	}
+	flavor = sp_i23.3.f
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 3
+	event_image = {
+		video = "africa_diplomats_negotiating"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i23_pulse_open = yes
+		NOT = { has_variable = sp_i23_french_pressure_fired }
+		game_date >= 1838.6.1
+		game_date < 1841.1.1
+		sp_i23_tun_is_direct_subject = yes
+		sp_i23_fra_tunis_relevant = yes
+	}
+
+	immediate = {
+		set_variable = sp_i23_french_pressure_fired
+		c:TUN ?= {
+			save_scope_as = sp_i23_tun_scope
+		}
+		c:FRA ?= {
+			save_scope_as = sp_i23_fra_scope
+		}
+	}
+
+	option = {
+		name = sp_i23.3.a
+		default_option = yes
+		set_variable = sp_i23_french_backed_down
+		change_relations = {
+			country = c:FRA
+			value = 10
+		}
+		change_relations = {
+			country = c:TUN
+			value = 5
+		}
+		ai_chance = {
+			base = 55
+		}
+	}
+
+	option = {
+		name = sp_i23.3.b
+		set_variable = sp_i23_french_maintained
+		change_relations = {
+			country = c:FRA
+			value = -10
+		}
+		c:TUN ?= {
+			add_liberty_desire = 10
+		}
+		ai_chance = {
+			base = 45
+		}
+	}
+}
+
+# 4 — Aden and the Red Sea, 1839–1842. MODEL B informational alarm.
+sp_i23.4 = {
+	type = country_event
+	placement = root
+	title = sp_i23.4.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					sp_i23_gbr_red_sea_present = yes
+				}
+				desc = sp_i23.4.d.present
+			}
+			desc = sp_i23.4.d
+		}
+	}
+	flavor = sp_i23.4.f
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_naval_battle"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i23_pulse_open = yes
+		NOT = { has_variable = sp_i23_aden_fired }
+		game_date >= 1839.1.1
+		game_date < 1843.1.1
+		exists = c:GBR
+	}
+
+	immediate = {
+		set_variable = sp_i23_aden_fired
+		c:GBR ?= {
+			save_scope_as = sp_i23_gbr_scope
+		}
+	}
+
+	option = {
+		name = sp_i23.4.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+	}
+}

@@ -1,0 +1,26 @@
+﻿# I-23 additive pulses. Do not edit I-16 / I-16B / I-18 / I-21 / I-22 on_actions.
+
+on_yearly_pulse_country = {
+	on_actions = {
+		sp_i23_yearly_events
+	}
+}
+
+sp_i23_yearly_events = {
+	effect = {
+		if = {
+			limit = {
+				c:TUR ?= this
+				game_date >= 1843.1.1
+				NOT = { has_variable = sp_i23_pulse_closed }
+			}
+			set_variable = sp_i23_pulse_closed
+		}
+	}
+	events = {
+		sp_i23.1
+		sp_i23.2
+		sp_i23.3
+		sp_i23.4
+	}
+}
