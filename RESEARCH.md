@@ -18,7 +18,11 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Economy & Finance
 
+- **R-19 — Ottoman companies/institutions inventory:** [`docs/research/R19_ottoman_companies_institutions_inventory.md`](docs/research/R19_ottoman_companies_institutions_inventory.md). Four named candidates were duplicate-checked against installed vanilla 1.13.11 companies, JEs, events, modifiers, technologies, laws and buildings. Vanilla already has Tersâne-i Âmire, Ottoman Tobacco Régie, Allatini Mills, Chemins de fer Orientaux and Turkish Petroleum. I-14 v1 roster: Şirket-i Hayriye as a port company; Bank-ı Osmanî-i Şahane as event/decision/modifier only. Memleket Sandıkları are not a company; Düyun-u Umumiye must not become a prosperity company because the Régie already covers the tobacco-monopoly slice. **COMPLETE — RESEARCH ONLY; I-14 NOT STARTED.**
+
 ## Ottoman Debt
+
+- **R-19 companion finding:** Düyun-u Umumiye is not an I-14 company. Vanilla `company_ottoman_tobacco_regie` already represents the 1883 Régie tobacco monopoly created under the Public Debt Administration. A named OPDA constraint JE belongs to later debt/capitulations work (R-16 already marked that design **LATER**). See [`docs/research/R19_ottoman_companies_institutions_inventory.md`](docs/research/R19_ottoman_companies_institutions_inventory.md).
 
 ## Capitulations
 
@@ -99,5 +103,7 @@ Do not place unverified historical claims in this file. Cite sources when resear
 - **R-11 — Character/Commander Dossier:** [`docs/research/R11_character_commander_dossier.md`](docs/research/R11_character_commander_dossier.md). I-10A is implemented in `c91e515`. The approved three-officer [`I-10B gameplay proposal`](docs/research/I10B_iconic_officers_gameplay_proposal.md) is implemented in `a85a34c` and documented in [`docs/implementation/I10B_iconic_officers.md`](docs/implementation/I10B_iconic_officers.md): MUST Fevzi 1850, Mustafa Kemal 1852 and Kâzım Karabekir 1857 use additive one-shot events and generated appearance; I-10B Tiger findings are 0/0/0 and runtime testing is pending. Cemal is **DEFERRED**. Enver is **VANILLA / VotP CONTENT — DO NOT REIMPLEMENT, RETIME OR DUPLICATE**. All custom/external DNA work is moved out of I-10B and its immediate follow-up into [`Phase 5 — Final Visual & Polish / Balance / Compatibility / Release`](docs/MASTER_PRODUCT_PLAN.md#phase-5--final-visual--polish--balance--compatibility--release), after gameplay and flavor scope is complete; external assets require a separate source/permission/license/provenance and Victoria 3 technical-compatibility audit before copying. **R-11 COMPLETE; I-10A AND I-10B IMPLEMENTED; I-10B RUNTIME TEST PENDING; R-14 COMPLETE.**
 
 ## Historical Companies
+
+- **R-19 — Ottoman companies/institutions inventory:** canonical dossier [`docs/research/R19_ottoman_companies_institutions_inventory.md`](docs/research/R19_ottoman_companies_institutions_inventory.md). Do not confuse with [`docs/research/R19_tanzimat_gameplay_design.md`](docs/research/R19_tanzimat_gameplay_design.md), which is the I-05 Tanzimat design file under a colliding filename. **COMPLETE — RESEARCH ONLY.**
 
 ## Alternative History
