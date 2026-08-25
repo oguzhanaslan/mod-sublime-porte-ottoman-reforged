@@ -1,0 +1,14 @@
+﻿# Vanilla 1.13.11 concept_balkan_culture_desc list.
+# Scope: political movement.
+sp_is_balkan_secessionist_movement = {
+	is_secessionist = yes
+	OR = {
+		culture = cu:albanian
+		culture = cu:bosniak
+		culture = cu:bulgarian
+		culture = cu:croat
+		culture = cu:greek
+		culture = cu:romanian
+		culture = cu:serb
+	}
+}

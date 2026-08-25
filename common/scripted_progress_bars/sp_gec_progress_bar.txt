@@ -14,7 +14,7 @@ REPLACE:control_eastern_crisis_bar = {
 					NOT = {
 						any_political_movement = {
 							AND = {
-								is_secessionist = yes
+								sp_is_balkan_secessionist_movement = yes
 								political_movement_radicalism >= define:NPolitics|MIN_RADICALISM_FOR_CIVIL_WAR_PROGRESSION
 							}
 						}

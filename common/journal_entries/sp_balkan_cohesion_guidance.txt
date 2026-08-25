@@ -1,0 +1,36 @@
+﻿sp_ottoman_balkan_cohesion_guidance = {
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	group = je_group_internal_affairs
+
+	is_shown_when_inactive = {
+		c:TUR ?= this
+	}
+
+	possible = {
+		c:TUR ?= this
+		OR = {
+			any_scope_state = {
+				region = sr:region_balkans
+			}
+			any_subject_or_below = {
+				OR = {
+					this = c:SER
+					this = c:MOL
+					this = c:WAL
+				}
+			}
+		}
+	}
+
+	immediate = {
+		trigger_event = { id = sp_balkan_cohesion.1 popup = yes }
+	}
+
+	invalid = {
+		NOT = { c:TUR ?= this }
+	}
+
+	transferable = no
+	weight = 4800
+	should_be_pinned_by_default_uninvolved_or_context = no
+}

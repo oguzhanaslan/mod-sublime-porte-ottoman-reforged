@@ -1,0 +1,22 @@
+﻿namespace = sp_balkan_cohesion
+
+sp_balkan_cohesion.1 = {
+	type = country_event
+	placement = root
+	title = sp_balkan_cohesion.1.t
+	desc = sp_balkan_cohesion.1.d
+	flavor = sp_balkan_cohesion.1.f
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	duration = 3
+	event_image = { video = "europenorthamerica_london_center" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+	}
+
+	option = {
+		name = sp_balkan_cohesion.1.a
+		default_option = yes
+	}
+}
