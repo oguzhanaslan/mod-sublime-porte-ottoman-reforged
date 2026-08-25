@@ -1,0 +1,517 @@
+﻿namespace = sp_muhacir_flavor
+
+# 1 — Miri Land and Village Claims
+sp_muhacir_flavor.1 = {
+	type = country_event
+	placement = root
+	title = sp_muhacir_flavor.1.t
+	desc = sp_muhacir_flavor.1.d
+	flavor = sp_muhacir_flavor.1.f
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+	event_image = {
+		video = "ep1_ca_mountain_pass_civilian"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		NOT = { has_variable = sp_i13_flavor_land_done }
+		game_date >= 1859.1.1
+		game_date < 1870.1.1
+		OR = {
+			has_variable = sp_i12_wave_a_done
+			AND = {
+				has_variable = sp_i12_wave_b_done
+				NOT = { has_variable = sp_i12_wave_b_refused }
+				OR = {
+					has_variable = sp_i12_settlement_rumelia
+					has_variable = sp_i12_settlement_balanced
+				}
+			}
+		}
+		any_scope_state = {
+			sp_i12_is_tur_settlement_target = yes
+			OR = {
+				state_region = s:STATE_DOBRUDJA
+				state_region = s:STATE_BULGARIA
+			}
+			OR = {
+				has_modifier = sp_i12_exemption_rumelia
+				has_modifier = sp_i12_rumelia_settlement_friction
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = sp_i13_flavor_land_done
+		random_scope_state = {
+			limit = {
+				sp_i12_is_tur_settlement_target = yes
+				OR = {
+					state_region = s:STATE_DOBRUDJA
+					state_region = s:STATE_BULGARIA
+				}
+				OR = {
+					has_modifier = sp_i12_exemption_rumelia
+					has_modifier = sp_i12_rumelia_settlement_friction
+				}
+			}
+			save_scope_as = sp_i13_land_state
+		}
+	}
+
+	option = {
+		name = sp_muhacir_flavor.1.a
+		default_option = yes
+		add_treasury = -8000
+		if = {
+			limit = {
+				exists = scope:sp_i13_land_state
+			}
+			scope:sp_i13_land_state = {
+				add_radicals_in_state = {
+					value = very_small_radicals
+					culture = cu:bulgarian
+				}
+				if = {
+					limit = {
+						state_region = s:STATE_DOBRUDJA
+					}
+					add_radicals_in_state = {
+						value = very_small_radicals
+						culture = cu:romanian
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				trigger = {
+					in_default = no
+				}
+				add = 25
+			}
+			modifier = {
+				trigger = {
+					highest_secession_progress >= 0.30
+				}
+				add = -20
+			}
+		}
+	}
+
+	option = {
+		name = sp_muhacir_flavor.1.b
+		if = {
+			limit = {
+				exists = scope:sp_i13_land_state
+			}
+			scope:sp_i13_land_state = {
+				add_radicals_in_state = {
+					value = small_radicals
+					culture = cu:bulgarian
+				}
+				if = {
+					limit = {
+						state_region = s:STATE_DOBRUDJA
+					}
+					add_radicals_in_state = {
+						value = small_radicals
+						culture = cu:romanian
+					}
+				}
+				add_modifier = {
+					name = sp_i13_land_dispute
+					months = 24
+				}
+			}
+		}
+		ai_chance = {
+			base = 35
+			modifier = {
+				trigger = {
+					highest_secession_progress >= 0.30
+				}
+				add = -15
+			}
+		}
+	}
+
+	option = {
+		name = sp_muhacir_flavor.1.c
+		add_treasury = -2000
+		if = {
+			limit = {
+				exists = scope:sp_i13_land_state
+			}
+			scope:sp_i13_land_state = {
+				add_radicals_in_state = {
+					value = very_small_radicals
+					culture = cu:turkish
+				}
+			}
+		}
+		ai_chance = {
+			base = 15
+		}
+	}
+}
+
+# 2 — The Commission's Ledger
+sp_muhacir_flavor.2 = {
+	type = country_event
+	placement = root
+	title = sp_muhacir_flavor.2.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i12_wave_b_done
+				}
+				desc = sp_muhacir_flavor.2.d.wave_b
+			}
+			desc = sp_muhacir_flavor.2.d
+		}
+	}
+	flavor = sp_muhacir_flavor.2.f
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		NOT = { has_variable = sp_i13_flavor_provisions_done }
+		has_journal_entry = sp_je_muhacirin_komisyonu
+		OR = {
+			has_variable = sp_i12_wave_a_done
+			has_variable = sp_i12_wave_b_done
+		}
+		game_date < 1868.1.1
+	}
+
+	immediate = {
+		set_variable = sp_i13_flavor_provisions_done
+	}
+
+	option = {
+		name = sp_muhacir_flavor.2.a
+		default_option = yes
+		add_treasury = -10000
+		ai_chance = {
+			base = 55
+			modifier = {
+				trigger = {
+					in_default = no
+				}
+				add = 20
+			}
+			modifier = {
+				trigger = {
+					in_default = yes
+				}
+				add = -40
+			}
+		}
+	}
+
+	option = {
+		name = sp_muhacir_flavor.2.b
+		add_treasury = -4000
+		add_modifier = {
+			name = sp_i13_ration_strain
+			months = 12
+		}
+		ai_chance = {
+			base = 30
+		}
+	}
+
+	option = {
+		name = sp_muhacir_flavor.2.c
+		if = {
+			limit = {
+				has_variable = sp_i12_wave_b_done
+				NOT = { has_variable = sp_i12_wave_b_refused }
+			}
+			add_radicals = {
+				value = small_radicals
+				culture = cu:circassian
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i12_wave_a_done
+			}
+			add_radicals = {
+				value = small_radicals
+				culture = cu:tatar
+			}
+		}
+		else = {
+			add_radicals = {
+				value = small_radicals
+				culture = cu:turkish
+			}
+		}
+		ai_chance = {
+			base = 15
+		}
+	}
+}
+
+# 3 — Villages on the Plateau
+sp_muhacir_flavor.3 = {
+	type = country_event
+	placement = root
+	title = sp_muhacir_flavor.3.t
+	desc = sp_muhacir_flavor.3.d
+	flavor = sp_muhacir_flavor.3.f
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+	event_image = {
+		video = "asia_farmers_market"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		NOT = { has_variable = sp_i13_flavor_anatolia_done }
+		game_date >= 1861.1.1
+		game_date < 1876.1.1
+		NOT = { has_variable = sp_i12_wave_b_settlement_active }
+		any_scope_state = {
+			sp_i12_is_tur_settlement_target = yes
+			has_modifier = sp_i12_exemption_anatolia
+			OR = {
+				state_region = s:STATE_ANKARA
+				state_region = s:STATE_KONYA
+				state_region = s:STATE_HUDAVENDIGAR
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = sp_i13_flavor_anatolia_done
+		random_scope_state = {
+			limit = {
+				sp_i12_is_tur_settlement_target = yes
+				has_modifier = sp_i12_exemption_anatolia
+				OR = {
+					state_region = s:STATE_ANKARA
+					state_region = s:STATE_KONYA
+					state_region = s:STATE_HUDAVENDIGAR
+				}
+			}
+			save_scope_as = sp_i13_village_state
+		}
+	}
+
+	option = {
+		name = sp_muhacir_flavor.3.a
+		default_option = yes
+		if = {
+			limit = {
+				exists = scope:sp_i13_village_state
+			}
+			scope:sp_i13_village_state = {
+				add_loyalists_in_state = {
+					value = small_radicals
+					culture = cu:turkish
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:sp_i13_village_state
+				has_variable = sp_i12_wave_b_done
+				NOT = { has_variable = sp_i12_wave_b_refused }
+			}
+			scope:sp_i13_village_state = {
+				add_loyalists_in_state = {
+					value = very_small_radicals
+					culture = cu:circassian
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:sp_i13_village_state
+				has_variable = sp_i12_wave_a_done
+			}
+			scope:sp_i13_village_state = {
+				add_loyalists_in_state = {
+					value = very_small_radicals
+					culture = cu:tatar
+				}
+			}
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+
+	option = {
+		name = sp_muhacir_flavor.3.b
+		if = {
+			limit = {
+				exists = scope:sp_i13_village_state
+			}
+			scope:sp_i13_village_state = {
+				add_loyalists_in_state = {
+					value = very_small_radicals
+					culture = cu:turkish
+				}
+				add_radicals_in_state = {
+					value = very_small_radicals
+					culture = cu:turkish
+				}
+			}
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+
+	option = {
+		name = sp_muhacir_flavor.3.c
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# 4 — The Capital Cannot Sleep
+sp_muhacir_flavor.4 = {
+	type = country_event
+	placement = root
+	title = sp_muhacir_flavor.4.t
+	desc = sp_muhacir_flavor.4.d
+	flavor = sp_muhacir_flavor.4.f
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_fire"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		NOT = { has_variable = sp_i13_flavor_capital_done }
+		has_variable = sp_i12_wave_c_done
+		OR = {
+			has_journal_entry = sp_je_umum_muhacir
+			game_date < 1884.1.1
+		}
+		s:STATE_EASTERN_THRACE = {
+			any_scope_state = {
+				sp_i12_is_tur_settlement_target = yes
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = sp_i13_flavor_capital_done
+		s:STATE_EASTERN_THRACE = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i13_capital_state
+			}
+		}
+	}
+
+	option = {
+		name = sp_muhacir_flavor.4.a
+		default_option = yes
+		add_treasury = -12000
+		if = {
+			limit = {
+				exists = scope:sp_i13_capital_state
+			}
+			scope:sp_i13_capital_state = {
+				add_loyalists_in_state = {
+					value = very_small_radicals
+					culture = cu:turkish
+				}
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				trigger = {
+					in_default = no
+				}
+				add = 20
+			}
+			modifier = {
+				trigger = {
+					exists = scope:sp_i13_capital_state
+					scope:sp_i13_capital_state = {
+						has_modifier = sp_i12_eastern_thrace_refugee_camp
+					}
+				}
+				add = 10
+			}
+		}
+	}
+
+	option = {
+		name = sp_muhacir_flavor.4.b
+		add_treasury = -4000
+		if = {
+			limit = {
+				exists = scope:sp_i13_capital_state
+			}
+			scope:sp_i13_capital_state = {
+				add_radicals_in_state = {
+					value = small_radicals
+					culture = cu:turkish
+				}
+			}
+		}
+		ai_chance = {
+			base = 25
+		}
+	}
+
+	option = {
+		name = sp_muhacir_flavor.4.c
+		if = {
+			limit = {
+				exists = scope:sp_i13_capital_state
+				scope:sp_i13_capital_state = {
+					NOR = {
+						has_modifier = sp_i12_eastern_thrace_refugee_camp
+						has_modifier = sp_i12_landing_camp_modifier
+					}
+				}
+			}
+			scope:sp_i13_capital_state = {
+				add_modifier = {
+					name = sp_i13_capital_overcrowding
+					months = 12
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				exists = scope:sp_i13_capital_state
+			}
+			scope:sp_i13_capital_state = {
+				add_radicals_in_state = {
+					value = very_small_radicals
+					culture = cu:turkish
+				}
+			}
+		}
+		ai_chance = {
+			base = 25
+		}
+	}
+}

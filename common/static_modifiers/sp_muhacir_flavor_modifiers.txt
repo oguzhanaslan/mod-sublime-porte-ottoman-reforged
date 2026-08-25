@@ -1,0 +1,16 @@
+﻿# I-13 Muhacir settlement flavor — short timed modifiers only.
+
+sp_i13_land_dispute = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	state_turmoil_effects_mult = 0.10
+}
+
+sp_i13_ration_strain = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 800
+}
+
+sp_i13_capital_overcrowding = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	state_standard_of_living_add = -1
+}

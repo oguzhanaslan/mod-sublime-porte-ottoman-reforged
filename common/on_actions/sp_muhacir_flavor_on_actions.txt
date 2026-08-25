@@ -1,0 +1,17 @@
+﻿# I-13 Muhacir settlement flavor — additive yearly pulse only.
+# Do not edit sp_muhacir_on_actions.txt.
+
+on_yearly_pulse_country = {
+	on_actions = {
+		sp_i13_yearly_flavor
+	}
+}
+
+sp_i13_yearly_flavor = {
+	events = {
+		sp_muhacir_flavor.1
+		sp_muhacir_flavor.2
+		sp_muhacir_flavor.3
+		sp_muhacir_flavor.4
+	}
+}
