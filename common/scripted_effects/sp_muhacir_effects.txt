@@ -1,0 +1,252 @@
+﻿# I-12 Muhacir - additive effects only (B9 ownership-safe Wave C library).
+# Unwired technical spike. Do not call from events/JE until I-12 is approved.
+# Cross-owner move shape: serbia_throne.6.b / greece.5 (s:STATE_* -> every_scope_state).
+# Foreign remnant kill intentionally omitted (unattested from TUR onto foreign states).
+#
+# Provenance wiring (full I-12 only - do not add in this spike):
+# - on_game_started / on_yearly_pulse_state / on_monthly_pulse_state:
+#     call sp_i12_stamp_tur_share_provenance_on_this_state when
+#     sp_i12_can_stamp_tur_share_provenance = yes
+# - optional on_state_owner_change reinforce if provenance already present
+# Late-install: never backfill provenance onto already-foreign never-stamped shares.
+
+# State scope. Stamp only while this share is TUR-owned Rumelian candidate.
+sp_i12_stamp_tur_share_provenance_on_this_state = {
+	if = {
+		limit = {
+			sp_i12_can_stamp_tur_share_provenance = yes
+			NOT = { has_variable = sp_i12_tur_share_provenance }
+		}
+		set_variable = sp_i12_tur_share_provenance
+	}
+}
+
+# Country scope: TUR. Stamp every currently owned Rumelian Wave C candidate share.
+# Intended caller: future additive on_actions (game start + state pulse). Not wired here.
+sp_i12_stamp_all_owned_rumelian_share_provenance = {
+	every_scope_state = {
+		limit = {
+			sp_i12_can_stamp_tur_share_provenance = yes
+		}
+		sp_i12_stamp_tur_share_provenance_on_this_state = yes
+	}
+}
+
+# Country scope: TUR. Saves staging destination for Wave C moves.
+sp_i12_save_wave_c_staging_state = {
+	if = {
+		limit = {
+			s:STATE_EASTERN_THRACE = {
+				any_scope_state = {
+					owner ?= c:TUR
+				}
+			}
+		}
+		s:STATE_EASTERN_THRACE = {
+			random_scope_state = {
+				limit = {
+					owner ?= c:TUR
+				}
+				save_scope_as = sp_i12_wave_c_staging_state
+			}
+		}
+	}
+	else = {
+		random_scope_state = {
+			limit = {
+				is_capital = yes
+			}
+			save_scope_as = sp_i12_wave_c_staging_state
+		}
+	}
+}
+
+# State-region walk helper. Expects scope:sp_i12_wave_c_staging_state.
+# Evacuates only provenance-stamped former TUR shares (B9).
+# 1836 RUS Dobrudja / SER Eastern Serbia shares have no stamp -> skipped.
+sp_i12_evacuate_foreign_shares_in_this_state_region = {
+	every_scope_state = {
+		limit = {
+			sp_i12_is_lost_tur_rumelian_share = yes
+		}
+		every_scope_pop = {
+			limit = {
+				sp_i12_is_muhacir_refugee_pop = yes
+			}
+			move_partial_pop = {
+				state = scope:sp_i12_wave_c_staging_state
+				population_ratio = 0.75
+			}
+		}
+	}
+}
+
+# Country scope: TUR. Lost-core conservation gated by provenance.
+sp_i12_evacuate_lost_rumelian_cores_to_staging = {
+	if = {
+		limit = {
+			NOT = {
+				exists = scope:sp_i12_wave_c_staging_state
+			}
+		}
+		sp_i12_save_wave_c_staging_state = yes
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_c_staging_state
+			s:STATE_BULGARIA = {
+				any_scope_state = {
+					sp_i12_is_lost_tur_rumelian_share = yes
+				}
+			}
+		}
+		s:STATE_BULGARIA = {
+			sp_i12_evacuate_foreign_shares_in_this_state_region = yes
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_c_staging_state
+			s:STATE_NORTHERN_THRACE = {
+				any_scope_state = {
+					sp_i12_is_lost_tur_rumelian_share = yes
+				}
+			}
+		}
+		s:STATE_NORTHERN_THRACE = {
+			sp_i12_evacuate_foreign_shares_in_this_state_region = yes
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_c_staging_state
+			s:STATE_WESTERN_THRACE = {
+				any_scope_state = {
+					sp_i12_is_lost_tur_rumelian_share = yes
+				}
+			}
+		}
+		s:STATE_WESTERN_THRACE = {
+			sp_i12_evacuate_foreign_shares_in_this_state_region = yes
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_c_staging_state
+			s:STATE_MACEDONIA = {
+				any_scope_state = {
+					sp_i12_is_lost_tur_rumelian_share = yes
+				}
+			}
+		}
+		s:STATE_MACEDONIA = {
+			sp_i12_evacuate_foreign_shares_in_this_state_region = yes
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_c_staging_state
+			s:STATE_KOSOVO = {
+				any_scope_state = {
+					sp_i12_is_lost_tur_rumelian_share = yes
+				}
+			}
+		}
+		s:STATE_KOSOVO = {
+			sp_i12_evacuate_foreign_shares_in_this_state_region = yes
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_c_staging_state
+			s:STATE_SKOPIA = {
+				any_scope_state = {
+					sp_i12_is_lost_tur_rumelian_share = yes
+				}
+			}
+		}
+		s:STATE_SKOPIA = {
+			sp_i12_evacuate_foreign_shares_in_this_state_region = yes
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_c_staging_state
+			s:STATE_DOBRUDJA = {
+				any_scope_state = {
+					sp_i12_is_lost_tur_rumelian_share = yes
+				}
+			}
+		}
+		s:STATE_DOBRUDJA = {
+			sp_i12_evacuate_foreign_shares_in_this_state_region = yes
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_c_staging_state
+			s:STATE_EASTERN_SERBIA = {
+				any_scope_state = {
+					sp_i12_is_lost_tur_rumelian_share = yes
+				}
+			}
+		}
+		s:STATE_EASTERN_SERBIA = {
+			sp_i12_evacuate_foreign_shares_in_this_state_region = yes
+		}
+	}
+}
+
+# Country scope: TUR. Still-owned devastated Rumelian shares.
+# Own-state move_partial_pop + kill is attested (Hokkaido / balkan_wars.9 owner-side).
+sp_i12_evacuate_devastated_held_rumelian_to_staging = {
+	if = {
+		limit = {
+			NOT = {
+				exists = scope:sp_i12_wave_c_staging_state
+			}
+		}
+		sp_i12_save_wave_c_staging_state = yes
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_c_staging_state
+		}
+		every_scope_state = {
+			limit = {
+				sp_i12_is_devastated_held_rumelian_share = yes
+				NOT = {
+					this = scope:sp_i12_wave_c_staging_state
+				}
+			}
+			every_scope_pop = {
+				limit = {
+					sp_i12_is_muhacir_refugee_pop = yes
+				}
+				move_partial_pop = {
+					state = scope:sp_i12_wave_c_staging_state
+					population_ratio = 0.75
+				}
+			}
+			kill_population_percent_in_state = {
+				percent = 0.10
+				culture = cu:turkish
+			}
+			kill_population_percent_in_state = {
+				percent = 0.10
+				culture = cu:tatar
+			}
+			kill_population_percent_in_state = {
+				percent = 0.10
+				culture = cu:circassian
+			}
+		}
+	}
+}
+
+# Country scope: TUR. Full Wave C origin evacuation before player distribution options.
+sp_i12_run_wave_c_origin_evacuation = {
+	sp_i12_save_wave_c_staging_state = yes
+	sp_i12_evacuate_lost_rumelian_cores_to_staging = yes
+	sp_i12_evacuate_devastated_held_rumelian_to_staging = yes
+}

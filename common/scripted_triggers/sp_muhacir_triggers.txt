@@ -1,0 +1,140 @@
+﻿# I-12 Muhacir - additive triggers only (B9 ownership-safe Wave C library).
+# Unwired technical spike. Do not call from events/JE/on_actions until I-12 is approved.
+# Provenance stamp wiring belongs to full I-12 (on_yearly_pulse_state / on_game_started /
+# optional on_state_owner_change) - not this file's job.
+
+# Country scope (call as c:TUR).
+sp_i12_lost_rumelian_core = {
+	OR = {
+		NOT = {
+			s:STATE_BULGARIA = {
+				any_scope_state = {
+					owner ?= c:TUR
+				}
+			}
+		}
+		NOT = {
+			s:STATE_NORTHERN_THRACE = {
+				any_scope_state = {
+					owner ?= c:TUR
+				}
+			}
+		}
+		NOT = {
+			s:STATE_WESTERN_THRACE = {
+				any_scope_state = {
+					owner ?= c:TUR
+				}
+			}
+		}
+		NOT = {
+			s:STATE_MACEDONIA = {
+				any_scope_state = {
+					owner ?= c:TUR
+				}
+			}
+		}
+		NOT = {
+			s:STATE_KOSOVO = {
+				any_scope_state = {
+					owner ?= c:TUR
+				}
+			}
+		}
+		NOT = {
+			s:STATE_SKOPIA = {
+				any_scope_state = {
+					owner ?= c:TUR
+				}
+			}
+		}
+		NOT = {
+			s:STATE_DOBRUDJA = {
+				any_scope_state = {
+					owner ?= c:TUR
+				}
+			}
+		}
+		NOT = {
+			s:STATE_EASTERN_SERBIA = {
+				any_scope_state = {
+					owner ?= c:TUR
+				}
+			}
+		}
+	}
+}
+
+# Country scope (call as c:TUR).
+sp_i12_has_devastated_held_rumelian_core = {
+	any_scope_state = {
+		devastation >= 15
+		OR = {
+			state_region = s:STATE_BULGARIA
+			state_region = s:STATE_NORTHERN_THRACE
+			state_region = s:STATE_WESTERN_THRACE
+			state_region = s:STATE_MACEDONIA
+			state_region = s:STATE_KOSOVO
+			state_region = s:STATE_SKOPIA
+			state_region = s:STATE_DOBRUDJA
+			state_region = s:STATE_EASTERN_SERBIA
+		}
+	}
+}
+
+# Country scope (call as c:TUR). Window is a filter, not a fire condition by itself.
+sp_i12_wave_c_crisis_signal = {
+	OR = {
+		sp_i12_lost_rumelian_core = yes
+		AND = {
+			has_war_with = c:RUS
+			sp_i12_has_devastated_held_rumelian_core = yes
+		}
+	}
+}
+
+# Pop scope. Sunni Turkish / Tatar / Circassian refugee filter.
+sp_i12_is_muhacir_refugee_pop = {
+	religion = rel:sunni
+	OR = {
+		culture = cu:turkish
+		culture = cu:tatar
+		culture = cu:circassian
+	}
+}
+
+# State scope. Wave C Rumelian candidate regions only.
+sp_i12_is_rumelian_wave_c_candidate_share = {
+	OR = {
+		state_region = s:STATE_BULGARIA
+		state_region = s:STATE_NORTHERN_THRACE
+		state_region = s:STATE_WESTERN_THRACE
+		state_region = s:STATE_MACEDONIA
+		state_region = s:STATE_KOSOVO
+		state_region = s:STATE_SKOPIA
+		state_region = s:STATE_DOBRUDJA
+		state_region = s:STATE_EASTERN_SERBIA
+	}
+}
+
+# State scope. Eligible for provenance stamp while TUR still owns the share.
+# 1836 RUS Dobrudja / SER Eastern Serbia shares fail owner ?= c:TUR and never stamp.
+sp_i12_can_stamp_tur_share_provenance = {
+	owner ?= c:TUR
+	sp_i12_is_rumelian_wave_c_candidate_share = yes
+}
+
+# State scope. Former TUR share now foreign - provenance required (B9).
+# Bare NOT owner ?= TUR is forbidden.
+sp_i12_is_lost_tur_rumelian_share = {
+	NOT = { owner ?= c:TUR }
+	has_variable = sp_i12_tur_share_provenance
+	sp_i12_is_rumelian_wave_c_candidate_share = yes
+}
+
+# State scope. Still-TUR devastated Rumelian core share (no provenance required).
+sp_i12_is_devastated_held_rumelian_share = {
+	owner ?= c:TUR
+	devastation >= 15
+	sp_i12_is_rumelian_wave_c_candidate_share = yes
+}
