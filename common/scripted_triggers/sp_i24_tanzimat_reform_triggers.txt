@@ -1,0 +1,79 @@
+﻿# I-24 Tanzimat interactive reform gates. Read-only against I-05 / vanilla Tanzimat state.
+
+sp_i24_tanzimat_window = {
+	c:TUR ?= this
+	has_journal_entry = je_sick_man_main
+	NOT = { has_variable = sick_man_complete }
+}
+
+sp_i24_reform_legitimacy = {
+	government_legitimacy >= 60
+}
+
+sp_i24_devout_resistance_weak = {
+	ig:ig_devout ?= {
+		is_in_government = no
+	}
+}
+
+# Landowners are out of government, or remain in office but are no longer powerful.
+sp_i24_landowners_resistance_weak = {
+	OR = {
+		ig:ig_landowners ?= {
+			is_in_government = no
+		}
+		ig:ig_landowners ?= {
+			is_powerful = no
+		}
+	}
+}
+
+sp_i24_has_education_law = {
+	NOT = { has_law_or_variant = law_type:law_no_schools }
+}
+
+sp_i24_slavery_still_legal = {
+	OR = {
+		has_law_or_variant = law_type:law_slave_trade
+		has_law_or_variant = law_type:law_debt_slavery
+		has_law_or_variant = law_type:law_legacy_slavery
+	}
+}
+
+sp_i24_cizye_done = {
+	has_variable = sp_i24_cizye_abolished
+}
+
+sp_i24_ciftlik_done = {
+	has_variable = sp_i24_ciftlik_reformed
+}
+
+sp_i24_education_done = {
+	has_variable = sp_i24_education_reorganized
+}
+
+sp_i24_slave_markets_done = {
+	has_variable = sp_i24_slave_markets_suppressed
+}
+
+# Law enactment of Slavery Banned counts as resolved; the button never bypasses that path.
+sp_i24_slave_reform_resolved = {
+	OR = {
+		has_variable = sp_i24_slave_markets_suppressed
+		has_law_or_variant = law_type:law_slavery_banned
+	}
+}
+
+sp_i24_all_reforms_resolved = {
+	sp_i24_cizye_done = yes
+	sp_i24_ciftlik_done = yes
+	sp_i24_education_done = yes
+	sp_i24_slave_reform_resolved = yes
+}
+
+sp_i24_ai_reform_pause = {
+	OR = {
+		is_at_war = yes
+		any_revolution_ongoing = yes
+	}
+}

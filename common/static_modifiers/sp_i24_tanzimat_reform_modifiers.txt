@@ -1,0 +1,37 @@
+﻿# I-24 timed reform modifiers. Five years (normal_modifier_time). No permanent buffs.
+# Values are independently chosen from vanilla 1.13.11 ranges; not copied from Gates of the Bosphorus.
+
+# Partial reduction of millet-system heathen tax after named cizye abolition. Medium tax on millet_system is 0.5; this offsets 0.20 of that levy for five years.
+sp_i24_cizye_abolished_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	tax_heathen_add = -0.20
+	interest_group_ig_devout_approval_add = -3
+	interest_group_ig_landowners_approval_add = -2
+}
+
+# Provincial land-order reform: small administrative capacity, Landowners resentment. No throughput or agriculture buff.
+sp_i24_ciftlik_reformed_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_mult = 0.05
+	state_tax_capacity_mult = 0.03
+	interest_group_ig_landowners_approval_add = -4
+}
+
+# Education administration reorganization. Smaller access than the I-06 success reward (0.05 / 10 years).
+sp_i24_education_reorganized_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_education_access_add = 0.02
+	country_bureaucracy_mult = 0.03
+	interest_group_ig_devout_approval_add = -3
+	interest_group_ig_intelligentsia_approval_add = 2
+}
+
+# Market suppression only. Does not enact Slavery Banned. Slave-import reduction is independent of Brazil's restricted-trade values.
+sp_i24_slave_markets_suppressed_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_slave_import_mult = -0.25
+	country_prestige_add = 10
+	interest_group_ig_landowners_approval_add = -3
+	interest_group_ig_devout_approval_add = -2
+	interest_group_ig_intelligentsia_approval_add = 1
+}

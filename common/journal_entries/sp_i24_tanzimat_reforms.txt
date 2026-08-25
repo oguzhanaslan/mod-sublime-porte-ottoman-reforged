@@ -1,0 +1,77 @@
+﻿# I-24 additive Tanzimat reform-decree JE. Does not replace je_sick_man_main or I-05 objectives.
+
+sp_je_tanzimat_reforms = {
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	group = je_group_tanzimat
+
+	is_shown_when_inactive = {
+		sp_i24_tanzimat_window = yes
+	}
+
+	possible = {
+		sp_i24_tanzimat_window = yes
+	}
+
+	scripted_button = sp_i24_abolish_cizye_button
+	scripted_button = sp_i24_reform_ciftlik_button
+	scripted_button = sp_i24_reorganize_education_button
+	scripted_button = sp_i24_suppress_slave_markets_button
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					sp_i24_all_reforms_resolved = yes
+				}
+				desc = sp_je_tanzimat_reforms_status_complete
+			}
+			triggered_desc = {
+				trigger = {
+					OR = {
+						sp_i24_cizye_done = yes
+						sp_i24_ciftlik_done = yes
+						sp_i24_education_done = yes
+						sp_i24_slave_reform_resolved = yes
+					}
+				}
+				desc = sp_je_tanzimat_reforms_status_partial
+			}
+			desc = sp_je_tanzimat_reforms_status_opening
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = sp_i24_cizye_complete_tt
+			sp_i24_cizye_done = yes
+		}
+		custom_tooltip = {
+			text = sp_i24_ciftlik_complete_tt
+			sp_i24_ciftlik_done = yes
+		}
+		custom_tooltip = {
+			text = sp_i24_education_complete_tt
+			sp_i24_education_done = yes
+		}
+		custom_tooltip = {
+			text = sp_i24_slave_markets_complete_tt
+			sp_i24_slave_reform_resolved = yes
+		}
+	}
+
+	on_complete = {
+		custom_tooltip = sp_i24_no_tanzimat_point_tt
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			NOT = { has_journal_entry = je_sick_man_main }
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+	weight = 9500
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

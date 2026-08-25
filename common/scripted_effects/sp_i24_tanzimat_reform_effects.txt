@@ -1,0 +1,68 @@
+﻿# I-24 one-shot loyalist helpers. Values are vanilla script_values, not custom mana.
+
+# Cizye abolition: small loyalists among non-Muslim millet communities.
+# Uses the same religion keys as vanilla tanzimat_events.4, at small_radicals (0.02).
+sp_i24_add_cizye_loyalists_effect = {
+	if = {
+		limit = {
+			any_scope_pop = {
+				religion = rel:orthodox
+			}
+		}
+		add_loyalists = {
+			religion = rel:orthodox
+			value = small_radicals
+		}
+	}
+	if = {
+		limit = {
+			any_scope_pop = {
+				religion = rel:oriental_orthodox
+			}
+		}
+		add_loyalists = {
+			religion = rel:oriental_orthodox
+			value = small_radicals
+		}
+	}
+	if = {
+		limit = {
+			any_scope_pop = {
+				religion = rel:catholic
+			}
+		}
+		add_loyalists = {
+			religion = rel:catholic
+			value = small_radicals
+		}
+	}
+	if = {
+		limit = {
+			any_scope_pop = {
+				religion = rel:protestant
+			}
+		}
+		add_loyalists = {
+			religion = rel:protestant
+			value = small_radicals
+		}
+	}
+	if = {
+		limit = {
+			any_scope_pop = {
+				religion = rel:jewish
+			}
+		}
+		add_loyalists = {
+			religion = rel:jewish
+			value = small_radicals
+		}
+	}
+}
+
+sp_i24_add_ciftlik_peasant_loyalists_effect = {
+	add_loyalists = {
+		pop_type = peasants
+		value = very_small_radicals
+	}
+}

@@ -1,0 +1,180 @@
+﻿# I-24 one-shot Tanzimat reform buttons. Independent of Gates of the Bosphorus.
+# Attached only to the additive companion JE sp_je_tanzimat_reforms.
+
+sp_i24_abolish_cizye_button = {
+	name = sp_i24_abolish_cizye_button
+	desc = sp_i24_abolish_cizye_button_desc
+
+	visible = {
+		NOT = { sp_i24_cizye_done = yes }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sp_i24_legitimacy_60_tt
+			sp_i24_reform_legitimacy = yes
+		}
+		custom_tooltip = {
+			text = sp_i24_devout_out_of_government_tt
+			sp_i24_devout_resistance_weak = yes
+		}
+		hidden_trigger = {
+			NOT = { sp_i24_cizye_done = yes }
+		}
+	}
+
+	ai_chance = {
+		value = 8
+		if = {
+			limit = {
+				sp_i24_ai_reform_pause = yes
+			}
+			add = -1000
+		}
+	}
+
+	effect = {
+		set_variable = sp_i24_cizye_abolished
+		add_modifier = {
+			name = sp_i24_cizye_abolished_mod
+			days = normal_modifier_time
+		}
+		sp_i24_add_cizye_loyalists_effect = yes
+		custom_tooltip = sp_i24_no_tanzimat_point_tt
+	}
+}
+
+sp_i24_reform_ciftlik_button = {
+	name = sp_i24_reform_ciftlik_button
+	desc = sp_i24_reform_ciftlik_button_desc
+
+	visible = {
+		NOT = { sp_i24_ciftlik_done = yes }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sp_i24_legitimacy_60_tt
+			sp_i24_reform_legitimacy = yes
+		}
+		custom_tooltip = {
+			text = sp_i24_landowners_resistance_weak_tt
+			sp_i24_landowners_resistance_weak = yes
+		}
+		hidden_trigger = {
+			NOT = { sp_i24_ciftlik_done = yes }
+		}
+	}
+
+	ai_chance = {
+		value = 6
+		if = {
+			limit = {
+				sp_i24_ai_reform_pause = yes
+			}
+			add = -1000
+		}
+	}
+
+	effect = {
+		set_variable = sp_i24_ciftlik_reformed
+		add_modifier = {
+			name = sp_i24_ciftlik_reformed_mod
+			days = normal_modifier_time
+		}
+		sp_i24_add_ciftlik_peasant_loyalists_effect = yes
+		custom_tooltip = sp_i24_no_tanzimat_point_tt
+	}
+}
+
+sp_i24_reorganize_education_button = {
+	name = sp_i24_reorganize_education_button
+	desc = sp_i24_reorganize_education_button_desc
+
+	visible = {
+		NOT = { sp_i24_education_done = yes }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sp_i24_legitimacy_60_tt
+			sp_i24_reform_legitimacy = yes
+		}
+		custom_tooltip = {
+			text = sp_i24_devout_out_of_government_tt
+			sp_i24_devout_resistance_weak = yes
+		}
+		custom_tooltip = {
+			text = sp_i24_has_education_law_tt
+			sp_i24_has_education_law = yes
+		}
+		hidden_trigger = {
+			NOT = { sp_i24_education_done = yes }
+		}
+	}
+
+	ai_chance = {
+		value = 7
+		if = {
+			limit = {
+				sp_i24_ai_reform_pause = yes
+			}
+			add = -1000
+		}
+	}
+
+	effect = {
+		set_variable = sp_i24_education_reorganized
+		add_modifier = {
+			name = sp_i24_education_reorganized_mod
+			days = normal_modifier_time
+		}
+		custom_tooltip = sp_i24_no_tanzimat_point_tt
+	}
+}
+
+sp_i24_suppress_slave_markets_button = {
+	name = sp_i24_suppress_slave_markets_button
+	desc = sp_i24_suppress_slave_markets_button_desc
+
+	visible = {
+		sp_i24_slavery_still_legal = yes
+		NOT = { sp_i24_slave_markets_done = yes }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sp_i24_legitimacy_60_tt
+			sp_i24_reform_legitimacy = yes
+		}
+		custom_tooltip = {
+			text = sp_i24_landowners_out_of_government_tt
+			ig:ig_landowners ?= {
+				is_in_government = no
+			}
+		}
+		hidden_trigger = {
+			sp_i24_slavery_still_legal = yes
+			NOT = { sp_i24_slave_markets_done = yes }
+		}
+	}
+
+	ai_chance = {
+		value = 5
+		if = {
+			limit = {
+				sp_i24_ai_reform_pause = yes
+			}
+			add = -1000
+		}
+	}
+
+	effect = {
+		set_variable = sp_i24_slave_markets_suppressed
+		add_modifier = {
+			name = sp_i24_slave_markets_suppressed_mod
+			days = normal_modifier_time
+		}
+		custom_tooltip = sp_i24_no_tanzimat_point_tt
+	}
+}
