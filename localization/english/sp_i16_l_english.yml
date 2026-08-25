@@ -1,0 +1,12 @@
+﻿l_english:
+ treaty_name_sp_baltalimani:0 "Treaty of Balta Liman"
+ sp_i16.1.t:0 "The Treaty of Balta Liman"
+ sp_i16.1.d:0 "British envoys press for a commercial convention that would open Ottoman markets, weaken state monopolies, and grant [SCOPE.sCountry('sp_i16_gbr_scope').GetAdjective] traders privileged access. Signing would draw London closer to the Porte; refusal would preserve the monopolies at the cost of cooler relations."
+ sp_i16.1.f:0 "Free trade is offered as friendship. The price is paid in customs and in the old monopolies of the Porte."
+ sp_i16.1.a:0 "Sign the commercial convention"
+ sp_i16.1.b:0 "Preserve the monopolies"
+ sp_i16.2.t:0 "The Treaty of Hünkâr İskelesi Lapses"
+ sp_i16.2.d:0 "The eight-year term of the 1833 Treaty of Hünkâr İskelesi has run out. [SCOPE.sCountry('sp_i16_rus_scope').GetName]'s guarantee of Ottoman independence ends. The two empires are not friends; the old rivalry remains."
+ sp_i16.2.f:0 "A protector for a season is not an ally for an age."
+ sp_i16.2.a:0 "The guarantee is finished"
+ sp_i16_hunkar_lapse_tt:0 "Russia withdraws from the Treaty of Hünkâr İskelesi"

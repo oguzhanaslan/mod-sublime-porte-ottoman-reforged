@@ -1,0 +1,12 @@
+﻿l_turkish:
+ treaty_name_sp_baltalimani:0 "Balta Limanı Antlaşması"
+ sp_i16.1.t:0 "Balta Limanı Antlaşması"
+ sp_i16.1.d:0 "İngiliz elçiler, Osmanlı pazarlarını açacak, devlet tekellerini zayıflatacak ve [SCOPE.sCountry('sp_i16_gbr_scope').GetAdjective] tüccarlarına imtiyazlı erişim tanıyacak bir ticaret sözleşmesi için baskı yapar. İmza Bâb-ı Âli'yi Londra'ya yaklaştırır; ret tekelleri korur, ilişkileri soğutur."
+ sp_i16.1.f:0 "Serbest ticaret dostluk diye sunulur. Bedeli gümrükte ve Bâb-ı Âli'nin eski tekellerinde ödenir."
+ sp_i16.1.a:0 "Ticaret sözleşmesini imzala"
+ sp_i16.1.b:0 "Tekelleri koru"
+ sp_i16.2.t:0 "Hünkâr İskelesi Antlaşması Sona Erer"
+ sp_i16.2.d:0 "1833 Hünkâr İskelesi Antlaşması'nın sekiz yıllık süresi dolmuştur. [SCOPE.sCountry('sp_i16_rus_scope').GetName] ülkesinin Osmanlı bağımsızlığına verdiği garanti biter. İki imparatorluk dost değildir; eski rekabet sürer."
+ sp_i16.2.f:0 "Bir mevsimlik hami, bir asırlık müttefik değildir."
+ sp_i16.2.a:0 "Garanti bitti"
+ sp_i16_hunkar_lapse_tt:0 "Rusya, Hünkâr İskelesi Antlaşması'ndan çekilir"

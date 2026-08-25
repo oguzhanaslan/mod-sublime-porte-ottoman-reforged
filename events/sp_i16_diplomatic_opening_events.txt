@@ -1,0 +1,126 @@
+﻿namespace = sp_i16
+
+# I-16 Baltalimanı — 1838 sign/refuse commercial treaty. Not an economy system.
+
+sp_i16.1 = {
+	type = country_event
+	placement = root
+	title = sp_i16.1.t
+	desc = sp_i16.1.d
+	flavor = sp_i16.1.f
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		exists = c:GBR
+		game_date >= 1838.1.1
+		NOT = { has_war_with = c:GBR }
+		NOT = { has_variable = sp_i16_baltalimani_resolved }
+	}
+
+	immediate = {
+		set_variable = sp_i16_baltalimani_resolved
+		c:GBR ?= {
+			save_scope_as = sp_i16_gbr_scope
+		}
+	}
+
+	option = {
+		name = sp_i16.1.a
+		default_option = yes
+		change_relations = {
+			country = c:GBR
+			value = 10
+		}
+		create_treaty = {
+			name = treaty_name_sp_baltalimani
+			first_country = root
+			second_country = c:GBR
+			is_draft = no
+			binding_period = { years = 10 }
+			articles_to_create = {
+				{
+					article = trade_privilege
+					source_country = root
+					target_country = c:GBR
+				}
+			}
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = sp_i16.1.b
+		change_relations = {
+			country = c:GBR
+			value = -10
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+# I-16 Hünkâr İskelesi lapse — withdraw only the RUS→TUR guarantee after 1841.7.8.
+
+sp_i16.2 = {
+	type = country_event
+	placement = root
+	title = sp_i16.2.t
+	desc = sp_i16.2.d
+	flavor = sp_i16.2.f
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		exists = c:RUS
+		game_date >= 1841.7.8
+		NOT = { has_variable = sp_i16_hunkar_lapse_resolved }
+		any_scope_treaty = {
+			binds = c:RUS
+			any_scope_article = {
+				has_type = guarantee_independence
+				source_country = c:RUS
+				target_country = c:TUR
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = sp_i16_hunkar_lapse_resolved
+		c:RUS ?= {
+			save_scope_as = sp_i16_rus_scope
+		}
+	}
+
+	option = {
+		name = sp_i16.2.a
+		default_option = yes
+		custom_tooltip = sp_i16_hunkar_lapse_tt
+		hidden_effect = {
+			c:RUS ?= {
+				every_scope_treaty = {
+					limit = {
+						binds = c:TUR
+						any_scope_article = {
+							has_type = guarantee_independence
+							source_country = c:RUS
+							target_country = c:TUR
+						}
+					}
+					withdraw = {
+						country = c:RUS
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+﻿# I-16 additive historical treaty. Do not overwrite vanilla 00_historical_treaties.txt.
+# Pattern: vanilla RUS guarantee of MON in 00_historical_treaties.txt.
+
+TREATIES = {
+	create_treaty = {
+		name = treaty_name_hunkar_iskelesi
+		first_country = c:RUS
+		second_country = c:TUR
+
+		is_draft = no
+		entered_into_force_on = 1833.7.8
+		binding_period = { years = 8 }
+
+		articles_to_create = {
+			{
+				article = guarantee_independence
+				source_country = c:RUS
+				target_country = c:TUR
+			}
+		}
+	}
+}

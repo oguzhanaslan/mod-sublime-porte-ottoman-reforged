@@ -1,0 +1,8 @@
+﻿# I-16 additive Egypt-crisis AI flag. Do not overwrite vanilla 00_behavior_variables.txt.
+# Vanilla already sets veiled_protectorate_support_ottomans on GBR/AUS/RUS/PRU.
+
+AI = {
+	c:FRA ?= {
+		set_variable = veiled_protectorate_support_egypt
+	}
+}

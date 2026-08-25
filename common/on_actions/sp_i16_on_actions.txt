@@ -1,0 +1,25 @@
+﻿# I-16 additive pulses. Do not edit I-07/I-10B/I-13/I-14 on_actions.
+
+on_yearly_pulse_country = {
+	on_actions = {
+		sp_i16_yearly_events
+	}
+}
+
+sp_i16_yearly_events = {
+	events = {
+		sp_i16.1
+	}
+}
+
+on_monthly_pulse_country = {
+	on_actions = {
+		sp_i16_monthly_events
+	}
+}
+
+sp_i16_monthly_events = {
+	events = {
+		sp_i16.2
+	}
+}
