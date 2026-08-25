@@ -1,0 +1,46 @@
+﻿# I-16B: I-07 Ottoman–Egypt crisis play window.
+# Same TUR–EGY pair vanilla already uses for veiled-protectorate AI weights,
+# plus the I-07 resolved flag so later sandbox wars are not locked.
+
+sp_i16b_egypt_crisis_alignment_active = {
+	exists = scope:initiator
+	exists = scope:target_country
+	exists = scope:enemy_country
+	exists = c:TUR
+	exists = c:EGY
+	scope:initiator = { c:TUR ?= this }
+	c:TUR = {
+		NOT = { has_variable = sp_egyptian_question_resolved }
+		OR = {
+			has_variable = egyptian_crisis
+			has_journal_entry = je_sick_man_syria
+			has_journal_entry = je_sick_man_egypt
+		}
+	}
+	OR = {
+		AND = {
+			scope:target_country = { c:EGY ?= this }
+			scope:enemy_country = { c:TUR ?= this }
+		}
+		AND = {
+			scope:target_country = { c:TUR ?= this }
+			scope:enemy_country = { c:EGY ?= this }
+		}
+	}
+}
+
+sp_i16b_coalition_cannot_join_egypt = {
+	sp_i16b_egypt_crisis_alignment_active = yes
+	scope:target_country = { c:EGY ?= this }
+	OR = {
+		c:GBR ?= this
+		c:AUS ?= this
+		c:RUS ?= this
+		c:PRU ?= this
+	}
+}
+
+sp_i16b_france_military_neutrality = {
+	sp_i16b_egypt_crisis_alignment_active = yes
+	c:FRA ?= this
+}

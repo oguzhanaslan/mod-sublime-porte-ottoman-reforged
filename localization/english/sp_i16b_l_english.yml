@@ -1,0 +1,3 @@
+﻿l_english:
+ sp_i16b_coalition_cannot_join_egypt_tt:0 "During the Ottoman–Egyptian crisis, [ROOT.GetCountry.GetName] will not join Egypt against the Ottoman Empire."
+ sp_i16b_france_military_neutrality_tt:0 "France remains politically sympathetic to Egypt but will not intervene militarily in the Ottoman–Egyptian crisis."

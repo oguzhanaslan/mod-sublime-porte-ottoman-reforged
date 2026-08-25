@@ -1,0 +1,79 @@
+﻿# I-16B narrow override of vanilla 1.13.11 can_join_side_in_diplomatic_play.
+# Keep the copied vanilla body synchronized with common/scripted_rules/00_scripted_rules.txt.
+# Additive I-16B NAND blocks are the only delta: they forbid GBR/AUS/RUS/PRU from
+# joining EGY, and FRA from joining either side, only in the I-07 TUR-initiated
+# Egypt crisis window. They do not force anyone onto TUR's side.
+
+REPLACE:can_join_side_in_diplomatic_play = {
+	# Might be disallowed by power bloc
+	NOT = {
+		custom_tooltip = {
+			text = "POWER_BLOC_CANNOT_SIDE_AGAINST_OVERLORD"
+			is_in_same_power_bloc = scope:target_country
+			is_in_same_power_bloc = scope:enemy_country
+			power_bloc ?= {
+				modifier:power_bloc_disallow_war_bool = yes
+			}
+			# Conflicts between Overlord and (their own) Subject are always permitted despite Power Bloc special conditions
+			# We can join the overlord side but not the subject's one
+			scope:target_country = {
+				is_direct_subject_of = scope:enemy_country
+			}
+		}
+	}
+	NOT = {
+		# Disallow plays targeting your indirect subjects
+		scope:enemy_country = {
+			is_indirect_subject_of = root
+		}
+	}
+
+	OR = {
+		has_strategic_region_interest_tier = {
+			strategic_region = scope:region
+			value >= interest_tier_effect_can_join_diplomatic_plays_min_tier
+		}
+		has_treaty_alliance_with = { TARGET = scope:target_country }
+		AND = {
+			has_treaty_defensive_pact_with = { TARGET = scope:target_country }
+			hidden_trigger = {
+				scope:target_country = {
+					scope:initiator != this
+				}
+			}
+		}
+		AND = {
+			scope:target_country = {
+				has_treaty_guarantee_independence_with = { TARGET = root }
+			}
+			hidden_trigger = {
+				scope:target_country = {
+					scope:initiator != this
+				}
+			}
+		}
+		scope:target_country = {
+			has_treaty_support_independence_with = { TARGET = root }
+		}
+		is_direct_subject_of = scope:enemy_country
+		scope:enemy_country = { is_direct_subject_of = root }
+		is_direct_subject_of = scope:target_country
+		scope:target_country = { is_direct_subject_of = root }
+	}
+
+	# I-16B: historical coalition may back TUR but cannot fight on EGY's side.
+	NOT = {
+		custom_tooltip = {
+			text = sp_i16b_coalition_cannot_join_egypt_tt
+			sp_i16b_coalition_cannot_join_egypt = yes
+		}
+	}
+
+	# I-16B: France may remain politically pro-Egypt, but not a military participant.
+	NOT = {
+		custom_tooltip = {
+			text = sp_i16b_france_military_neutrality_tt
+			sp_i16b_france_military_neutrality = yes
+		}
+	}
+}
