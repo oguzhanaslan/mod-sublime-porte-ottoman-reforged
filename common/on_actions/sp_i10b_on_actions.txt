@@ -1,0 +1,13 @@
+﻿on_yearly_pulse_country = {
+	on_actions = {
+		sp_i10b_yearly_events
+	}
+}
+
+sp_i10b_yearly_events = {
+	events = {
+		sp_i10b.1
+		sp_i10b.2
+		sp_i10b.3
+	}
+}

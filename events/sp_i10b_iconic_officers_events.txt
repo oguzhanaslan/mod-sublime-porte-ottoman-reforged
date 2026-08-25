@@ -1,0 +1,133 @@
+﻿namespace = sp_i10b
+
+sp_i10b.1 = { # Fevzi Çakmak
+	type = country_event
+	placement = root
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:sp_i10b_fevzi_scope
+
+	title = sp_i10b.1.t
+	desc = sp_i10b.1.d
+	flavor = sp_i10b.1.f
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+	duration = 3
+
+	trigger = {
+		this = c:TUR
+		game_date >= 1850.1.1
+		NOT = { has_variable = sp_i10b_fevzi_emerged }
+		NOT = {
+			any_scope_character = {
+				has_template = sp_i10b_fevzi_cakmak_template
+			}
+		}
+	}
+
+	immediate = {
+		create_character = {
+			template = sp_i10b_fevzi_cakmak_template
+			save_scope_as = sp_i10b_fevzi_scope
+		}
+		set_variable = sp_i10b_fevzi_emerged
+	}
+
+	option = {
+		name = sp_i10b.1.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+sp_i10b.2 = { # Mustafa Kemal
+	type = country_event
+	placement = root
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:sp_i10b_mustafa_scope
+
+	title = sp_i10b.2.t
+	desc = sp_i10b.2.d
+	flavor = sp_i10b.2.f
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+	duration = 3
+
+	trigger = {
+		this = c:TUR
+		game_date >= 1852.1.1
+		NOT = { has_variable = sp_i10b_mustafa_emerged }
+		NOT = {
+			any_scope_character = {
+				has_template = sp_i10b_mustafa_kemal_template
+			}
+		}
+	}
+
+	immediate = {
+		create_character = {
+			template = sp_i10b_mustafa_kemal_template
+			save_scope_as = sp_i10b_mustafa_scope
+		}
+		set_variable = sp_i10b_mustafa_emerged
+	}
+
+	option = {
+		name = sp_i10b.2.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+sp_i10b.3 = { # Kâzım Karabekir
+	type = country_event
+	placement = root
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:sp_i10b_kazim_scope
+
+	title = sp_i10b.3.t
+	desc = sp_i10b.3.d
+	flavor = sp_i10b.3.f
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+	duration = 3
+
+	trigger = {
+		this = c:TUR
+		game_date >= 1857.1.1
+		NOT = { has_variable = sp_i10b_kazim_emerged }
+		NOT = {
+			any_scope_character = {
+				has_template = sp_i10b_kazim_karabekir_template
+			}
+		}
+	}
+
+	immediate = {
+		create_character = {
+			template = sp_i10b_kazim_karabekir_template
+			save_scope_as = sp_i10b_kazim_scope
+		}
+		set_variable = sp_i10b_kazim_emerged
+	}
+
+	option = {
+		name = sp_i10b.3.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
