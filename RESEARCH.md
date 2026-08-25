@@ -109,6 +109,7 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Validation & Release
 
-- **I-15 — v1.0 release validation:** [`docs/research/I15_release_validation_matrix.md`](docs/research/I15_release_validation_matrix.md). **PLAYER VISUAL / FIRST-RUNTIME CLOSED 2026-08-25.** Static `6767622`: 16 PASS / 0 FAIL. Tester 1836 visual pass: no visible bug. `sp_balkan_cohesion.1` informational PASS. I-15 fix pass **not required**. Date-gated campaigns remain NOT RUN and are not v1.0 blockers. Canonical next work: optional Phase 5 visual assets or Future v1.x / R-20. R-20–R-24 remain Future v1.x.
+- **I-15 — v1.0 release validation:** [`docs/research/I15_release_validation_matrix.md`](docs/research/I15_release_validation_matrix.md). **PLAYER VISUAL / FIRST-RUNTIME CLOSED 2026-08-25.** Static `6767622`: 16 PASS / 0 FAIL. Tester 1836 visual pass: no visible bug. `sp_balkan_cohesion.1` informational PASS. I-15 fix pass **not required**. Date-gated campaigns remain NOT RUN and are not v1.0 blockers.
+- **Phase 5 release-facing polish:** [`docs/implementation/P5_v1_release_polish.md`](docs/implementation/P5_v1_release_polish.md). **COMPLETE 2026-08-25** in loc `b5315e9` and docs/metadata `08c800a`. Player-facing EN/TR text, `1.0.0` / `1.13.*` metadata, README, and changelog. Tiger `fatal 0 / error 1 / warning 10`. Gameplay unchanged. DNA/artwork/Workshop images remain optional. Canonical next work: optional Phase 5 visual assets or Future v1.x / R-20. R-20–R-24 remain Future v1.x.
 
 ## Alternative History
