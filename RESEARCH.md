@@ -18,7 +18,7 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Economy & Finance
 
-- **R-19 — Ottoman companies/institutions inventory:** [`docs/research/R19_ottoman_companies_institutions_inventory.md`](docs/research/R19_ottoman_companies_institutions_inventory.md). Four named candidates were duplicate-checked against installed vanilla 1.13.11 companies, JEs, events, modifiers, technologies, laws and buildings. Vanilla already has Tersâne-i Âmire, Ottoman Tobacco Régie, Allatini Mills, Chemins de fer Orientaux and Turkish Petroleum. I-14 v1 roster: Şirket-i Hayriye as a port company; Bank-ı Osmanî-i Şahane as event/decision/modifier only. Memleket Sandıkları are not a company; Düyun-u Umumiye must not become a prosperity company because the Régie already covers the tobacco-monopoly slice. **COMPLETE — RESEARCH ONLY; I-14 NOT STARTED.**
+- **R-19 — Ottoman companies/institutions inventory:** [`docs/research/R19_ottoman_companies_institutions_inventory.md`](docs/research/R19_ottoman_companies_institutions_inventory.md). Four named candidates were duplicate-checked against installed vanilla 1.13.11 companies, JEs, events, modifiers, technologies, laws and buildings. Vanilla already has Tersâne-i Âmire, Ottoman Tobacco Régie, Allatini Mills, Chemins de fer Orientaux and Turkish Petroleum. I-14 v1 roster: Şirket-i Hayriye as a port company; Bank-ı Osmanî-i Şahane as event/decision/modifier only. Memleket Sandıkları are not a company; Düyun-u Umumiye must not become a prosperity company because the Régie already covers the tobacco-monopoly slice. **COMPLETE — RESEARCH ONLY.** The exact I-14 contract is [`docs/research/I14_ottoman_company_institution_proposal.md`](docs/research/I14_ottoman_company_institution_proposal.md) and is **NOT APPROVED FOR IMPLEMENTATION** until explicit user approval.
 
 ## Ottoman Debt
 
@@ -105,5 +105,6 @@ Do not place unverified historical claims in this file. Cite sources when resear
 ## Historical Companies
 
 - **R-19 — Ottoman companies/institutions inventory:** canonical dossier [`docs/research/R19_ottoman_companies_institutions_inventory.md`](docs/research/R19_ottoman_companies_institutions_inventory.md). Do not confuse with [`docs/research/R19_tanzimat_gameplay_design.md`](docs/research/R19_tanzimat_gameplay_design.md), which is the I-05 Tanzimat design file under a colliding filename. **COMPLETE — RESEARCH ONLY.**
+- **I-14 — Ottoman company/institution flavor proposal:** [`docs/research/I14_ottoman_company_institution_proposal.md`](docs/research/I14_ottoman_company_institution_proposal.md). Exact Hayriye company contract and Ottoman Bank one-shot event contract. **PROPOSAL ONLY — AWAITING EXPLICIT APPROVAL; NOT IMPLEMENTED.**
 
 ## Alternative History
