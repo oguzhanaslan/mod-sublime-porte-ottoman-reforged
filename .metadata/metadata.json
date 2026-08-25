@@ -1,11 +1,11 @@
 {
   "name": "Sublime Porte: Ottoman Reforged",
   "id": "com.sublimeporte.ottomanreforged",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "game_id": "victoria3",
-  "supported_game_version": "1.13.11",
-  "short_description": "A comprehensive Ottoman Empire overhaul for Victoria 3.",
-  "tags": ["Alternative History", "Flavor", "Gameplay"],
+  "supported_game_version": "1.13.*",
+  "short_description": "A vanilla-first Ottoman flavor and rework for Victoria 3.",
+  "tags": ["Historical", "Flavor", "Gameplay"],
   "relationships": [
     {
       "rel_type": "dependency",

@@ -109,6 +109,6 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Validation & Release
 
-- **I-15 — v1.0 release validation:** [`docs/research/I15_release_validation_matrix.md`](docs/research/I15_release_validation_matrix.md). **PLAYER VISUAL / FIRST-RUNTIME CLOSED 2026-08-25.** Static `6767622`: 16 PASS / 0 FAIL. Tester 1836 visual pass: no visible bug. `sp_balkan_cohesion.1` informational PASS. I-15 fix pass **not required**. Date-gated campaigns remain NOT RUN and move to final release validation. Canonical next work: Phase 5 Visual/Polish → final release validation → v1.0. R-20–R-24 remain Future v1.x.
+- **I-15 — v1.0 release validation:** [`docs/research/I15_release_validation_matrix.md`](docs/research/I15_release_validation_matrix.md). **PLAYER VISUAL / FIRST-RUNTIME CLOSED 2026-08-25.** Static `6767622`: 16 PASS / 0 FAIL. Tester 1836 visual pass: no visible bug. `sp_balkan_cohesion.1` informational PASS. I-15 fix pass **not required**. Date-gated campaigns remain NOT RUN and are not v1.0 blockers. Canonical next work: optional Phase 5 visual assets or Future v1.x / R-20. R-20–R-24 remain Future v1.x.
 
 ## Alternative History

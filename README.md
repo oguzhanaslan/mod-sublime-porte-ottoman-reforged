@@ -1,34 +1,51 @@
 # Sublime Porte: Ottoman Reforged
 
-A Victoria 3 overhaul and flavor project focused on making the Ottoman Empire more historical, deeper, balanced, and engaging from 1836 through the late game.
+A vanilla-first Ottoman flavor and rework for **Victoria 3**. The 1836 setup and the nineteenth-century campaign are more historically grounded, without turning the empire into a total overhaul or an overpowered faction.
 
-## Project goals
+Strength still has to be earned through reform, investment, politics, diplomacy, time, and opportunity cost.
 
-The project aims to create a distinct Ottoman campaign across economics, demographics, politics, reform, diplomacy, warfare, migration, centralization, and historical development. The goal is not to make the Ottoman Empire overpowered: success should require reform, investment, political struggle, diplomacy, time, and opportunity cost.
+## Features
+
+- **1836 foundation.** Owner-aware Ottoman population, resource potential, starting buildings, and military setup on the vanilla map. The authored Ottoman population total stays near vanilla.
+- **Tanzimat and the Sick Man.** Clearer objectives, visible tradeoffs, and outcomes that do not erase the empire’s structural constraints.
+- **Eastern Question.** The Egyptian crisis can end in a limited European settlement, a costly maximalist victory, or an unresolved balance. No forced historical victor.
+- **Rumelia and the Great Eastern Crisis.** Balkan guidance for reform, order, or compromise with existing subjects, plus verified crisis-scope corrections. The crisis itself remains National Awakening content when that DLC is enabled.
+- **Characters and names.** Nineteenth-century Ottoman naming, corrected 1836 commanders, a small historical statesman pack, and later officer events.
+- **Muhacir settlement.** Timed refugee waves from Crimea, the Caucasus, and Rumelia, with treasury and provincial costs rather than free manpower.
+- **Companies and finance.** Şirket-i Hayriye as a port company; a one-shot Bank-ı Osmanî-i Şahane concession event.
+- **Localization.** Full English and Turkish coverage.
+
+## Requirements
+
+- **Victoria 3:** `1.13.*` (tested on `1.13.11`)
+- **Required mods:**
+  - [Community Mod Framework](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework)
+  - Community State Framework
+- **Load order:** Community Mod Framework → Community State Framework → Sublime Porte: Ottoman Reforged
+
+National Awakening is **not** required. The mod is built to load with that DLC off. Great Eastern Crisis journal content remains vanilla DLC-gated.
+
+Voice of the People and Sphere of Influence are also optional. Enver Paşa stays vanilla Voice of the People content and is not duplicated here.
+
+## Installation
+
+1. Install Community Mod Framework and Community State Framework.
+2. Copy or subscribe to this mod and enable it in the launcher.
+3. Confirm the load order above.
+4. Start a **new game** as the Ottoman Empire.
 
 ## Compatibility
 
-- Supported Victoria 3 version: `1.13.11`
-- Required dependency: Community Mod Framework `1.*`
-- CMF reference baseline: `1.59.2` (released 31 July 2026)
-- Development status: I-01 through I-14 gameplay is implemented on Victoria 3 `1.13.11`. I-15 player visual / first-runtime validation is closed (no visible bug). Date-gated campaigns remain for final release validation.
-- Project namespace: `sp_`
-- Supported localization: English and Turkish
+- No `replace_path`.
+- Narrow replacements are used only where vanilla has no additive hook (selected Tanzimat/Sick Man/Great Eastern Crisis definitions, Turkish names, and Ottoman history files).
+- Other mods that edit Ottoman population, buildings, state regions, military formations, characters, Tanzimat, or the Great Eastern Crisis can conflict. Place this mod after CMF/CSF and check load order if another Ottoman flavor mod is in the playset.
 
-Community Mod Framework is declared as a dependency, but individual systems should use it only when a verified CMF extension point provides a concrete benefit. Features that can be implemented cleanly with standard Victoria 3 script should remain vanilla-script implementations.
+## Saves
 
-Authoritative CMF source: [Victoria-3-Modding-Co-op/Community-Mod-Framework](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework).
+The 1836 demographic, resource, building, naming, commander, and military setup is **new-game only**. Installing the mod into an existing save will not rebuild history.
 
-## Development principles
+Some later events can appear on an already-running Ottoman campaign. Mid-crisis or late-install behavior is otherwise unsupported.
 
-- Vanilla game files are read-only references and are never modified.
-- Study a working vanilla or CMF pattern before implementing a feature; never invent script syntax.
-- Prefer additive files and narrow changes over broad vanilla overrides.
-- Keep player-facing text in localization files; never hardcode it in script.
-- Treat English as the source language and provide a synchronized Turkish translation for every released player-facing string.
-- Use `sp_` for custom IDs and localization keys wherever possible.
-- Treat compatibility, maintainability, historical sourcing, and balanced trade-offs as first-class requirements.
-- Mark uncertain historical material as `ASSUMPTION` until verified.
-- Develop each logical gameplay feature as a separate Git commit and require Tiger validation before completion.
+## Languages
 
-Contributor rules and the approval workflow are defined in [AGENTS.md](AGENTS.md). Technical boundaries are documented in [ARCHITECTURE.md](ARCHITECTURE.md).
+English is the source language. Turkish is fully supported and kept in key parity with English.
