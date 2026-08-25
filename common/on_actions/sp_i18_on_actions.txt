@@ -1,0 +1,28 @@
+﻿# I-18 additive pulses. Do not edit I-10B / I-14 / I-16 on_actions.
+
+on_yearly_pulse_country = {
+	on_actions = {
+		sp_i18_yearly_events
+	}
+}
+
+sp_i18_yearly_events = {
+	events = {
+		sp_i18.1
+		sp_i18.2
+		sp_i18.4
+	}
+}
+
+on_law_enactment_pass = {
+	on_actions = {
+		sp_i18_law_pass_events
+	}
+}
+
+sp_i18_law_pass_events = {
+	events = {
+		sp_i18.3
+		sp_i18.5
+	}
+}

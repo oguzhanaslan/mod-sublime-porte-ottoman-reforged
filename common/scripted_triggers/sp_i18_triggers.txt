@@ -1,0 +1,47 @@
+﻿# I-18 post-Tanzimat political flavor. Reads I-05 vars; does not set them.
+# sick_man_complete is not Tanzimat success (I-06 sets it on success and failure).
+
+# At least one domestic Tanzimat objective completed. Syria/Egypt reconquest is not enough.
+sp_i18_has_domestic_tanzimat_reform = {
+	OR = {
+		has_variable = completed_sick_man_bureaucracy_je
+		has_variable = completed_sick_man_education_je
+		has_variable = completed_sick_man_army_je
+		has_variable = completed_sick_man_economy_je
+		has_variable = completed_separatism_sick_man_je
+	}
+}
+
+# Left at least one 1836 political/institutional baseline, or already has a franchise.
+sp_i18_has_minimum_political_modernization = {
+	OR = {
+		NOT = { has_law_or_variant = law_type:law_hereditary_bureaucrats }
+		NOT = { has_law_or_variant = law_type:law_peasant_levies }
+		NOT = { has_law_or_variant = law_type:law_traditionalism }
+		NOT = { has_law_or_variant = law_type:law_no_schools }
+		NOT = { has_law = law_type:law_autocracy }
+		sp_i18_has_constitutional_government = yes
+	}
+}
+
+# Monarchy plus a voting franchise. Oligarchy and autocracy are not constitutional.
+sp_i18_has_constitutional_government = {
+	has_law = law_type:law_monarchy
+	OR = {
+		has_law_or_variant = law_type:law_landed_voting
+		has_law_or_variant = law_type:law_wealth_voting
+		has_law_or_variant = law_type:law_census_voting
+		has_law_or_variant = law_type:law_universal_suffrage
+	}
+}
+
+# Phase I window: 1852 through 1864. Date alone is not enough.
+sp_i18_phase_i_eligible = {
+	c:TUR ?= this
+	has_law = law_type:law_monarchy
+	game_date >= 1852.1.1
+	game_date < 1865.1.1
+	sp_i18_has_domestic_tanzimat_reform = yes
+	sp_i18_has_minimum_political_modernization = yes
+	NOT = { has_variable = sp_i18_debate_fired }
+}

@@ -1,0 +1,270 @@
+﻿namespace = sp_i18
+
+# I-18 post-Tanzimat political flavor. Five one-shot TUR events. No JE, no laws, no movements.
+
+# 1 — Post-Tanzimat debate, 1852–1864.
+sp_i18.1 = {
+	type = country_event
+	placement = root
+	title = sp_i18.1.t
+	desc = sp_i18.1.d
+	flavor = sp_i18.1.f
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i18_phase_i_eligible = yes
+	}
+
+	immediate = {
+		set_variable = sp_i18_debate_fired
+	}
+
+	option = {
+		name = sp_i18.1.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i18_reform_debate
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 40
+			modifier = {
+				trigger = {
+					ig:ig_intelligentsia ?= {
+						is_in_government = yes
+					}
+				}
+				add = 20
+			}
+		}
+	}
+
+	option = {
+		name = sp_i18.1.b
+		add_modifier = {
+			name = sp_i18_palace_prerogative
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 60
+			modifier = {
+				trigger = {
+					ig:ig_intelligentsia ?= {
+						is_in_government = yes
+					}
+				}
+				add = -20
+			}
+		}
+	}
+}
+
+# 2 — Young Ottomans circle/press, 1865+. Does not create Nâmık or Midhat.
+sp_i18.2 = {
+	type = country_event
+	placement = root
+	title = sp_i18.2.t
+	desc = sp_i18.2.d
+	flavor = sp_i18.2.f
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 3
+	event_image = {
+		video = "asia_politician_parliament_motion"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_law = law_type:law_monarchy
+		game_date >= 1865.1.1
+		NOT = { has_variable = sp_i18_young_ottomans_fired }
+		OR = {
+			has_variable = sp_i18_debate_fired
+			sp_i18_has_domestic_tanzimat_reform = yes
+			has_variable = sick_man_complete
+			has_variable = failed_sick_man_main
+			has_variable = failed_sick_man_separatism
+		}
+		OR = {
+			ig:ig_intelligentsia ?= {
+				ig_counts_as_marginal = no
+			}
+			any_political_movement = {
+				is_political_movement_type = movement_liberal
+			}
+			any_political_movement = {
+				is_political_movement_type = movement_radical
+			}
+			has_law_or_variant = law_type:law_censorship
+		}
+	}
+
+	immediate = {
+		set_variable = sp_i18_young_ottomans_fired
+	}
+
+	option = {
+		name = sp_i18.2.a
+		default_option = yes
+		# pop_type = academics is not attested on country-scope add_radicals.
+		# I-13 / dominican country-event pattern: culture-filtered radicals.
+		add_radicals = {
+			value = very_small_radicals
+			culture = cu:turkish
+		}
+		add_modifier = {
+			name = sp_i18_young_ottoman_press
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				trigger = {
+					has_law_or_variant = law_type:law_censorship
+				}
+				add = 5
+			}
+		}
+	}
+
+	option = {
+		name = sp_i18.2.b
+		add_modifier = {
+			name = sp_i18_young_ottoman_warning
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				trigger = {
+					ig:ig_landowners ?= {
+						is_in_government = yes
+					}
+				}
+				add = 5
+			}
+		}
+	}
+}
+
+# 3 — Early constitutional acknowledgement, 1852–1875. Not Kanun-i Esasi. NO EFFECT.
+sp_i18.3 = {
+	type = country_event
+	placement = root
+	title = sp_i18.3.t
+	desc = sp_i18.3.d
+	flavor = sp_i18.3.f
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_law = law_type:law_monarchy
+		game_date >= 1852.1.1
+		game_date < 1876.1.1
+		NOT = { has_variable = sp_i18_early_constitution_fired }
+		OR = {
+			is_enacting_law = law_type:law_landed_voting
+			is_enacting_law = law_type:law_wealth_voting
+			is_enacting_law = law_type:law_census_voting
+			is_enacting_law = law_type:law_universal_suffrage
+		}
+	}
+
+	immediate = {
+		set_variable = sp_i18_early_constitution_fired
+		set_variable = sp_i18_constitution_seen
+	}
+
+	option = {
+		name = sp_i18.3.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# 4 — Kanun-i Esasi names an existing franchise. 1876+. NO EFFECT. GEC does not block.
+sp_i18.4 = {
+	type = country_event
+	placement = root
+	title = sp_i18.4.t
+	desc = sp_i18.4.d
+	flavor = sp_i18.4.f
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 3
+	event_image = {
+		video = "asia_politician_parliament_motion"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_law = law_type:law_monarchy
+		sp_i18_has_constitutional_government = yes
+		game_date >= 1876.1.1
+		NOT = { has_variable = sp_i18_kanun_i_esasi_fired }
+	}
+
+	immediate = {
+		set_variable = sp_i18_kanun_i_esasi_fired
+		set_variable = sp_i18_constitution_seen
+	}
+
+	option = {
+		name = sp_i18.4.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# 5 — Hamidian restoration flavor after a prior franchise, 1878+. Does not enact autocracy.
+sp_i18.5 = {
+	type = country_event
+	placement = root
+	title = sp_i18.5.t
+	desc = sp_i18.5.d
+	flavor = sp_i18.5.f
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		game_date >= 1878.1.1
+		is_enacting_law = law_type:law_autocracy
+		has_variable = sp_i18_constitution_seen
+		NOT = { has_variable = sp_i18_hamidian_fired }
+	}
+
+	immediate = {
+		set_variable = sp_i18_hamidian_fired
+	}
+
+	option = {
+		name = sp_i18.5.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i18_hamidian_restoration
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
