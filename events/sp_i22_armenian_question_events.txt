@@ -1,0 +1,84 @@
+﻿namespace = sp_i22
+
+# I-22 Armenian Question. Two one-shot TUR events. No JE opener, no gameplay effects.
+
+# 1 — Armenian National Constitution, 1863+. Communal administration acknowledgement only.
+sp_i22.1 = {
+	type = country_event
+	placement = root
+	title = sp_i22.1.t
+	desc = sp_i22.1.d
+	flavor = sp_i22.1.f
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		game_date >= 1863.1.1
+		game_date < 1878.1.1
+		NOT = { has_variable = sp_i22_communal_constitution_fired }
+		NOT = { sp_i22_communal_constitution_skip = yes }
+	}
+
+	immediate = {
+		set_variable = sp_i22_communal_constitution_fired
+	}
+
+	option = {
+		name = sp_i22.1.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# 2 — Armenian Question before Europe, 1878+. Berlin / Article 61 diplomatic flavor only.
+sp_i22.2 = {
+	type = country_event
+	placement = root
+	title = sp_i22.2.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					sp_i22_repression_path = yes
+				}
+				desc = sp_i22.2.d.repression
+			}
+			desc = sp_i22.2.d
+		}
+	}
+	flavor = sp_i22.2.f
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 3
+	event_image = {
+		video = "middleeast_courtroom_upheaval"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		game_date >= 1878.7.1
+		game_date < 1886.1.1
+		NOT = { has_variable = sp_i22_berlin_flavor_fired }
+		NOT = { sp_i22_integration_path = yes }
+		sp_i22_armenian_grievance_present = yes
+	}
+
+	immediate = {
+		set_variable = sp_i22_berlin_flavor_fired
+	}
+
+	option = {
+		name = sp_i22.2.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+	}
+}

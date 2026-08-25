@@ -1,0 +1,21 @@
+﻿l_english:
+ sp_i22.1.t: "Armenian National Constitution"
+ sp_i22.1.d: "The Porte has approved a communal regulation for the Armenian millet: patriarchal authority, lay representation, and provincial assemblies now share in the administration of communal affairs. This is an imperial framework of communal governance, not a grant of independence or territorial autonomy."
+ sp_i22.1.f: "Clergy and lay delegates will administer Armenian communal life under Ottoman law. The regulation organizes representation and taxation within the millet; it does not create a separate state."
+ sp_i22.1.a: "The regulation is recorded."
+
+ sp_i22.2.t: "The Armenian Question before Europe"
+ sp_i22.2.d: "The settlement that ended the recent war has placed the security and reform of Ottoman Armenian subjects before the European powers. Memoranda, articles, and diplomatic notes now treat eastern communal grievances as a matter of international concern as well as domestic policy."
+ sp_i22.2.d.repression: "The settlement that ended the recent war has placed the security and reform of Ottoman Armenian subjects before the European powers. In capitals from Saint Petersburg to London, the language is sharper: the Porte is expected to answer for discrimination, unrest, and the failure of earlier promises of equality."
+ sp_i22.2.f: "Article 61 and the surrounding diplomacy do not by themselves alter Ottoman law. They mark the moment when Armenian communal reform became a question the powers could raise in every conference."
+ sp_i22.2.a: "The diplomatic record stands."
+
+ sp_je_armenian_question: "The Armenian Question"
+ sp_je_armenian_question_reason: "After the Berlin settlement, the condition of Ottoman Armenian subjects has become a matter of domestic reform and international diplomacy. This entry records the situation as it stands; it does not create new institutions, laws, or separatist demands."
+ sp_je_armenian_question_status_opening: "Communal grievances in the Armenian homelands are entering the language of international diplomacy."
+ sp_je_armenian_question_status_reform: "Recent equality reforms or inclusive citizenship have eased some communal tension, though the eastern question remains visible."
+ sp_je_armenian_question_status_diplomatic: "The Berlin settlement has made Armenian communal reform an item of Great Power concern."
+ sp_je_armenian_question_status_discrimination: "Low cultural acceptance and persistent discrimination keep Armenian communal grievance alive."
+ sp_je_armenian_question_status_secession_progress: "Secessionist pressure is rising in the empire, including among Armenian homelands."
+ sp_je_armenian_question_status_movement: "An Armenian cultural-minority movement is active in imperial politics."
+ sp_je_armenian_question_status_secession_pressure: "Armenian political grievance and secessionist pressure are both visible in the eastern provinces."

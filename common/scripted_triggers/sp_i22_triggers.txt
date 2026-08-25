@@ -1,0 +1,100 @@
+﻿# I-22 Armenian Question. Read-only gates for events and informational JE.
+
+sp_i22_communal_constitution_skip = {
+	OR = {
+		has_modifier = equality_under_the_law
+		NOT = { has_law_or_variant = law_type:law_millet_system }
+		has_law_or_variant = law_type:law_cultural_exclusion
+		has_law_or_variant = law_type:law_multicultural
+		has_law_or_variant = law_type:law_freedom_of_conscience
+		has_law_or_variant = law_type:law_total_separation
+	}
+}
+
+sp_i22_integration_path = {
+	c:TUR ?= this
+	OR = {
+		has_law_or_variant = law_type:law_cultural_exclusion
+		has_law_or_variant = law_type:law_multicultural
+	}
+	NOT = {
+		any_political_movement = {
+			is_political_movement_type = movement_cultural_minority
+			culture ?= cu:armenian
+		}
+	}
+	highest_secession_progress < 0.15
+	any_scope_state = {
+		state_region = s:STATE_ERZURUM
+		is_incorporated = yes
+		turmoil < 0.10
+	}
+}
+
+sp_i22_repression_path = {
+	c:TUR ?= this
+	OR = {
+		has_law_or_variant = law_type:law_ethnostate
+		has_law_or_variant = law_type:law_national_supremacy
+		has_variable = failed_tanzimat
+		has_variable = failed_sick_man_separatism
+		any_political_movement = {
+			is_political_movement_type = movement_cultural_minority
+			culture ?= cu:armenian
+		}
+		highest_secession_progress >= 0.25
+		cultural_acceptance_base = { target = cu:armenian value <= acceptance_status_2 }
+		any_scope_state = {
+			state_region = s:STATE_ERZURUM
+			is_incorporated = yes
+			turmoil >= 0.20
+		}
+	}
+}
+
+sp_i22_armenian_grievance_present = {
+	c:TUR ?= this
+	OR = {
+		cultural_acceptance_base = { target = cu:armenian value <= acceptance_status_2 }
+		any_political_movement = {
+			is_political_movement_type = movement_cultural_minority
+			culture ?= cu:armenian
+		}
+		highest_secession_progress >= 0.15
+		has_variable = failed_sick_man_separatism
+		has_variable = failed_tanzimat
+		any_scope_state = {
+			state_region = s:STATE_ERZURUM
+			is_incorporated = yes
+			turmoil >= 0.15
+		}
+		AND = {
+			has_law_or_variant = law_type:law_subjecthood
+			has_law_or_variant = law_type:law_millet_system
+			NOT = { has_modifier = equality_under_the_law }
+			NOT = {
+				OR = {
+					has_law_or_variant = law_type:law_cultural_exclusion
+					has_law_or_variant = law_type:law_multicultural
+				}
+			}
+		}
+	}
+}
+
+sp_je_armenian_question_possible = {
+	c:TUR ?= this
+	game_date >= 1878.7.1
+	game_date < 1890.1.1
+	NOT = { sp_i22_integration_path = yes }
+	sp_i22_armenian_grievance_present = yes
+	NOT = {
+		AND = {
+			has_variable = sp_i22_berlin_flavor_fired
+			OR = {
+				game_date >= 1879.7.1
+				sp_i22_integration_path = yes
+			}
+		}
+	}
+}

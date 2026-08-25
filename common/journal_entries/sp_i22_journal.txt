@@ -1,0 +1,87 @@
+﻿# I-22 Armenian Question — informational umbrella JE only.
+# No immediate effects, no pulses, no modifiers, no progress bars.
+
+sp_je_armenian_question = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	group = je_group_foreign_affairs
+
+	is_shown_when_inactive = {
+		sp_je_armenian_question_possible = yes
+	}
+
+	possible = {
+		sp_je_armenian_question_possible = yes
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					any_political_movement = {
+						is_political_movement_type = movement_cultural_minority
+						culture ?= cu:armenian
+					}
+					highest_secession_progress >= 0.25
+				}
+				desc = sp_je_armenian_question_status_secession_pressure
+			}
+			triggered_desc = {
+				trigger = {
+					any_political_movement = {
+						is_political_movement_type = movement_cultural_minority
+						culture ?= cu:armenian
+					}
+				}
+				desc = sp_je_armenian_question_status_movement
+			}
+			triggered_desc = {
+				trigger = {
+					highest_secession_progress >= 0.15
+				}
+				desc = sp_je_armenian_question_status_secession_progress
+			}
+			triggered_desc = {
+				trigger = {
+					cultural_acceptance_base = { target = cu:armenian value <= acceptance_status_2 }
+				}
+				desc = sp_je_armenian_question_status_discrimination
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i22_berlin_flavor_fired
+				}
+				desc = sp_je_armenian_question_status_diplomatic
+			}
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_modifier = equality_under_the_law
+						has_law_or_variant = law_type:law_cultural_exclusion
+						has_law_or_variant = law_type:law_multicultural
+					}
+				}
+				desc = sp_je_armenian_question_status_reform
+			}
+			desc = sp_je_armenian_question_status_opening
+		}
+	}
+
+	complete = {
+		OR = {
+			sp_i22_integration_path = yes
+			AND = {
+				has_variable = sp_i22_berlin_flavor_fired
+				game_date >= 1879.7.1
+			}
+			game_date >= 1890.1.1
+		}
+	}
+
+	invalid = {
+		NOT = { c:TUR ?= this }
+	}
+
+	transferable = no
+	weight = 4650
+	should_be_pinned_by_default_uninvolved_or_context = no
+}

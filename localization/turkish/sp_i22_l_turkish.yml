@@ -1,0 +1,21 @@
+﻿l_turkish:
+ sp_i22.1.t: "Ermeni Millet Anayasası"
+ sp_i22.1.d: "Bâb-ı Âli, Ermeni milleti için bir nizamname onaylamıştır: patrik otoritesi, lay temsil ve vilayet meclisleri artık cemaat işlerinin idaresinde yer alır. Bu, bağımsızlık veya toprak özerkliği değil; imparatorluk çerçevesinde bir millet idaresi düzenlemesidir."
+ sp_i22.1.f: "Ruhban ve lay delegeler, Osmanlı hukuku altında Ermeni cemaat hayatını yönetecektir. Nizamname temsil ve cemaat vergisini düzenler; ayrı bir devlet yaratmaz."
+ sp_i22.1.a: "Nizamname kayda geçirildi."
+
+ sp_i22.2.t: "Avrupa Karşısında Ermeni Meselesi"
+ sp_i22.2.d: "Yakın savaşı sona erdiren uzlaşma, Osmanlı Ermeni tebaasının güvenliği ile ıslahatını Avrupa devletlerinin gündemine taşımıştır. Notlar, maddeler ve diplomatik yazışmalar, doğu cemaat meselelerini artık yalnız iç politika değil, uluslararası bir kaygı olarak ele almaktadır."
+ sp_i22.2.d.repression: "Yakın savaşı sona erdiren uzlaşma, Osmanlı Ermeni tebaasının güvenliği ile ıslahatını Avrupa devletlerinin gündemine taşımıştır. Petersburg'dan Londra'ya capiallerde dil daha serttir: Bâb-ı Âli'nin ayrımcılık, huzursuzluk ve önceki eşitlik vaatlerinin tutulmaması karşısında hesap vermesi beklenmektedir."
+ sp_i22.2.f: "61. Madde ve çevresindeki diplomasi tek başına Osmanlı hukukunu değiştirmez. Ermeni cemaat ıslahatının artık devletlerin her konferansta gündeme getirebileceği bir mesele haline geldiği anı işaret eder."
+ sp_i22.2.a: "Diplomatik kayıt düşüldü."
+
+ sp_je_armenian_question: "Ermeni Meselesi"
+ sp_je_armenian_question_reason: "Berlin uzlaşmasından sonra Osmanlı Ermeni tebaasının durumu hem iç ıslahat hem uluslararası diplomasi meselesi olmuştur. Bu kayıt mevcut durumu izler; yeni kurum, kanun veya ayrılıkçı talep yaratmaz."
+ sp_je_armenian_question_status_opening: "Ermeni yurtlarındaki cemaat meseleleri uluslararası diplomasi diline girmektedir."
+ sp_je_armenian_question_status_reform: "Son eşitlik ıslahatları veya kapsayıcı vatandaşlık bazı cemaat gerilimlerini hafifletmiş olsa da doğu meselesi görünür kalmaktadır."
+ sp_je_armenian_question_status_diplomatic: "Berlin uzlaşması Ermeni cemaat ıslahatını Büyük Devletlerin kaygısı haline getirmiştir."
+ sp_je_armenian_question_status_discrimination: "Düşük kültürel kabul ve süregelen ayrımcılık Ermeni cemaat kaygısını canlı tutmaktadır."
+ sp_je_armenian_question_status_secession_progress: "İmparatorlukta, Ermeni yurtları da dâhil olmak üzere ayrılıkçı baskı artmaktadır."
+ sp_je_armenian_question_status_movement: "Ermeni kültürel azınlık hareketi imparatorluk siyasetinde etkindir."
+ sp_je_armenian_question_status_secession_pressure: "Doğu vilayetlerinde Ermeni siyasi kaygısı ile ayrılıkçı baskı birlikte görünmektedir."
