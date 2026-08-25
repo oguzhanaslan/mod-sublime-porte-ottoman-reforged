@@ -1,0 +1,158 @@
+﻿# I-06 narrow replacements for the vanilla 1.13.11 Sick Man outcome events.
+namespace = REPLACE:sick_man
+
+REPLACE:sick_man.2 = {
+	type = country_event
+	placement = root
+	title = sick_man.2.t
+	desc = sick_man.2.desc
+	flavor = sick_man.2.f
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	event_image = { video = "europenorthamerica_london_center" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	trigger = { }
+
+	immediate = {
+		set_variable = sick_man_complete
+		add_modifier = {
+			name = sp_rejuvenated_sublime_porte
+			days = long_modifier_time
+		}
+	}
+
+	# Army: doctrine or logistics.
+	option = {
+		name = sp_sick_man_success_army_doctrine
+		default_option = yes
+		trigger = { has_variable = completed_sick_man_army_je }
+		add_modifier = { name = sp_tanzimat_army_doctrine days = normal_modifier_time }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = sp_sick_man_success_army_logistics
+		trigger = { has_variable = completed_sick_man_army_je }
+		add_modifier = { name = sp_tanzimat_army_logistics days = normal_modifier_time }
+		ai_chance = { base = 1 }
+	}
+
+	# Economy: industrial consolidation or public works.
+	option = {
+		name = sp_sick_man_success_economy_industry
+		trigger = { has_variable = completed_sick_man_economy_je }
+		add_modifier = { name = sp_tanzimat_economy_industry days = normal_modifier_time }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = sp_sick_man_success_economy_public_works
+		trigger = { has_variable = completed_sick_man_economy_je }
+		add_modifier = { name = sp_tanzimat_economy_public_works days = normal_modifier_time }
+		ai_chance = { base = 1 }
+	}
+
+	# Education: academies or broad access and qualifications.
+	option = {
+		name = sp_sick_man_success_education_academies
+		trigger = { has_variable = completed_sick_man_education_je }
+		add_modifier = { name = sp_tanzimat_education_academies days = normal_modifier_time }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = sp_sick_man_success_education_access
+		trigger = { has_variable = completed_sick_man_education_je }
+		add_modifier = { name = sp_tanzimat_education_access days = normal_modifier_time }
+		ai_chance = { base = 1 }
+	}
+
+	# Bureaucracy: central capacity or provincial revenue administration.
+	option = {
+		name = sp_sick_man_success_bureaucracy_chancery
+		trigger = { has_variable = completed_sick_man_bureaucracy_je }
+		add_modifier = { name = sp_tanzimat_bureaucracy_chancery days = normal_modifier_time }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = sp_sick_man_success_bureaucracy_revenue
+		trigger = { has_variable = completed_sick_man_bureaucracy_je }
+		add_modifier = { name = sp_tanzimat_bureaucracy_revenue days = normal_modifier_time }
+		ai_chance = { base = 1 }
+	}
+
+	# Separatism: reconciliation or central order.
+	option = {
+		name = sp_sick_man_success_separatism_reconciliation
+		trigger = { has_variable = completed_separatism_sick_man_je }
+		add_modifier = { name = sp_tanzimat_separatism_reconciliation days = normal_modifier_time }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = sp_sick_man_success_separatism_order
+		trigger = { has_variable = completed_separatism_sick_man_je }
+		add_modifier = { name = sp_tanzimat_separatism_order days = normal_modifier_time }
+		ai_chance = { base = 1 }
+	}
+
+	# Syria: diplomatic standing or the limited Cretan claim.
+	option = {
+		name = sp_sick_man_success_syria_diplomacy
+		trigger = { has_variable = completed_syria_je }
+		add_modifier = { name = sp_tanzimat_syria_diplomacy days = normal_modifier_time }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = sp_sick_man_success_syria_crete
+		trigger = {
+			has_variable = completed_syria_je
+			NOT = { owns_entire_state_region = STATE_CRETE }
+		}
+		s:STATE_CRETE = { add_claim = ROOT }
+		ai_chance = { base = 1 }
+	}
+}
+
+REPLACE:sick_man.3 = {
+	type = country_event
+	placement = root
+	title = sick_man.3.t
+	desc = sick_man.3.d
+	flavor = sick_man.3.f
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	duration = 3
+	event_image = { video = "unspecific_factory_closed" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	trigger = { }
+
+	immediate = { set_variable = sick_man_complete }
+
+	option = {
+		name = sick_man.3.a
+		if = {
+			limit = {
+				is_subject = no
+				any_subject_or_below = {
+					NOT = { any_overlord_or_above = { NOT = { ROOT = this } } }
+					NOT = { is_country_type = unrecognized }
+				}
+			}
+			every_subject_or_below = {
+				limit = {
+					NOT = { any_overlord_or_above = { NOT = { ROOT = this } } }
+					OR = {
+						NOT = { is_country_type = unrecognized }
+						is_subject_type = subject_type_protectorate
+						is_subject_type = subject_type_dominion
+						is_subject_type = subject_type_puppet
+						is_subject_type = subject_type_colony
+						is_subject_type = subject_type_chartered_company
+					}
+				}
+				make_independent = yes
+			}
+		}
+		set_country_type = unrecognized
+		if = {
+			limit = { has_dlc_feature = ip3_content }
+			show_as_tooltip = { add_contextless_journal_entry = je_great_eastern_crisis }
+		}
+	}
+}

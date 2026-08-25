@@ -255,7 +255,7 @@ REPLACE:je_sick_man_separatism = {
 		}
 	}
 
-	fail = { highest_secession_progress > 0.5 }
+	fail = { highest_secession_progress >= 0.5 }
 
 	on_fail = {
 		set_variable = failed_sick_man_separatism
