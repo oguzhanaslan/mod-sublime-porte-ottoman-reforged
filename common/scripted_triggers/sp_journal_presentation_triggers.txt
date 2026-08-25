@@ -1,0 +1,41 @@
+﻿# Journal Presentation Pass Phase 1. Read-only triggers for informational umbrella JEs.
+# Do not add gameplay effects here.
+
+sp_i16_hunkar_guarantee_active = {
+	exists = c:RUS
+	any_scope_treaty = {
+		binds = c:RUS
+		any_scope_article = {
+			has_type = guarantee_independence
+			source_country = c:RUS
+			target_country = c:TUR
+		}
+	}
+}
+
+sp_je_hunkar_iskelesi_possible = {
+	c:TUR ?= this
+	NOT = { has_variable = sp_i16_hunkar_lapse_resolved }
+	sp_i16_hunkar_guarantee_active = yes
+}
+
+sp_je_post_tanzimat_era_possible = {
+	c:TUR ?= this
+	NOT = {
+		OR = {
+			has_variable = sp_i18_hamidian_fired
+			AND = {
+				has_variable = sp_i18_kanun_i_esasi_fired
+				game_date >= 1886.1.1
+			}
+		}
+	}
+	OR = {
+		sp_i18_phase_i_eligible = yes
+		has_variable = sp_i18_debate_fired
+		has_variable = sp_i18_young_ottomans_fired
+		has_variable = sp_i18_early_constitution_fired
+		has_variable = sp_i18_constitution_seen
+		has_variable = sp_i18_kanun_i_esasi_fired
+	}
+}

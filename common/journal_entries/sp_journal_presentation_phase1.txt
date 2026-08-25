@@ -1,0 +1,182 @@
+﻿# Journal Presentation Pass Phase 1 — informational umbrella JEs only.
+# No immediate effects, no pulses, no modifiers, no progress bars.
+
+sp_je_hunkar_iskelesi = {
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	group = je_group_foreign_affairs
+
+	is_shown_when_inactive = {
+		c:TUR ?= this
+		sp_i16_hunkar_guarantee_active = yes
+		NOT = { has_variable = sp_i16_hunkar_lapse_resolved }
+	}
+
+	possible = {
+		sp_je_hunkar_iskelesi_possible = yes
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					game_date >= 1841.7.8
+				}
+				desc = sp_je_hunkar_iskelesi_status_lapse_window
+			}
+			desc = sp_je_hunkar_iskelesi_status_active
+		}
+	}
+
+	complete = {
+		OR = {
+			has_variable = sp_i16_hunkar_lapse_resolved
+			NOT = { sp_i16_hunkar_guarantee_active = yes }
+			game_date >= 1842.1.1
+		}
+	}
+
+	invalid = {
+		NOT = { c:TUR ?= this }
+	}
+
+	transferable = no
+	weight = 4850
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+sp_je_eastern_provinces = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_internal_affairs
+
+	is_shown_when_inactive = {
+		sp_i21_arc_active = yes
+	}
+
+	possible = {
+		sp_i21_arc_active = yes
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i21_direct_admin_fired
+				}
+				desc = sp_je_eastern_provinces_status_direct_admin
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i21_bedirhan_enforced
+				}
+				desc = sp_je_eastern_provinces_status_bedirhan_enforced
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i21_bedirhan_accommodated
+				}
+				desc = sp_je_eastern_provinces_status_bedirhan_accommodated
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i21_bedirhan_fired
+				}
+				desc = sp_je_eastern_provinces_status_bedirhan
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i21_porte_reach_fired
+				}
+				desc = sp_je_eastern_provinces_status_porte_reach
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i21_local_authority_fired
+				}
+				desc = sp_je_eastern_provinces_status_local_authority
+			}
+			desc = sp_je_eastern_provinces_status_opening
+		}
+	}
+
+	complete = {
+		has_variable = sp_i21_arc_closed
+	}
+
+	invalid = {
+		NOT = { c:TUR ?= this }
+	}
+
+	transferable = no
+	weight = 4750
+	should_be_pinned_by_default_uninvolved_or_context = no
+}
+
+sp_je_post_tanzimat_era = {
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	group = je_group_internal_affairs
+
+	is_shown_when_inactive = {
+		sp_je_post_tanzimat_era_possible = yes
+	}
+
+	possible = {
+		sp_je_post_tanzimat_era_possible = yes
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i18_hamidian_fired
+				}
+				desc = sp_je_post_tanzimat_era_status_hamidian
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i18_kanun_i_esasi_fired
+				}
+				desc = sp_je_post_tanzimat_era_status_kanun_i_esasi
+			}
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_variable = sp_i18_early_constitution_fired
+						has_variable = sp_i18_constitution_seen
+					}
+				}
+				desc = sp_je_post_tanzimat_era_status_constitution
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i18_young_ottomans_fired
+				}
+				desc = sp_je_post_tanzimat_era_status_young_ottomans
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i18_debate_fired
+				}
+				desc = sp_je_post_tanzimat_era_status_debate
+			}
+			desc = sp_je_post_tanzimat_era_status_opening
+		}
+	}
+
+	complete = {
+		OR = {
+			has_variable = sp_i18_hamidian_fired
+			AND = {
+				has_variable = sp_i18_kanun_i_esasi_fired
+				game_date >= 1886.1.1
+			}
+		}
+	}
+
+	invalid = {
+		NOT = { c:TUR ?= this }
+	}
+
+	transferable = no
+	weight = 4700
+	should_be_pinned_by_default_uninvolved_or_context = no
+}
