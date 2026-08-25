@@ -26,6 +26,8 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Capitulations
 
+- **I-16 Baltalimanı:** vanilla 1.13.11 has no Baltalimanı treaty. Implemented as a 1838 sign/refuse event creating a one-way `trade_privilege` (TUR grantor, GBR receiver), not DLC-gated `no_tariffs` / `foreign_investment_rights`. See [`docs/research/I16_ottoman_diplomatic_opening_proposal.md`](docs/research/I16_ottoman_diplomatic_opening_proposal.md) and [`docs/implementation/I16_ottoman_diplomatic_opening.md`](docs/implementation/I16_ottoman_diplomatic_opening.md). **IMPLEMENTED — STATIC VALIDATED / RUNTIME PENDING.**
+
 ## Government & Centralization
 
 - **R-16 — Ottoman institutional modernization:** [`docs/research/R16_institutional_modernization.md`](docs/research/R16_institutional_modernization.md). 1836–1876 merkezi bürokrasi, maliye/vergi, eğitim, ordu ve altyapı/devlet kapasitesi yalnız doğrulanmış vanilla law/institution/building/technology/JE-event karşılıklarıyla eşleştirildi. **COMPLETE — RESEARCH ONLY; I-05 REQUIREMENTS IDENTIFIED.**
@@ -53,6 +55,7 @@ Do not place unverified historical claims in this file. Cite sources when resear
 ## Egypt
 
 - **R-09 — Egypt / Eastern Question audit and I-07 proposal:** [`docs/research/R09_egypt_eastern_question.md`](docs/research/R09_egypt_eastern_question.md), [`docs/research/I07_egypt_eastern_question_gameplay_proposal.md`](docs/research/I07_egypt_eastern_question_gameplay_proposal.md). Victoria 3 1.13.11 vanilla ve mevcut mod üzerinden setup, Levant/Adana, aktif kriz internationalization, Nizip/London settlement boşluğu, GP alignment, subject/peace/front riskleri ve I-05/I-06 sınırları denetlendi. Onaylanan üç-outcome proposal değiştirilmeden I-07 olarak uygulandı. **R-09 COMPLETE AND USED; I-07 IMPLEMENTED IN `f4a8634`; TIGER CLEAN FOR I-07; RUNTIME AI/FRONT TESTS PENDING.**
+- **I-16 must not duplicate I-07.** Egypt protectorate/own-market and the Eastern Question outcome layer stay I-07. I-16 added complementary 1836–41 diplomacy only (Hünkâr İskelesi, Baltalimanı, FRA support flag) without editing I-07 files. See [`docs/research/I16_ottoman_diplomatic_opening_proposal.md`](docs/research/I16_ottoman_diplomatic_opening_proposal.md) and [`docs/implementation/I16_ottoman_diplomatic_opening.md`](docs/implementation/I16_ottoman_diplomatic_opening.md).
 
 ## Balkans
 
@@ -76,6 +79,16 @@ Do not place unverified historical claims in this file. Cite sources when resear
 ## Great Power Diplomacy
 
 - **R-08 — Great Eastern Crisis reproduction matrix:** [`docs/research/R08_gec_reproduction_matrix.md`](docs/research/R08_gec_reproduction_matrix.md). Victoria 3 1.13.11 vanilla and current-mod script/scope audit completed for GEC-01–08. The approved four-fix minimum slice was implemented as I-04 in `53e870d`; controlled runtime validation, player/AI comparison, and SME exact-0.5 reproduction remain pending/unproduced. **COMPLETE — USED IN I-04; TIGER CLEAN FOR I-04; RUNTIME SMOKE TEST PENDING.**
+
+- **I-16 — Ottoman Diplomatic Opening (1836–1841):** proposal [`docs/research/I16_ottoman_diplomatic_opening_proposal.md`](docs/research/I16_ottoman_diplomatic_opening_proposal.md); dossier [`docs/implementation/I16_ottoman_diplomatic_opening.md`](docs/implementation/I16_ottoman_diplomatic_opening.md). Installed vanilla 1.13.11 diplomacy audit of TUR vs RUS, GBR, AUS, PRU, FRA, EGY, GRE, PER, SER, WAL, MOL, TUN. Gameplay `0cf714d20468e1d03491ac77b4666e89deda2022`. **IMPLEMENTED — STATIC VALIDATED / RUNTIME PENDING.**
+
+  Vanilla sources inspected: `common/history/treaties/00_historical_treaties.txt`; `common/history/diplomacy/00_{relations,rivalries,subject_relationships,truces,embargos}.txt`; `common/history/ai/00_{behavior_variables,strategy,secret_goals}.txt`; `common/history/lobbies/00_lobbies.txt`; `common/treaty_articles/{00_alliance,01_defensive_pact,02_guarantee_independence,12_military_assistance,25_trade_privilege,07_foreign_investment_rights,21_no_tariffs,33_strait_access,34_no_strait_closure,treaty_articles.md}`; `common/ai_strategies/00_default_strategy.txt`; `common/on_actions/00_code_on_actions.txt` (Egypt yearly flip; `on_country_broke_treaty`); `common/defines/00_{defines,ai}.txt`; `common/diplomatic_catalysts/00_diplomatic_catalysts.txt`; `localization/english/{diplomatic_treaties,concepts}_l_english.yml`; unused loc `treaty_name_hunkar_iskelesi`.
+
+  **NO CHANGE countries (vanilla already matches the historical target closely enough):** GBR 1836 setup, AUS, PRU (keep existing Military Assistance; do not duplicate), EGY subject/market/truce (I-07 owns the crisis), GRE, PER, SER, WAL, MOL, TUN.
+
+  **Implemented v1:** Hünkâr İskelesi as historical `guarantee_independence` (keep rivalry); 1841 lapse `withdraw` event because binding period does not auto-delete treaties; 1838 Baltalimanı sign/refuse → one-way `trade_privilege`; FRA `veiled_protectorate_support_egypt` only. GBR/AUS/RUS/PRU Egypt-crisis weights already exist in vanilla.
+
+  **Runtime risks / not static blockers:** rivalry+guarantee coexistence (RT-1); Call Ally only when TUR is defender (RT-2); 1841 withdraw without break penalties (RT-3); Baltalimanı market impact (RT-5); FRA flag aggression (RT-6).
 
 ## Crimean War
 
@@ -110,6 +123,6 @@ Do not place unverified historical claims in this file. Cite sources when resear
 ## Validation & Release
 
 - **I-15 — v1.0 release validation:** [`docs/research/I15_release_validation_matrix.md`](docs/research/I15_release_validation_matrix.md). **PLAYER VISUAL / FIRST-RUNTIME CLOSED 2026-08-25.** Static `6767622`: 16 PASS / 0 FAIL. Tester 1836 visual pass: no visible bug. `sp_balkan_cohesion.1` informational PASS. I-15 fix pass **not required**. Date-gated campaigns remain NOT RUN and are not v1.0 blockers.
-- **Phase 5 release-facing polish:** [`docs/implementation/P5_v1_release_polish.md`](docs/implementation/P5_v1_release_polish.md). **COMPLETE 2026-08-25** in loc `b5315e9` and docs/metadata `08c800a`. Player-facing EN/TR text, `1.0.0` / `1.13.*` metadata, README, and changelog. Tiger `fatal 0 / error 1 / warning 10`. Gameplay unchanged. DNA/artwork/Workshop images remain optional. Canonical next work: optional Phase 5 visual assets or Future v1.x / R-20. R-20–R-24 remain Future v1.x.
+- **Phase 5 release-facing polish:** [`docs/implementation/P5_v1_release_polish.md`](docs/implementation/P5_v1_release_polish.md). **COMPLETE 2026-08-25** in loc `b5315e9` and docs/metadata `08c800a`. Player-facing EN/TR text, `1.0.0` / `1.13.*` metadata, README, and changelog. Tiger `fatal 0 / error 1 / warning 10`. Gameplay unchanged. DNA/artwork/Workshop images remain optional. Canonical next work: **I-16 runtime checklist (RT-1–RT-7)**. I-16 gameplay is implemented and statically validated. R-20–R-24 remain Future v1.x. Community localization contributor support is **I-17** (formerly listed as I-16).
 
 ## Alternative History
