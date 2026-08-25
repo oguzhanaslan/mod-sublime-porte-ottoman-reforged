@@ -1,0 +1,14 @@
+﻿# I-14 Ottoman Bank concession pulse — additive yearly dispatch only.
+# Do not edit I-10B or I-13 on_actions.
+
+on_yearly_pulse_country = {
+	on_actions = {
+		sp_i14_yearly_events
+	}
+}
+
+sp_i14_yearly_events = {
+	events = {
+		sp_i14.1
+	}
+}

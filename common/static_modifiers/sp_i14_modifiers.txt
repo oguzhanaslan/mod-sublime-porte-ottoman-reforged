@@ -1,0 +1,8 @@
+﻿# I-14 Bank-ı Osmanî-i Şahane — timed accept modifier only.
+
+sp_i14_imperial_ottoman_bank = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_minting_mult = 0.05
+	country_loan_interest_rate_add = -0.01
+	country_prestige_mult = -0.05
+}
