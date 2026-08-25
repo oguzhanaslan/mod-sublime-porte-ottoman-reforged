@@ -11,7 +11,7 @@ The project aims to create a distinct Ottoman campaign across economics, demogra
 - Supported Victoria 3 version: `1.13.11`
 - Required dependency: Community Mod Framework `1.*`
 - CMF reference baseline: `1.59.2` (released 31 July 2026)
-- Development status: I-01 through I-14 gameplay is implemented on Victoria 3 `1.13.11`; runtime validation remains pending. I-15 is not started.
+- Development status: I-01 through I-14 gameplay is implemented on Victoria 3 `1.13.11`. I-15 player visual / first-runtime validation is closed (no visible bug). Date-gated campaigns remain for final release validation.
 - Project namespace: `sp_`
 - Supported localization: English and Turkish
 
