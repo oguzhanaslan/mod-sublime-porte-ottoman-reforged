@@ -1,0 +1,123 @@
+﻿sp_i10a_mehmed_emin_ali_pasha = {
+	first_name = sp_mehmed_emin_ali
+	last_name = Pasha
+	historical = yes
+	female = no
+	culture = cu:turkish
+	religion = rel:sunni
+	birth_date = 1815.3.5
+	interest_group = ig_intelligentsia
+	ideology = ideology_modernizer_leader
+	traits = {
+		experienced_diplomat
+		cautious
+	}
+	home_region = STATE_EASTERN_THRACE
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			this = c:TUR
+		}
+		interest_group_trigger = {
+			this = ig:ig_intelligentsia
+			is_marginal = no
+		}
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1871.9.7
+		chance = 50
+	}
+}
+
+sp_i10a_mehmed_fuad_pasha = {
+	first_name = sp_mehmed_fuad
+	last_name = Pasha
+	historical = yes
+	female = no
+	culture = cu:turkish
+	religion = rel:sunni
+	# Only the birth year is securely established; January 1 is a mechanical placeholder.
+	birth_date = 1815.1.1
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+	traits = {
+		experienced_diplomat
+		tactful
+	}
+	home_region = STATE_EASTERN_THRACE
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			this = c:TUR
+		}
+		interest_group_trigger = {
+			this = ig:ig_intelligentsia
+			is_marginal = no
+		}
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1869.2.12
+		chance = 50
+	}
+}
+
+sp_i10a_ahmed_cevdet_pasha = {
+	first_name = sp_ahmed_cevdet
+	last_name = Pasha
+	historical = yes
+	female = no
+	culture = cu:turkish
+	religion = rel:sunni
+	# Sources differ between March 26 and 27; March 27 is used as the mechanical date.
+	birth_date = 1823.3.27
+	interest_group = ig_devout
+	ideology = ideology_reformer
+	traits = {
+		master_bureaucrat
+		erudite
+		meticulous
+	}
+	home_region = STATE_EASTERN_THRACE
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			this = c:TUR
+		}
+		interest_group_trigger = {
+			this = ig:ig_devout
+			is_marginal = no
+		}
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1890.12.31
+		chance = 50
+	}
+}
+
+sp_i10a_namik_kemal = {
+	first_name = sp_namik
+	last_name = Kemal
+	historical = yes
+	female = no
+	culture = cu:turkish
+	religion = rel:sunni
+	birth_date = 1840.12.21
+	interest_group = ig_intelligentsia
+	ideology = ideology_liberal_leader
+	traits = {
+		literary
+		charismatic
+		persistent
+	}
+	home_region = STATE_EASTERN_THRACE
+
+	agitator_usage = {
+		country_trigger = {
+			this = c:TUR
+		}
+		interest_group_trigger = {
+			this = ig:ig_intelligentsia
+			is_marginal = no
+		}
+		earliest_usage_date = 1865.6.1
+		latest_usage_date = 1888.12.2
+		chance = 50
+	}
+}
