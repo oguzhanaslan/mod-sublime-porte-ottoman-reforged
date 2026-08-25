@@ -63,7 +63,9 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 - **R-14 — Ottoman Muhacir chronology and settlement audit:** [`docs/research/R14_muhacir_chronology.md`](docs/research/R14_muhacir_chronology.md). 1854–58 is a Tatar precursor, not the mass wave; 1859–62 Tatar/Nogai *Büyük Göç*, 1860 Muhacirin Komisyonu, 1857 immigration regulations, 1863–66 Circassian peak (1864 centerpiece), and 1877–78 Rumelian refugee crisis were verified against scholarship and installed vanilla 1.13.11. Vanilla SoI already `move_pop`s Circassians into Eastern Thrace/Kastamonu/Trabzon. Hybrid conservation-first architecture is recommended. **COMPLETE — RESEARCH ONLY.**
 
-- **I-12 — Muhacir migration slice:** [`docs/research/I12_muhacir_gameplay_proposal.md`](docs/research/I12_muhacir_gameplay_proposal.md). **B9 CLEARED — OWNERSHIP-SAFE LIBRARY READY FOR WIRING** (`sp_muhacir_triggers.txt` / `sp_muhacir_effects.txt`). Full I-12 **NOT IMPLEMENTED — EXPLICIT USER APPROVAL REQUIRED.** No events/JE/on_actions wired.
+- **I-12 — Muhacir migration slice:** [`docs/research/I12_muhacir_gameplay_proposal.md`](docs/research/I12_muhacir_gameplay_proposal.md); dossier [`docs/implementation/I12_muhacir_migration.md`](docs/implementation/I12_muhacir_migration.md). **IMPLEMENTED** in `c99a081` (Waves A/B/C, commission JEs, B9 provenance stamps, EN/TR). Tiger clean for I-12; runtime pending. No Circassian `create_pop`; no `create_mass_migration`; no I-01–I-11 gameplay edits.
+
+- **I-13 — Muhacir settlement flavor:** [`docs/research/I13_muhacir_settlement_flavor_proposal.md`](docs/research/I13_muhacir_settlement_flavor_proposal.md). Four one-shot vanilla-style events bound to wired I-12 identifiers. No pop movement, no new JE/system, no I-12 retune. **COMPLETE — RESEARCH/PROPOSAL ONLY; NOT IMPLEMENTED — EXPLICIT APPROVAL REQUIRED.**
 
 ## Settlement Policies
 
