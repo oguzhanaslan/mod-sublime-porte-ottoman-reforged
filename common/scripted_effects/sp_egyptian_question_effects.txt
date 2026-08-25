@@ -1,0 +1,32 @@
+﻿# I-07 settlement effects. transfer_state moves only shares owned by GIVER.
+
+sp_apply_historical_egyptian_settlement = {
+	set_variable = sp_egyptian_crisis_historical_settlement
+	set_variable = sp_egyptian_question_resolved
+	transfer_state = { STATE = s:STATE_ALEPPO GIVER = c:EGY TAKER = c:TUR }
+	transfer_state = { STATE = s:STATE_SYRIA GIVER = c:EGY TAKER = c:TUR }
+	transfer_state = { STATE = s:STATE_LEBANON GIVER = c:EGY TAKER = c:TUR }
+	transfer_state = { STATE = s:STATE_PALESTINE GIVER = c:EGY TAKER = c:TUR }
+	transfer_state = { STATE = s:STATE_TRANSJORDAN GIVER = c:EGY TAKER = c:TUR }
+	transfer_state = { STATE = s:STATE_ADANA GIVER = c:EGY TAKER = c:TUR }
+	add_modifier = { name = sp_egyptian_question_historical_settlement days = 1095 }
+	custom_tooltip = sp_egyptian_question_no_crete_no_tanzimat_tt
+}
+
+sp_close_egyptian_question_maximalist = {
+	set_variable = sp_egyptian_question_resolved
+	set_variable = sp_egyptian_question_maximalist_outcome
+	add_modifier = { name = sp_egyptian_question_maximalist_victory days = 1095 }
+}
+
+sp_close_egyptian_question_stalemate = {
+	set_variable = sp_egyptian_question_resolved
+	set_variable = sp_egyptian_question_stalemate_outcome
+	add_modifier = { name = sp_egyptian_question_stalemate days = 1095 }
+}
+
+sp_close_egyptian_question_egyptian_advantage = {
+	set_variable = sp_egyptian_question_resolved
+	set_variable = sp_egyptian_question_egyptian_advantage_outcome
+	add_modifier = { name = sp_egyptian_question_egyptian_advantage days = 1825 }
+}

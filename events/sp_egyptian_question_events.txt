@@ -1,0 +1,183 @@
+﻿namespace = sp_egyptian_question
+
+sp_egyptian_question.1 = {
+	type = country_event
+	placement = root
+	title = sp_egyptian_question.1.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { ruler = { has_template = tur_mahmut_osmanoglu_template } }
+				desc = sp_egyptian_question.1.d.mahmud
+			}
+			triggered_desc = {
+				trigger = { ruler = { has_template = tur_abdulmecid_osmanoglu_template } }
+				desc = sp_egyptian_question.1.d.abdulmecid
+			}
+			desc = sp_egyptian_question.1.d
+		}
+	}
+	flavor = sp_egyptian_question.1.f
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+	event_image = { video = "europenorthamerica_london_center" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	trigger = {
+		c:TUR ?= this
+		NOT = { has_variable = sp_egyptian_question_mediation_offered }
+	}
+	immediate = { set_variable = sp_egyptian_question_mediation_offered }
+
+	option = {
+		name = sp_egyptian_question.1.a
+		default_option = yes
+		custom_tooltip = sp_egyptian_question_historical_terms_tt
+		c:EGY ?= { trigger_event = { id = sp_egyptian_question.2 popup = yes } }
+		ai_chance = {
+			base = 80
+			modifier = { add = 20 sp_egyptian_question_coalition_leverage = yes }
+			modifier = { add = 10 has_variable = sp_egyptian_question_battlefield_leverage }
+		}
+	}
+	option = {
+		name = sp_egyptian_question.1.b
+		set_variable = sp_egyptian_question_pursuing_maximalist
+		custom_tooltip = sp_egyptian_question_vanilla_sandbox_tt
+		ai_chance = { base = 20 }
+	}
+}
+
+sp_egyptian_question.2 = {
+	type = country_event
+	placement = root
+	title = sp_egyptian_question.2.t
+	desc = sp_egyptian_question.2.d
+	flavor = sp_egyptian_question.2.f
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+	event_image = { video = "europenorthamerica_london_center" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	trigger = {
+		c:EGY ?= this
+		exists = c:TUR
+	}
+
+	option = {
+		name = sp_egyptian_question.2.a
+		default_option = yes
+		c:TUR = { sp_apply_historical_egyptian_settlement = yes }
+		custom_tooltip = sp_egyptian_question_historical_terms_tt
+		ai_chance = {
+			base = 70
+			modifier = { add = 40 c:TUR = { sp_egyptian_question_coalition_leverage = yes } }
+			modifier = { add = 30 c:TUR = { has_variable = sp_egyptian_question_battlefield_leverage } }
+			modifier = { add = 15 c:TUR = { sp_egyptian_question_territorial_leverage = yes } }
+			modifier = { add = -35 c:TUR = { has_variable = sp_egyptian_question_france_backed_egypt } }
+		}
+	}
+	option = {
+		name = sp_egyptian_question.2.b
+		c:TUR = { trigger_event = { id = sp_egyptian_question.6 popup = yes } }
+		ai_chance = {
+			base = 30
+			modifier = { add = 40 c:TUR = { has_variable = sp_egyptian_question_france_backed_egypt } }
+			modifier = { add = -20 c:TUR = { sp_egyptian_question_coalition_leverage = yes } }
+		}
+	}
+}
+
+sp_egyptian_question.3 = {
+	type = country_event
+	placement = root
+	title = sp_egyptian_question.3.t
+	desc = sp_egyptian_question.3.d
+	flavor = sp_egyptian_question.3.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+	event_image = { video = "ep1_ca_mountain_pass_civilian" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	trigger = { c:TUR ?= this }
+	option = {
+		name = sp_egyptian_question.3.a
+		custom_tooltip = sp_egyptian_question_nizip_flavor_only_tt
+		ai_chance = { base = 1 }
+	}
+}
+
+sp_egyptian_question.4 = {
+	type = country_event
+	placement = root
+	title = sp_egyptian_question.4.t
+	desc = sp_egyptian_question.4.d
+	flavor = sp_egyptian_question.4.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+	event_image = { video = "ep1_ca_mountain_pass_civilian" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	trigger = { c:TUR ?= this }
+	immediate = { sp_close_egyptian_question_maximalist = yes }
+	option = {
+		name = sp_egyptian_question.4.a
+		custom_tooltip = sp_egyptian_question_vanilla_sandbox_tt
+		ai_chance = { base = 1 }
+	}
+}
+
+sp_egyptian_question.5 = {
+	type = country_event
+	placement = root
+	title = sp_egyptian_question.5.t
+	desc = sp_egyptian_question.5.d
+	flavor = sp_egyptian_question.5.f
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+	event_image = { video = "europenorthamerica_london_center" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	trigger = { c:TUR ?= this }
+	immediate = {
+		if = {
+			limit = {
+				has_variable = sp_egyptian_question_nizip_seen
+				exists = c:EGY
+				c:EGY = {
+					owns_entire_state_region = STATE_LOWER_EGYPT
+					owns_entire_state_region = STATE_MIDDLE_EGYPT
+					owns_entire_state_region = STATE_UPPER_EGYPT
+				}
+			}
+			sp_close_egyptian_question_egyptian_advantage = yes
+		}
+		else = { sp_close_egyptian_question_stalemate = yes }
+	}
+	option = {
+		name = sp_egyptian_question.5.a
+		ai_chance = { base = 1 }
+	}
+}
+
+sp_egyptian_question.6 = {
+	type = country_event
+	placement = root
+	title = sp_egyptian_question.6.t
+	desc = sp_egyptian_question.6.d
+	flavor = sp_egyptian_question.6.f
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+	event_image = { video = "europenorthamerica_london_center" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	trigger = { c:TUR ?= this }
+	immediate = {
+		if = {
+			limit = {
+				has_variable = sp_egyptian_question_nizip_seen
+				has_variable = sp_egyptian_question_france_backed_egypt
+			}
+			sp_close_egyptian_question_egyptian_advantage = yes
+		}
+		else = { sp_close_egyptian_question_stalemate = yes }
+	}
+	option = {
+		name = sp_egyptian_question.6.a
+		ai_chance = { base = 1 }
+	}
+}

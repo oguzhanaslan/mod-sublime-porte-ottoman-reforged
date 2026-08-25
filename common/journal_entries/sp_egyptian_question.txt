@@ -1,0 +1,152 @@
+﻿sp_egyptian_question = {
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	group = je_group_tanzimat
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { sp_egyptian_question_coalition_leverage = yes }
+				desc = sp_egyptian_question_status_coalition
+			}
+			triggered_desc = {
+				trigger = { has_variable = sp_egyptian_question_battlefield_leverage }
+				desc = sp_egyptian_question_status_battlefield
+			}
+			triggered_desc = {
+				trigger = { sp_egyptian_question_territorial_leverage = yes }
+				desc = sp_egyptian_question_status_territorial
+			}
+			desc = sp_egyptian_question_status_no_leverage
+		}
+	}
+
+	invalid = { has_variable = sp_egyptian_question_resolved }
+
+	on_weekly_pulse = {
+		effect = {
+			# Record only committed Great Powers actually on the Ottoman side.
+			if = {
+				limit = {
+					exists = c:GBR
+					c:GBR = {
+						has_variable = veiled_protectorate_support_ottomans
+						is_diplomatic_play_participant_with = c:TUR
+						is_diplomatic_play_ally_of = c:TUR
+					}
+				}
+				set_variable = sp_egyptian_question_gbr_backing
+			}
+			if = {
+				limit = {
+					exists = c:AUS
+					c:AUS = {
+						has_variable = veiled_protectorate_support_ottomans
+						is_diplomatic_play_participant_with = c:TUR
+						is_diplomatic_play_ally_of = c:TUR
+					}
+				}
+				set_variable = sp_egyptian_question_aus_backing
+			}
+			if = {
+				limit = {
+					exists = c:RUS
+					c:RUS = {
+						has_variable = veiled_protectorate_support_ottomans
+						is_diplomatic_play_participant_with = c:TUR
+						is_diplomatic_play_ally_of = c:TUR
+					}
+				}
+				set_variable = sp_egyptian_question_rus_backing
+			}
+			if = {
+				limit = {
+					exists = c:PRU
+					c:PRU = {
+						has_variable = veiled_protectorate_support_ottomans
+						is_diplomatic_play_participant_with = c:TUR
+						is_diplomatic_play_ally_of = c:TUR
+					}
+				}
+				set_variable = sp_egyptian_question_pru_backing
+			}
+			if = {
+				limit = {
+					exists = c:FRA
+					c:FRA = {
+						has_variable = veiled_protectorate_support_egypt
+						is_diplomatic_play_participant_with = c:EGY
+						is_diplomatic_play_ally_of = c:EGY
+					}
+				}
+				set_variable = sp_egyptian_question_france_backed_egypt
+			}
+			if = {
+				limit = {
+					exists = c:FRA
+					c:FRA = {
+						is_diplomatic_play_participant_with = c:TUR
+						is_diplomatic_play_ally_of = c:TUR
+					}
+				}
+				set_variable = sp_egyptian_question_france_backed_ottomans
+			}
+
+			# Battlefield leverage and Nizip are conditional outcomes, never forced history.
+			if = {
+				limit = {
+					has_war_with = c:EGY
+					any_scope_war = {
+						has_war_support = { target = c:EGY value < 0 }
+					}
+				}
+				set_variable = sp_egyptian_question_battlefield_leverage
+			}
+			if = {
+				limit = {
+					NOT = { has_variable = sp_egyptian_question_nizip_seen }
+					has_war_with = c:EGY
+					any_scope_war = {
+						has_war_support = { target = c:TUR value < 0 }
+						has_war_support = { target = c:EGY value >= 0 }
+					}
+				}
+				set_variable = sp_egyptian_question_nizip_seen
+				trigger_event = { id = sp_egyptian_question.3 popup = yes }
+			}
+
+			if = {
+				limit = { sp_egyptian_question_maximalist_victory = yes }
+				trigger_event = { id = sp_egyptian_question.4 popup = yes }
+			}
+			else_if = {
+				limit = {
+					NOT = { has_variable = sp_egyptian_question_mediation_offered }
+					NOT = { is_diplomatic_play_involved_with = c:EGY }
+					NOT = { has_war_with = c:EGY }
+				}
+				if = {
+					limit = {
+						exists = c:EGY
+						c:EGY = {
+							is_subject_of = c:TUR
+							is_subject_type = subject_type_protectorate
+						}
+						OR = {
+							sp_egyptian_question_coalition_leverage = yes
+							has_variable = sp_egyptian_question_battlefield_leverage
+							sp_egyptian_question_territorial_leverage = yes
+						}
+					}
+					trigger_event = { id = sp_egyptian_question.1 popup = yes }
+				}
+				else = {
+					trigger_event = { id = sp_egyptian_question.5 popup = yes }
+				}
+			}
+		}
+	}
+
+	transferable = no
+	weight = 4900
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

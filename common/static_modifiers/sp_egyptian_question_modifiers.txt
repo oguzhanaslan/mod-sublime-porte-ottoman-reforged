@@ -1,0 +1,27 @@
+﻿# I-07 temporary outcome modifiers; intentionally below I-06's strongest rewards.
+
+sp_egyptian_question_historical_settlement = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.05
+	country_legitimacy_base_add = 5
+	country_influence_mult = 0.05
+}
+
+sp_egyptian_question_maximalist_victory = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.05
+	country_legitimacy_base_add = 5
+	country_influence_mult = 0.05
+}
+
+sp_egyptian_question_stalemate = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_prestige_mult = -0.05
+	country_influence_mult = -0.05
+}
+
+sp_egyptian_question_egyptian_advantage = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_prestige_mult = -0.10
+	country_legitimacy_base_add = -5
+}

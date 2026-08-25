@@ -1,0 +1,39 @@
+﻿# I-07 Egypt / Eastern Question outcome gates. The three leverage doors are alternatives.
+
+sp_egyptian_question_territorial_leverage = {
+	calc_true_if = {
+		amount >= 3
+		owns_entire_state_region = STATE_ALEPPO
+		owns_entire_state_region = STATE_SYRIA
+		owns_entire_state_region = STATE_LEBANON
+		owns_entire_state_region = STATE_PALESTINE
+		owns_entire_state_region = STATE_TRANSJORDAN
+		owns_entire_state_region = STATE_ADANA
+	}
+}
+
+sp_egyptian_question_coalition_leverage = {
+	calc_true_if = {
+		amount >= 2
+		has_variable = sp_egyptian_question_gbr_backing
+		has_variable = sp_egyptian_question_aus_backing
+		has_variable = sp_egyptian_question_rus_backing
+		has_variable = sp_egyptian_question_pru_backing
+	}
+}
+
+sp_egyptian_question_maximalist_victory = {
+	OR = {
+		NOT = { exists = c:EGY }
+		c:EGY ?= {
+			is_subject_of = c:TUR
+			is_subject_type = subject_type_puppet
+		}
+		AND = {
+			owns_entire_state_region = STATE_SINAI
+			owns_entire_state_region = STATE_UPPER_EGYPT
+			owns_entire_state_region = STATE_MIDDLE_EGYPT
+			owns_entire_state_region = STATE_LOWER_EGYPT
+		}
+	}
+}

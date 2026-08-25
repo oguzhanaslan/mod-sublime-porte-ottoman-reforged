@@ -25,6 +25,7 @@ REPLACE:je_sick_man_syria = {
 		if = {
 			limit = {
 				OR = {
+					has_variable = sp_egyptian_crisis_historical_settlement
 					AND = {
 						exists = c:EGY
 						c:EGY ?= {
@@ -56,7 +57,18 @@ REPLACE:je_sick_man_syria = {
 		}
 	}
 
-	on_weekly_pulse = { events = { } }
+	on_weekly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					has_variable = egyptian_crisis
+					NOT = { has_variable = sp_egyptian_question_resolved }
+					NOT = { has_journal_entry = sp_egyptian_question }
+				}
+				add_journal_entry = { type = sp_egyptian_question }
+			}
+		}
+	}
 	transferable = no
 	weight = 5000
 	should_be_pinned_by_default_uninvolved_or_context = yes
@@ -68,6 +80,7 @@ REPLACE:je_sick_man_egypt = {
 
 	complete = {
 		OR = {
+			has_variable = sp_egyptian_crisis_historical_settlement
 			AND = {
 				exists = c:EGY
 				c:EGY ?= {
@@ -87,6 +100,19 @@ REPLACE:je_sick_man_egypt = {
 	on_complete = {
 		set_variable = sp_completed_egypt_followup
 		custom_tooltip = sp_egypt_followup_no_tanzimat_point_tt
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					has_variable = egyptian_crisis
+					NOT = { has_variable = sp_egyptian_question_resolved }
+					NOT = { has_journal_entry = sp_egyptian_question }
+				}
+				add_journal_entry = { type = sp_egyptian_question }
+			}
+		}
 	}
 
 	invalid = {
