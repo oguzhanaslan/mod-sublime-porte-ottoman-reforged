@@ -1,0 +1,59 @@
+﻿# I-12 Muhacir additive on_actions.
+
+on_game_started = {
+	on_actions = {
+		sp_i12_game_started
+	}
+}
+
+sp_i12_game_started = {
+	effect = {
+		c:TUR ?= {
+			sp_i12_stamp_all_owned_rumelian_share_provenance = yes
+		}
+	}
+}
+
+on_yearly_pulse_state = {
+	on_actions = {
+		sp_i12_yearly_state_provenance
+	}
+}
+
+sp_i12_yearly_state_provenance = {
+	effect = {
+		sp_i12_stamp_tur_share_provenance_on_this_state = yes
+	}
+}
+
+on_yearly_pulse_country = {
+	on_actions = {
+		sp_i12_yearly_events
+	}
+}
+
+sp_i12_yearly_events = {
+	events = {
+		sp_muhacir.1
+		sp_muhacir.2
+		sp_muhacir.3
+	}
+}
+
+on_monthly_pulse_country = {
+	on_actions = {
+		sp_i12_monthly_settlement
+	}
+}
+
+sp_i12_monthly_settlement = {
+	effect = {
+		if = {
+			limit = {
+				c:TUR ?= this
+				has_variable = sp_i12_wave_b_settlement_active
+			}
+			sp_i12_wave_b_monthly_fanout = yes
+		}
+	}
+}

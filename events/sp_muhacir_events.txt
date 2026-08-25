@@ -1,0 +1,174 @@
+﻿namespace = sp_muhacir
+
+# Wave A - Tatar/Nogay Buyuk Goc 1859-62
+sp_muhacir.1 = {
+	type = country_event
+	placement = root
+	title = sp_muhacir.1.t
+	desc = sp_muhacir.1.d
+	flavor = sp_muhacir.1.f
+	duration = 3
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	event_image = {
+		video = "ep1_ca_mountain_pass_civilian"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		this = c:TUR
+		game_date >= 1859.1.1
+		game_date < 1863.1.1
+		NOT = { has_variable = sp_i12_wave_a_done }
+		exists = c:RUS
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = sp_muhacir.1.a
+		sp_i12_wave_a_option_rumelia = yes
+		ai_chance = {
+			base = 35
+		}
+	}
+
+	option = {
+		name = sp_muhacir.1.b
+		sp_i12_wave_a_option_anatolia = yes
+		ai_chance = {
+			base = 15
+		}
+	}
+
+	option = {
+		name = sp_muhacir.1.c
+		default_option = yes
+		sp_i12_wave_a_option_balanced = yes
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+# Wave B - Circassian centerpiece
+sp_muhacir.2 = {
+	type = country_event
+	placement = root
+	title = sp_muhacir.2.t
+	desc = sp_muhacir.2.d
+	flavor = sp_muhacir.2.f
+	duration = 3
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	event_image = {
+		video = "ep1_ca_mountain_pass_civilian"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		this = c:TUR
+		NOT = { has_variable = sp_i12_wave_b_done }
+		sp_i12_wave_b_can_fire = yes
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				sp_i12_vanilla_circassian_pipeline = yes
+			}
+			sp_i12_wave_b_set_vanilla_mode = yes
+		}
+		else = {
+			sp_i12_wave_b_set_conservation_mode = yes
+		}
+	}
+
+	option = {
+		name = sp_muhacir.2.a
+		sp_i12_wave_b_option_rumelia = yes
+		ai_chance = {
+			base = 25
+			modifier = {
+				trigger = {
+					highest_secession_progress >= 0.30
+				}
+				add = -15
+			}
+		}
+	}
+
+	option = {
+		name = sp_muhacir.2.b
+		sp_i12_wave_b_option_anatolia = yes
+		ai_chance = {
+			base = 30
+			modifier = {
+				trigger = {
+					highest_secession_progress >= 0.30
+				}
+				add = 20
+			}
+		}
+	}
+
+	option = {
+		name = sp_muhacir.2.c
+		default_option = yes
+		sp_i12_wave_b_option_balanced = yes
+		ai_chance = {
+			base = 45
+		}
+	}
+
+	option = {
+		name = sp_muhacir.2.e
+		sp_i12_wave_b_option_refuse = yes
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+# Wave C - Rumelian refugee crisis
+sp_muhacir.3 = {
+	type = country_event
+	placement = root
+	title = sp_muhacir.3.t
+	desc = sp_muhacir.3.d
+	flavor = sp_muhacir.3.f
+	duration = 3
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	event_image = {
+		video = "unspecific_fire"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		this = c:TUR
+		game_date >= 1876.1.1
+		game_date < 1882.1.1
+		NOT = { has_variable = sp_i12_wave_c_done }
+		sp_i12_wave_c_crisis_signal = yes
+	}
+
+	immediate = {
+		sp_i12_run_wave_c_origin_evacuation = yes
+	}
+
+	option = {
+		name = sp_muhacir.3.a
+		sp_i12_wave_c_option_capital = yes
+		ai_chance = {
+			base = 20
+		}
+	}
+
+	option = {
+		name = sp_muhacir.3.b
+		default_option = yes
+		sp_i12_wave_c_option_disperse = yes
+		ai_chance = {
+			base = 80
+		}
+	}
+}

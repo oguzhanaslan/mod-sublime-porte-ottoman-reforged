@@ -1,14 +1,16 @@
-﻿# I-12 Muhacir - additive effects only (B9 ownership-safe Wave C library).
-# Unwired technical spike. Do not call from events/JE until I-12 is approved.
+﻿# I-12 Muhacir - additive effects (Wave A/B/C + B9 ownership-safe Wave C library).
 # Cross-owner move shape: serbia_throne.6.b / greece.5 (s:STATE_* -> every_scope_state).
-# Foreign remnant kill intentionally omitted (unattested from TUR onto foreign states).
+# No create_pop Circassian. No create_mass_migration. No foreign remnant kill (Wave C B9).
+# Conservation refuse Kuban transit kill is an explicit Wave B exception (proposal 4).
 #
-# Provenance wiring (full I-12 only - do not add in this spike):
-# - on_game_started / on_yearly_pulse_state / on_monthly_pulse_state:
-#     call sp_i12_stamp_tur_share_provenance_on_this_state when
-#     sp_i12_can_stamp_tur_share_provenance = yes
-# - optional on_state_owner_change reinforce if provenance already present
+# Provenance wiring:
+# - on_game_started / on_yearly_pulse_state call stamp helpers when
+#   sp_i12_can_stamp_tur_share_provenance = yes
 # Late-install: never backfill provenance onto already-foreign never-stamped shares.
+
+########################################
+# B9 Wave C provenance / evacuation
+########################################
 
 # State scope. Stamp only while this share is TUR-owned Rumelian candidate.
 sp_i12_stamp_tur_share_provenance_on_this_state = {
@@ -22,7 +24,6 @@ sp_i12_stamp_tur_share_provenance_on_this_state = {
 }
 
 # Country scope: TUR. Stamp every currently owned Rumelian Wave C candidate share.
-# Intended caller: future additive on_actions (game start + state pulse). Not wired here.
 sp_i12_stamp_all_owned_rumelian_share_provenance = {
 	every_scope_state = {
 		limit = {
@@ -63,7 +64,6 @@ sp_i12_save_wave_c_staging_state = {
 
 # State-region walk helper. Expects scope:sp_i12_wave_c_staging_state.
 # Evacuates only provenance-stamped former TUR shares (B9).
-# 1836 RUS Dobrudja / SER Eastern Serbia shares have no stamp -> skipped.
 sp_i12_evacuate_foreign_shares_in_this_state_region = {
 	every_scope_state = {
 		limit = {
@@ -198,7 +198,6 @@ sp_i12_evacuate_lost_rumelian_cores_to_staging = {
 }
 
 # Country scope: TUR. Still-owned devastated Rumelian shares.
-# Own-state move_partial_pop + kill is attested (Hokkaido / balkan_wars.9 owner-side).
 sp_i12_evacuate_devastated_held_rumelian_to_staging = {
 	if = {
 		limit = {
@@ -249,4 +248,2018 @@ sp_i12_run_wave_c_origin_evacuation = {
 	sp_i12_save_wave_c_staging_state = yes
 	sp_i12_evacuate_lost_rumelian_cores_to_staging = yes
 	sp_i12_evacuate_devastated_held_rumelian_to_staging = yes
+}
+
+########################################
+# Commission / JE / exemptions
+########################################
+
+# Country scope: TUR.
+sp_i12_clear_commission_country_modifiers = {
+	remove_modifier = sp_i12_commission_wave_a
+	remove_modifier = sp_i12_commission_wave_b_rumelia
+	remove_modifier = sp_i12_commission_wave_b_anatolia
+	remove_modifier = sp_i12_commission_wave_b_balanced
+	remove_modifier = sp_i12_commission_wave_b_refuse
+	remove_modifier = sp_i12_commission_wave_c
+}
+
+# Country scope: TUR.
+sp_i12_ensure_muhacirin_komisyonu = {
+	if = {
+		limit = {
+			NOT = {
+				has_journal_entry = sp_je_muhacirin_komisyonu
+			}
+		}
+		add_journal_entry = {
+			type = sp_je_muhacirin_komisyonu
+		}
+	}
+}
+
+# State scope.
+sp_i12_apply_exemption_rumelia = {
+	add_modifier = {
+		name = sp_i12_exemption_rumelia
+		months = 72
+	}
+}
+
+# State scope.
+sp_i12_apply_exemption_anatolia = {
+	add_modifier = {
+		name = sp_i12_exemption_anatolia
+		months = 144
+	}
+}
+
+# State scope. Wave C disperse half-packet.
+sp_i12_apply_exemption_wave_c_anatolia = {
+	add_modifier = {
+		name = sp_i12_exemption_wave_c_anatolia
+		months = 24
+	}
+}
+
+########################################
+# Shared settlement target helpers
+########################################
+
+# Country scope: TUR. Ankara -> Konya -> Hudavendigar. Saves sp_i12_settlement_target.
+sp_i12_save_anatolia_fallback_target = {
+	if = {
+		limit = {
+			s:STATE_ANKARA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_ANKARA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			s:STATE_KONYA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_KONYA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			s:STATE_HUDAVENDIGAR = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_HUDAVENDIGAR = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+}
+
+# Country scope: TUR. Prefer named region; else anatolia fallback. Saves sp_i12_settlement_target.
+sp_i12_save_target_prefer_dobrudja = {
+	if = {
+		limit = {
+			s:STATE_DOBRUDJA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_DOBRUDJA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+	else = {
+		sp_i12_save_anatolia_fallback_target = yes
+	}
+}
+
+sp_i12_save_target_prefer_eastern_thrace = {
+	if = {
+		limit = {
+			s:STATE_EASTERN_THRACE = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_EASTERN_THRACE = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+	else = {
+		sp_i12_save_anatolia_fallback_target = yes
+	}
+}
+
+sp_i12_save_target_prefer_bulgaria = {
+	if = {
+		limit = {
+			s:STATE_BULGARIA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_BULGARIA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+	else = {
+		sp_i12_save_anatolia_fallback_target = yes
+	}
+}
+
+sp_i12_save_target_prefer_ankara = {
+	if = {
+		limit = {
+			s:STATE_ANKARA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_ANKARA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+	else = {
+		sp_i12_save_anatolia_fallback_target = yes
+	}
+}
+
+sp_i12_save_target_prefer_konya = {
+	if = {
+		limit = {
+			s:STATE_KONYA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_KONYA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+	else = {
+		sp_i12_save_anatolia_fallback_target = yes
+	}
+}
+
+sp_i12_save_target_prefer_hudavendigar = {
+	if = {
+		limit = {
+			s:STATE_HUDAVENDIGAR = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_HUDAVENDIGAR = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+	else = {
+		sp_i12_save_anatolia_fallback_target = yes
+	}
+}
+
+sp_i12_save_target_prefer_kosovo = {
+	if = {
+		limit = {
+			s:STATE_KOSOVO = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_KOSOVO = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+}
+
+sp_i12_save_target_prefer_eastern_serbia = {
+	if = {
+		limit = {
+			s:STATE_EASTERN_SERBIA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_EASTERN_SERBIA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+}
+
+sp_i12_save_target_prefer_kastamonu = {
+	if = {
+		limit = {
+			s:STATE_KASTAMONU = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_KASTAMONU = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+}
+
+sp_i12_save_target_prefer_trabzon = {
+	if = {
+		limit = {
+			s:STATE_TRABZON = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_TRABZON = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_settlement_target
+			}
+		}
+	}
+}
+
+# State scope. Rumelia receiver friction + exemption.
+sp_i12_wave_a_finish_rumelia_receiver = {
+	sp_i12_apply_exemption_rumelia = yes
+	if = {
+		limit = {
+			state_region = s:STATE_DOBRUDJA
+		}
+		add_radicals_in_state = {
+			value = small_radicals
+			culture = cu:bulgarian
+		}
+		add_radicals_in_state = {
+			value = small_radicals
+			culture = cu:romanian
+		}
+	}
+	if = {
+		limit = {
+			state_region = s:STATE_BULGARIA
+		}
+		add_radicals_in_state = {
+			value = small_radicals
+			culture = cu:bulgarian
+		}
+	}
+}
+
+# State scope. Anatolia receiver friction + exemption.
+sp_i12_wave_a_finish_anatolia_receiver = {
+	sp_i12_apply_exemption_anatolia = yes
+	add_radicals_in_state = {
+		value = very_small_radicals
+		culture = cu:turkish
+	}
+}
+
+# Country scope: TUR. After create_pop target saved as sp_i12_settlement_target.
+sp_i12_wave_a_finish_create_target = {
+	if = {
+		limit = {
+			exists = scope:sp_i12_settlement_target
+		}
+		scope:sp_i12_settlement_target = {
+			if = {
+				limit = {
+					OR = {
+						state_region = s:STATE_DOBRUDJA
+						state_region = s:STATE_EASTERN_THRACE
+						state_region = s:STATE_BULGARIA
+						state_region = s:STATE_KOSOVO
+						state_region = s:STATE_EASTERN_SERBIA
+					}
+				}
+				sp_i12_wave_a_finish_rumelia_receiver = yes
+			}
+			else = {
+				sp_i12_wave_a_finish_anatolia_receiver = yes
+			}
+		}
+	}
+}
+
+########################################
+# Wave A - Tatar / Nogay
+########################################
+
+# Country scope: TUR. Prefer Dobrudja else Eastern Thrace.
+sp_i12_wave_a_save_crimea_landing = {
+	if = {
+		limit = {
+			s:STATE_DOBRUDJA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_DOBRUDJA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_wave_a_landing
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			s:STATE_EASTERN_THRACE = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_EASTERN_THRACE = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_wave_a_landing
+			}
+		}
+	}
+}
+
+# Country scope: TUR. Move 0.40 Crimean Tatar to landing if saved.
+sp_i12_wave_a_move_crimea = {
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_a_landing
+		}
+		s:STATE_CRIMEA = {
+			every_scope_state = {
+				every_scope_pop = {
+					limit = {
+						culture = cu:tatar
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_wave_a_landing
+						population_ratio = 0.40
+					}
+				}
+			}
+		}
+		scope:sp_i12_wave_a_landing = {
+			sp_i12_wave_a_finish_rumelia_receiver = yes
+		}
+	}
+}
+
+# Country scope: TUR. Shared Wave A closeout.
+sp_i12_wave_a_apply_commission_closeout = {
+	add_treasury = -35000
+	sp_i12_ensure_muhacirin_komisyonu = yes
+	sp_i12_clear_commission_country_modifiers = yes
+	add_modifier = {
+		name = sp_i12_commission_wave_a
+	}
+	set_variable = sp_i12_wave_a_done
+}
+
+# Country scope: TUR. Rumelia-focused paid 70k + Crimea move.
+sp_i12_wave_a_option_rumelia = {
+	sp_i12_wave_a_save_crimea_landing = yes
+	sp_i12_wave_a_move_crimea = yes
+	# Dobrudja 35000
+	sp_i12_save_target_prefer_dobrudja = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_settlement_target
+		}
+		scope:sp_i12_settlement_target = {
+			create_pop = {
+				culture = tatar
+				religion = sunni
+				pop_type = peasants
+				size = 35000
+			}
+		}
+		sp_i12_wave_a_finish_create_target = yes
+	}
+	# Eastern Thrace 20000
+	sp_i12_save_target_prefer_eastern_thrace = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_settlement_target
+		}
+		scope:sp_i12_settlement_target = {
+			create_pop = {
+				culture = tatar
+				religion = sunni
+				pop_type = peasants
+				size = 20000
+			}
+		}
+		sp_i12_wave_a_finish_create_target = yes
+	}
+	# Bulgaria 15000
+	sp_i12_save_target_prefer_bulgaria = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_settlement_target
+		}
+		scope:sp_i12_settlement_target = {
+			create_pop = {
+				culture = tatar
+				religion = sunni
+				pop_type = peasants
+				size = 15000
+			}
+		}
+		sp_i12_wave_a_finish_create_target = yes
+	}
+	sp_i12_wave_a_apply_commission_closeout = yes
+}
+
+# Country scope: TUR. Anatolia-focused paid 70k + Crimea to Dobrudja landing.
+sp_i12_wave_a_option_anatolia = {
+	sp_i12_wave_a_save_crimea_landing = yes
+	sp_i12_wave_a_move_crimea = yes
+	# Ankara 30000
+	sp_i12_save_target_prefer_ankara = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_settlement_target
+		}
+		scope:sp_i12_settlement_target = {
+			create_pop = {
+				culture = tatar
+				religion = sunni
+				pop_type = peasants
+				size = 30000
+			}
+		}
+		sp_i12_wave_a_finish_create_target = yes
+	}
+	# Konya 20000
+	sp_i12_save_target_prefer_konya = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_settlement_target
+		}
+		scope:sp_i12_settlement_target = {
+			create_pop = {
+				culture = tatar
+				religion = sunni
+				pop_type = peasants
+				size = 20000
+			}
+		}
+		sp_i12_wave_a_finish_create_target = yes
+	}
+	# Hudavendigar 20000
+	sp_i12_save_target_prefer_hudavendigar = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_settlement_target
+		}
+		scope:sp_i12_settlement_target = {
+			create_pop = {
+				culture = tatar
+				religion = sunni
+				pop_type = peasants
+				size = 20000
+			}
+		}
+		sp_i12_wave_a_finish_create_target = yes
+	}
+	sp_i12_wave_a_apply_commission_closeout = yes
+}
+
+# Country scope: TUR. Balanced paid split + Crimea move.
+sp_i12_wave_a_option_balanced = {
+	sp_i12_wave_a_save_crimea_landing = yes
+	sp_i12_wave_a_move_crimea = yes
+	# Dobrudja 25000
+	sp_i12_save_target_prefer_dobrudja = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_settlement_target
+		}
+		scope:sp_i12_settlement_target = {
+			create_pop = {
+				culture = tatar
+				religion = sunni
+				pop_type = peasants
+				size = 25000
+			}
+		}
+		sp_i12_wave_a_finish_create_target = yes
+	}
+	# Eastern Thrace 15000
+	sp_i12_save_target_prefer_eastern_thrace = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_settlement_target
+		}
+		scope:sp_i12_settlement_target = {
+			create_pop = {
+				culture = tatar
+				religion = sunni
+				pop_type = peasants
+				size = 15000
+			}
+		}
+		sp_i12_wave_a_finish_create_target = yes
+	}
+	# Ankara 20000
+	sp_i12_save_target_prefer_ankara = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_settlement_target
+		}
+		scope:sp_i12_settlement_target = {
+			create_pop = {
+				culture = tatar
+				religion = sunni
+				pop_type = peasants
+				size = 20000
+			}
+		}
+		sp_i12_wave_a_finish_create_target = yes
+	}
+	# Konya 10000
+	sp_i12_save_target_prefer_konya = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_settlement_target
+		}
+		scope:sp_i12_settlement_target = {
+			create_pop = {
+				culture = tatar
+				religion = sunni
+				pop_type = peasants
+				size = 10000
+			}
+		}
+		sp_i12_wave_a_finish_create_target = yes
+	}
+	sp_i12_wave_a_apply_commission_closeout = yes
+}
+
+########################################
+# Wave B - mode flags and landing helpers
+########################################
+
+# Country scope: TUR. Set in event immediate.
+sp_i12_wave_b_set_vanilla_mode = {
+	set_variable = sp_i12_wave_b_vanilla_management
+}
+
+sp_i12_wave_b_set_conservation_mode = {
+	set_variable = sp_i12_wave_b_conservation
+}
+
+# Country scope: TUR. Eastern Thrace staging for conservation origin moves.
+sp_i12_save_wave_b_staging_state = {
+	if = {
+		limit = {
+			s:STATE_EASTERN_THRACE = {
+				any_scope_state = {
+					owner ?= c:TUR
+				}
+			}
+		}
+		s:STATE_EASTERN_THRACE = {
+			random_scope_state = {
+				limit = {
+					owner ?= c:TUR
+				}
+				save_scope_as = sp_i12_wave_b_staging_state
+			}
+		}
+	}
+}
+
+# State scope. Expects destination scopes already saved when present.
+# Successive ratios of ORIGINAL: 0.25 / 0.20 / 0.10 / 0.05 -> 0.25, 0.266667, 0.181818, 0.111111.
+sp_i12_wave_b_move_circassian_pop_rumelia_route = {
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_bulgaria
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_bulgaria
+			population_ratio = 0.25
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_dobrudja
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_dobrudja
+			population_ratio = 0.266667
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_kosovo
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_kosovo
+			population_ratio = 0.181818
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_eastern_serbia
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_eastern_serbia
+			population_ratio = 0.111111
+		}
+	}
+}
+
+# Successive of ORIGINAL 0.25 / 0.25 / 0.15 / 0.05 -> 0.25, 0.333333, 0.30, 0.142857.
+sp_i12_wave_b_move_circassian_pop_anatolia_route = {
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_hudavendigar
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_hudavendigar
+			population_ratio = 0.25
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_ankara
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_ankara
+			population_ratio = 0.333333
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_konya
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_konya
+			population_ratio = 0.30
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_kastamonu
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_kastamonu
+			population_ratio = 0.142857
+		}
+	}
+}
+
+# Successive of ORIGINAL 0.15 / 0.15 / 0.20 / 0.25 / 0.15 -> 0.15, 0.176471, 0.285714, 0.50, 0.60.
+sp_i12_wave_b_move_circassian_pop_balanced_route = {
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_dobrudja
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_dobrudja
+			population_ratio = 0.15
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_bulgaria
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_bulgaria
+			population_ratio = 0.176471
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_hudavendigar
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_hudavendigar
+			population_ratio = 0.285714
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_ankara
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_ankara
+			population_ratio = 0.50
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:sp_i12_dest_konya
+		}
+		move_partial_pop = {
+			state = scope:sp_i12_dest_konya
+			population_ratio = 0.60
+		}
+	}
+}
+
+# Country scope: TUR. Save common inland destinations used by Wave B routes.
+sp_i12_wave_b_save_common_destinations = {
+	if = {
+		limit = {
+			s:STATE_BULGARIA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_BULGARIA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_dest_bulgaria
+			}
+		}
+	}
+	if = {
+		limit = {
+			s:STATE_DOBRUDJA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_DOBRUDJA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_dest_dobrudja
+			}
+		}
+	}
+	if = {
+		limit = {
+			s:STATE_KOSOVO = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_KOSOVO = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_dest_kosovo
+			}
+		}
+	}
+	if = {
+		limit = {
+			s:STATE_EASTERN_SERBIA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_EASTERN_SERBIA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_dest_eastern_serbia
+			}
+		}
+	}
+	if = {
+		limit = {
+			s:STATE_HUDAVENDIGAR = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_HUDAVENDIGAR = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_dest_hudavendigar
+			}
+		}
+	}
+	if = {
+		limit = {
+			s:STATE_ANKARA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_ANKARA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_dest_ankara
+			}
+		}
+	}
+	if = {
+		limit = {
+			s:STATE_KONYA = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_KONYA = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_dest_konya
+			}
+		}
+	}
+	if = {
+		limit = {
+			s:STATE_KASTAMONU = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_KASTAMONU = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_dest_kastamonu
+			}
+		}
+	}
+	if = {
+		limit = {
+			s:STATE_TRABZON = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_TRABZON = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_dest_trabzon
+			}
+		}
+	}
+	if = {
+		limit = {
+			s:STATE_EASTERN_THRACE = {
+				any_scope_state = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+			}
+		}
+		s:STATE_EASTERN_THRACE = {
+			random_scope_state = {
+				limit = {
+					sp_i12_is_tur_settlement_target = yes
+				}
+				save_scope_as = sp_i12_dest_eastern_thrace
+			}
+		}
+	}
+}
+
+# Country scope: TUR. Landing-state Circassian moves (route chosen at country scope, not pop).
+sp_i12_wave_b_vanilla_from_landings_rumelia = {
+	sp_i12_wave_b_save_common_destinations = yes
+	s:STATE_EASTERN_THRACE = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				sp_i12_wave_b_move_circassian_pop_rumelia_route = yes
+			}
+		}
+	}
+	s:STATE_KASTAMONU = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				sp_i12_wave_b_move_circassian_pop_rumelia_route = yes
+			}
+		}
+	}
+	s:STATE_TRABZON = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				sp_i12_wave_b_move_circassian_pop_rumelia_route = yes
+			}
+		}
+	}
+}
+
+sp_i12_wave_b_vanilla_from_landings_anatolia = {
+	sp_i12_wave_b_save_common_destinations = yes
+	s:STATE_EASTERN_THRACE = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				sp_i12_wave_b_move_circassian_pop_anatolia_route = yes
+			}
+		}
+	}
+	s:STATE_KASTAMONU = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				sp_i12_wave_b_move_circassian_pop_anatolia_route = yes
+			}
+		}
+	}
+	s:STATE_TRABZON = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				sp_i12_wave_b_move_circassian_pop_anatolia_route = yes
+			}
+		}
+	}
+}
+
+sp_i12_wave_b_vanilla_from_landings_balanced = {
+	sp_i12_wave_b_save_common_destinations = yes
+	s:STATE_EASTERN_THRACE = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				sp_i12_wave_b_move_circassian_pop_balanced_route = yes
+			}
+		}
+	}
+	s:STATE_KASTAMONU = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				sp_i12_wave_b_move_circassian_pop_balanced_route = yes
+			}
+		}
+	}
+	s:STATE_TRABZON = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				sp_i12_wave_b_move_circassian_pop_balanced_route = yes
+			}
+		}
+	}
+}
+
+sp_i12_wave_b_vanilla_rumelia = {
+	set_variable = sp_i12_settlement_rumelia
+	sp_i12_wave_b_vanilla_from_landings_rumelia = yes
+}
+
+sp_i12_wave_b_vanilla_anatolia = {
+	set_variable = sp_i12_settlement_anatolia
+	sp_i12_wave_b_vanilla_from_landings_anatolia = yes
+}
+
+sp_i12_wave_b_vanilla_balanced = {
+	set_variable = sp_i12_settlement_balanced
+	sp_i12_wave_b_vanilla_from_landings_balanced = yes
+}
+
+# Conservation: move 0.35 Circassian from Kuban + North Caucasus to ET staging.
+sp_i12_wave_b_conservation_origin_to_staging = {
+	sp_i12_save_wave_b_staging_state = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_b_staging_state
+		}
+		s:STATE_KUBAN = {
+			every_scope_state = {
+				every_scope_pop = {
+					limit = {
+						culture = cu:circassian
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_wave_b_staging_state
+						population_ratio = 0.35
+					}
+				}
+			}
+		}
+		s:STATE_NORTH_CAUCASUS = {
+			every_scope_state = {
+				every_scope_pop = {
+					limit = {
+						culture = cu:circassian
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_wave_b_staging_state
+						population_ratio = 0.35
+					}
+				}
+			}
+		}
+	}
+}
+
+# Conservation redistributes from staging with proposal shares of the moved stock.
+# Rumelia shares of moved: Bul 0.36 / Dob 0.28 / Kos 0.16 / ES 0.08 / leave ET 0.12
+# Successive: 0.36, 0.4375, 0.444444, 0.40
+sp_i12_wave_b_conservation_redistribute_rumelia = {
+	sp_i12_wave_b_save_common_destinations = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_b_staging_state
+		}
+		scope:sp_i12_wave_b_staging_state = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_bulgaria
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_bulgaria
+						population_ratio = 0.36
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_dobrudja
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_dobrudja
+						population_ratio = 0.4375
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_kosovo
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_kosovo
+						population_ratio = 0.444444
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_eastern_serbia
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_eastern_serbia
+						population_ratio = 0.40
+					}
+				}
+			}
+		}
+	}
+}
+
+# Anatolia shares: Hud 0.28 / Ank 0.32 / Kon 0.20 / Kas 0.12 / Tra 0.08
+# Successive: 0.28, 0.444444, 0.50, 0.60, 1.0
+sp_i12_wave_b_conservation_redistribute_anatolia = {
+	sp_i12_wave_b_save_common_destinations = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_b_staging_state
+		}
+		scope:sp_i12_wave_b_staging_state = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_hudavendigar
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_hudavendigar
+						population_ratio = 0.28
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_ankara
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_ankara
+						population_ratio = 0.444444
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_konya
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_konya
+						population_ratio = 0.50
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_kastamonu
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_kastamonu
+						population_ratio = 0.60
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_trabzon
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_trabzon
+						population_ratio = 1.0
+					}
+				}
+			}
+		}
+	}
+}
+
+# Balanced shares: Dob 0.15 / Bul 0.15 / Hud 0.20 / Ank 0.25 / Kon 0.15 / Kas 0.10
+# Successive: 0.15, 0.176471, 0.285714, 0.50, 0.60, 1.0
+sp_i12_wave_b_conservation_redistribute_balanced = {
+	sp_i12_wave_b_save_common_destinations = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_b_staging_state
+		}
+		scope:sp_i12_wave_b_staging_state = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:circassian
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_dobrudja
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_dobrudja
+						population_ratio = 0.15
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_bulgaria
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_bulgaria
+						population_ratio = 0.176471
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_hudavendigar
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_hudavendigar
+						population_ratio = 0.285714
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_ankara
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_ankara
+						population_ratio = 0.50
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_konya
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_konya
+						population_ratio = 0.60
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_kastamonu
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_kastamonu
+						population_ratio = 1.0
+					}
+				}
+			}
+		}
+	}
+}
+
+sp_i12_wave_b_conservation_rumelia = {
+	sp_i12_wave_b_conservation_origin_to_staging = yes
+	sp_i12_wave_b_conservation_redistribute_rumelia = yes
+}
+
+sp_i12_wave_b_conservation_anatolia = {
+	sp_i12_wave_b_conservation_origin_to_staging = yes
+	sp_i12_wave_b_conservation_redistribute_anatolia = yes
+}
+
+sp_i12_wave_b_conservation_balanced = {
+	sp_i12_wave_b_conservation_origin_to_staging = yes
+	sp_i12_wave_b_conservation_redistribute_balanced = yes
+}
+
+# State scope friction helpers for Wave B receivers.
+sp_i12_wave_b_friction_rumelia_state = {
+	add_modifier = {
+		name = sp_i12_rumelia_settlement_friction
+		months = 60
+	}
+	add_radicals_in_state = {
+		value = medium_radicals
+		culture = cu:bulgarian
+	}
+	add_radicals_in_state = {
+		value = medium_radicals
+		culture = cu:serb
+	}
+	add_radicals_in_state = {
+		value = medium_radicals
+		culture = cu:romanian
+	}
+	add_radicals_in_state = {
+		value = medium_radicals
+		culture = cu:albanian
+	}
+	sp_i12_apply_exemption_rumelia = yes
+}
+
+sp_i12_wave_b_friction_anatolia_state = {
+	add_radicals_in_state = {
+		value = small_radicals
+		culture = cu:turkish
+	}
+	sp_i12_apply_exemption_anatolia = yes
+}
+
+sp_i12_wave_b_friction_balanced_rumelia_state = {
+	add_radicals_in_state = {
+		value = small_radicals
+		culture = cu:bulgarian
+	}
+	add_radicals_in_state = {
+		value = small_radicals
+		culture = cu:serb
+	}
+	add_radicals_in_state = {
+		value = small_radicals
+		culture = cu:romanian
+	}
+	add_radicals_in_state = {
+		value = small_radicals
+		culture = cu:albanian
+	}
+	sp_i12_apply_exemption_rumelia = yes
+}
+
+sp_i12_wave_b_friction_balanced_anatolia_state = {
+	add_radicals_in_state = {
+		value = very_small_radicals
+		culture = cu:turkish
+	}
+	sp_i12_apply_exemption_anatolia = yes
+}
+
+# Apply friction/exemptions on saved destination scopes.
+sp_i12_wave_b_apply_rumelia_receiver_packets = {
+	if = {
+		limit = { exists = scope:sp_i12_dest_bulgaria }
+		scope:sp_i12_dest_bulgaria = { sp_i12_wave_b_friction_rumelia_state = yes }
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_dobrudja }
+		scope:sp_i12_dest_dobrudja = { sp_i12_wave_b_friction_rumelia_state = yes }
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_kosovo }
+		scope:sp_i12_dest_kosovo = { sp_i12_wave_b_friction_rumelia_state = yes }
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_eastern_serbia }
+		scope:sp_i12_dest_eastern_serbia = { sp_i12_wave_b_friction_rumelia_state = yes }
+	}
+}
+
+sp_i12_wave_b_apply_anatolia_receiver_packets = {
+	if = {
+		limit = { exists = scope:sp_i12_dest_hudavendigar }
+		scope:sp_i12_dest_hudavendigar = { sp_i12_wave_b_friction_anatolia_state = yes }
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_ankara }
+		scope:sp_i12_dest_ankara = { sp_i12_wave_b_friction_anatolia_state = yes }
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_konya }
+		scope:sp_i12_dest_konya = { sp_i12_wave_b_friction_anatolia_state = yes }
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_kastamonu }
+		scope:sp_i12_dest_kastamonu = { sp_i12_wave_b_friction_anatolia_state = yes }
+	}
+}
+
+sp_i12_wave_b_apply_balanced_receiver_packets = {
+	if = {
+		limit = { exists = scope:sp_i12_dest_bulgaria }
+		scope:sp_i12_dest_bulgaria = { sp_i12_wave_b_friction_balanced_rumelia_state = yes }
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_dobrudja }
+		scope:sp_i12_dest_dobrudja = { sp_i12_wave_b_friction_balanced_rumelia_state = yes }
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_hudavendigar }
+		scope:sp_i12_dest_hudavendigar = { sp_i12_wave_b_friction_balanced_anatolia_state = yes }
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_ankara }
+		scope:sp_i12_dest_ankara = { sp_i12_wave_b_friction_balanced_anatolia_state = yes }
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_konya }
+		scope:sp_i12_dest_konya = { sp_i12_wave_b_friction_balanced_anatolia_state = yes }
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_kastamonu }
+		scope:sp_i12_dest_kastamonu = { sp_i12_wave_b_friction_balanced_anatolia_state = yes }
+	}
+}
+
+# Country scope: TUR. Player option wrappers.
+sp_i12_wave_b_option_rumelia = {
+	remove_variable = sp_i12_settlement_anatolia
+	remove_variable = sp_i12_settlement_balanced
+	set_variable = sp_i12_settlement_rumelia
+	if = {
+		limit = {
+			has_variable = sp_i12_wave_b_vanilla_management
+		}
+		sp_i12_wave_b_vanilla_from_landings_rumelia = yes
+		set_variable = {
+			name = sp_i12_wave_b_settlement_active
+			months = 24
+		}
+	}
+	else = {
+		sp_i12_wave_b_conservation_rumelia = yes
+	}
+	sp_i12_wave_b_save_common_destinations = yes
+	sp_i12_wave_b_apply_rumelia_receiver_packets = yes
+	add_treasury = -90000
+	sp_i12_ensure_muhacirin_komisyonu = yes
+	sp_i12_clear_commission_country_modifiers = yes
+	add_modifier = {
+		name = sp_i12_commission_wave_b_rumelia
+	}
+	set_variable = sp_i12_wave_b_done
+}
+
+sp_i12_wave_b_option_anatolia = {
+	remove_variable = sp_i12_settlement_rumelia
+	remove_variable = sp_i12_settlement_balanced
+	set_variable = sp_i12_settlement_anatolia
+	if = {
+		limit = {
+			has_variable = sp_i12_wave_b_vanilla_management
+		}
+		sp_i12_wave_b_vanilla_from_landings_anatolia = yes
+		set_variable = {
+			name = sp_i12_wave_b_settlement_active
+			months = 24
+		}
+	}
+	else = {
+		sp_i12_wave_b_conservation_anatolia = yes
+	}
+	sp_i12_wave_b_save_common_destinations = yes
+	sp_i12_wave_b_apply_anatolia_receiver_packets = yes
+	add_treasury = -150000
+	sp_i12_ensure_muhacirin_komisyonu = yes
+	sp_i12_clear_commission_country_modifiers = yes
+	add_modifier = {
+		name = sp_i12_commission_wave_b_anatolia
+	}
+	set_variable = sp_i12_wave_b_done
+}
+
+sp_i12_wave_b_option_balanced = {
+	remove_variable = sp_i12_settlement_rumelia
+	remove_variable = sp_i12_settlement_anatolia
+	set_variable = sp_i12_settlement_balanced
+	if = {
+		limit = {
+			has_variable = sp_i12_wave_b_vanilla_management
+		}
+		sp_i12_wave_b_vanilla_from_landings_balanced = yes
+		set_variable = {
+			name = sp_i12_wave_b_settlement_active
+			months = 24
+		}
+	}
+	else = {
+		sp_i12_wave_b_conservation_balanced = yes
+	}
+	sp_i12_wave_b_save_common_destinations = yes
+	sp_i12_wave_b_apply_balanced_receiver_packets = yes
+	add_treasury = -120000
+	sp_i12_ensure_muhacirin_komisyonu = yes
+	sp_i12_clear_commission_country_modifiers = yes
+	add_modifier = {
+		name = sp_i12_commission_wave_b_balanced
+	}
+	set_variable = sp_i12_wave_b_done
+}
+
+# Refuse vanilla: camp on three landings, no inland move.
+sp_i12_wave_b_refuse_vanilla = {
+	s:STATE_EASTERN_THRACE = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			add_modifier = {
+				name = sp_i12_landing_camp_modifier
+				months = 36
+			}
+			add_radicals_in_state = {
+				value = large_radicals
+				culture = cu:circassian
+			}
+			add_radicals_in_state = {
+				value = medium_radicals
+				culture = cu:turkish
+			}
+		}
+	}
+	s:STATE_KASTAMONU = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			add_modifier = {
+				name = sp_i12_landing_camp_modifier
+				months = 36
+			}
+		}
+	}
+	s:STATE_TRABZON = {
+		every_scope_state = {
+			limit = {
+				owner ?= c:TUR
+			}
+			add_modifier = {
+				name = sp_i12_landing_camp_modifier
+				months = 36
+			}
+		}
+	}
+	add_treasury = -40000
+	sp_i12_ensure_muhacirin_komisyonu = yes
+	sp_i12_clear_commission_country_modifiers = yes
+	add_modifier = {
+		name = sp_i12_commission_wave_b_refuse
+	}
+	set_variable = sp_i12_wave_b_refused
+	set_variable = sp_i12_wave_b_done
+}
+
+# Refuse conservation: Kuban transit kill 0.08 + 0.15 move to ET (explicit exception).
+sp_i12_wave_b_refuse_conservation = {
+	s:STATE_KUBAN = {
+		every_scope_state = {
+			kill_population_percent_in_state = {
+				percent = 0.08
+				culture = cu:circassian
+			}
+		}
+	}
+	sp_i12_save_wave_b_staging_state = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_b_staging_state
+		}
+		s:STATE_KUBAN = {
+			every_scope_state = {
+				every_scope_pop = {
+					limit = {
+						culture = cu:circassian
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_wave_b_staging_state
+						population_ratio = 0.15
+					}
+				}
+			}
+		}
+		s:STATE_NORTH_CAUCASUS = {
+			every_scope_state = {
+				every_scope_pop = {
+					limit = {
+						culture = cu:circassian
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_wave_b_staging_state
+						population_ratio = 0.15
+					}
+				}
+			}
+		}
+		scope:sp_i12_wave_b_staging_state = {
+			add_radicals_in_state = {
+				value = large_radicals
+				culture = cu:circassian
+			}
+			add_radicals_in_state = {
+				value = medium_radicals
+				culture = cu:turkish
+			}
+		}
+	}
+	add_treasury = -40000
+	sp_i12_ensure_muhacirin_komisyonu = yes
+	sp_i12_clear_commission_country_modifiers = yes
+	add_modifier = {
+		name = sp_i12_commission_wave_b_refuse
+	}
+	set_variable = sp_i12_wave_b_refused
+	set_variable = sp_i12_wave_b_done
+}
+
+# Country scope: TUR. Unified refuse option.
+sp_i12_wave_b_option_refuse = {
+	if = {
+		limit = {
+			has_variable = sp_i12_wave_b_vanilla_management
+		}
+		sp_i12_wave_b_refuse_vanilla = yes
+	}
+	else = {
+		sp_i12_wave_b_refuse_conservation = yes
+	}
+}
+
+# Country scope: TUR. Monthly fan-out while settlement_active.
+# Simplified: move 0.20 Circassian from each landing toward primary inland of route.
+sp_i12_wave_b_monthly_fanout = {
+	if = {
+		limit = {
+			has_variable = sp_i12_wave_b_settlement_active
+		}
+		sp_i12_wave_b_save_common_destinations = yes
+		if = {
+			limit = {
+				has_variable = sp_i12_settlement_rumelia
+				exists = scope:sp_i12_dest_bulgaria
+			}
+			s:STATE_EASTERN_THRACE = {
+				every_scope_state = {
+					limit = { owner ?= c:TUR }
+					every_scope_pop = {
+						limit = { culture = cu:circassian }
+						move_partial_pop = {
+							state = scope:sp_i12_dest_bulgaria
+							population_ratio = 0.20
+						}
+					}
+				}
+			}
+			s:STATE_KASTAMONU = {
+				every_scope_state = {
+					limit = { owner ?= c:TUR }
+					every_scope_pop = {
+						limit = { culture = cu:circassian }
+						move_partial_pop = {
+							state = scope:sp_i12_dest_bulgaria
+							population_ratio = 0.20
+						}
+					}
+				}
+			}
+			s:STATE_TRABZON = {
+				every_scope_state = {
+					limit = { owner ?= c:TUR }
+					every_scope_pop = {
+						limit = { culture = cu:circassian }
+						move_partial_pop = {
+							state = scope:sp_i12_dest_bulgaria
+							population_ratio = 0.20
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i12_settlement_anatolia
+				exists = scope:sp_i12_dest_hudavendigar
+			}
+			s:STATE_EASTERN_THRACE = {
+				every_scope_state = {
+					limit = { owner ?= c:TUR }
+					every_scope_pop = {
+						limit = { culture = cu:circassian }
+						move_partial_pop = {
+							state = scope:sp_i12_dest_hudavendigar
+							population_ratio = 0.20
+						}
+					}
+				}
+			}
+			s:STATE_KASTAMONU = {
+				every_scope_state = {
+					limit = { owner ?= c:TUR }
+					every_scope_pop = {
+						limit = { culture = cu:circassian }
+						move_partial_pop = {
+							state = scope:sp_i12_dest_hudavendigar
+							population_ratio = 0.20
+						}
+					}
+				}
+			}
+			s:STATE_TRABZON = {
+				every_scope_state = {
+					limit = { owner ?= c:TUR }
+					every_scope_pop = {
+						limit = { culture = cu:circassian }
+						move_partial_pop = {
+							state = scope:sp_i12_dest_hudavendigar
+							population_ratio = 0.20
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i12_settlement_balanced
+				exists = scope:sp_i12_dest_ankara
+			}
+			s:STATE_EASTERN_THRACE = {
+				every_scope_state = {
+					limit = { owner ?= c:TUR }
+					every_scope_pop = {
+						limit = { culture = cu:circassian }
+						move_partial_pop = {
+							state = scope:sp_i12_dest_ankara
+							population_ratio = 0.20
+						}
+					}
+				}
+			}
+			s:STATE_KASTAMONU = {
+				every_scope_state = {
+					limit = { owner ?= c:TUR }
+					every_scope_pop = {
+						limit = { culture = cu:circassian }
+						move_partial_pop = {
+							state = scope:sp_i12_dest_ankara
+							population_ratio = 0.20
+						}
+					}
+				}
+			}
+			s:STATE_TRABZON = {
+				every_scope_state = {
+					limit = { owner ?= c:TUR }
+					every_scope_pop = {
+						limit = { culture = cu:circassian }
+						move_partial_pop = {
+							state = scope:sp_i12_dest_ankara
+							population_ratio = 0.20
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+########################################
+# Wave C - distribution options
+########################################
+
+# Country scope: TUR. Capital dump: leave 0.40 in ET staging; 0.25/0.20/0.15 of original to Ank/Kon/Hud.
+# Successive conversion: 0.25, 0.266667, 0.272727.
+sp_i12_wave_c_option_capital = {
+	sp_i12_save_wave_c_staging_state = yes
+	sp_i12_wave_b_save_common_destinations = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_c_staging_state
+		}
+		scope:sp_i12_wave_c_staging_state = {
+			every_scope_pop = {
+				limit = {
+					sp_i12_is_muhacir_refugee_pop = yes
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_ankara
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_ankara
+						population_ratio = 0.25
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_konya
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_konya
+						population_ratio = 0.266667
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_hudavendigar
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_hudavendigar
+						population_ratio = 0.272727
+					}
+				}
+			}
+			add_radicals_in_state = {
+				value = large_radicals
+				culture = cu:turkish
+			}
+			add_modifier = {
+				name = sp_i12_eastern_thrace_refugee_camp
+				months = 24
+			}
+		}
+	}
+	add_treasury = -100000
+	if = {
+		limit = {
+			NOT = {
+				has_journal_entry = sp_je_umum_muhacir
+			}
+		}
+		add_journal_entry = {
+			type = sp_je_umum_muhacir
+		}
+	}
+	set_variable = sp_i12_wave_c_done
+}
+
+# Country scope: TUR. Disperse: leave 0.20; 0.30/0.25/0.25 of original to Ank/Kon/Hud.
+# Successive: 0.30, 0.357143, 0.555556.
+sp_i12_wave_c_option_disperse = {
+	sp_i12_save_wave_c_staging_state = yes
+	sp_i12_wave_b_save_common_destinations = yes
+	if = {
+		limit = {
+			exists = scope:sp_i12_wave_c_staging_state
+		}
+		scope:sp_i12_wave_c_staging_state = {
+			every_scope_pop = {
+				limit = {
+					sp_i12_is_muhacir_refugee_pop = yes
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_ankara
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_ankara
+						population_ratio = 0.30
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_konya
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_konya
+						population_ratio = 0.357143
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:sp_i12_dest_hudavendigar
+					}
+					move_partial_pop = {
+						state = scope:sp_i12_dest_hudavendigar
+						population_ratio = 0.555556
+					}
+				}
+			}
+			add_radicals_in_state = {
+				value = medium_radicals
+				culture = cu:turkish
+			}
+		}
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_ankara }
+		scope:sp_i12_dest_ankara = {
+			add_radicals_in_state = {
+				value = small_radicals
+				culture = cu:turkish
+			}
+			sp_i12_apply_exemption_wave_c_anatolia = yes
+		}
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_konya }
+		scope:sp_i12_dest_konya = {
+			add_radicals_in_state = {
+				value = small_radicals
+				culture = cu:turkish
+			}
+			sp_i12_apply_exemption_wave_c_anatolia = yes
+		}
+	}
+	if = {
+		limit = { exists = scope:sp_i12_dest_hudavendigar }
+		scope:sp_i12_dest_hudavendigar = {
+			add_radicals_in_state = {
+				value = small_radicals
+				culture = cu:turkish
+			}
+			sp_i12_apply_exemption_wave_c_anatolia = yes
+		}
+	}
+	add_treasury = -120000
+	if = {
+		limit = {
+			NOT = {
+				has_journal_entry = sp_je_umum_muhacir
+			}
+		}
+		add_journal_entry = {
+			type = sp_je_umum_muhacir
+		}
+	}
+	set_variable = sp_i12_wave_c_done
 }

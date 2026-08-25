@@ -1,7 +1,4 @@
-﻿# I-12 Muhacir - additive triggers only (B9 ownership-safe Wave C library).
-# Unwired technical spike. Do not call from events/JE/on_actions until I-12 is approved.
-# Provenance stamp wiring belongs to full I-12 (on_yearly_pulse_state / on_game_started /
-# optional on_state_owner_change) - not this file's job.
+﻿# I-12 Muhacir additive triggers (Waves A/B/C + B9 provenance).
 
 # Country scope (call as c:TUR).
 sp_i12_lost_rumelian_core = {
@@ -82,7 +79,7 @@ sp_i12_has_devastated_held_rumelian_core = {
 	}
 }
 
-# Country scope (call as c:TUR). Window is a filter, not a fire condition by itself.
+# Country scope (call as c:TUR).
 sp_i12_wave_c_crisis_signal = {
 	OR = {
 		sp_i12_lost_rumelian_core = yes
@@ -93,7 +90,7 @@ sp_i12_wave_c_crisis_signal = {
 	}
 }
 
-# Pop scope. Sunni Turkish / Tatar / Circassian refugee filter.
+# Pop scope.
 sp_i12_is_muhacir_refugee_pop = {
 	religion = rel:sunni
 	OR = {
@@ -103,7 +100,7 @@ sp_i12_is_muhacir_refugee_pop = {
 	}
 }
 
-# State scope. Wave C Rumelian candidate regions only.
+# State scope.
 sp_i12_is_rumelian_wave_c_candidate_share = {
 	OR = {
 		state_region = s:STATE_BULGARIA
@@ -117,24 +114,66 @@ sp_i12_is_rumelian_wave_c_candidate_share = {
 	}
 }
 
-# State scope. Eligible for provenance stamp while TUR still owns the share.
-# 1836 RUS Dobrudja / SER Eastern Serbia shares fail owner ?= c:TUR and never stamp.
 sp_i12_can_stamp_tur_share_provenance = {
 	owner ?= c:TUR
 	sp_i12_is_rumelian_wave_c_candidate_share = yes
 }
 
-# State scope. Former TUR share now foreign - provenance required (B9).
-# Bare NOT owner ?= TUR is forbidden.
 sp_i12_is_lost_tur_rumelian_share = {
 	NOT = { owner ?= c:TUR }
 	has_variable = sp_i12_tur_share_provenance
 	sp_i12_is_rumelian_wave_c_candidate_share = yes
 }
 
-# State scope. Still-TUR devastated Rumelian core share (no provenance required).
 sp_i12_is_devastated_held_rumelian_share = {
 	owner ?= c:TUR
 	devastation >= 15
 	sp_i12_is_rumelian_wave_c_candidate_share = yes
+}
+
+# Country scope: vanilla Circassian pipeline proof (proposal 2.1).
+sp_i12_vanilla_circassian_pipeline = {
+	OR = {
+		c:RUS ?= {
+			has_journal_entry = je_circassian_expulsions
+		}
+		AND = {
+			game_date >= 1863.1.1
+			game_date < 1868.1.1
+			c:RUS ?= {
+				has_variable = milyutin_memorandum_accepted
+			}
+			NOT = { exists = c:CIR }
+		}
+		AND = {
+			game_date >= 1863.1.1
+			game_date < 1868.1.1
+			has_variable = refused_circassian_refugees
+		}
+	}
+}
+
+# Country scope: Wave B conservation door.
+sp_i12_wave_b_conservation_door = {
+	NOT = { sp_i12_vanilla_circassian_pipeline = yes }
+	game_date >= 1864.1.1
+	game_date < 1868.1.1
+	NOT = { exists = c:CIR }
+	c:RUS ?= {
+		owns_entire_state_region = STATE_KUBAN
+	}
+}
+
+# Country scope: Wave B can fire.
+sp_i12_wave_b_can_fire = {
+	OR = {
+		sp_i12_vanilla_circassian_pipeline = yes
+		sp_i12_wave_b_conservation_door = yes
+	}
+}
+
+# State scope: TUR owned incorporated settlement target.
+sp_i12_is_tur_settlement_target = {
+	owner ?= c:TUR
+	is_incorporated = yes
 }

@@ -1,0 +1,77 @@
+﻿# I-12 Muhacir commission, exemption, and camp modifiers.
+
+sp_i12_commission_wave_a = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 1500
+	country_bureaucracy_add = -50
+	country_authority_cost_add = 50
+}
+
+sp_i12_commission_wave_b_rumelia = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 3000
+	country_bureaucracy_add = -80
+	country_authority_cost_add = 40
+}
+
+sp_i12_commission_wave_b_anatolia = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 5000
+	country_bureaucracy_add = -120
+	country_authority_cost_add = 60
+}
+
+sp_i12_commission_wave_b_balanced = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 4000
+	country_bureaucracy_add = -100
+	country_authority_cost_add = 50
+}
+
+sp_i12_commission_wave_b_refuse = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 2000
+	country_bureaucracy_add = -50
+	country_authority_cost_add = 25
+}
+
+sp_i12_commission_wave_c = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 5000
+	country_bureaucracy_add = -150
+	country_authority_cost_add = 80
+}
+
+sp_i12_exemption_rumelia = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_tax_collection_mult = -0.15
+	state_conscription_rate_mult = -0.25
+}
+
+sp_i12_exemption_anatolia = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_tax_collection_mult = -0.15
+	state_conscription_rate_mult = -0.25
+}
+
+sp_i12_exemption_wave_c_anatolia = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_tax_collection_mult = -0.08
+	state_conscription_rate_mult = -0.10
+}
+
+sp_i12_rumelia_settlement_friction = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	state_turmoil_effects_mult = 0.20
+}
+
+sp_i12_landing_camp_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	state_turmoil_effects_mult = 0.25
+	state_standard_of_living_add = -1
+}
+
+sp_i12_eastern_thrace_refugee_camp = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	state_standard_of_living_add = -1
+}

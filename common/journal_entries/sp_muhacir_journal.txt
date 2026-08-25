@@ -1,0 +1,76 @@
+﻿# I-12 Muhacirin commission journal entries. No progress bar, no Tanzimat points.
+
+sp_je_muhacirin_komisyonu = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_internal_affairs
+
+	is_shown_when_inactive = {
+		always = no
+	}
+
+	possible = {
+		always = no
+	}
+
+	immediate = {
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			game_date >= 1868.1.1
+		}
+	}
+
+	timeout = 2920
+
+	on_timeout = {
+		sp_i12_clear_commission_country_modifiers = yes
+	}
+
+	on_invalid = {
+		sp_i12_clear_commission_country_modifiers = yes
+	}
+
+	transferable = no
+	weight = 4500
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+sp_je_umum_muhacir = {
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	group = je_group_internal_affairs
+
+	is_shown_when_inactive = {
+		always = no
+	}
+
+	possible = {
+		always = no
+	}
+
+	immediate = {
+	}
+
+	invalid = {
+		NOT = { c:TUR ?= this }
+	}
+
+	timeout = 730
+
+	on_timeout = {
+		remove_modifier = sp_i12_commission_wave_c
+	}
+
+	on_invalid = {
+		remove_modifier = sp_i12_commission_wave_c
+	}
+
+	modifiers_while_active = {
+		sp_i12_commission_wave_c
+	}
+
+	transferable = no
+	weight = 4600
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
