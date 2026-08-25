@@ -10,9 +10,11 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Agriculture & Resources
 
+- **R-04/R-05 — Ottoman resource-potential audit:** [`docs/research/R04_ottoman_resource_potential.md`](docs/research/R04_ottoman_resource_potential.md). Arable/agriculture and mineral/oil matrices were completed together, approved, and used in I-02 via Community State Framework state-level complete-key overrides. **COMPLETE AND USED IN I-02; TIGER CLEAN; RUNTIME SMOKE TEST PENDING.**
+
 ## Starting Buildings
 
-- **R-06 — 1836 Ottoman starting economy audit:** [`docs/research/R06_ottoman_starting_economy_audit.md`](docs/research/R06_ottoman_starting_economy_audit.md). All 30 TUR region-states and all authored starting-building categories checked against vanilla 1.13.11; final proposal contains 12 state packages / 29 atomic building edits. **APPROVED AND IMPLEMENTED IN I-03; RUNTIME SMOKE TEST PENDING.** The user called the deliverable R-05, but the established roadmap reserves R-05 for minerals/oil and R-06 for the establishment inventory.
+- **R-06 — 1836 Ottoman starting economy audit:** [`docs/research/R06_ottoman_starting_economy_audit.md`](docs/research/R06_ottoman_starting_economy_audit.md). All 30 TUR region-states and all authored starting-building categories checked against vanilla 1.13.11; final proposal contains 12 state packages / 29 atomic building edits. **COMPLETE AND USED IN I-03; INITIAL RUNTIME SMOKE TEST SUBSTANTIALLY COMPLETED; FINAL/EXTENDED VALIDATION PENDING.** The user called the deliverable R-05, but the established roadmap reserves R-05 for minerals/oil and R-06 for the establishment inventory.
 
 ## Economy & Finance
 
@@ -39,6 +41,8 @@ Do not place unverified historical claims in this file. Cite sources when resear
 - **R-17 — Millet, equality and Ottoman subjecthood:** [`docs/research/R17_millet_equality.md`](docs/research/R17_millet_equality.md). 1836 millet düzeni, Gülhane, 1856 Islahat, Müslim/gayrimüslim eşitliği, askerlik/vergi ve 1869 citizenship dönüşümü mevcut discrimination, law, institution, movement ve Tanzimat event sistemleriyle eşleştirildi; custom millet institution/currency reddedildi. **COMPLETE — RESEARCH ONLY; I-05 REQUIREMENTS IDENTIFIED.**
 
 ## Army
+
+- **R-13 — Ottoman 1836 full military setup audit:** [`docs/research/R13_ottoman_military_setup.md`](docs/research/R13_ottoman_military_setup.md). Installed vanilla 1.13.11 and the current I-11 setup were audited formation-by-formation against EGY, Mansure/Hassa/Redif history, naval rebuilding, I-05, I-07, and I-03 supply constraints. The approved four-army, 160-battalion, 30%-irregular package was implemented without changing the 28-flotilla fleet or military industry. **COMPLETE AND USED IN I-09 `1049242`; TIGER CLEAN FOR I-09; RUNTIME TEST PENDING.**
 
 ## Navy
 
@@ -85,7 +89,8 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Historical Characters
 
-- **Ottoman Characters & Naming Audit — Victoria 3 1.13.11:** [`docs/audits/ottoman-characters-naming-audit.md`](docs/audits/ottoman-characters-naming-audit.md). Vanilla Turkish name pools, rulers/heirs, starting and generated commanders, and existing mod overlap audited against 19th-century register studies and commander biographies; final proposal retains five day-one commanders by replacing Abdülkerim Nâdir with Dârendeli İzzet Mehmed Paşa. **APPROVED AND IMPLEMENTED IN I-04; RUNTIME SMOKE TEST PENDING.**
+- **Ottoman Characters & Naming Audit — Victoria 3 1.13.11:** [`docs/audits/ottoman-characters-naming-audit.md`](docs/audits/ottoman-characters-naming-audit.md). Vanilla Turkish name pools, rulers/heirs, starting and generated commanders, and existing mod overlap audited against 19th-century register studies and commander biographies; final proposal retains five day-one commanders by replacing Abdülkerim Nâdir with Dârendeli İzzet Mehmed Paşa. **R-12 COMPLETE; R-11 PARTIAL; IMPLEMENTED AS CANONICAL I-11 IN COMMIT `e456401`; RUNTIME SMOKE TEST PENDING.**
+- **R-11 — Character/Commander Dossier expansion:** the remaining source-of-truth research must cover (1) a selective historical roster for I-10A, (2) the iconic late Ottoman officer roster for I-10B, initially Mustafa Kemal, Enver Paşa, Kazım Karabekir and Fevzi Çakmak, (3) mandatory per-character DNA provenance/reuse classification and Victoria 3 1.13.11 compatibility, and (4) emergence-date calibration that balances historical plausibility with campaign visibility. I-10B is explicitly intentional alternate history/gameplay visibility: a roughly 1870–1890 window may be tested, but no exact emergence year is canonical before R-11 completion. Unknown-provenance DNA must be reported and not copied into implementation. **PARTIAL — RESEARCH REQUIRED BEFORE I-10A/I-10B IMPLEMENTATION.**
 
 ## Historical Companies
 
