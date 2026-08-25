@@ -34,6 +34,8 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 - **R-18 — Provincial power and centralization:** [`docs/research/R18_provincial_power_centralization.md`](docs/research/R18_provincial_power_centralization.md). Ayanlar, vali/merkez ilişkisi, doğrudan vergi denemeleri, 1858 Land Code, 1864 Vilayet Law ve eşitsiz taşra kapasitesi incelendi; map fragmentation, ayan mana ve custom provincial system reddedildi. Belgenin sonunda R-16–R-18 sentezi olarak 10 maddelik I-05 Tanzimat design requirements kaydedildi. **COMPLETE — RESEARCH ONLY; I-05 REQUIREMENTS IDENTIFIED.**
 
+- **R-20 — Post-Tanzimat political development:** [`docs/research/R20_post_tanzimat_political_development.md`](docs/research/R20_post_tanzimat_political_development.md). Late Tanzimat opposition through Kanun-i Esasi, Hamidian autocracy and Young Turks mapped onto vanilla 1.13.11 laws, movements, agitators and existing characters. **Kanuni Nizam is rejected as a custom institution**; Kanun-i Esasi maps to monarchy plus a limited voting franchise. **COMPLETE — RESEARCH ONLY; NOT IMPLEMENTED.**
+
 ## Tanzimat
 
 - **R-07 — Tanzimat / Sick Man vanilla concordance:** [`docs/research/R07_tanzimat_vanilla_concordance.md`](docs/research/R07_tanzimat_vanilla_concordance.md). Victoria 3 1.13.11 ana Sick Man JE'si, altı başlangıç objective'i, koşullu Egypt JE'si, dört-puan/30-yıl mantığı, sonuçlar, event zincirleri, DLC gate'leri ve AI ağırlıkları vanilla script ile tarihsel mekanizma karşılaştırması üzerinden denetlendi. SME-01 exact `0.5` dead zone'u statik olarak yeniden doğrulandı; hiçbir fix veya gameplay implementasyonu yapılmadı. **COMPLETE — RESEARCH ONLY; I-05/I-06 CANDIDATES IDENTIFIED; RUNTIME AI/SME TESTS PENDING.**
@@ -96,21 +98,39 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Ottomanism
 
+- **R-20 mapping:** inclusive citizenship/subjecthood, legitimacy and I-05/I-08 equality/reform routes. Not a custom movement. See [`docs/research/R20_post_tanzimat_political_development.md`](docs/research/R20_post_tanzimat_political_development.md). **RESEARCH ONLY.**
+
 ## Islamism
+
+- **R-20 mapping:** `law_millet_system`, Devout IG, `movement_religious_majority`, traditionalist/theocrat characters (including I-10A Ahmed Cevdet). Not a theocracy mandate or custom Islamist ideology. **RESEARCH ONLY.**
 
 ## Turkism
 
+- **R-20 mapping:** late `movement_cultural_majority` / `ideology_ethno_nationalist` / vanilla Enver. Do not back-project into 1836. Turan and new Turkic cultures remain deferred. **RESEARCH ONLY.**
+
 ## Young Ottomans
+
+- **R-20 + I-10A:** named window from 1865. Nâmık Kemal already implemented as ungated Intelligentsia liberal agitator (`1865.6.1–1888.12.2`). Vanilla liberal movement is blocked while Traditionalism or Peasant Levies remain. Ziyâ/Ali Suâvi remain deferred. **RESEARCH ONLY for R-20 flavor; I-10A character already shipped.**
 
 ## First Constitutional Era
 
+- **R-20:** Kanun-i Esasi (23 Dec 1876; parliament 1877–Feb 1878) maps to keeping `law_monarchy` and enacting a limited voting franchise (`law_wealth_voting` / `law_census_voting` preferred over oligarchy or universal suffrage). Vanilla Midhat already covers the constitutional grand vizier. No custom constitution law. **RESEARCH ONLY.**
+
 ## Abdulhamid II
+
+- Vanilla NA succession (`ottoman_monarchs.2`, `tur_abdulhamid_ii_osmanoglu_template`, authoritarian Landowners). Hamidian restoration maps to re-enacting `law_autocracy` after a franchise. Do not replace the succession chain. **RESEARCH ONLY for R-20 flavor.**
 
 ## Young Turks
 
+- **R-20:** named organization not before 1889; restoration not before 1908. Vanilla Enver (1906 agitator / 1908 IG leader) and Prince Sabahaddin (1899 agitator) already cover CUP-military and liberal-decentralist poles. Do not reimplement Enver. **RESEARCH ONLY.**
+
 ## Second Constitutional Era
 
+- **R-20:** 1908 restoration of the 1876 constitution; 1909 amendments are a later law-state, not a new mechanic. Optional late event only; vanilla characters/radicals may suffice. **RESEARCH ONLY.**
+
 ## CUP
+
+- Covered by vanilla Enver + late Armed Forces ethno-nationalism. No CUP institution, party object or 1836 spawn. **RESEARCH ONLY.**
 
 ## Historical Characters
 
@@ -125,6 +145,6 @@ Do not place unverified historical claims in this file. Cite sources when resear
 ## Validation & Release
 
 - **I-15 — v1.0 release validation:** [`docs/research/I15_release_validation_matrix.md`](docs/research/I15_release_validation_matrix.md). **PLAYER VISUAL / FIRST-RUNTIME CLOSED 2026-08-25.** Static `6767622`: 16 PASS / 0 FAIL. Tester 1836 visual pass: no visible bug. `sp_balkan_cohesion.1` informational PASS. I-15 fix pass **not required**. Date-gated campaigns remain NOT RUN and are not v1.0 blockers.
-- **Phase 5 release-facing polish:** [`docs/implementation/P5_v1_release_polish.md`](docs/implementation/P5_v1_release_polish.md). **COMPLETE 2026-08-25** in loc `b5315e9` and docs/metadata `08c800a`. Player-facing EN/TR text, `1.0.0` / `1.13.*` metadata, README, and changelog. Tiger `fatal 0 / error 1 / warning 10`. Gameplay unchanged. DNA/artwork/Workshop images remain optional. Canonical next work: **I-16 / I-16B runtime checklists**. R-20–R-24 remain Future v1.x. Community localization contributor support is **I-17** (formerly listed as I-16).
+- **Phase 5 release-facing polish:** [`docs/implementation/P5_v1_release_polish.md`](docs/implementation/P5_v1_release_polish.md). **COMPLETE 2026-08-25** in loc `b5315e9` and docs/metadata `08c800a`. Player-facing EN/TR text, `1.0.0` / `1.13.*` metadata, README, and changelog. Tiger `fatal 0 / error 1 / warning 10`. Gameplay unchanged. DNA/artwork/Workshop images remain optional. **R-20 research is complete** ([`docs/research/R20_post_tanzimat_political_development.md`](docs/research/R20_post_tanzimat_political_development.md)); not implemented. Canonical next work: **I-proposal from R-20 after user approval**. I-16 / I-16B runtime checklists remain pending. R-21–R-24 remain Future v1.x / not started. Community localization contributor support is **I-17** (formerly listed as I-16).
 
 ## Alternative History
