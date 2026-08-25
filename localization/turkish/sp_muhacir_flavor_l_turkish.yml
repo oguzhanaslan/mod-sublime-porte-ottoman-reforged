@@ -1,6 +1,6 @@
 ﻿l_turkish:
  sp_muhacir_flavor.1.t:0 "Miri Arazi ve Köy İddiaları"
- sp_muhacir_flavor.1.d:0 "Komisyon kâtipleri muhacir çiftlikleri için miri parselleri işaretler. Yerel köylüler otlak ve nakliyeyi kaybeder; Babiâli iskânın ne kadar sert uygulanacağına karar vermelidir."
+ sp_muhacir_flavor.1.d:0 "Komisyon kâtipleri muhacir çiftlikleri için miri parselleri işaretler. Yerel köylüler otlak ve nakliyeyi kaybeder; Bâb-ı Âli iskânın ne kadar sert uygulanacağına karar vermelidir."
  sp_muhacir_flavor.1.f:0 "Toprak devletindir; köy başka türlü hatırlar."
  sp_muhacir_flavor.1.a:0 "Köylülere tazminat ver."
  sp_muhacir_flavor.1.b:0 "Tahsisi uygula."
@@ -19,7 +19,7 @@
  sp_muhacir_flavor.3.b:0 "Koloniyi duyur."
  sp_muhacir_flavor.3.c:0 "Onları kendi hâllerine bırak."
  sp_muhacir_flavor.4.t:0 "Başkent Uyumuyor"
- sp_muhacir_flavor.4.d:0 "Son kaçıştan sonra Rumeli muhacirleri Doğu Trakya'yı doldurur. Barınma, çadır ve kalabalık başkent yığınınını sıkıştırır; bu bir ikinci iskân değil, sıkışıklıktır."
+ sp_muhacir_flavor.4.d:0 "Son kaçıştan sonra Rumeli muhacirleri Doğu Trakya'yı doldurur. Barınma, çadır ve kalabalık başkent yığınını sıkıştırır; bu bir ikinci iskân değil, sıkışıklıktır."
  sp_muhacir_flavor.4.f:0 "Şehir, kaybedilen eyaletlerden gelen her adımı duyar."
  sp_muhacir_flavor.4.a:0 "Ek çadır ve iaşe gönder."
  sp_muhacir_flavor.4.b:0 "Evleri müsadere et."
