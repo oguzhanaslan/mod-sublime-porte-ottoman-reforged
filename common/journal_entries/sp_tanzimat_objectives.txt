@@ -1,0 +1,392 @@
+﻿# I-05 narrow replacements for the vanilla 1.13.11 Tanzimat objectives.
+# The main 30-year/four-point JE and Sick Man outcome events remain vanilla.
+
+REPLACE:je_sick_man_syria = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_tanzimat
+
+	complete = {
+		owns_entire_state_region = STATE_ALEPPO
+		owns_entire_state_region = STATE_SYRIA
+		owns_entire_state_region = STATE_LEBANON
+		owns_entire_state_region = STATE_PALESTINE
+		owns_entire_state_region = STATE_TRANSJORDAN
+		owns_entire_state_region = STATE_ADANA
+	}
+
+	on_complete = {
+		custom_tooltip = je_sick_man_advance
+		change_variable = { name = sick_man_var add = 1 }
+		set_variable = completed_syria_je
+		s:STATE_SINAI = { add_claim = ROOT }
+		s:STATE_UPPER_EGYPT = { add_claim = ROOT }
+		s:STATE_MIDDLE_EGYPT = { add_claim = ROOT }
+		s:STATE_LOWER_EGYPT = { add_claim = ROOT }
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						exists = c:EGY
+						c:EGY ?= {
+							is_subject_of = ROOT
+							is_subject_type = subject_type_puppet
+						}
+					}
+					AND = {
+						owns_entire_state_region = STATE_SINAI
+						owns_entire_state_region = STATE_UPPER_EGYPT
+						owns_entire_state_region = STATE_MIDDLE_EGYPT
+						owns_entire_state_region = STATE_LOWER_EGYPT
+					}
+				}
+			}
+			set_variable = sp_completed_egypt_followup
+			custom_tooltip = sp_egypt_followup_no_tanzimat_point_tt
+		}
+		else = {
+			add_journal_entry = { type = je_sick_man_egypt }
+		}
+		custom_tooltip = sickman_syria_egypt
+	}
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	on_weekly_pulse = { events = { } }
+	transferable = no
+	weight = 5000
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+REPLACE:je_sick_man_egypt = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_tanzimat
+
+	complete = {
+		OR = {
+			AND = {
+				exists = c:EGY
+				c:EGY ?= {
+					is_subject_of = ROOT
+					is_subject_type = subject_type_puppet
+				}
+			}
+			AND = {
+				owns_entire_state_region = STATE_SINAI
+				owns_entire_state_region = STATE_UPPER_EGYPT
+				owns_entire_state_region = STATE_MIDDLE_EGYPT
+				owns_entire_state_region = STATE_LOWER_EGYPT
+			}
+		}
+	}
+
+	on_complete = {
+		set_variable = sp_completed_egypt_followup
+		custom_tooltip = sp_egypt_followup_no_tanzimat_point_tt
+	}
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+	weight = 5000
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+REPLACE:je_sick_man_economy = {
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	group = je_group_tanzimat
+
+	immediate = {
+		set_variable = { name = sp_tanzimat_sound_finance_months value = 0 }
+	}
+
+	complete = {
+		scope:journal_entry = { is_goal_complete = yes }
+		custom_tooltip = {
+			text = sp_tanzimat_sound_finance_12_months_tt
+			var:sp_tanzimat_sound_finance_months >= 12
+		}
+		any_scope_state = {
+			filter = { is_incorporated = yes }
+			market_access >= 0.90
+			percent >= 0.60
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					in_default = no
+					net_fixed_income > 0
+				}
+				change_variable = { name = sp_tanzimat_sound_finance_months add = 1 }
+			}
+			else = {
+				set_variable = { name = sp_tanzimat_sound_finance_months value = 0 }
+			}
+		}
+	}
+
+	on_complete = {
+		set_variable = completed_sick_man_economy_je
+		custom_tooltip = je_sick_man_advance
+		change_variable = { name = sick_man_var add = 1 }
+	}
+
+	current_value = { value = gdp }
+	goal_add_value = { value = gdp multiply = 0.25 }
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+	weight = 5000
+	should_be_pinned_by_default_uninvolved_or_context = yes
+	progressbar = yes
+}
+
+REPLACE:je_sick_man_education = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	group = je_group_tanzimat
+
+	complete = {
+		NOT = { has_law_or_variant = law_type:law_no_schools }
+		institution_investment_level = {
+			institution = institution_schools
+			value >= 2
+		}
+		any_scope_building = {
+			is_building_type = building_university
+			occupancy >= 0.80
+			level >= 2
+		}
+		scope:journal_entry = { is_goal_complete = yes }
+	}
+
+	on_complete = {
+		set_variable = completed_sick_man_education_je
+		custom_tooltip = je_sick_man_advance
+		change_variable = { name = sick_man_var add = 1 }
+	}
+
+	current_value = { value = root.literacy_rate }
+	goal_add_value = { add = 0.10 }
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+	weight = 5000
+	should_be_pinned_by_default_uninvolved_or_context = yes
+	progressbar = yes
+}
+
+REPLACE:je_sick_man_separatism = {
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	group = je_group_tanzimat
+
+	complete = {
+		scope:journal_entry = { is_goal_complete = yes }
+		highest_secession_progress < 0.5
+	}
+
+	on_complete = {
+		set_variable = completed_separatism_sick_man_je
+		custom_tooltip = je_sick_man_advance
+		change_variable = { name = sick_man_var add = 1 }
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = { highest_secession_progress < 0.5 }
+				change_variable = { name = sick_man_separatist_var add = 1 }
+				if = {
+					limit = {
+						OR = {
+							has_modifier = equality_under_the_law
+							has_law_or_variant = law_type:law_racial_segregation
+							has_law_or_variant = law_type:law_cultural_exclusion
+							has_law_or_variant = law_type:law_multicultural
+							AND = {
+								OR = {
+									institution_investment_level = {
+										institution = institution_police
+										value >= 2
+									}
+									institution_investment_level = {
+										institution = institution_home_affairs
+										value >= 2
+									}
+								}
+								any_scope_state = {
+									filter = { is_incorporated = yes }
+									has_building = building_government_administration
+									percent >= 0.50
+								}
+							}
+						}
+					}
+					change_variable = { name = sick_man_separatist_var add = 1 }
+				}
+			}
+		}
+		random_events = {
+			100 = 0
+			10 = tanzimat_events.5
+		}
+	}
+
+	fail = { highest_secession_progress > 0.5 }
+
+	on_fail = {
+		set_variable = failed_sick_man_separatism
+		if = {
+			limit = {
+				c:TUR ?= this
+				has_dlc_feature = ip3_content
+				NOT = { has_global_variable = eastern_crisis_happened }
+			}
+			add_contextless_journal_entry = je_great_eastern_crisis
+		}
+	}
+
+	current_value = { value = var:sick_man_separatist_var }
+	goal_add_value = { add = 120 }
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+	weight = 5000
+	should_be_pinned_by_default_uninvolved_or_context = yes
+	progressbar = yes
+}
+
+REPLACE:je_sick_man_army = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_tanzimat
+
+	complete = {
+		has_technology_researched = napoleonic_warfare
+		NOT = { has_law_or_variant = law_type:law_peasant_levies }
+		any_scope_building = {
+			filter = { is_building_type = building_barrack }
+			NOR = {
+				building_has_goods_shortage = yes
+				has_active_production_method = pm_no_organization
+			}
+			percent = 1
+		}
+		NOT = {
+			any_military_formation = {
+				filter = { is_army = yes }
+				any_combat_unit = {
+					has_unit_type = unit_type:combat_unit_type_irregular_infantry
+				}
+			}
+		}
+	}
+
+	on_complete = {
+		set_variable = completed_sick_man_army_je
+		custom_tooltip = je_sick_man_advance
+		change_variable = { name = sick_man_var add = 1 }
+	}
+
+	on_monthly_pulse = { events = { tanzimat_events.10 } }
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+	should_be_pinned_by_default_uninvolved_or_context = yes
+	weight = 5000
+}
+
+REPLACE:je_sick_man_bureaucracy = {
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	group = je_group_tanzimat
+
+	immediate = {
+		set_variable = { name = sp_tanzimat_funded_administration_months value = 0 }
+	}
+
+	complete = {
+		NOT = { has_law_or_variant = law_type:law_hereditary_bureaucrats }
+		NOT = { has_law_or_variant = law_type:law_land_based_taxation }
+		custom_tooltip = {
+			text = sp_tanzimat_funded_administration_12_months_tt
+			var:sp_tanzimat_funded_administration_months >= 12
+		}
+		any_scope_state = {
+			filter = { is_incorporated = yes }
+			has_building = building_government_administration
+			tax_capacity >= tax_capacity_usage
+			percent >= 0.50
+		}
+	}
+
+	on_complete = {
+		set_variable = completed_sick_man_bureaucracy_je
+		custom_tooltip = je_sick_man_advance
+		change_variable = { name = sick_man_var add = 1 }
+		remove_modifier = outmoded_bureaucracy
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					bureaucracy > 0
+					approaching_bureaucracy_shortage = no
+				}
+				change_variable = { name = sp_tanzimat_funded_administration_months add = 1 }
+			}
+			else = {
+				set_variable = { name = sp_tanzimat_funded_administration_months value = 0 }
+			}
+		}
+		random_events = {
+			100 = 0
+			10 = tanzimat_events.9
+		}
+	}
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+	weight = 5000
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

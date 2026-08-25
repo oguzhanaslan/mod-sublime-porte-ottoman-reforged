@@ -1,3 +1,13 @@
 ﻿l_turkish:
  sp_mod_name: "Sublime Porte: Ottoman Reforged"
  sp_mod_description: "Osmanlı İmparatorluğu için tarihsel, derin, dengeli ve ilgi çekici bir kapsamlı yenileme ve içerik modu."
+ sp_egypt_followup_no_tanzimat_point_tt: "Mısır takip hedefi tamamlanır ancak ilave bir Tanzimat hedef puanı kazandırmaz."
+ sp_tanzimat_sound_finance_12_months_tt: "Temerrüde düşmeden 12 ay boyunca kesintisiz pozitif sabit millî gelir sürdür."
+ sp_tanzimat_funded_administration_12_months_tt: "Bürokrasi kıtlığına yaklaşmadan 12 ay boyunca kesintisiz pozitif Bürokrasi sürdür."
+ je_sick_man_egypt: "Mısır Meselesi"
+ je_sick_man_egypt_reason: "Suriye'de hâkimiyet yeniden kurulduktan sonra Mısır, Osmanlı egemenliği açısından isteğe bağlı bir mesele olarak kalır. Bu meselenin çözülmesi ilave bir Tanzimat hedef puanı kazandırmaz."
+ sickman_syria_egypt: "Aşağı Mısır, Orta Mısır, Yukarı Mısır ve Sina üzerindeki hak iddiaları yenilendi. Mısır takip hedefinin çözülmesi ilave bir Tanzimat hedef puanı kazandırmaz."
+ je_sick_man_economy: "Tanzimat: İktisadi Reform"
+ je_sick_man_economy_reason: "Daha güçlü bir Osmanlı ekonomisi sürekli büyüme, sağlam kamu maliyesi ve ilhak edilmiş vilayetlerle millî pazar arasında güvenilir erişim gerektirir."
+ je_sick_man_education_goal: "Okuryazarlığı bu hedef başladığındaki seviyesinden 10 yüzde puan artır."
+ je_sick_man_separatism_goal: "Ayrılık tehlikesini 10 yıl boyunca düşük tut veya uygun bir eşitlik ya da zorlayıcı idare yolu izlerken bunu 5 yıl boyunca sürdür."

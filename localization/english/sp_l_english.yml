@@ -1,3 +1,13 @@
 ﻿l_english:
  sp_mod_name: "Sublime Porte: Ottoman Reforged"
  sp_mod_description: "A historical, deep, balanced, and engaging overhaul and flavor mod for the Ottoman Empire."
+ sp_egypt_followup_no_tanzimat_point_tt: "The Egyptian follow-up is completed, but does not grant an additional Tanzimat objective point."
+ sp_tanzimat_sound_finance_12_months_tt: "Maintain a positive fixed national income while not in default for 12 consecutive months."
+ sp_tanzimat_funded_administration_12_months_tt: "Maintain positive Bureaucracy without approaching a Bureaucracy shortage for 12 consecutive months."
+ je_sick_man_egypt: "The Egyptian Question"
+ je_sick_man_egypt_reason: "With Syria restored, Egypt remains an optional question of Ottoman sovereignty. Resolving it does not grant another Tanzimat objective point."
+ sickman_syria_egypt: "Claims on Lower Egypt, Middle Egypt, Upper Egypt, and Sinai have been restored. Resolving the Egyptian follow-up does not grant another Tanzimat objective point."
+ je_sick_man_economy: "Tanzimat: Economic Reform"
+ je_sick_man_economy_reason: "A stronger Ottoman economy requires sustained growth, sound public finances, and reliable access between the incorporated provinces and the national market."
+ je_sick_man_education_goal: "Increase literacy by 10 percentage points from its level when this objective began."
+ je_sick_man_separatism_goal: "Maintain safety from secession for 10 years, or for 5 years while pursuing a qualifying equality or coercive-administration path."

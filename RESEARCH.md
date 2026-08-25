@@ -22,9 +22,19 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Government & Centralization
 
+- **R-16 — Ottoman institutional modernization:** [`docs/research/R16_institutional_modernization.md`](docs/research/R16_institutional_modernization.md). 1836–1876 merkezi bürokrasi, maliye/vergi, eğitim, ordu ve altyapı/devlet kapasitesi yalnız doğrulanmış vanilla law/institution/building/technology/JE-event karşılıklarıyla eşleştirildi. **COMPLETE — RESEARCH ONLY; I-05 REQUIREMENTS IDENTIFIED.**
+
+- **R-18 — Provincial power and centralization:** [`docs/research/R18_provincial_power_centralization.md`](docs/research/R18_provincial_power_centralization.md). Ayanlar, vali/merkez ilişkisi, doğrudan vergi denemeleri, 1858 Land Code, 1864 Vilayet Law ve eşitsiz taşra kapasitesi incelendi; map fragmentation, ayan mana ve custom provincial system reddedildi. Belgenin sonunda R-16–R-18 sentezi olarak 10 maddelik I-05 Tanzimat design requirements kaydedildi. **COMPLETE — RESEARCH ONLY; I-05 REQUIREMENTS IDENTIFIED.**
+
 ## Tanzimat
 
+- **R-07 — Tanzimat / Sick Man vanilla concordance:** [`docs/research/R07_tanzimat_vanilla_concordance.md`](docs/research/R07_tanzimat_vanilla_concordance.md). Victoria 3 1.13.11 ana Sick Man JE'si, altı başlangıç objective'i, koşullu Egypt JE'si, dört-puan/30-yıl mantığı, sonuçlar, event zincirleri, DLC gate'leri ve AI ağırlıkları vanilla script ile tarihsel mekanizma karşılaştırması üzerinden denetlendi. SME-01 exact `0.5` dead zone'u statik olarak yeniden doğrulandı; hiçbir fix veya gameplay implementasyonu yapılmadı. **COMPLETE — RESEARCH ONLY; I-05/I-06 CANDIDATES IDENTIFIED; RUNTIME AI/SME TESTS PENDING.**
+
+- **I-05 Tanzimat objective gameplay design (user-requested R19 filename):** [`docs/research/R19_tanzimat_gameplay_design.md`](docs/research/R19_tanzimat_gameplay_design.md). R-07/R-16/R-17/R-18 source-of-truth senteziyle altı objective için engine-doğrulanmış exact completion sözleşmesi ve statik kalibrasyon çıkarıldı; onaylanan sözleşme [`I05_tanzimat_objective_rework.md`](docs/implementation/I05_tanzimat_objective_rework.md) ile uygulandı. Canonical roadmap'taki R-19 historical companies/institutions kaydı değiştirilmedi. **APPROVED AND IMPLEMENTED AS I-05; TIGER CLEAN FOR I-05; MANUAL RUNTIME CALIBRATION PENDING.**
+
 ## Millet System
+
+- **R-17 — Millet, equality and Ottoman subjecthood:** [`docs/research/R17_millet_equality.md`](docs/research/R17_millet_equality.md). 1836 millet düzeni, Gülhane, 1856 Islahat, Müslim/gayrimüslim eşitliği, askerlik/vergi ve 1869 citizenship dönüşümü mevcut discrimination, law, institution, movement ve Tanzimat event sistemleriyle eşleştirildi; custom millet institution/currency reddedildi. **COMPLETE — RESEARCH ONLY; I-05 REQUIREMENTS IDENTIFIED.**
 
 ## Army
 
