@@ -1,0 +1,6 @@
+﻿# I-21 timed IG-approval flavor only. Accommodate path; 365 days (very_short_modifier_time).
+
+sp_i21_local_accommodation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_landowners_approval_add = 2
+}

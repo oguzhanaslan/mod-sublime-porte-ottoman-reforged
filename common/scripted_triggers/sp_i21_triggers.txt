@@ -1,0 +1,73 @@
+﻿# I-21 Kurdish provincial centralization. Read-only I-05 / vanilla centralization signals.
+
+sp_i21_is_eastern_core_state = {
+	OR = {
+		state_region = s:STATE_DIYARBAKIR
+		state_region = s:STATE_MOSUL
+	}
+}
+
+sp_i21_arc_active = {
+	c:TUR ?= this
+	NOT = { has_variable = sp_i21_arc_closed }
+	game_date >= 1836.1.1
+	game_date < 1851.1.1
+}
+
+sp_i21_centralization_pressure = {
+	OR = {
+		has_variable = completed_sick_man_bureaucracy_je
+		var:sp_tanzimat_funded_administration_months >= 12
+		AND = {
+			NOT = { has_law_or_variant = law_type:law_hereditary_bureaucrats }
+			NOT = { has_law_or_variant = law_type:law_land_based_taxation }
+			any_scope_state = {
+				sp_i21_is_eastern_core_state = yes
+				is_incorporated = yes
+				tax_capacity >= tax_capacity_usage
+				has_building = building_government_administration
+			}
+		}
+		AND = {
+			OR = {
+				institution_investment_level = {
+					institution = institution_police
+					value >= 2
+				}
+				institution_investment_level = {
+					institution = institution_home_affairs
+					value >= 2
+				}
+			}
+			any_scope_state = {
+				sp_i21_is_eastern_core_state = yes
+				is_incorporated = yes
+			}
+		}
+		is_enacting_law = law_type:law_appointed_bureaucrats
+		is_enacting_law = law_type:law_per_capita_based_taxation
+		is_enacting_law = law_type:law_proportional_taxation
+		is_enacting_law = law_type:law_graduated_taxation
+		is_enacting_law = law_type:law_consumption_based_taxation
+	}
+}
+
+sp_i21_has_eastern_admin_capacity = {
+	any_scope_state = {
+		state_region = s:STATE_DIYARBAKIR
+		is_incorporated = yes
+		tax_capacity >= tax_capacity_usage
+		has_building = building_government_administration
+	}
+}
+
+sp_i21_eastern_stable = {
+	any_scope_state = {
+		state_region = s:STATE_DIYARBAKIR
+		is_incorporated = yes
+		turmoil < 0.10
+		tax_capacity >= tax_capacity_usage
+		has_building = building_government_administration
+	}
+	highest_secession_progress < 0.15
+}
