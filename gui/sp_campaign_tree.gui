@@ -14,7 +14,20 @@ widget = {
 	size = { 100% 100% }
 	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
 
-	sp_campaign_tree_window = {}
+	# CMF scripted-widget shell: top margin + expanding host (com_gui_international_organizations_panel pattern).
+	vbox = {
+		parentanchor = top|left
+		layoutpolicy_horizontal = expanding
+		layoutpolicy_vertical = expanding
+		margin_top = 85
+
+		widget = {
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+
+			sp_campaign_tree_window = {}
+		}
+	}
 }
 
 types sp_campaign_tree_types {
@@ -26,9 +39,11 @@ types sp_campaign_tree_types {
 		using = clickthrough_blocker
 
 		visible = "[GetVariableSystem.HasValue('com_open_window', 'gui_sidebar_sp_campaign_tree')]"
+		alpha = 0
 
 		state = {
 			name = _show
+			trigger_on_create = yes
 			alpha = 1
 			duration = 0
 			on_start = "[InformationPanelBar.ClosePanel]"
@@ -108,12 +123,14 @@ types sp_campaign_tree_types {
 					using = dark_area
 					alpha = 0.28
 				}
-				icon = {
+				widget = {
 					size = { 100% 4 }
 					parentanchor = bottom
-					texture = "gfx/interface/backgrounds/divider_gold.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
+					background = {
+						texture = "gfx/interface/backgrounds/divider_gold.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+					}
 				}
 
 				back_button_large = {
@@ -158,8 +175,9 @@ types sp_campaign_tree_types {
 				spacing = 12
 
 				scrollarea = {
-					size = { 67% 100% }
+					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = expanding
+					size = { -1 100% }
 					scrollbarpolicy_horizontal = as_needed
 					scrollbar_horizontal = { using = horizontal_scrollbar }
 					scrollbar_vertical = { using = vertical_scrollbar }
@@ -851,8 +869,9 @@ types sp_campaign_tree_types {
 				}
 
 				widget = {
-					size = { 33% 100% }
+					size = { 520 100% }
 					layoutpolicy_vertical = expanding
+					minimumsize = { 440 -1 }
 					background = {
 						using = dark_area
 						alpha = 0.42
