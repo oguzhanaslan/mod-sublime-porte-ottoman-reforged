@@ -1,0 +1,316 @@
+﻿namespace = sp_i31i
+
+# 2 — Pan-Islamic Unity opened.
+sp_i31i.2 = {
+	type = country_event
+	placement = root
+	title = sp_i31i.2.t
+	desc = sp_i31i.2.d
+	flavor = sp_i31i.2.f
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+	event_image = {
+		video = "middleeast_islam"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		always = yes
+	}
+
+	option = {
+		name = sp_i31i.2.a
+		default_option = yes
+		custom_tooltip = sp_i31i.2.a_tt
+	}
+}
+
+# 10 — Stage 1 → Stage 2 Arabia claims.
+sp_i31i.10 = {
+	type = country_event
+	placement = root
+	title = sp_i31i.10.t
+	desc = sp_i31i.10.d
+	flavor = sp_i31i.10.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+	event_image = {
+		video = "middleeast_islam"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		var:sp_islamism_stage = 1
+		NOT = { has_variable = sp_islamism_stage_1_done }
+		sp_i31_islamism_stage_1_complete = yes
+	}
+
+	immediate = {
+		set_variable = sp_islamism_stage_1_done
+		set_variable = {
+			name = sp_islamism_stage
+			value = 2
+		}
+		set_variable = {
+			name = sp_islamism_stage_goal
+			value = 4
+		}
+		sp_i31_grant_arabia_claims = yes
+		sp_i31_apply_isolation_tier = yes
+		sp_i31_islamism_recount_progress = yes
+	}
+
+	option = {
+		name = sp_i31i.10.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i31_stage_complete_prestige
+			months = 60
+		}
+	}
+}
+
+# 11 — Stage 2 → Stage 3 Nile/Maghreb.
+sp_i31i.11 = {
+	type = country_event
+	placement = root
+	title = sp_i31i.11.t
+	desc = sp_i31i.11.d
+	flavor = sp_i31i.11.f
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		var:sp_islamism_stage = 2
+		NOT = { has_variable = sp_islamism_stage_2_done }
+		sp_i31_islamism_stage_2_complete = yes
+	}
+
+	immediate = {
+		set_variable = sp_islamism_stage_2_done
+		set_variable = {
+			name = sp_islamism_stage
+			value = 3
+		}
+		set_variable = {
+			name = sp_islamism_stage_goal
+			value = 7
+		}
+		sp_i31_grant_stage_3_claims = yes
+		sp_i31_apply_isolation_tier = yes
+		sp_i31_islamism_recount_progress = yes
+	}
+
+	option = {
+		name = sp_i31i.11.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i31_stage_complete_prestige
+			months = 60
+		}
+		custom_tooltip = sp_i31i.11.a_tt
+	}
+}
+
+# 12 — Stage 3 → Stage 4 Protector.
+sp_i31i.12 = {
+	type = country_event
+	placement = root
+	title = sp_i31i.12.t
+	desc = sp_i31i.12.d
+	flavor = sp_i31i.12.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+	event_image = {
+		video = "middleeast_islam"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		var:sp_islamism_stage = 3
+		NOT = { has_variable = sp_islamism_stage_3_done }
+		sp_i31_islamism_stage_3_complete = yes
+	}
+
+	immediate = {
+		set_variable = sp_islamism_stage_3_done
+		set_variable = {
+			name = sp_islamism_stage
+			value = 4
+		}
+		set_variable = {
+			name = sp_islamism_stage_goal
+			value = 8
+		}
+		sp_i31_apply_isolation_tier = yes
+		sp_i31_islamism_recount_progress = yes
+	}
+
+	option = {
+		name = sp_i31i.12.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i31_stage_complete_prestige
+			months = 60
+		}
+	}
+}
+
+# 20 — Great Caliphate final.
+sp_i31i.20 = {
+	type = country_event
+	placement = root
+	title = sp_i31i.20.t
+	desc = sp_i31i.20.d
+	flavor = sp_i31i.20.f
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 7
+	event_image = {
+		video = "middleeast_islam"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		var:sp_islamism_stage = 4
+		NOT = { has_variable = sp_islamism_stage_4_done }
+		sp_i31_islamism_stage_4_complete = yes
+	}
+
+	immediate = {
+		set_variable = sp_islamism_stage_4_done
+		set_variable = {
+			name = sp_islamism_stage
+			value = 5
+		}
+		sp_i31_finalize_great_caliphate_reward = yes
+	}
+
+	option = {
+		name = sp_i31i.20.a
+		default_option = yes
+		custom_tooltip = sp_i31i.20.a_tt
+	}
+}
+
+# 30 — The Caliph Calls (TUR notification).
+sp_i31i.30 = {
+	type = country_event
+	placement = root
+	title = sp_i31i.30.t
+	desc = sp_i31i.30.d
+	flavor = sp_i31i.30.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+	event_image = {
+		video = "middleeast_islam"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		always = yes
+	}
+
+	option = {
+		name = sp_i31i.30.a
+		default_option = yes
+		custom_tooltip = sp_i31i.30.a_tt
+	}
+}
+
+# 31 — The Caliph Calls (eligible Muslim country response).
+sp_i31i.31 = {
+	type = country_event
+	placement = root
+	title = sp_i31i.31.t
+	desc = sp_i31i.31.d
+	flavor = sp_i31i.31.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 14
+	event_image = {
+		video = "middleeast_islam"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		exists = c:TUR
+		sp_i31_is_muslim_country = yes
+		is_subject = no
+		NOT = { THIS = c:TUR }
+	}
+
+	option = {
+		name = sp_i31i.31.a
+		default_option = yes
+		change_relations = {
+			country = c:TUR
+			value = 20
+		}
+		c:TUR ?= {
+			add_modifier = {
+				name = sp_i31_caliph_support_prestige
+				months = 24
+			}
+		}
+		custom_tooltip = sp_i31i.31.a_tt
+		ai_chance = {
+			base = 40
+			modifier = {
+				trigger = {
+					relations:c:TUR >= 20
+				}
+				add = 20
+			}
+			modifier = {
+				trigger = {
+					OR = {
+						is_in_same_power_bloc = c:TUR
+						any_scope_treaty = {
+							binds = c:TUR
+							any_scope_article = {
+								OR = {
+									has_type = alliance
+									has_type = defensive_pact
+								}
+							}
+						}
+					}
+				}
+				add = 25
+			}
+		}
+	}
+
+	option = {
+		name = sp_i31i.31.b
+		custom_tooltip = sp_i31i.31.b_tt
+		ai_chance = {
+			base = 40
+		}
+	}
+
+	option = {
+		name = sp_i31i.31.c
+		change_relations = {
+			country = c:TUR
+			value = -10
+		}
+		custom_tooltip = sp_i31i.31.c_tt
+		ai_chance = {
+			base = 20
+			modifier = {
+				trigger = {
+					relations:c:TUR < 0
+				}
+				add = 20
+			}
+		}
+	}
+}

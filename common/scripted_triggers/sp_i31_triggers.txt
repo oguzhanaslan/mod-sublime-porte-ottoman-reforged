@@ -1,0 +1,234 @@
+﻿# I-31 Ottomanism & Islamism — scripted triggers.
+# Reads I-28 identity vars and I-18 constitutional helper. Does not edit I-28.
+
+sp_i31_post_tanzimat = {
+	OR = {
+		has_variable = sick_man_complete
+		sp_i18_has_domestic_tanzimat_reform = yes
+		has_variable = completed_sick_man_bureaucracy_je
+		has_variable = completed_sick_man_education_je
+		has_variable = completed_sick_man_army_je
+		has_variable = completed_sick_man_economy_je
+		has_variable = completed_separatism_sick_man_je
+	}
+}
+
+sp_i31_ottomanism_eligible = {
+	c:TUR ?= this
+	has_variable = sp_ottomanism_selected
+	sp_i31_post_tanzimat = yes
+	NOT = { has_variable = sp_ottomanism_ideal_complete }
+}
+
+sp_i31_islamism_eligible = {
+	c:TUR ?= this
+	has_variable = sp_islamism_selected
+	sp_i31_post_tanzimat = yes
+	NOT = { has_variable = sp_great_caliphate_complete }
+	OR = {
+		has_law = law_type:law_millet_system
+		has_law = law_type:law_people_of_the_book
+		has_law = law_type:law_state_religion
+		country_has_state_religion = rel:sunni
+	}
+}
+
+sp_i31_inclusive_citizenship = {
+	OR = {
+		has_law_or_variant = law_type:law_racial_segregation
+		has_law_or_variant = law_type:law_cultural_exclusion
+		has_law_or_variant = law_type:law_multicultural
+	}
+	NOR = {
+		has_law_or_variant = law_type:law_ethnostate
+		has_law_or_variant = law_type:law_national_supremacy
+		has_law_or_variant = law_type:law_subjecthood
+	}
+}
+
+sp_i31_civic_church = {
+	OR = {
+		has_law_or_variant = law_type:law_freedom_of_conscience
+		has_law_or_variant = law_type:law_total_separation
+	}
+}
+
+sp_i31_press_opening = {
+	OR = {
+		has_law_or_variant = law_type:law_right_of_assembly
+		has_law_or_variant = law_type:law_protected_speech
+	}
+}
+
+# Stage 2 still allows landed voting.
+sp_i31_constitutional_any_franchise = {
+	sp_i18_has_constitutional_government = yes
+}
+
+# Stage 4 / Final democratic gate — landed alone insufficient.
+sp_i31_democratic_franchise = {
+	has_law = law_type:law_monarchy
+	OR = {
+		has_law_or_variant = law_type:law_wealth_voting
+		has_law_or_variant = law_type:law_census_voting
+		has_law_or_variant = law_type:law_universal_suffrage
+	}
+}
+
+sp_i31_modern_institutions = {
+	OR = {
+		institution_investment_level = {
+			institution = institution_schools
+			value >= 2
+		}
+		institution_investment_level = {
+			institution = institution_police
+			value >= 2
+		}
+		institution_investment_level = {
+			institution = institution_home_affairs
+			value >= 2
+		}
+	}
+}
+
+sp_i31_ottomanism_stage_1_complete = {
+	sp_i31_inclusive_citizenship = yes
+	sp_i31_civic_church = yes
+}
+
+sp_i31_ottomanism_stage_2_complete = {
+	sp_i31_constitutional_any_franchise = yes
+	sp_i31_press_opening = yes
+	government_legitimacy >= 50
+}
+
+sp_i31_ottomanism_stage_3_complete = {
+	sp_i31_inclusive_citizenship = yes
+	highest_secession_progress < 0.20
+	NOT = {
+		any_scope_state = {
+			is_incorporated = yes
+			turmoil >= 0.25
+		}
+	}
+}
+
+sp_i31_ottomanism_stage_4_complete = {
+	sp_i31_democratic_franchise = yes
+	sp_i31_inclusive_citizenship = yes
+	country_rank >= rank_value:great_power
+	literacy_rate >= 0.35
+	sp_i31_modern_institutions = yes
+	government_legitimacy >= 60
+}
+
+sp_i31_islamism_stage_1_complete = {
+	country_or_subject_owns_entire_state_region = STATE_EASTERN_THRACE
+	country_or_subject_owns_entire_state_region = STATE_HEDJAZ
+	has_law = law_type:law_monarchy
+	OR = {
+		has_law = law_type:law_millet_system
+		has_law = law_type:law_people_of_the_book
+		has_law = law_type:law_state_religion
+	}
+	government_legitimacy >= 50
+}
+
+sp_i31_islamism_stage_2_complete = {
+	country_or_subject_owns_entire_state_region = STATE_HEDJAZ
+	country_or_subject_owns_entire_state_region = STATE_NEJD
+	country_or_subject_owns_entire_state_region = STATE_HAIL
+	country_or_subject_owns_entire_state_region = STATE_YEMEN
+}
+
+sp_i31_islamism_sudan_count_ge_2 = {
+	OR = {
+		AND = {
+			country_or_subject_owns_entire_state_region = STATE_DONGOLA
+			country_or_subject_owns_entire_state_region = STATE_KORDOFAN
+		}
+		AND = {
+			country_or_subject_owns_entire_state_region = STATE_DONGOLA
+			country_or_subject_owns_entire_state_region = STATE_BLUE_NILE
+		}
+		AND = {
+			country_or_subject_owns_entire_state_region = STATE_KORDOFAN
+			country_or_subject_owns_entire_state_region = STATE_BLUE_NILE
+		}
+	}
+}
+
+sp_i31_islamism_stage_3_complete = {
+	country_or_subject_owns_entire_state_region = STATE_LOWER_EGYPT
+	country_or_subject_owns_entire_state_region = STATE_UPPER_EGYPT
+	country_or_subject_owns_entire_state_region = STATE_SINAI
+	sp_i31_islamism_sudan_count_ge_2 = yes
+	country_or_subject_owns_entire_state_region = STATE_TRIPOLI
+	country_or_subject_owns_entire_state_region = STATE_TUNISIA
+}
+
+sp_i31_is_muslim_country = {
+	OR = {
+		country_has_state_religion = rel:sunni
+		country_has_state_religion = rel:shiite
+		country_has_state_religion = rel:ibadi
+	}
+}
+
+sp_i31_is_christian_country = {
+	religion = {
+		has_discrimination_trait = heritage_christian
+	}
+}
+
+# Meaningful geopolitical alignment only (no relations-only).
+sp_i31_muslim_aligned_with_tur = {
+	NOT = { THIS = ROOT }
+	sp_i31_is_muslim_country = yes
+	OR = {
+		is_subject_of = ROOT
+		any_scope_treaty = {
+			binds = ROOT
+			any_scope_article = {
+				has_type = alliance
+			}
+		}
+		any_scope_treaty = {
+			binds = ROOT
+			any_scope_article = {
+				has_type = defensive_pact
+			}
+		}
+		AND = {
+			is_in_same_power_bloc = ROOT
+			ROOT = {
+				is_power_bloc_leader = yes
+			}
+		}
+	}
+}
+
+sp_i31_islamism_stage_4_complete = {
+	any_country = {
+		sp_i31_muslim_aligned_with_tur = yes
+		count >= 8
+	}
+}
+
+sp_i31_at_war_vs_christian_gp = {
+	is_at_war = yes
+	any_country = {
+		country_rank >= rank_value:great_power
+		sp_i31_is_christian_country = yes
+		has_war_with = ROOT
+	}
+}
+
+sp_i31_eligible_caliph_call_target = {
+	NOT = { THIS = c:TUR }
+	is_subject = no
+	sp_i31_is_muslim_country = yes
+	NOT = { has_war_with = c:TUR }
+	NOT = { has_variable = sp_caliph_call_received }
+}

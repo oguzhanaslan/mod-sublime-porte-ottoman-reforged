@@ -1,0 +1,549 @@
+﻿# I-31 Ottomanism & Islamism — claims, progress, JE add, Caliph Calls, isolation.
+
+sp_i31_try_add_ottomanism_je = {
+	if = {
+		limit = {
+			sp_i31_ottomanism_eligible = yes
+			NOT = { has_journal_entry = sp_je_ottomanism }
+		}
+		add_journal_entry = {
+			type = sp_je_ottomanism
+		}
+	}
+}
+
+sp_i31_try_add_islamism_je = {
+	if = {
+		limit = {
+			sp_i31_islamism_eligible = yes
+			NOT = { has_journal_entry = sp_je_pan_islamic_unity }
+		}
+		add_journal_entry = {
+			type = sp_je_pan_islamic_unity
+		}
+	}
+}
+
+sp_i31_try_add_identity_jes = {
+	sp_i31_try_add_ottomanism_je = yes
+	sp_i31_try_add_islamism_je = yes
+}
+
+### Ottomanism claim: none.
+
+sp_i31_ottomanism_recount_progress = {
+	set_variable = {
+		name = sp_ottomanism_stage_progress
+		value = 0
+	}
+	if = {
+		limit = { var:sp_ottomanism_stage = 1 }
+		if = {
+			limit = { sp_i31_inclusive_citizenship = yes }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { sp_i31_civic_church = yes }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+	}
+	else_if = {
+		limit = { var:sp_ottomanism_stage = 2 }
+		if = {
+			limit = { sp_i31_constitutional_any_franchise = yes }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { sp_i31_press_opening = yes }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { government_legitimacy >= 50 }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+	}
+	else_if = {
+		limit = { var:sp_ottomanism_stage = 3 }
+		if = {
+			limit = { sp_i31_ottomanism_stage_3_complete = yes }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+	}
+	else_if = {
+		limit = { var:sp_ottomanism_stage = 4 }
+		if = {
+			limit = { sp_i31_democratic_franchise = yes }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { sp_i31_inclusive_citizenship = yes }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_rank >= rank_value:great_power }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { literacy_rate >= 0.35 }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { sp_i31_modern_institutions = yes }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { government_legitimacy >= 60 }
+			change_variable = { name = sp_ottomanism_stage_progress add = 1 }
+		}
+	}
+}
+
+sp_i31_finalize_ottomanism_reward = {
+	set_variable = sp_ottomanism_ideal_complete
+	set_variable = {
+		name = sp_ottomanism_stage
+		value = 6
+	}
+	add_modifier = {
+		name = sp_ottoman_constitutional_empire
+		months = -1
+	}
+}
+
+### Islamism claims
+
+sp_i31_grant_arabia_claims = {
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_HEDJAZ
+				country_or_subject_owns_entire_state_region = STATE_HEDJAZ
+			}
+		}
+		s:STATE_HEDJAZ = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_NEJD
+				country_or_subject_owns_entire_state_region = STATE_NEJD
+			}
+		}
+		s:STATE_NEJD = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_HAIL
+				country_or_subject_owns_entire_state_region = STATE_HAIL
+			}
+		}
+		s:STATE_HAIL = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_YEMEN
+				country_or_subject_owns_entire_state_region = STATE_YEMEN
+			}
+		}
+		s:STATE_YEMEN = { add_claim = ROOT }
+	}
+}
+
+sp_i31_grant_stage_3_claims = {
+	# Always-attempt Darfur (base claim #5)
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_DARFUR
+				country_or_subject_owns_entire_state_region = STATE_DARFUR
+			}
+		}
+		s:STATE_DARFUR = { add_claim = ROOT }
+	}
+	# Conditional Nile/Sudan — only if outside TUR/subject control
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_LOWER_EGYPT
+				country_or_subject_owns_entire_state_region = STATE_LOWER_EGYPT
+			}
+		}
+		s:STATE_LOWER_EGYPT = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_UPPER_EGYPT
+				country_or_subject_owns_entire_state_region = STATE_UPPER_EGYPT
+			}
+		}
+		s:STATE_UPPER_EGYPT = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_SINAI
+				country_or_subject_owns_entire_state_region = STATE_SINAI
+			}
+		}
+		s:STATE_SINAI = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_DONGOLA
+				country_or_subject_owns_entire_state_region = STATE_DONGOLA
+			}
+		}
+		s:STATE_DONGOLA = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_KORDOFAN
+				country_or_subject_owns_entire_state_region = STATE_KORDOFAN
+			}
+		}
+		s:STATE_KORDOFAN = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_BLUE_NILE
+				country_or_subject_owns_entire_state_region = STATE_BLUE_NILE
+			}
+		}
+		s:STATE_BLUE_NILE = { add_claim = ROOT }
+	}
+}
+
+sp_i31_islamism_recount_progress = {
+	set_variable = {
+		name = sp_islamism_stage_progress
+		value = 0
+	}
+	if = {
+		limit = { var:sp_islamism_stage = 1 }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_EASTERN_THRACE }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_HEDJAZ }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+	}
+	else_if = {
+		limit = { var:sp_islamism_stage = 2 }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_HEDJAZ }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_NEJD }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_HAIL }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_YEMEN }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+	}
+	else_if = {
+		limit = { var:sp_islamism_stage = 3 }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_LOWER_EGYPT }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_UPPER_EGYPT }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_SINAI }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_DONGOLA }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_KORDOFAN }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_BLUE_NILE }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_TRIPOLI }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_TUNISIA }
+			change_variable = { name = sp_islamism_stage_progress add = 1 }
+		}
+	}
+	else_if = {
+		limit = { var:sp_islamism_stage = 4 }
+		every_country = {
+			limit = {
+				sp_i31_muslim_aligned_with_tur = yes
+			}
+			ROOT = {
+				change_variable = { name = sp_islamism_stage_progress add = 1 }
+			}
+		}
+	}
+}
+
+sp_i31_apply_isolation_tier = {
+	# Progressive soft diplomatic cost via reputation modifiers only.
+	if = {
+		limit = {
+			has_modifier = sp_i31_isolation_s2
+		}
+		remove_modifier = sp_i31_isolation_s2
+	}
+	if = {
+		limit = {
+			has_modifier = sp_i31_isolation_s3
+		}
+		remove_modifier = sp_i31_isolation_s3
+	}
+	if = {
+		limit = {
+			has_modifier = sp_i31_isolation_s4
+		}
+		remove_modifier = sp_i31_isolation_s4
+	}
+	if = {
+		limit = {
+			has_modifier = sp_i31_muslim_affinity_s2
+		}
+		remove_modifier = sp_i31_muslim_affinity_s2
+	}
+	if = {
+		limit = {
+			has_modifier = sp_i31_muslim_affinity_s3
+		}
+		remove_modifier = sp_i31_muslim_affinity_s3
+	}
+	if = {
+		limit = {
+			has_modifier = sp_i31_muslim_affinity_s4
+		}
+		remove_modifier = sp_i31_muslim_affinity_s4
+	}
+	if = {
+		limit = { var:sp_islamism_stage >= 4 }
+		add_modifier = {
+			name = sp_i31_isolation_s4
+			months = -1
+		}
+		add_modifier = {
+			name = sp_i31_muslim_affinity_s4
+			months = -1
+		}
+	}
+	else_if = {
+		limit = { var:sp_islamism_stage >= 3 }
+		add_modifier = {
+			name = sp_i31_isolation_s3
+			months = -1
+		}
+		add_modifier = {
+			name = sp_i31_muslim_affinity_s3
+			months = -1
+		}
+	}
+	else_if = {
+		limit = { var:sp_islamism_stage >= 2 }
+		add_modifier = {
+			name = sp_i31_isolation_s2
+			months = -1
+		}
+		add_modifier = {
+			name = sp_i31_muslim_affinity_s2
+			months = -1
+		}
+	}
+}
+
+sp_i31_yearly_soft_relations_drift = {
+	# Soft yearly suspicion vs Christian GPs + mild Muslim affinity. No -100, no rivalry.
+	if = {
+		limit = {
+			has_variable = sp_islamism_selected
+			has_journal_entry = sp_je_pan_islamic_unity
+			var:sp_islamism_stage >= 2
+			NOT = { has_variable = sp_great_caliphate_complete }
+		}
+		if = {
+			limit = { var:sp_islamism_stage >= 4 }
+			every_country = {
+				limit = {
+					country_rank >= rank_value:great_power
+					sp_i31_is_christian_country = yes
+					NOT = { THIS = ROOT }
+					NOT = { has_war_with = ROOT }
+				}
+				change_relations = {
+					country = ROOT
+					value = -5
+				}
+			}
+			every_country = {
+				limit = {
+					sp_i31_is_muslim_country = yes
+					is_subject = no
+					NOT = { THIS = ROOT }
+					NOT = { has_war_with = ROOT }
+				}
+				change_relations = {
+					country = ROOT
+					value = 3
+				}
+			}
+		}
+		else_if = {
+			limit = { var:sp_islamism_stage >= 3 }
+			every_country = {
+				limit = {
+					country_rank >= rank_value:great_power
+					sp_i31_is_christian_country = yes
+					NOT = { THIS = ROOT }
+					NOT = { has_war_with = ROOT }
+				}
+				change_relations = {
+					country = ROOT
+					value = -3
+				}
+			}
+			every_country = {
+				limit = {
+					sp_i31_is_muslim_country = yes
+					is_subject = no
+					NOT = { THIS = ROOT }
+					NOT = { has_war_with = ROOT }
+				}
+				change_relations = {
+					country = ROOT
+					value = 2
+				}
+			}
+		}
+		else = {
+			every_country = {
+				limit = {
+					country_rank >= rank_value:great_power
+					sp_i31_is_christian_country = yes
+					NOT = { THIS = ROOT }
+					NOT = { has_war_with = ROOT }
+				}
+				change_relations = {
+					country = ROOT
+					value = -2
+				}
+			}
+			every_country = {
+				limit = {
+					sp_i31_is_muslim_country = yes
+					is_subject = no
+					NOT = { THIS = ROOT }
+					NOT = { has_war_with = ROOT }
+				}
+				change_relations = {
+					country = ROOT
+					value = 1
+				}
+			}
+		}
+	}
+}
+
+sp_i31_clear_caliph_war_token_if_peace = {
+	if = {
+		limit = {
+			has_variable = sp_caliph_calls_this_war
+			is_at_war = no
+		}
+		remove_variable = sp_caliph_calls_this_war
+	}
+}
+
+sp_i31_try_caliph_calls = {
+	sp_i31_clear_caliph_war_token_if_peace = yes
+	if = {
+		limit = {
+			has_variable = sp_islamism_selected
+			has_journal_entry = sp_je_pan_islamic_unity
+			var:sp_islamism_stage >= 3
+			sp_i31_at_war_vs_christian_gp = yes
+			NOT = { has_variable = sp_caliph_calls_cooldown }
+			NOT = { has_variable = sp_caliph_calls_this_war }
+			any_country = {
+				sp_i31_eligible_caliph_call_target = yes
+			}
+		}
+		set_variable = sp_caliph_calls_this_war
+		set_variable = {
+			name = sp_caliph_calls_cooldown
+			months = 60
+		}
+		set_variable = {
+			name = sp_caliph_call_batch
+			value = 0
+		}
+		trigger_event = {
+			id = sp_i31i.30
+			popup = yes
+		}
+		while = {
+			limit = {
+				var:sp_caliph_call_batch < 5
+				any_country = {
+					sp_i31_eligible_caliph_call_target = yes
+				}
+			}
+			ordered_country = {
+				limit = {
+					sp_i31_eligible_caliph_call_target = yes
+				}
+				order_by = gdp
+				position = 0
+				check_range_bounds = no
+				set_variable = {
+					name = sp_caliph_call_received
+					months = 12
+				}
+				trigger_event = {
+					id = sp_i31i.31
+					popup = yes
+				}
+			}
+			change_variable = {
+				name = sp_caliph_call_batch
+				add = 1
+			}
+		}
+	}
+}
+
+sp_i31_finalize_great_caliphate_reward = {
+	set_variable = sp_great_caliphate_complete
+	set_variable = {
+		name = sp_islamism_stage
+		value = 6
+	}
+	add_modifier = {
+		name = sp_protector_of_the_faithful
+		months = -1
+	}
+	sp_i31_apply_isolation_tier = yes
+}

@@ -1,0 +1,59 @@
+﻿# I-31 Ottomanism & Islamism modifiers (modest).
+
+sp_ottoman_constitutional_empire = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_prestige_add = 15
+	country_legitimacy_base_add = 5
+	country_loyalists_from_legitimacy_mult = 0.05
+}
+
+sp_protector_of_the_faithful = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_prestige_add = 20
+	country_legitimacy_base_add = 5
+}
+
+sp_i31_stage_complete_prestige = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_add = 10
+}
+
+# Soft Christian GP isolation tiers (reputation only — no forced rivalry/war).
+sp_i31_isolation_s2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_diplomatic_reputation_add = -5
+}
+
+sp_i31_isolation_s3 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_diplomatic_reputation_add = -10
+}
+
+sp_i31_isolation_s4 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_diplomatic_reputation_add = -20
+	country_influence_mult = -0.05
+}
+
+# Soft Muslim affinity (influence/prestige only — does not force pacts).
+sp_i31_muslim_affinity_s2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_add = 5
+}
+
+sp_i31_muslim_affinity_s3 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_add = 10
+	country_influence_mult = 0.03
+}
+
+sp_i31_muslim_affinity_s4 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_add = 15
+	country_influence_mult = 0.05
+}
+
+sp_i31_caliph_support_prestige = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_add = 5
+}

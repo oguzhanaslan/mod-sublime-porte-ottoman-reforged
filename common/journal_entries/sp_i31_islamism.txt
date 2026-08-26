@@ -1,0 +1,141 @@
+﻿# I-31 umbrella JE — Pan-Islamic Unity / İttihad-ı İslam
+
+sp_je_pan_islamic_unity = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+	weight = 10000
+	should_be_pinned_by_default_uninvolved_or_context = yes
+
+	is_shown_when_inactive = {
+		sp_i31_islamism_eligible = yes
+	}
+
+	possible = {
+		sp_i31_islamism_eligible = yes
+	}
+
+	immediate = {
+		set_variable = {
+			name = sp_islamism_stage
+			value = 1
+		}
+		set_variable = {
+			name = sp_islamism_stage_goal
+			value = 2
+		}
+		set_variable = {
+			name = sp_islamism_stage_progress
+			value = 0
+		}
+		sp_i31_islamism_recount_progress = yes
+		trigger_event = {
+			id = sp_i31i.2
+			popup = yes
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_islamism_stage_4_done
+					NOT = { has_variable = sp_great_caliphate_complete }
+				}
+				desc = sp_je_pan_islamic_unity_status_final
+			}
+			triggered_desc = {
+				trigger = { var:sp_islamism_stage = 4 }
+				desc = sp_je_pan_islamic_unity_status_stage_4
+			}
+			triggered_desc = {
+				trigger = { var:sp_islamism_stage = 3 }
+				desc = sp_je_pan_islamic_unity_status_stage_3
+			}
+			triggered_desc = {
+				trigger = { var:sp_islamism_stage = 2 }
+				desc = sp_je_pan_islamic_unity_status_stage_2
+			}
+			desc = sp_je_pan_islamic_unity_status_stage_1
+		}
+	}
+
+	current_value = {
+		value = var:sp_islamism_stage_progress
+	}
+
+	goal_add_value = {
+		value = var:sp_islamism_stage_goal
+	}
+
+	progressbar = yes
+
+	complete = {
+		has_variable = sp_great_caliphate_complete
+	}
+
+	on_complete = {
+		custom_tooltip = sp_je_pan_islamic_unity_complete_tt
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			AND = {
+				NOT = { has_variable = sp_islamism_selected }
+				NOT = { has_variable = sp_great_caliphate_complete }
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			sp_i31_islamism_recount_progress = yes
+			sp_i31_try_caliph_calls = yes
+
+			if = {
+				limit = {
+					var:sp_islamism_stage = 1
+					NOT = { has_variable = sp_islamism_stage_1_done }
+					sp_i31_islamism_stage_1_complete = yes
+				}
+				trigger_event = {
+					id = sp_i31i.10
+					popup = yes
+				}
+			}
+			else_if = {
+				limit = {
+					var:sp_islamism_stage = 2
+					NOT = { has_variable = sp_islamism_stage_2_done }
+					sp_i31_islamism_stage_2_complete = yes
+				}
+				trigger_event = {
+					id = sp_i31i.11
+					popup = yes
+				}
+			}
+			else_if = {
+				limit = {
+					var:sp_islamism_stage = 3
+					NOT = { has_variable = sp_islamism_stage_3_done }
+					sp_i31_islamism_stage_3_complete = yes
+				}
+				trigger_event = {
+					id = sp_i31i.12
+					popup = yes
+				}
+			}
+			else_if = {
+				limit = {
+					var:sp_islamism_stage = 4
+					NOT = { has_variable = sp_islamism_stage_4_done }
+					sp_i31_islamism_stage_4_complete = yes
+				}
+				trigger_event = {
+					id = sp_i31i.20
+					popup = yes
+				}
+			}
+		}
+	}
+}

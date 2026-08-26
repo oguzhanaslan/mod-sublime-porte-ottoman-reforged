@@ -1,0 +1,27 @@
+﻿# I-31 additive pulses. Do not edit I-28 or other feature on_action files.
+
+on_yearly_pulse_country = {
+	on_actions = {
+		sp_i31_yearly_pulse
+	}
+}
+
+on_monthly_pulse_country = {
+	on_actions = {
+		sp_i31_monthly_pulse
+	}
+}
+
+sp_i31_yearly_pulse = {
+	effect = {
+		sp_i31_try_add_identity_jes = yes
+		sp_i31_yearly_soft_relations_drift = yes
+	}
+}
+
+sp_i31_monthly_pulse = {
+	effect = {
+		sp_i31_try_add_identity_jes = yes
+		sp_i31_clear_caliph_war_token_if_peace = yes
+	}
+}
