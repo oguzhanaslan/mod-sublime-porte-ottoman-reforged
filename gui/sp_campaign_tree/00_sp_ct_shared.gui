@@ -1,6 +1,5 @@
-# I-30 Campaign Tree — shared presentation primitives (Phase A).
+# I-30 Campaign Tree — shared presentation primitives (Phase A + visual pass).
 # Types register globally; callers in gui/sp_campaign_tree.gui keep the same type names.
-# Load-order prefix 00_ mirrors CMF MPM_custom_types.gui pattern.
 
 @sp_ct_insp_art_w = 520
 @sp_ct_insp_art_h = 260
@@ -8,35 +7,35 @@
 types sp_ct_shared_types {
 
 	type sp_ct_connector_trunk_v = widget {
-		size = { 4 8 }
+		size = { 3 10 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.92
+			alpha = 0.72
 		}
 	}
 
 	type sp_ct_connector_v = widget {
-		size = { 2 4 }
+		size = { 2 6 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.58
+			alpha = 0.48
 		}
 	}
 
 	type sp_ct_connector_h = widget {
-		size = { 4 2 }
+		size = { 6 2 }
 		parentanchor = vcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.58
+			alpha = 0.48
 		}
 	}
 
@@ -44,50 +43,50 @@ types sp_ct_shared_types {
 		size = { 992 10 }
 		parentanchor = hcenter
 		widget = {
-			size = { 992 3 }
+			size = { 992 2 }
 			parentanchor = top|hcenter
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.92
+				alpha = 0.72
 			}
 		}
 		widget = {
-			size = { 2 7 }
-			position = { 160 3 }
+			size = { 2 8 }
+			position = { 160 2 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.58
+				alpha = 0.48
 			}
 		}
 		widget = {
-			size = { 2 7 }
-			position = { 496 3 }
+			size = { 2 8 }
+			position = { 496 2 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.58
+				alpha = 0.48
 			}
 		}
 		widget = {
-			size = { 2 7 }
-			position = { 832 3 }
+			size = { 2 8 }
+			position = { 832 2 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.58
+				alpha = 0.48
 			}
 		}
 	}
 
 	type sp_ct_insp_section_header = widget {
-		size = { 100% 28 }
-		margin_top = 6
+		size = { 100% 26 }
+		margin_top = 8
 		margin_bottom = 2
 		background = {
 			using = default_header_bg_faded
@@ -104,21 +103,9 @@ types sp_ct_shared_types {
 	}
 
 	type sp_ct_insp_req_row = widget {
-		size = { 100% 26 }
+		size = { 100% 28 }
 		background = {
 			using = entry_bg_simple
-		}
-		textbox = {
-			block "req_label" { text = "sp_ct_node_placeholder" }
-			block "req_tooltip" {}
-			parentanchor = vcenter
-			margin_left = 28
-			margin_right = 80
-			autoresize = yes
-			align = left|vcenter|nobaseline
-			using = fontsize_small
-			max_width = 360
-			elide = right
 		}
 		widget = {
 			size = { 100% 100% }
@@ -126,12 +113,12 @@ types sp_ct_shared_types {
 			icon = {
 				size = { 16 16 }
 				parentanchor = left|vcenter
-				position = { 8 0 }
+				position = { 10 0 }
 				texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
 			}
 			textbox = {
 				parentanchor = right|vcenter
-				position = { -8 0 }
+				position = { -10 0 }
 				text = "sp_ct_req_met"
 				autoresize = yes
 				align = right|vcenter|nobaseline
@@ -145,36 +132,49 @@ types sp_ct_shared_types {
 			icon = {
 				size = { 16 16 }
 				parentanchor = left|vcenter
-				position = { 8 0 }
+				position = { 10 0 }
 				texture = "gfx/interface/icons/generic_icons/red_cross.dds"
 			}
 			textbox = {
 				parentanchor = right|vcenter
-				position = { -8 0 }
+				position = { -10 0 }
 				text = "sp_ct_req_missing"
 				autoresize = yes
 				align = right|vcenter|nobaseline
 				using = fontsize_small
+				default_format = "#I"
 			}
+		}
+		textbox = {
+			block "req_label" { text = "sp_ct_node_placeholder" }
+			block "req_tooltip" {}
+			parentanchor = vcenter
+			margin_left = 32
+			margin_right = 88
+			autoresize = yes
+			align = left|vcenter|nobaseline
+			using = fontsize_small
+			max_width = 380
+			elide = right
 		}
 	}
 
 	type sp_ct_insp_divider = widget {
-		size = { 100% 3 }
+		size = { 100% 2 }
 		margin_top = 8
 		margin_bottom = 4
 		divider_gold = {}
 	}
 
 	type sp_ct_insp_stat_row = widget {
-		size = { 100% 26 }
+		size = { 100% 28 }
 		background = {
 			using = entry_bg_simple
 		}
 		icon = {
 			size = { 20 20 }
 			parentanchor = left|vcenter
-			position = { 8 0 }
+			position = { 10 0 }
 			block "stat_icon" {
 				texture = "gfx/interface/icons/generic_icons/prestige.dds"
 			}
@@ -182,7 +182,7 @@ types sp_ct_shared_types {
 		textbox = {
 			block "stat_label" { text = "sp_ct_node_placeholder" }
 			parentanchor = vcenter
-			margin_left = 32
+			margin_left = 36
 			margin_right = 100
 			autoresize = yes
 			align = left|vcenter|nobaseline
@@ -191,11 +191,60 @@ types sp_ct_shared_types {
 		textbox = {
 			block "stat_value" { text = "sp_ct_node_placeholder" }
 			parentanchor = right|vcenter
-			position = { -8 0 }
+			position = { -10 0 }
 			autoresize = yes
 			align = right|vcenter|nobaseline
 			using = fontsize_small
 			default_format = "#v"
+		}
+	}
+
+	# Live progress meter — Turan stage bindings (I-28 presentation only).
+	type sp_ct_insp_progress_turan_live = widget {
+		size = { 100% -1 }
+		visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
+		sp_ct_insp_progress_card = {}
+	}
+
+	# Live progress meter — Islamism stage bindings.
+	type sp_ct_insp_progress_islamism_live = widget {
+		size = { 100% -1 }
+		visible = "[And(GetPlayer.MakeScope.Var('sp_islamism_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_islamism_stage_goal').IsSet)]"
+		background = {
+			using = entry_bg_simple
+		}
+		flowcontainer = {
+			direction = vertical
+			spacing = 6
+			margin = { 10 10 }
+			margin_bottom = 12
+			widget = {
+				size = { 100% 22 }
+				textbox = {
+					text = "sp_ct_progress_controlled"
+					parentanchor = left|vcenter
+					autoresize = yes
+					align = left|vcenter|nobaseline
+					using = fontsize_small
+					default_format = "#title"
+				}
+				textbox = {
+					raw_text = "[GetPlayer.MakeScope.Var('sp_islamism_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_islamism_stage_goal').GetValue|0]"
+					parentanchor = right|vcenter
+					autoresize = yes
+					align = right|vcenter|nobaseline
+					using = fontsize_small
+					default_format = "#Y"
+				}
+			}
+			default_progressbar_horizontal = {
+				size = { 100% 26 }
+				blockoverride "values" {
+					value = "[GetPlayer.MakeScope.Var('sp_islamism_stage_progress').GetValue]"
+					min = 0
+					max = "[GetPlayer.MakeScope.Var('sp_islamism_stage_goal').GetValue]"
+				}
+			}
 		}
 	}
 
@@ -205,9 +254,42 @@ types sp_ct_shared_types {
 			using = entry_bg_simple
 		}
 		flowcontainer = {
-			direction = horizontal
-			spacing = 8
-			margin = { 10 8 }
+			direction = vertical
+			spacing = 6
+			margin = { 10 10 }
+			margin_bottom = 12
+
+			widget = {
+				size = { 100% 22 }
+				textbox = {
+					block "progress_label" { text = "sp_ct_progress_controlled" }
+					parentanchor = left|vcenter
+					autoresize = yes
+					align = left|vcenter|nobaseline
+					using = fontsize_small
+					default_format = "#title"
+				}
+				textbox = {
+					block "progress_value_raw" {
+						raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
+					}
+					parentanchor = right|vcenter
+					autoresize = yes
+					align = right|vcenter|nobaseline
+					using = fontsize_small
+					default_format = "#Y"
+				}
+			}
+
+			default_progressbar_horizontal = {
+				size = { 100% 26 }
+				blockoverride "values" {
+					value = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue]"
+					min = 0
+					max = "[GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue]"
+				}
+			}
+
 			block "progress_card_content" {}
 		}
 	}

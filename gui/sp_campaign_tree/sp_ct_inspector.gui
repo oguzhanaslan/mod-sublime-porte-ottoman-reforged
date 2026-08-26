@@ -10,7 +10,7 @@ types sp_ct_inspector_types {
 		parentanchor = hcenter
 		background = {
 			using = dark_area
-			alpha = 0.55
+			alpha = 0.42
 		}
 		icon = {
 			size = { @sp_ct_insp_art_w @sp_ct_insp_art_h }
@@ -26,120 +26,100 @@ types sp_ct_inspector_types {
 	}
 
 	type sp_ct_insp_status_header = widget {
-		size = { 100% 32 }
-		minimumsize = { 480 32 }
-		textbox = {
-			block "insp_title" { text = "sp_ct_node_placeholder" }
-			parentanchor = left|vcenter
-			autoresize = yes
-			align = left|vcenter|nobaseline
-			default_format = "#header"
-			using = fontsize_medium
-			max_width = 360
-			elide = right
-		}
+		size = { 100% -1 }
+		minimumsize = { 480 -1 }
+
 		widget = {
-			size = { 72 18 }
-			parentanchor = right|vcenter
-			block "insp_status_completed" { visible = no }
-			background = {
-				using = entry_bg_simple
+			size = { 100% 34 }
+			textbox = {
+				block "insp_title" { text = "sp_ct_node_placeholder" }
+				parentanchor = left|vcenter
+				autoresize = yes
+				align = left|vcenter|nobaseline
+				default_format = "#header"
+				using = fontsize_medium
+				max_width = 380
+				elide = right
 			}
 			textbox = {
-				parentanchor = center
+				block "insp_status_completed" { visible = no }
+				parentanchor = right|vcenter
 				text = "sp_ct_state_completed"
 				autoresize = yes
-				align = hcenter|vcenter|nobaseline
+				align = right|vcenter|nobaseline
 				using = fontsize_small
 				default_format = "#G"
-				margin_left = 6
-				margin_right = 6
-			}
-		}
-		widget = {
-			size = { 72 18 }
-			parentanchor = right|vcenter
-			block "insp_status_active" { visible = no }
-			background = {
-				using = entry_bg_simple
 			}
 			textbox = {
-				parentanchor = center
+				block "insp_status_active" { visible = no }
+				parentanchor = right|vcenter
 				text = "sp_ct_state_active"
 				autoresize = yes
-				align = hcenter|vcenter|nobaseline
+				align = right|vcenter|nobaseline
 				using = fontsize_small
 				default_format = "#Y"
-				margin_left = 6
-				margin_right = 6
-			}
-		}
-		widget = {
-			size = { 72 18 }
-			parentanchor = right|vcenter
-			block "insp_status_available" { visible = no }
-			background = {
-				using = entry_bg_simple
 			}
 			textbox = {
-				parentanchor = center
+				block "insp_status_available" { visible = no }
+				parentanchor = right|vcenter
 				text = "sp_ct_state_available"
 				autoresize = yes
-				align = hcenter|vcenter|nobaseline
+				align = right|vcenter|nobaseline
 				using = fontsize_small
-				margin_left = 6
-				margin_right = 6
-			}
-		}
-		widget = {
-			size = { 72 18 }
-			parentanchor = right|vcenter
-			block "insp_status_locked" { visible = no }
-			background = {
-				using = entry_bg_simple
 			}
 			textbox = {
-				parentanchor = center
+				block "insp_status_locked" { visible = no }
+				parentanchor = right|vcenter
 				text = "sp_ct_state_locked"
 				autoresize = yes
-				align = hcenter|vcenter|nobaseline
+				align = right|vcenter|nobaseline
 				using = fontsize_small
 				default_format = "#I"
-				margin_left = 6
-				margin_right = 6
 			}
 		}
+
+		block "insp_description" {}
 	}
 
-	type sp_ct_insp_section_panel = flowcontainer {
-		direction = vertical
-		spacing = 0
-		minimumsize = { 500 -1 }
+	type sp_ct_insp_section_panel = widget {
+		size = { 100% -1 }
+		margin_bottom = 4
 
 		background = {
 			using = entry_bg_simple
-			margin = { 0 0 }
 		}
 		background = {
 			using = simple_frame
-			margin = { 0 0 }
-		}
-
-		textbox = {
-			block "section_title" { text = "sp_ct_node_placeholder" }
-			margin = { 10 8 }
-			autoresize = yes
-			align = left|nobaseline
-			default_format = "#title"
-			using = fontsize_small
 		}
 
 		flowcontainer = {
 			direction = vertical
-			spacing = 2
-			margin = { 6 10 }
-			margin_bottom = 10
-			block "section_body" {}
+			spacing = 0
+			minimumsize = { 500 -1 }
+
+			widget = {
+				size = { 100% 26 }
+				background = {
+					using = default_header_bg_faded
+				}
+				textbox = {
+					block "section_title" { text = "sp_ct_node_placeholder" }
+					parentanchor = left|vcenter
+					margin_left = 10
+					autoresize = yes
+					align = left|vcenter|nobaseline
+					default_format = "#title"
+					using = fontsize_small
+				}
+			}
+
+			flowcontainer = {
+				direction = vertical
+				spacing = 1
+				margin = { 8 10 }
+				margin_bottom = 10
+				block "section_body" {}
+			}
 		}
 	}
 
@@ -159,7 +139,7 @@ types sp_ct_inspector_types {
 			block "scroll_content" {
 				flowcontainer = {
 					direction = vertical
-					spacing = 8
+					spacing = 12
 					minimumsize = { 500 -1 }
 				}
 			}
@@ -175,7 +155,7 @@ types sp_ct_inspector_types {
 		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
-			spacing = 8
+			spacing = 10
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
@@ -335,7 +315,7 @@ types sp_ct_inspector_types {
 		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
-			spacing = 8
+			spacing = 10
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
@@ -485,7 +465,7 @@ types sp_ct_inspector_types {
 		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
-			spacing = 8
+			spacing = 10
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
@@ -823,7 +803,7 @@ types sp_ct_inspector_types {
 		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
-			spacing = 8
+			spacing = 10
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
@@ -973,7 +953,7 @@ types sp_ct_inspector_types {
 		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
-			spacing = 8
+			spacing = 10
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
@@ -1211,25 +1191,7 @@ types sp_ct_inspector_types {
 								using = fontsize_small
 							}
 						}
-						sp_ct_insp_progress_card = {
-							visible = "[And(GetPlayer.MakeScope.Var('sp_islamism_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_islamism_stage_goal').IsSet)]"
-							blockoverride "progress_card_content" {
-								textbox = {
-									text = "sp_ct_progress_controlled"
-									autoresize = yes
-									align = left|nobaseline
-									using = fontsize_small
-									default_format = "#Y"
-								}
-								textbox = {
-									raw_text = "[GetPlayer.MakeScope.Var('sp_islamism_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_islamism_stage_goal').GetValue|0]"
-									autoresize = yes
-									align = left|nobaseline
-									using = fontsize_small
-									default_format = "#G"
-								}
-							}
-						}
+						sp_ct_insp_progress_islamism_live = {}
 					}
 				}
 				sp_ct_insp_section_panel = {
@@ -1353,7 +1315,7 @@ types sp_ct_inspector_types {
 				spacing = 8
 				visible = "[EqualTo_string(JournalEntry.GetName, Localize('je_sick_man_main'))]"
 				button = {
-					size = { 200 36 }
+					size = { 184 32 }
 					using = default_button_action
 					using = confirm_button_sound
 					visible = "[JournalEntry.IsValid]"
@@ -1371,7 +1333,7 @@ types sp_ct_inspector_types {
 					}
 				}
 				button = {
-					size = { 140 36 }
+					size = { 132 32 }
 					using = default_button_action
 					using = check_button_sound
 					visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
@@ -1387,7 +1349,7 @@ types sp_ct_inspector_types {
 					}
 				}
 				button = {
-					size = { 140 36 }
+					size = { 132 32 }
 					using = default_button_action
 					using = check_button_sound
 					visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
@@ -1420,7 +1382,7 @@ types sp_ct_inspector_types {
 						visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_post_tanzimat_era'))]"
 						datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
 						button = {
-							size = { 200 36 }
+							size = { 184 32 }
 							using = default_button_action
 							using = confirm_button_sound
 							visible = "[JournalEntry.IsValid]"
@@ -1438,7 +1400,7 @@ types sp_ct_inspector_types {
 							}
 						}
 						button = {
-							size = { 140 36 }
+							size = { 132 32 }
 							using = default_button_action
 							using = check_button_sound
 							visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
@@ -1454,7 +1416,7 @@ types sp_ct_inspector_types {
 							}
 						}
 						button = {
-							size = { 140 36 }
+							size = { 132 32 }
 							using = default_button_action
 							using = check_button_sound
 							visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
@@ -1489,7 +1451,7 @@ types sp_ct_inspector_types {
 						visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
 						datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
 						button = {
-							size = { 200 36 }
+							size = { 184 32 }
 							using = default_button_action
 							using = confirm_button_sound
 							visible = "[JournalEntry.IsValid]"
@@ -1507,7 +1469,7 @@ types sp_ct_inspector_types {
 							}
 						}
 						button = {
-							size = { 140 36 }
+							size = { 132 32 }
 							using = default_button_action
 							using = check_button_sound
 							visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
@@ -1523,7 +1485,7 @@ types sp_ct_inspector_types {
 							}
 						}
 						button = {
-							size = { 140 36 }
+							size = { 132 32 }
 							using = default_button_action
 							using = check_button_sound
 							visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
@@ -1553,7 +1515,7 @@ types sp_ct_inspector_types {
 		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
-			spacing = 8
+			spacing = 10
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
@@ -1658,25 +1620,7 @@ types sp_ct_inspector_types {
 										using = fontsize_medium
 									}
 								}
-								sp_ct_insp_progress_card = {
-									visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
-									blockoverride "progress_card_content" {
-										textbox = {
-											text = "sp_ct_progress_controlled"
-											autoresize = yes
-											align = left|nobaseline
-											using = fontsize_small
-											default_format = "#Y"
-										}
-										textbox = {
-											raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
-											autoresize = yes
-											align = left|nobaseline
-											using = fontsize_small
-											default_format = "#G"
-										}
-									}
-								}
+								sp_ct_insp_progress_turan_live = {}
 							}
 						}
 
@@ -1761,7 +1705,7 @@ types sp_ct_inspector_types {
 		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
-			spacing = 8
+			spacing = 10
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
@@ -1929,7 +1873,7 @@ types sp_ct_inspector_types {
 		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
-			spacing = 8
+			spacing = 10
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
@@ -2105,7 +2049,7 @@ types sp_ct_inspector_types {
 		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
-			spacing = 8
+			spacing = 10
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
@@ -2255,7 +2199,7 @@ types sp_ct_inspector_types {
 		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
-			spacing = 8
+			spacing = 10
 
 			sp_ct_insp_artwork_band = {
 				block "artwork_texture" {
@@ -2341,25 +2285,7 @@ types sp_ct_inspector_types {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s1_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
 					blockoverride "section_body" {
-						flowcontainer = {
-							direction = horizontal
-							spacing = 4
-							visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
-							textbox = {
-								text = "sp_ct_progress_controlled"
-								autoresize = yes
-								align = left|nobaseline
-								using = fontsize_medium
-								default_format = "#Y"
-							}
-							textbox = {
-								raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
-								autoresize = yes
-								align = left|nobaseline
-								using = fontsize_medium
-								default_format = "#Y"
-							}
-						}
+						sp_ct_insp_progress_turan_live = {}
 					}
 				}
 				sp_ct_insp_section_panel = {
@@ -2452,25 +2378,7 @@ types sp_ct_inspector_types {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s2_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
 					blockoverride "section_body" {
-						flowcontainer = {
-							direction = horizontal
-							spacing = 4
-							visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
-							textbox = {
-								text = "sp_ct_progress_controlled"
-								autoresize = yes
-								align = left|nobaseline
-								using = fontsize_medium
-								default_format = "#Y"
-							}
-							textbox = {
-								raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
-								autoresize = yes
-								align = left|nobaseline
-								using = fontsize_medium
-								default_format = "#Y"
-							}
-						}
+						sp_ct_insp_progress_turan_live = {}
 					}
 				}
 				sp_ct_insp_section_panel = {
@@ -2617,25 +2525,7 @@ types sp_ct_inspector_types {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s3_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
 					blockoverride "section_body" {
-						flowcontainer = {
-							direction = horizontal
-							spacing = 4
-							visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
-							textbox = {
-								text = "sp_ct_progress_controlled"
-								autoresize = yes
-								align = left|nobaseline
-								using = fontsize_medium
-								default_format = "#Y"
-							}
-							textbox = {
-								raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
-								autoresize = yes
-								align = left|nobaseline
-								using = fontsize_medium
-								default_format = "#Y"
-							}
-						}
+						sp_ct_insp_progress_turan_live = {}
 					}
 				}
 				sp_ct_insp_section_panel = {
@@ -2728,25 +2618,7 @@ types sp_ct_inspector_types {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s4_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
 					blockoverride "section_body" {
-						flowcontainer = {
-							direction = horizontal
-							spacing = 4
-							visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
-							textbox = {
-								text = "sp_ct_progress_controlled"
-								autoresize = yes
-								align = left|nobaseline
-								using = fontsize_medium
-								default_format = "#Y"
-							}
-							textbox = {
-								raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
-								autoresize = yes
-								align = left|nobaseline
-								using = fontsize_medium
-								default_format = "#Y"
-							}
-						}
+						sp_ct_insp_progress_turan_live = {}
 					}
 				}
 				sp_ct_insp_section_panel = {
