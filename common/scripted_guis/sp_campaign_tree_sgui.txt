@@ -316,3 +316,66 @@ sp_ct_vis_great_ottoman_locked = {
 	scope = country
 	is_shown = { sp_ct_great_ottoman_locked = yes }
 }
+
+### Phase 3 requirement / territory visibility
+
+sp_ct_vis_req_je_sick_man = { scope = country is_shown = { sp_ct_req_je_sick_man_active = yes } }
+sp_ct_vis_req_je_post_tanzimat = { scope = country is_shown = { sp_ct_req_je_post_tanzimat_active = yes } }
+sp_ct_vis_req_je_turan = { scope = country is_shown = { sp_ct_req_je_turan_active = yes } }
+sp_ct_vis_req_pan_nationalism = { scope = country is_shown = { sp_ct_req_pan_nationalism = yes } }
+sp_ct_vis_req_post_tanzimat_gate = { scope = country is_shown = { sp_ct_post_tanzimat_gate = yes } }
+sp_ct_vis_req_turkism = { scope = country is_shown = { has_variable = sp_turkism_selected } }
+sp_ct_vis_req_ottomanism = { scope = country is_shown = { has_variable = sp_ottomanism_selected } }
+sp_ct_vis_req_islamism = { scope = country is_shown = { has_variable = sp_islamism_selected } }
+sp_ct_vis_req_identity_chosen = { scope = country is_shown = { has_variable = sp_imperial_identity_chosen } }
+
+sp_ct_vis_req_obj_bureaucracy = { scope = country is_shown = { sp_ct_req_obj_bureaucracy = yes } }
+sp_ct_vis_req_obj_education = { scope = country is_shown = { sp_ct_req_obj_education = yes } }
+sp_ct_vis_req_obj_army = { scope = country is_shown = { sp_ct_req_obj_army = yes } }
+sp_ct_vis_req_obj_economy = { scope = country is_shown = { sp_ct_req_obj_economy = yes } }
+sp_ct_vis_req_obj_separatism = { scope = country is_shown = { sp_ct_req_obj_separatism = yes } }
+sp_ct_vis_req_obj_syria = { scope = country is_shown = { sp_ct_req_obj_syria = yes } }
+
+sp_ct_vis_req_i18_debate = { scope = country is_shown = { sp_ct_req_i18_debate = yes } }
+sp_ct_vis_req_i18_young_ottomans = { scope = country is_shown = { sp_ct_req_i18_young_ottomans = yes } }
+sp_ct_vis_req_i18_constitution = { scope = country is_shown = { sp_ct_req_i18_constitution = yes } }
+sp_ct_vis_req_i18_kanun = { scope = country is_shown = { sp_ct_req_i18_kanun = yes } }
+sp_ct_vis_req_i18_hamidian = { scope = country is_shown = { sp_ct_req_i18_hamidian = yes } }
+
+sp_ct_vis_ctrl_azerbaijan = { scope = country is_shown = { sp_ct_ctrl_azerbaijan = yes } }
+sp_ct_vis_ctrl_elizavetpol = { scope = country is_shown = { sp_ct_ctrl_elizavetpol = yes } }
+sp_ct_vis_ctrl_tabriz = { scope = country is_shown = { sp_ct_ctrl_tabriz = yes } }
+sp_ct_vis_ctrl_urmia = { scope = country is_shown = { sp_ct_ctrl_urmia = yes } }
+sp_ct_vis_ctrl_irakajemi = { scope = country is_shown = { sp_ct_ctrl_irakajemi = yes } }
+sp_ct_vis_ctrl_isfahan = { scope = country is_shown = { sp_ct_ctrl_isfahan = yes } }
+sp_ct_vis_ctrl_fars = { scope = country is_shown = { sp_ct_ctrl_fars = yes } }
+sp_ct_vis_ctrl_kerman = { scope = country is_shown = { sp_ct_ctrl_kerman = yes } }
+sp_ct_vis_ctrl_khorasan = { scope = country is_shown = { sp_ct_ctrl_khorasan = yes } }
+sp_ct_vis_ctrl_mazandaran = { scope = country is_shown = { sp_ct_ctrl_mazandaran = yes } }
+sp_ct_vis_ctrl_semnan = { scope = country is_shown = { sp_ct_ctrl_semnan = yes } }
+sp_ct_vis_ctrl_laristan = { scope = country is_shown = { sp_ct_ctrl_laristan = yes } }
+sp_ct_vis_ctrl_luristan = { scope = country is_shown = { sp_ct_ctrl_luristan = yes } }
+sp_ct_vis_ctrl_persian_kurdistan = { scope = country is_shown = { sp_ct_ctrl_persian_kurdistan = yes } }
+sp_ct_vis_ctrl_khuzestan = { scope = country is_shown = { sp_ct_ctrl_khuzestan = yes } }
+sp_ct_vis_ctrl_turkmenia = { scope = country is_shown = { sp_ct_ctrl_turkmenia = yes } }
+sp_ct_vis_ctrl_merz = { scope = country is_shown = { sp_ct_ctrl_merz = yes } }
+sp_ct_vis_ctrl_khiva = { scope = country is_shown = { sp_ct_ctrl_khiva = yes } }
+sp_ct_vis_ctrl_uzbekia = { scope = country is_shown = { sp_ct_ctrl_uzbekia = yes } }
+sp_ct_vis_ctrl_fergana = { scope = country is_shown = { sp_ct_ctrl_fergana = yes } }
+sp_ct_vis_ctrl_kirghizia = { scope = country is_shown = { sp_ct_ctrl_kirghizia = yes } }
+sp_ct_vis_ctrl_syrdarya = { scope = country is_shown = { sp_ct_ctrl_syrdarya = yes } }
+sp_ct_vis_ctrl_aktobe = { scope = country is_shown = { sp_ct_ctrl_aktobe = yes } }
+sp_ct_vis_ctrl_akmolinsk = { scope = country is_shown = { sp_ct_ctrl_akmolinsk = yes } }
+sp_ct_vis_ctrl_uralsk = { scope = country is_shown = { sp_ct_ctrl_uralsk = yes } }
+sp_ct_vis_ctrl_semireche = { scope = country is_shown = { sp_ct_ctrl_semireche = yes } }
+sp_ct_vis_ctrl_jetisy = { scope = country is_shown = { sp_ct_ctrl_jetisy = yes } }
+sp_ct_vis_ctrl_dzungaria = { scope = country is_shown = { sp_ct_ctrl_dzungaria = yes } }
+sp_ct_vis_ctrl_tianshan = { scope = country is_shown = { sp_ct_ctrl_tianshan = yes } }
+
+sp_ct_vis_req_persia_subject = { scope = country is_shown = { sp_ct_req_persia_subject = yes } }
+sp_ct_vis_req_claims_4b = { scope = country is_shown = { sp_ct_req_claims_4b = yes } }
+sp_ct_vis_req_turan_ideal_complete = { scope = country is_shown = { sp_ct_req_turan_ideal_complete = yes } }
+sp_ct_vis_req_turan_s4_done = { scope = country is_shown = { sp_ct_req_turan_s4_done = yes } }
+sp_ct_vis_req_great_ottoman_proclaimed = { scope = country is_shown = { sp_ct_req_great_ottoman_proclaimed = yes } }
+
+sp_ct_vis_has_turan_progress = { scope = country is_shown = { sp_ct_has_turan_progress_vars = yes } }

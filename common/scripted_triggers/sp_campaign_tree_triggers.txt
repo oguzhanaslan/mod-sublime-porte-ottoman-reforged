@@ -365,3 +365,123 @@ sp_ct_great_ottoman_locked = {
 		}
 	}
 }
+
+### Phase 3 — live requirement / territory checks (read-only)
+
+sp_ct_req_je_sick_man_active = {
+	has_journal_entry = je_sick_man_main
+}
+
+sp_ct_req_je_post_tanzimat_active = {
+	has_journal_entry = sp_je_post_tanzimat_era
+}
+
+sp_ct_req_je_turan_active = {
+	has_journal_entry = sp_je_turanian_ideal
+}
+
+sp_ct_req_pan_nationalism = {
+	has_technology_researched = pan-nationalism
+}
+
+sp_ct_req_obj_bureaucracy = {
+	has_variable = completed_sick_man_bureaucracy_je
+}
+sp_ct_req_obj_education = {
+	has_variable = completed_sick_man_education_je
+}
+sp_ct_req_obj_army = {
+	has_variable = completed_sick_man_army_je
+}
+sp_ct_req_obj_economy = {
+	has_variable = completed_sick_man_economy_je
+}
+sp_ct_req_obj_separatism = {
+	has_variable = completed_separatism_sick_man_je
+}
+sp_ct_req_obj_syria = {
+	has_variable = completed_syria_je
+}
+
+sp_ct_req_i18_debate = {
+	has_variable = sp_i18_debate_fired
+}
+sp_ct_req_i18_young_ottomans = {
+	has_variable = sp_i18_young_ottomans_fired
+}
+sp_ct_req_i18_constitution = {
+	has_variable = sp_i18_constitution_seen
+}
+sp_ct_req_i18_kanun = {
+	has_variable = sp_i18_kanun_i_esasi_fired
+}
+sp_ct_req_i18_hamidian = {
+	has_variable = sp_i18_hamidian_fired
+}
+
+# Stage 1 territories
+sp_ct_ctrl_azerbaijan = { country_or_subject_owns_entire_state_region = STATE_AZERBAIJAN }
+sp_ct_ctrl_elizavetpol = { country_or_subject_owns_entire_state_region = STATE_ELIZAVETPOL }
+sp_ct_ctrl_tabriz = { country_or_subject_owns_entire_state_region = STATE_TABRIZ }
+sp_ct_ctrl_urmia = { country_or_subject_owns_entire_state_region = STATE_URMIA }
+
+# Stage 2 territories
+sp_ct_ctrl_irakajemi = { country_or_subject_owns_entire_state_region = STATE_IRAKAJEMI }
+sp_ct_ctrl_isfahan = { country_or_subject_owns_entire_state_region = STATE_ISFAHAN }
+sp_ct_ctrl_fars = { country_or_subject_owns_entire_state_region = STATE_FARS }
+sp_ct_ctrl_kerman = { country_or_subject_owns_entire_state_region = STATE_KERMAN }
+sp_ct_ctrl_khorasan = { country_or_subject_owns_entire_state_region = STATE_KHORASAN }
+sp_ct_ctrl_mazandaran = { country_or_subject_owns_entire_state_region = STATE_MAZANDARAN }
+sp_ct_ctrl_semnan = { country_or_subject_owns_entire_state_region = STATE_SEMNAN }
+sp_ct_ctrl_laristan = { country_or_subject_owns_entire_state_region = STATE_LARISTAN }
+sp_ct_ctrl_luristan = { country_or_subject_owns_entire_state_region = STATE_LURISTAN }
+sp_ct_ctrl_persian_kurdistan = { country_or_subject_owns_entire_state_region = STATE_PERSIAN_KURDISTAN }
+sp_ct_ctrl_khuzestan = { country_or_subject_owns_entire_state_region = STATE_KHUZESTAN }
+
+# Stage 3
+sp_ct_ctrl_turkmenia = { country_or_subject_owns_entire_state_region = STATE_TURKMENIA }
+sp_ct_ctrl_merz = { country_or_subject_owns_entire_state_region = STATE_MERZ }
+sp_ct_ctrl_khiva = { country_or_subject_owns_entire_state_region = STATE_KHIVA }
+sp_ct_ctrl_uzbekia = { country_or_subject_owns_entire_state_region = STATE_UZBEKIA }
+
+# Stage 4
+sp_ct_ctrl_fergana = { country_or_subject_owns_entire_state_region = STATE_FERGANA }
+sp_ct_ctrl_kirghizia = { country_or_subject_owns_entire_state_region = STATE_KIRGHIZIA }
+sp_ct_ctrl_syrdarya = { country_or_subject_owns_entire_state_region = STATE_SYRDARYA }
+sp_ct_ctrl_aktobe = { country_or_subject_owns_entire_state_region = STATE_AKTOBE }
+sp_ct_ctrl_akmolinsk = { country_or_subject_owns_entire_state_region = STATE_AKMOLINSK }
+sp_ct_ctrl_uralsk = { country_or_subject_owns_entire_state_region = STATE_URALSK }
+sp_ct_ctrl_semireche = { country_or_subject_owns_entire_state_region = STATE_SEMIRECHE }
+sp_ct_ctrl_jetisy = { country_or_subject_owns_entire_state_region = STATE_JETISY }
+sp_ct_ctrl_dzungaria = { country_or_subject_owns_entire_state_region = STATE_DZUNGARIA }
+sp_ct_ctrl_tianshan = { country_or_subject_owns_entire_state_region = STATE_TIANSHAN }
+
+sp_ct_has_turan_progress_vars = {
+	has_variable = sp_turan_stage
+	has_variable = sp_turan_stage_progress
+	has_variable = sp_turan_stage_goal
+}
+
+# Stage II subject-control alternative (I-28: subject Persia ownership counts via country_or_subject_owns).
+sp_ct_req_persia_subject = {
+	exists = c:PER
+	c:PER = {
+		is_subject_of = ROOT
+	}
+}
+
+sp_ct_req_claims_4b = {
+	has_variable = sp_turan_claims_4b_granted
+}
+
+sp_ct_req_turan_ideal_complete = {
+	has_variable = sp_turan_ideal_complete
+}
+
+sp_ct_req_turan_s4_done = {
+	has_variable = sp_turan_stage_4_done
+}
+
+sp_ct_req_great_ottoman_proclaimed = {
+	has_variable = sp_great_ottoman_empire_proclaimed
+}

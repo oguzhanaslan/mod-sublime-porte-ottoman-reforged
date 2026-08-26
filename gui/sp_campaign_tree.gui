@@ -8,7 +8,7 @@
 @sp_ct_compact_width = 190
 @sp_ct_compact_height = 54
 @sp_ct_branch_gap = 14
-@sp_ct_tree_width = 980
+@sp_ct_tree_width = 500
 
 widget = {
 	name = "sp_campaign_tree_root"
@@ -148,51 +148,28 @@ types sp_campaign_tree_types {
 				}
 			}
 
-			# Selection status strip (Phase 3 inspector hook)
-			widget = {
-				size = { 100% 40 }
-				layoutpolicy_horizontal = expanding
-				margin_bottom = 8
-				background = {
-					using = dark_area
-					alpha = 0.4
-					margin = { 4 2 }
-				}
-				textbox = {
-					parentanchor = left|vcenter
-					position = { 16 0 }
-					text = "sp_ct_selection_hint"
-					autoresize = yes
-					align = left|nobaseline
-					using = fontsize_medium
-					visible = "[Not(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet)]"
-				}
-				textbox = {
-					parentanchor = left|vcenter
-					position = { 16 0 }
-					text = "sp_ct_selection_active"
-					autoresize = yes
-					align = left|nobaseline
-					using = fontsize_medium
-					visible = "[GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet]"
-				}
-			}
 
-			scrollarea = {
+			# Phase 3 — tree (left) + detail inspector (right)
+			hbox = {
 				layoutpolicy_vertical = expanding
 				layoutpolicy_horizontal = expanding
-				scrollbarpolicy_horizontal = as_needed
-				scrollbar_horizontal = { using = horizontal_scrollbar }
-				scrollbar_vertical = { using = vertical_scrollbar }
+				spacing = 16
 
-				scrollwidget = {
-					flowcontainer = {
-						direction = vertical
-						parentanchor = top|hcenter
-						spacing = 14
-						margin_top = 8
-						margin_bottom = 36
-						minimumsize = { @sp_ct_tree_width -1 }
+				scrollarea = {
+					size = { 520 100% }
+					layoutpolicy_vertical = expanding
+					scrollbarpolicy_horizontal = as_needed
+					scrollbar_horizontal = { using = horizontal_scrollbar }
+					scrollbar_vertical = { using = vertical_scrollbar }
+
+					scrollwidget = {
+						flowcontainer = {
+							direction = vertical
+							parentanchor = top|hcenter
+							spacing = 14
+							margin_top = 8
+							margin_bottom = 36
+							minimumsize = { @sp_ct_tree_width -1 }
 
 						sp_ct_node = {
 							blockoverride "node_onclick" {
@@ -478,6 +455,4157 @@ types sp_campaign_tree_types {
 								texture = "gfx/coat_of_arms/textured_emblems/te_sp_great_ottoman.dds"
 							}
 						}
+						}
+					}
+				}
+
+				widget = {
+					size = { 440 100% }
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					background = {
+						using = dark_area
+						alpha = 0.45
+						margin = { 2 2 }
+					}
+
+					vbox = {
+						size = { 100% 100% }
+						margin = { 12 12 }
+						spacing = 8
+
+						textbox = {
+							text = "sp_ct_insp_header"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#header"
+							using = fontsize_large
+						}
+
+						scrollarea = {
+							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							scrollbar_vertical = { using = vertical_scrollbar }
+
+							scrollwidget = {
+								flowcontainer = {
+									direction = vertical
+									spacing = 4
+									minimumsize = { 416 -1 }
+
+									sp_ct_insp_empty = {
+										visible = "[Not(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet)]"
+									}
+
+									### SP_CT_INSPECTOR_PANELS_START
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_tanzimat'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/interface/icons/event_icons/event_scales.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_tanzimat"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_tanzimat_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_tanzimat_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#Y"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_tanzimat_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_available"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_tanzimat_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_tanzimat_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_tanzimat_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_completion"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_obj_bureaucracy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_bureaucracy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_obj_bureaucracy"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_obj_education').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_education').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_obj_education"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_obj_army').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_army').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_obj_army"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_obj_economy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_economy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_obj_economy"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_obj_separatism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_separatism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_obj_separatism"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_optional"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_obj_syria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_syria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_obj_syria"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_tanzimat_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_none"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_post_tanzimat"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_req_je_sick_man').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								margin_top = 8
+								flowcontainer = {
+									direction = vertical
+									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+									item = {
+										flowcontainer = {
+											direction = vertical
+											datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+											item = {
+												flowcontainer = {
+													direction = horizontal
+													spacing = 8
+													visible = "[EqualTo_string(JournalEntryType.GetName, Localize('je_sick_man_main'))]"
+													datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = confirm_button_sound
+														visible = "[JournalEntry.IsValid]"
+														onclick = "[GetVariableSystem.Clear('com_open_window')]"
+														onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+														onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_open_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_pin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_unpin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_post_tanzimat'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/interface/icons/event_icons/sp_je_post_tanzimat_era.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_post_tanzimat"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_post_tanzimat_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_post_tanzimat_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#Y"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_post_tanzimat_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_available"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_post_tanzimat_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_post_tanzimat_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_post_tanzimat_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_unlock"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_post_tanzimat_gate"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_completion"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_i18_debate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_debate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_i18_debate"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_i18_young_ottomans').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_young_ottomans').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_i18_young_ottomans"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_i18_constitution').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_constitution').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_i18_constitution"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_i18_kanun').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_kanun').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_i18_kanun"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_i18_hamidian').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_hamidian').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_i18_hamidian"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_insp_post_tanzimat_complete_note"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_post_tanzimat_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_tanzimat"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_identity"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_req_je_post_tanzimat').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								margin_top = 8
+								flowcontainer = {
+									direction = vertical
+									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+									item = {
+										flowcontainer = {
+											direction = vertical
+											datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+											item = {
+												flowcontainer = {
+													direction = horizontal
+													spacing = 8
+													visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_post_tanzimat_era'))]"
+													datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = confirm_button_sound
+														visible = "[JournalEntry.IsValid]"
+														onclick = "[GetVariableSystem.Clear('com_open_window')]"
+														onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+														onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_open_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_pin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_unpin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_identity'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/interface/icons/event_icons/event_election.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_identity"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_identity_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_identity_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_available"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_identity_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_identity_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_identity_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_unlock"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_post_tanzimat_gate"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_completion"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_identity_chosen').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_identity_chosen').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_identity_chosen"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_path"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_path_ottomanism"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_path_islamism"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_path_turkism"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_identity_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_post_tanzimat"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_identity_paths"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+						}
+					}
+
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_ottomanism'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/interface/icons/event_icons/event_election.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_ottomanism"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_ottomanism_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_ottomanism_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_available"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_ottomanism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_ottomanism_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_ottomanism_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_unlock"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_post_tanzimat_gate"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_completion"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_path_ottomanism"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_path"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_ottomanism_path"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_ottomanism_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_identity"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_none_path"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+						}
+					}
+
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_islamism'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/interface/icons/event_icons/event_protest.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_islamism"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_islamism_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_islamism_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_available"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_islamism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_islamism_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_islamism_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_unlock"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_post_tanzimat_gate"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_completion"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_path_islamism"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_path"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_islamism_path"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_islamism_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_identity"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_none_path"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+						}
+					}
+
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turkism'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/interface/icons/event_icons/event_military.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_turkism"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turkism_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turkism_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_available"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turkism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turkism_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turkism_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_unlock"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_post_tanzimat_gate"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_completion"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_path_turkism"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_path"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turkism_path"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turkism_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_identity"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_turan"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+						}
+					}
+
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turan'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/interface/icons/event_icons/event_military.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_turan"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#Y"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_available"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_unlock"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_path_turkism"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_pan_nationalism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_pan_nationalism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_pan_nationalism"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_post_tanzimat_gate"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_progress"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 4
+								visible = "[GetPlayer.MakeScope.Var('sp_turan_stage').IsSet]"
+								textbox = {
+									text = "sp_ct_progress_stage"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_medium
+								}
+								textbox = {
+									raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage').GetValue|0]"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_medium
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 4
+								visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
+								textbox = {
+									text = "sp_ct_progress_controlled"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_medium
+									default_format = "#Y"
+								}
+								textbox = {
+									raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_medium
+									default_format = "#Y"
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_completion"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_turan_ideal_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_turan_ideal_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_turan_ideal_complete"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_turkism"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_turan_s1"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								margin_top = 8
+								flowcontainer = {
+									direction = vertical
+									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+									item = {
+										flowcontainer = {
+											direction = vertical
+											datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+											item = {
+												flowcontainer = {
+													direction = horizontal
+													spacing = 8
+													visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
+													datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = confirm_button_sound
+														visible = "[JournalEntry.IsValid]"
+														onclick = "[GetVariableSystem.Clear('com_open_window')]"
+														onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+														onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_open_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_pin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_unpin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turan_s1'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/interface/icons/event_icons/event_military.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_turan_s1"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s1_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s1_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#Y"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s1_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s1_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s1_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s1_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								textbox = {
+									text = "sp_ct_sec_progress"
+									autoresize = yes
+									align = left|nobaseline
+									default_format = "#header"
+									using = fontsize_medium
+								}
+								flowcontainer = {
+									direction = horizontal
+									spacing = 4
+									visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
+									textbox = {
+										text = "sp_ct_progress_controlled"
+										autoresize = yes
+										align = left|nobaseline
+										using = fontsize_medium
+										default_format = "#Y"
+									}
+									textbox = {
+										raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
+										autoresize = yes
+										align = left|nobaseline
+										using = fontsize_medium
+										default_format = "#Y"
+									}
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_territories"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_azerbaijan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_azerbaijan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_azerbaijan"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_elizavetpol').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_elizavetpol').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_elizavetpol"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_tabriz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_tabriz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_tabriz"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_urmia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_urmia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_urmia"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s1_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_turan"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_turan_s2"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								margin_top = 8
+								flowcontainer = {
+									direction = vertical
+									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+									item = {
+										flowcontainer = {
+											direction = vertical
+											datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+											item = {
+												flowcontainer = {
+													direction = horizontal
+													spacing = 8
+													visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
+													datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = confirm_button_sound
+														visible = "[JournalEntry.IsValid]"
+														onclick = "[GetVariableSystem.Clear('com_open_window')]"
+														onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+														onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_open_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_pin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_unpin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turan_s2'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/interface/icons/event_icons/event_military.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_turan_s2"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s2_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s2_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#Y"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s2_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s2_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s2_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s2_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								textbox = {
+									text = "sp_ct_sec_progress"
+									autoresize = yes
+									align = left|nobaseline
+									default_format = "#header"
+									using = fontsize_medium
+								}
+								flowcontainer = {
+									direction = horizontal
+									spacing = 4
+									visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
+									textbox = {
+										text = "sp_ct_progress_controlled"
+										autoresize = yes
+										align = left|nobaseline
+										using = fontsize_medium
+										default_format = "#Y"
+									}
+									textbox = {
+										raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
+										autoresize = yes
+										align = left|nobaseline
+										using = fontsize_medium
+										default_format = "#Y"
+									}
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_territories"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_irakajemi').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_irakajemi').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_irakajemi"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_isfahan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_isfahan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_isfahan"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_fars').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_fars').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_fars"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_kerman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_kerman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_kerman"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_khorasan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_khorasan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_khorasan"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_mazandaran').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_mazandaran').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_mazandaran"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_semnan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_semnan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_semnan"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_laristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_laristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_laristan"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_luristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_luristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_luristan"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_persian_kurdistan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_persian_kurdistan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_persian_kurdistan"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_khuzestan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_khuzestan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_khuzestan"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_alternatives"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_persia_subject').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_persia_subject').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_persia_subject"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s2_alt_note"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s2_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_turan_s1"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_turan_s3"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								margin_top = 8
+								flowcontainer = {
+									direction = vertical
+									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+									item = {
+										flowcontainer = {
+											direction = vertical
+											datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+											item = {
+												flowcontainer = {
+													direction = horizontal
+													spacing = 8
+													visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
+													datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = confirm_button_sound
+														visible = "[JournalEntry.IsValid]"
+														onclick = "[GetVariableSystem.Clear('com_open_window')]"
+														onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+														onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_open_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_pin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_unpin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turan_s3'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/interface/icons/event_icons/event_military.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_turan_s3"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s3_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s3_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#Y"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s3_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s3_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s3_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s3_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								textbox = {
+									text = "sp_ct_sec_progress"
+									autoresize = yes
+									align = left|nobaseline
+									default_format = "#header"
+									using = fontsize_medium
+								}
+								flowcontainer = {
+									direction = horizontal
+									spacing = 4
+									visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
+									textbox = {
+										text = "sp_ct_progress_controlled"
+										autoresize = yes
+										align = left|nobaseline
+										using = fontsize_medium
+										default_format = "#Y"
+									}
+									textbox = {
+										raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
+										autoresize = yes
+										align = left|nobaseline
+										using = fontsize_medium
+										default_format = "#Y"
+									}
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_territories"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_turkmenia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_turkmenia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_turkmenia"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_merz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_merz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_merz"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_khiva').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_khiva').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_khiva"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_uzbekia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_uzbekia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_uzbekia"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s3_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_turan_s2"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_turan_s4"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								margin_top = 8
+								flowcontainer = {
+									direction = vertical
+									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+									item = {
+										flowcontainer = {
+											direction = vertical
+											datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+											item = {
+												flowcontainer = {
+													direction = horizontal
+													spacing = 8
+													visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
+													datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = confirm_button_sound
+														visible = "[JournalEntry.IsValid]"
+														onclick = "[GetVariableSystem.Clear('com_open_window')]"
+														onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+														onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_open_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_pin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_unpin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turan_s4'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/interface/icons/event_icons/event_military.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_turan_s4"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s4_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s4_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#Y"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s4_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s4_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s4_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_s4_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								textbox = {
+									text = "sp_ct_sec_progress"
+									autoresize = yes
+									align = left|nobaseline
+									default_format = "#header"
+									using = fontsize_medium
+								}
+								flowcontainer = {
+									direction = horizontal
+									spacing = 4
+									visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
+									textbox = {
+										text = "sp_ct_progress_controlled"
+										autoresize = yes
+										align = left|nobaseline
+										using = fontsize_medium
+										default_format = "#Y"
+									}
+									textbox = {
+										raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
+										autoresize = yes
+										align = left|nobaseline
+										using = fontsize_medium
+										default_format = "#Y"
+									}
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_territories"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_fergana').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_fergana').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_fergana"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_kirghizia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_kirghizia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_kirghizia"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_syrdarya').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_syrdarya').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_syrdarya"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_aktobe').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_aktobe').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_aktobe"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_akmolinsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_akmolinsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_akmolinsk"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_uralsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_uralsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_uralsk"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_semireche').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_semireche').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_semireche"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_jetisy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_jetisy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_jetisy"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_dzungaria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_dzungaria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_dzungaria"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_ctrl_tianshan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_tianshan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_terr_tianshan"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_claims"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_claims_4b').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_claims_4b').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_claims_4b"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s4_claims_note"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_turan_s4_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_turan_s3"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_great_ottoman"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								margin_top = 8
+								flowcontainer = {
+									direction = vertical
+									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+									item = {
+										flowcontainer = {
+											direction = vertical
+											datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+											item = {
+												flowcontainer = {
+													direction = horizontal
+													spacing = 8
+													visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
+													datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = confirm_button_sound
+														visible = "[JournalEntry.IsValid]"
+														onclick = "[GetVariableSystem.Clear('com_open_window')]"
+														onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+														onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_open_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_pin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_unpin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					widget = {
+						visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_great_ottoman'))]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							minimumsize = { 420 -1 }
+							widget = {
+								size = { 400 160 }
+								parentanchor = hcenter
+								background = {
+									using = dark_area
+									alpha = 0.55
+								}
+								icon = {
+									parentanchor = center
+									size = { 120 120 }
+									texture = "gfx/coat_of_arms/textured_emblems/te_sp_great_ottoman.dds"
+								}
+							}
+							textbox = {
+								text = "sp_ct_node_great_ottoman"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_large
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_great_ottoman_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#G"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_great_ottoman_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#Y"
+							}
+							textbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_great_ottoman_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_medium
+									default_format = "#I"
+							}
+							textbox = {
+								text = "sp_ct_sec_description"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_great_ottoman_desc"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_great_ottoman_flavor"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_unlock"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_turan_s4_done').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_turan_s4_done').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_turan_s4_done"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_completion"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							flowcontainer = {
+								direction = horizontal
+								spacing = 6
+								minimumsize = { 400 18 }
+								textbox = {
+									visible = "[GetScriptedGui('sp_ct_vis_req_great_ottoman_proclaimed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									raw_text = "#G ✓#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									visible = "[Not(GetScriptedGui('sp_ct_vis_req_great_ottoman_proclaimed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+									raw_text = "#R ✗#!"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+								}
+								textbox = {
+									text = "sp_ct_req_great_ottoman_proclaimed"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 360
+									multiline = yes
+								}
+							}
+							textbox = {
+								text = "sp_ct_sec_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_insp_great_ottoman_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 6
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_turan_s4"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_none"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 400
+								multiline = yes
+							}
+							vbox = {
+								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								spacing = 4
+								margin_top = 8
+								flowcontainer = {
+									direction = vertical
+									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+									item = {
+										flowcontainer = {
+											direction = vertical
+											datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+											item = {
+												flowcontainer = {
+													direction = horizontal
+													spacing = 8
+													visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
+													datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = confirm_button_sound
+														visible = "[JournalEntry.IsValid]"
+														onclick = "[GetVariableSystem.Clear('com_open_window')]"
+														onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+														onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_open_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_pin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+													button = {
+														size = { 190 36 }
+														using = default_button_action
+														using = check_button_sound
+														visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+														onclick = "[JournalEntry.TogglePinInOutliner]"
+														textbox = {
+															parentanchor = center
+															text = "sp_ct_btn_unpin_je"
+															autoresize = yes
+															align = hcenter|nobaseline
+															using = fontsize_small
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					### SP_CT_INSPECTOR_PANELS_END
+								}
+							}
+						}
 					}
 				}
 			}
@@ -485,182 +4613,383 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_node = widget {
+
 		size = { @sp_ct_node_width @sp_ct_node_height }
+
 		parentanchor = hcenter
 
+
+
 		button = {
+
 			size = { 100% 100% }
+
 			using = default_button_action
+
 			using = confirm_button_sound
+
 			block "node_onclick" {
+
 				onclick = "[GetPlayer.IsValid]"
+
 			}
+
+
 
 			background = {
+
 				using = default_header_bg
+
 			}
 
+
+
 			widget = {
+
 				size = { 100% 100% }
+
 				block "node_selected" { visible = no }
+
 				background = {
+
 					texture = "gfx/interface/buttons/default_button_mouseover.dds"
+
 					spriteType = Corneredstretched
+
 					spriteborder = { 0 0 }
+
 					blend_mode = colordodge
+
 					alpha = 0.55
+
 				}
+
 			}
+
+
 
 			flowcontainer = {
+
 				direction = horizontal
+
 				size = { 100% 100% }
+
 				spacing = 8
+
 				margin_left = 10
+
 				margin_right = 8
 
+
+
 				icon = {
+
 					size = { 38 38 }
+
 					parentanchor = vcenter
+
 					block "node_icon" {
+
 						texture = "gfx/interface/icons/event_icons/event_default.dds"
+
 					}
+
 				}
+
+
 
 				vbox = {
+
 					parentanchor = vcenter
+
 					layoutpolicy_horizontal = expanding
+
 					spacing = 1
 
+
+
 					textbox = {
+
 						block "node_title" { text = "sp_ct_node_placeholder" }
+
 						autoresize = yes
+
 						align = left|nobaseline
+
 						default_format = "#header"
+
 						using = fontsize_medium
+
 						max_width = 170
+
 						elide = right
+
 					}
+
 					textbox = {
+
 						block "state_completed" { visible = no }
+
 						text = "sp_ct_state_completed"
+
 						autoresize = yes
+
 						align = left|nobaseline
+
 						using = fontsize_small
+
 						default_format = "#G"
+
 					}
+
 					textbox = {
+
 						block "state_active" { visible = no }
+
 						text = "sp_ct_state_active"
+
 						autoresize = yes
+
 						align = left|nobaseline
+
 						using = fontsize_small
+
 						default_format = "#Y"
+
 					}
+
 					textbox = {
+
 						block "state_available" { visible = no }
+
 						text = "sp_ct_state_available"
+
 						autoresize = yes
+
 						align = left|nobaseline
+
 						using = fontsize_small
+
 					}
+
 					textbox = {
+
 						block "state_locked" { visible = no }
+
 						text = "sp_ct_state_locked"
+
 						autoresize = yes
+
 						align = left|nobaseline
+
 						using = fontsize_small
+
 						default_format = "#I"
+
 					}
+
 				}
+
 			}
+
 		}
+
 	}
+
+
 
 	type sp_ct_node_compact = widget {
+
 		size = { @sp_ct_compact_width @sp_ct_compact_height }
+
 		parentanchor = hcenter
+
+
 
 		button = {
+
 			size = { 100% 100% }
+
 			using = default_button_action
+
 			using = confirm_button_sound
+
 			block "node_onclick" { onclick = "[GetPlayer.IsValid]" }
 
+
+
 			background = {
+
 				using = dark_area
+
 				alpha = 0.6
+
 			}
+
+
 
 			widget = {
+
 				size = { 100% 100% }
+
 				block "node_selected" { visible = no }
+
 				background = {
+
 					texture = "gfx/interface/buttons/default_button_mouseover.dds"
+
 					spriteType = Corneredstretched
+
 					spriteborder = { 0 0 }
+
 					blend_mode = colordodge
+
 					alpha = 0.5
+
 				}
+
 			}
+
+
 
 			vbox = {
+
 				parentanchor = center
+
 				spacing = 1
+
 				textbox = {
+
 					block "node_title" { text = "sp_ct_node_placeholder" }
+
 					autoresize = yes
+
 					align = hcenter|nobaseline
+
 					default_format = "#header"
+
 					using = fontsize_small
+
 					max_width = 170
+
 					elide = right
+
 				}
+
 				textbox = {
+
 					block "state_completed" { visible = no }
+
 					text = "sp_ct_state_completed"
+
 					autoresize = yes
+
 					align = hcenter|nobaseline
+
 					using = fontsize_small
+
 					default_format = "#G"
+
 				}
+
 				textbox = {
+
 					block "state_active" { visible = no }
+
 					text = "sp_ct_state_active"
+
 					autoresize = yes
+
 					align = hcenter|nobaseline
+
 					using = fontsize_small
+
 					default_format = "#Y"
+
 				}
+
 				textbox = {
+
 					block "state_available" { visible = no }
+
 					text = "sp_ct_state_available"
+
 					autoresize = yes
+
 					align = hcenter|nobaseline
+
 					using = fontsize_small
+
 				}
+
 				textbox = {
+
 					block "state_locked" { visible = no }
+
 					text = "sp_ct_state_locked"
+
 					autoresize = yes
+
 					align = hcenter|nobaseline
+
 					using = fontsize_small
+
 					default_format = "#I"
+
 				}
+
 			}
+
 		}
+
 	}
 
+
+
 	type sp_ct_connector_down = widget {
+
 		size = { 24 16 }
+
 		parentanchor = hcenter
+
 		textbox = {
+
 			parentanchor = center
-			raw_text = "▼"
+
+			raw_text = "?"
+
+			autoresize = yes
+
+			align = hcenter|nobaseline
+
+			using = fontsize_medium
+
+			default_format = "#I"
+
+		}
+
+	}
+
+
+	type sp_ct_insp_empty = flowcontainer {
+		direction = vertical
+		parentanchor = center
+		spacing = 8
+		textbox = {
+			text = "sp_ct_insp_empty_title"
+			autoresize = yes
+			align = hcenter|nobaseline
+			default_format = "#header"
+			using = fontsize_large
+		}
+		textbox = {
+			text = "sp_ct_insp_empty_desc"
 			autoresize = yes
 			align = hcenter|nobaseline
 			using = fontsize_medium
-			default_format = "#I"
+			max_width = 360
+			multiline = yes
 		}
 	}
+
 }
