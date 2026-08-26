@@ -5745,7 +5745,8 @@ types sp_campaign_tree_types {
 						texture = "gfx/interface/icons/event_icons/event_default.dds"
 					}
 				}
-				vbox = {
+				flowcontainer = {
+					direction = vertical
 					parentanchor = vcenter
 					layoutpolicy_horizontal = expanding
 					spacing = 1
@@ -5968,7 +5969,8 @@ types sp_campaign_tree_types {
 						texture = "gfx/interface/icons/event_icons/event_default.dds"
 					}
 				}
-				vbox = {
+				flowcontainer = {
+					direction = vertical
 					parentanchor = vcenter
 					layoutpolicy_horizontal = expanding
 					spacing = 1
@@ -6080,7 +6082,8 @@ types sp_campaign_tree_types {
 						texture = "gfx/interface/icons/event_icons/event_default.dds"
 					}
 				}
-				vbox = {
+				flowcontainer = {
+					direction = vertical
 					parentanchor = vcenter
 					layoutpolicy_horizontal = expanding
 					spacing = 1
@@ -6291,7 +6294,8 @@ types sp_campaign_tree_types {
 						texture = "gfx/interface/icons/event_icons/event_default.dds"
 					}
 				}
-				vbox = {
+				flowcontainer = {
+					direction = vertical
 					parentanchor = vcenter
 					layoutpolicy_horizontal = expanding
 					spacing = 1
