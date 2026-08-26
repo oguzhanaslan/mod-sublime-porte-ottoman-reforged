@@ -1,7 +1,7 @@
-# I-30 Campaign Tree — native fullscreen header (Phase F + visual pass).
+# I-30 Campaign Tree — native fullscreen header (Phase F + runtime fix).
 # Structural source: Victoria 3 1.13.11 block_windows.gui fullscreen_block_window
 # header row (L868–914): 70px band, back top|left {11 15}, close top|right {-11 15},
-# title hbox margin {250 0} for side-control clearance.
+# title hbox margin {250 0}, centered textbox size {0 50}.
 # Presentation only; onclick blocks are overridden from sp_campaign_tree_window.
 
 types sp_ct_header_types {
@@ -32,26 +32,17 @@ types sp_ct_header_types {
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
 			margin = { 250 0 }
-			margin_bottom = 4
+			margin_bottom = 8
 
-			hbox = {
-				parentanchor = center
-				spacing = 12
-
-				icon = {
-					size = { 48 48 }
-					parentanchor = vcenter
-					texture = "gfx/interface/icons/sp_campaign_tree/sp_ct_header_logo.dds"
-				}
-				textbox = {
-					text = "sp_ct_window_title"
-					autoresize = yes
-					parentanchor = vcenter
-					align = left|vcenter|nobaseline
-					default_format = "#header"
-					using = header_font_fancy
-					using = header_font_fancy_size
-				}
+			textbox = {
+				size = { 0 50 }
+				layoutpolicy_horizontal = expanding
+				fontsize_min = 14
+				using = header_font_fancy
+				using = header_font_fancy_size
+				text = "sp_ct_window_title"
+				default_format = "#header"
+				align = center|nobaseline
 			}
 		}
 	}
