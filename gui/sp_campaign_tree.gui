@@ -915,112 +915,156 @@ types sp_campaign_tree_types {
 						sp_ct_inspector_pilot_turan = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_identity = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_identity').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_ottomanism = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_islamism = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_ottomanism_s1 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_ottomanism_s1').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_ottomanism_s2 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_ottomanism_s2').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_ottomanism_s3 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_ottomanism_s3').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_ottomanism_s4 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_ottomanism_s4').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_constitutional_ottoman = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_constitutional_ottoman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_islamism_s1 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_islamism_s1').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_islamism_s2 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_islamism_s2').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_islamism_s3 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_islamism_s3').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_islamism_s4 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_islamism_s4').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_great_caliphate = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_great_caliphate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 
 						sp_ct_inspector_tanzimat = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_tanzimat').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_post_tanzimat = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_post_tanzimat').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_turkism = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_turan_s1 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_turan_s1').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_turan_s2 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_turan_s2').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_turan_s3 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_turan_s3').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_turan_s4 = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_turan_s4').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 
 						sp_ct_inspector_great_ottoman = {
 							visible = "[GetScriptedGui('sp_ct_vis_sel_great_ottoman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							layoutpolicy_vertical = expanding
+							layoutpolicy_horizontal = expanding
+							size = { 100% -1 }
 						}
 					}
 				}

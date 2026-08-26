@@ -1,9 +1,6 @@
 # I-30 Campaign Tree — shared presentation primitives (Phase A + visual pass).
 # Types register globally; callers in gui/sp_campaign_tree.gui keep the same type names.
 
-@sp_ct_insp_art_w = 520
-@sp_ct_insp_art_h = 260
-
 types sp_ct_shared_types {
 
 	type sp_ct_connector_trunk_v = widget {
