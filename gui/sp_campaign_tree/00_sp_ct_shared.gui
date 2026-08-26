@@ -1,0 +1,214 @@
+# I-30 Campaign Tree — shared presentation primitives (Phase A).
+# Types register globally; callers in gui/sp_campaign_tree.gui keep the same type names.
+# Load-order prefix 00_ mirrors CMF MPM_custom_types.gui pattern.
+
+@sp_ct_insp_art_w = 520
+@sp_ct_insp_art_h = 260
+
+types sp_ct_shared_types {
+
+	type sp_ct_connector_trunk_v = widget {
+		size = { 4 8 }
+		parentanchor = hcenter
+		background = {
+			texture = "gfx/interface/backgrounds/divider_gold.dds"
+			spriteType = Corneredstretched
+			spriteborder = { 0 0 }
+			alpha = 0.92
+		}
+	}
+
+	type sp_ct_connector_v = widget {
+		size = { 2 4 }
+		parentanchor = hcenter
+		background = {
+			texture = "gfx/interface/backgrounds/divider_gold.dds"
+			spriteType = Corneredstretched
+			spriteborder = { 0 0 }
+			alpha = 0.58
+		}
+	}
+
+	type sp_ct_connector_h = widget {
+		size = { 4 2 }
+		parentanchor = vcenter
+		background = {
+			texture = "gfx/interface/backgrounds/divider_gold.dds"
+			spriteType = Corneredstretched
+			spriteborder = { 0 0 }
+			alpha = 0.58
+		}
+	}
+
+	type sp_ct_branch_fork = widget {
+		size = { 992 10 }
+		parentanchor = hcenter
+		widget = {
+			size = { 992 3 }
+			parentanchor = top|hcenter
+			background = {
+				texture = "gfx/interface/backgrounds/divider_gold.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				alpha = 0.92
+			}
+		}
+		widget = {
+			size = { 2 7 }
+			position = { 160 3 }
+			background = {
+				texture = "gfx/interface/backgrounds/divider_gold.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				alpha = 0.58
+			}
+		}
+		widget = {
+			size = { 2 7 }
+			position = { 496 3 }
+			background = {
+				texture = "gfx/interface/backgrounds/divider_gold.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				alpha = 0.58
+			}
+		}
+		widget = {
+			size = { 2 7 }
+			position = { 832 3 }
+			background = {
+				texture = "gfx/interface/backgrounds/divider_gold.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				alpha = 0.58
+			}
+		}
+	}
+
+	type sp_ct_insp_section_header = widget {
+		size = { 100% 28 }
+		margin_top = 6
+		margin_bottom = 2
+		background = {
+			using = default_header_bg_faded
+		}
+		textbox = {
+			block "section_title" { text = "sp_ct_node_placeholder" }
+			parentanchor = left|vcenter
+			margin_left = 10
+			autoresize = yes
+			align = left|vcenter|nobaseline
+			default_format = "#title"
+			using = fontsize_small
+		}
+	}
+
+	type sp_ct_insp_req_row = widget {
+		size = { 100% 26 }
+		background = {
+			using = entry_bg_simple
+		}
+		textbox = {
+			block "req_label" { text = "sp_ct_node_placeholder" }
+			block "req_tooltip" {}
+			parentanchor = vcenter
+			margin_left = 28
+			margin_right = 80
+			autoresize = yes
+			align = left|vcenter|nobaseline
+			using = fontsize_small
+			max_width = 360
+			elide = right
+		}
+		widget = {
+			size = { 100% 100% }
+			block "req_met_icon" { visible = no }
+			icon = {
+				size = { 16 16 }
+				parentanchor = left|vcenter
+				position = { 8 0 }
+				texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
+			}
+			textbox = {
+				parentanchor = right|vcenter
+				position = { -8 0 }
+				text = "sp_ct_req_met"
+				autoresize = yes
+				align = right|vcenter|nobaseline
+				using = fontsize_small
+				default_format = "#G"
+			}
+		}
+		widget = {
+			size = { 100% 100% }
+			block "req_fail_icon" { visible = no }
+			icon = {
+				size = { 16 16 }
+				parentanchor = left|vcenter
+				position = { 8 0 }
+				texture = "gfx/interface/icons/generic_icons/red_cross.dds"
+			}
+			textbox = {
+				parentanchor = right|vcenter
+				position = { -8 0 }
+				text = "sp_ct_req_missing"
+				autoresize = yes
+				align = right|vcenter|nobaseline
+				using = fontsize_small
+			}
+		}
+	}
+
+	type sp_ct_insp_divider = widget {
+		size = { 100% 3 }
+		margin_top = 8
+		margin_bottom = 4
+		divider_gold = {}
+	}
+
+	type sp_ct_insp_stat_row = widget {
+		size = { 100% 26 }
+		background = {
+			using = entry_bg_simple
+		}
+		icon = {
+			size = { 20 20 }
+			parentanchor = left|vcenter
+			position = { 8 0 }
+			block "stat_icon" {
+				texture = "gfx/interface/icons/generic_icons/prestige.dds"
+			}
+		}
+		textbox = {
+			block "stat_label" { text = "sp_ct_node_placeholder" }
+			parentanchor = vcenter
+			margin_left = 32
+			margin_right = 100
+			autoresize = yes
+			align = left|vcenter|nobaseline
+			using = fontsize_small
+		}
+		textbox = {
+			block "stat_value" { text = "sp_ct_node_placeholder" }
+			parentanchor = right|vcenter
+			position = { -8 0 }
+			autoresize = yes
+			align = right|vcenter|nobaseline
+			using = fontsize_small
+			default_format = "#v"
+		}
+	}
+
+	type sp_ct_insp_progress_card = widget {
+		size = { 100% -1 }
+		background = {
+			using = entry_bg_simple
+		}
+		flowcontainer = {
+			direction = horizontal
+			spacing = 8
+			margin = { 10 8 }
+			block "progress_card_content" {}
+		}
+	}
+}
