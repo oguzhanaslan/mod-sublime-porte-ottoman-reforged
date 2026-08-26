@@ -1,4 +1,4 @@
-# I-30 Campaign Tree — inspector components (Phase D1).
+# I-30 Campaign Tree — inspector components (Phase D1 + D2A).
 # Scroll pattern: block_windows.gui default_block_window scrollarea (L525–569)
 # + fullscreen_scrollarea expanding policies (L927–953).
 # Reuses sp_ct_insp_req_row, sp_ct_insp_stat_row, sp_ct_insp_progress_card from 00_sp_ct_shared.gui.
@@ -161,6 +161,466 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 8
 					minimumsize = { 500 -1 }
+				}
+			}
+		}
+	}
+
+	# Phase D2A — Imperial Identity.
+	type sp_ct_inspector_identity = widget {
+		size = { 100% -1 }
+		layoutpolicy_vertical = expanding
+		minimumsize = { 500 -1 }
+
+		vbox = {
+			size = { 100% 100% }
+			layoutpolicy_vertical = expanding
+			spacing = 8
+
+			sp_ct_insp_artwork_band = {
+				blockoverride "artwork_texture" {
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_identity.dds"
+				}
+			}
+
+			sp_ct_insp_status_header = {
+				blockoverride "insp_title" { text = "sp_ct_node_identity" }
+				blockoverride "insp_status_completed" { visible = "[GetScriptedGui('sp_ct_vis_identity_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+				blockoverride "insp_status_active" { visible = no }
+				blockoverride "insp_status_available" { visible = "[GetScriptedGui('sp_ct_vis_identity_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_identity_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+			}
+
+			widget = {
+				flowcontainer = {
+					direction = vertical
+					spacing = 4
+					textbox = {
+						text = "sp_ct_sec_description"
+						autoresize = yes
+						align = left|nobaseline
+						default_format = "#title"
+						using = fontsize_small
+					}
+					textbox = {
+						text = "sp_ct_insp_identity_desc"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						max_width = 500
+						multiline = yes
+					}
+					textbox = {
+						text = "sp_ct_sec_flavor"
+						autoresize = yes
+						align = left|nobaseline
+						default_format = "#title"
+						using = fontsize_small
+						margin_top = 4
+					}
+					textbox = {
+						text = "sp_ct_insp_identity_flavor"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						max_width = 500
+						multiline = yes
+					}
+				}
+			}
+
+			sp_ct_insp_scroll_panel = {
+				blockoverride "scroll_content" {
+					flowcontainer = {
+						direction = vertical
+						spacing = 8
+						minimumsize = { 500 -1 }
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
+							blockoverride "section_body" {
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_completion" }
+							blockoverride "section_body" {
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_identity_chosen').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_identity_chosen').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_identity_chosen" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_identity_chosen_tt" }
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_path" }
+							blockoverride "section_body" {
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_path_ottomanism" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_ottomanism_tt" }
+								}
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_path_islamism" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_islamism_tt" }
+								}
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_path_turkism" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_turkism_tt" }
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
+							blockoverride "section_body" {
+								textbox = {
+									text = "sp_ct_insp_identity_rewards"
+									tooltip = "sp_ct_insp_identity_rewards_tt"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
+							blockoverride "section_body" {
+								textbox = {
+									text = "sp_ct_nav_prev_post_tanzimat"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+								textbox = {
+									text = "sp_ct_nav_next_identity_paths"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	# Phase D2A — Ottomanism path hub.
+	type sp_ct_inspector_ottomanism = widget {
+		size = { 100% -1 }
+		layoutpolicy_vertical = expanding
+		minimumsize = { 500 -1 }
+
+		vbox = {
+			size = { 100% 100% }
+			layoutpolicy_vertical = expanding
+			spacing = 8
+
+			sp_ct_insp_artwork_band = {
+				blockoverride "artwork_texture" {
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+				}
+			}
+
+			sp_ct_insp_status_header = {
+				blockoverride "insp_title" { text = "sp_ct_node_ottomanism" }
+				blockoverride "insp_status_completed" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+				blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+				blockoverride "insp_status_available" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+			}
+
+			widget = {
+				flowcontainer = {
+					direction = vertical
+					spacing = 4
+					textbox = {
+						text = "sp_ct_sec_description"
+						autoresize = yes
+						align = left|nobaseline
+						default_format = "#title"
+						using = fontsize_small
+					}
+					textbox = {
+						text = "sp_ct_insp_ottomanism_desc"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						max_width = 500
+						multiline = yes
+					}
+					textbox = {
+						text = "sp_ct_sec_flavor"
+						autoresize = yes
+						align = left|nobaseline
+						default_format = "#title"
+						using = fontsize_small
+						margin_top = 4
+					}
+					textbox = {
+						text = "sp_ct_insp_ottomanism_flavor"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						max_width = 500
+						multiline = yes
+					}
+				}
+			}
+
+			sp_ct_insp_scroll_panel = {
+				blockoverride "scroll_content" {
+					flowcontainer = {
+						direction = vertical
+						spacing = 8
+						minimumsize = { 500 -1 }
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
+							blockoverride "section_body" {
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_completion" }
+							blockoverride "section_body" {
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_path_ottomanism" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_ottomanism_tt" }
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_path" }
+							blockoverride "section_body" {
+								textbox = {
+									text = "sp_ct_insp_ottomanism_path"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
+							blockoverride "section_body" {
+								textbox = {
+									text = "sp_ct_insp_ottomanism_rewards"
+									tooltip = "sp_ct_insp_ottomanism_rewards_tt"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
+							blockoverride "section_body" {
+								textbox = {
+									text = "sp_ct_nav_prev_identity"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+								textbox = {
+									text = "sp_ct_nav_next_ottomanism_stages"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	# Phase D2A — Islamism path hub.
+	type sp_ct_inspector_islamism = widget {
+		size = { 100% -1 }
+		layoutpolicy_vertical = expanding
+		minimumsize = { 500 -1 }
+
+		vbox = {
+			size = { 100% 100% }
+			layoutpolicy_vertical = expanding
+			spacing = 8
+
+			sp_ct_insp_artwork_band = {
+				blockoverride "artwork_texture" {
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+				}
+			}
+
+			sp_ct_insp_status_header = {
+				blockoverride "insp_title" { text = "sp_ct_node_islamism" }
+				blockoverride "insp_status_completed" { visible = "[GetScriptedGui('sp_ct_vis_islamism_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+				blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_islamism_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+				blockoverride "insp_status_available" { visible = "[GetScriptedGui('sp_ct_vis_islamism_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_islamism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+			}
+
+			widget = {
+				flowcontainer = {
+					direction = vertical
+					spacing = 4
+					textbox = {
+						text = "sp_ct_sec_description"
+						autoresize = yes
+						align = left|nobaseline
+						default_format = "#title"
+						using = fontsize_small
+					}
+					textbox = {
+						text = "sp_ct_insp_islamism_desc"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						max_width = 500
+						multiline = yes
+					}
+					textbox = {
+						text = "sp_ct_sec_flavor"
+						autoresize = yes
+						align = left|nobaseline
+						default_format = "#title"
+						using = fontsize_small
+						margin_top = 4
+					}
+					textbox = {
+						text = "sp_ct_insp_islamism_flavor"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						max_width = 500
+						multiline = yes
+					}
+				}
+			}
+
+			sp_ct_insp_scroll_panel = {
+				blockoverride "scroll_content" {
+					flowcontainer = {
+						direction = vertical
+						spacing = 8
+						minimumsize = { 500 -1 }
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
+							blockoverride "section_body" {
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_completion" }
+							blockoverride "section_body" {
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_path_islamism" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_islamism_tt" }
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_path" }
+							blockoverride "section_body" {
+								textbox = {
+									text = "sp_ct_insp_islamism_path"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
+							blockoverride "section_body" {
+								textbox = {
+									text = "sp_ct_insp_islamism_rewards"
+									tooltip = "sp_ct_insp_islamism_rewards_tt"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
+							blockoverride "section_body" {
+								textbox = {
+									text = "sp_ct_nav_prev_identity"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+								textbox = {
+									text = "sp_ct_nav_next_islamism_stages"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+							}
+						}
+					}
 				}
 			}
 		}
