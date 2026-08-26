@@ -198,14 +198,14 @@ types sp_ct_shared_types {
 
 	# Live progress meter — Turan stage bindings (I-28 presentation only).
 	type sp_ct_insp_progress_turan_live = widget {
-		size = { 100% -1 }
+		layoutpolicy_horizontal = expanding
 		visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
 		sp_ct_insp_progress_card = {}
 	}
 
 	# Live progress meter — Islamism stage bindings.
 	type sp_ct_insp_progress_islamism_live = widget {
-		size = { 100% -1 }
+		layoutpolicy_horizontal = expanding
 		visible = "[And(GetPlayer.MakeScope.Var('sp_islamism_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_islamism_stage_goal').IsSet)]"
 		background = {
 			using = entry_bg_simple
@@ -246,7 +246,7 @@ types sp_ct_shared_types {
 	}
 
 	type sp_ct_insp_progress_card = widget {
-		size = { 100% -1 }
+		layoutpolicy_horizontal = expanding
 		background = {
 			using = entry_bg_simple
 		}
