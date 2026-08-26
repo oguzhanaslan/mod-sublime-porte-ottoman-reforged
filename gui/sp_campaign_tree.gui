@@ -244,7 +244,7 @@ types sp_campaign_tree_types {
 								}
 							}
 							sp_ct_connector_trunk_v = {}
-							sp_ct_node_major = {
+							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_identity').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
