@@ -1,0 +1,436 @@
+﻿# I-28 claim grants and stage progress recount.
+
+sp_i28_grant_stage_1_claims = {
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_AZERBAIJAN
+				owns_entire_state_region = STATE_AZERBAIJAN
+			}
+		}
+		s:STATE_AZERBAIJAN = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_ELIZAVETPOL
+				owns_entire_state_region = STATE_ELIZAVETPOL
+			}
+		}
+		s:STATE_ELIZAVETPOL = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_TABRIZ
+				owns_entire_state_region = STATE_TABRIZ
+			}
+		}
+		s:STATE_TABRIZ = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_URMIA
+				owns_entire_state_region = STATE_URMIA
+			}
+		}
+		s:STATE_URMIA = { add_claim = ROOT }
+	}
+}
+
+sp_i28_grant_stage_2_claims = {
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_IRAKAJEMI
+				owns_entire_state_region = STATE_IRAKAJEMI
+			}
+		}
+		s:STATE_IRAKAJEMI = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_ISFAHAN
+				owns_entire_state_region = STATE_ISFAHAN
+			}
+		}
+		s:STATE_ISFAHAN = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_FARS
+				owns_entire_state_region = STATE_FARS
+			}
+		}
+		s:STATE_FARS = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_KERMAN
+				owns_entire_state_region = STATE_KERMAN
+			}
+		}
+		s:STATE_KERMAN = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_KHORASAN
+				owns_entire_state_region = STATE_KHORASAN
+			}
+		}
+		s:STATE_KHORASAN = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_MAZANDARAN
+				owns_entire_state_region = STATE_MAZANDARAN
+			}
+		}
+		s:STATE_MAZANDARAN = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_SEMNAN
+				owns_entire_state_region = STATE_SEMNAN
+			}
+		}
+		s:STATE_SEMNAN = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_LARISTAN
+				owns_entire_state_region = STATE_LARISTAN
+			}
+		}
+		s:STATE_LARISTAN = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_LURISTAN
+				owns_entire_state_region = STATE_LURISTAN
+			}
+		}
+		s:STATE_LURISTAN = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_PERSIAN_KURDISTAN
+				owns_entire_state_region = STATE_PERSIAN_KURDISTAN
+			}
+		}
+		s:STATE_PERSIAN_KURDISTAN = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_KHUZESTAN
+				owns_entire_state_region = STATE_KHUZESTAN
+			}
+		}
+		s:STATE_KHUZESTAN = { add_claim = ROOT }
+	}
+}
+
+sp_i28_grant_stage_3_claims = {
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_TURKMENIA
+				owns_entire_state_region = STATE_TURKMENIA
+			}
+		}
+		s:STATE_TURKMENIA = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_MERZ
+				owns_entire_state_region = STATE_MERZ
+			}
+		}
+		s:STATE_MERZ = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_KHIVA
+				owns_entire_state_region = STATE_KHIVA
+			}
+		}
+		s:STATE_KHIVA = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_UZBEKIA
+				owns_entire_state_region = STATE_UZBEKIA
+			}
+		}
+		s:STATE_UZBEKIA = { add_claim = ROOT }
+	}
+}
+
+sp_i28_grant_stage_4a_claims = {
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_FERGANA
+				owns_entire_state_region = STATE_FERGANA
+			}
+		}
+		s:STATE_FERGANA = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_KIRGHIZIA
+				owns_entire_state_region = STATE_KIRGHIZIA
+			}
+		}
+		s:STATE_KIRGHIZIA = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_SYRDARYA
+				owns_entire_state_region = STATE_SYRDARYA
+			}
+		}
+		s:STATE_SYRDARYA = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_AKTOBE
+				owns_entire_state_region = STATE_AKTOBE
+			}
+		}
+		s:STATE_AKTOBE = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_AKMOLINSK
+				owns_entire_state_region = STATE_AKMOLINSK
+			}
+		}
+		s:STATE_AKMOLINSK = { add_claim = ROOT }
+	}
+}
+
+sp_i28_grant_stage_4b_claims = {
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_URALSK
+				owns_entire_state_region = STATE_URALSK
+			}
+		}
+		s:STATE_URALSK = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_SEMIRECHE
+				owns_entire_state_region = STATE_SEMIRECHE
+			}
+		}
+		s:STATE_SEMIRECHE = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_JETISY
+				owns_entire_state_region = STATE_JETISY
+			}
+		}
+		s:STATE_JETISY = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_DZUNGARIA
+				owns_entire_state_region = STATE_DZUNGARIA
+			}
+		}
+		s:STATE_DZUNGARIA = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_claim = s:STATE_TIANSHAN
+				owns_entire_state_region = STATE_TIANSHAN
+			}
+		}
+		s:STATE_TIANSHAN = { add_claim = ROOT }
+	}
+}
+
+sp_i28_recount_stage_progress = {
+	set_variable = {
+		name = sp_turan_stage_progress
+		value = 0
+	}
+	if = {
+		limit = { var:sp_turan_stage = 1 }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_AZERBAIJAN }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_ELIZAVETPOL }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_TABRIZ }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_URMIA }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+	}
+	else_if = {
+		limit = { var:sp_turan_stage = 2 }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_IRAKAJEMI }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_ISFAHAN }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_FARS }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_KERMAN }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_KHORASAN }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_MAZANDARAN }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_SEMNAN }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_LARISTAN }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_LURISTAN }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_PERSIAN_KURDISTAN }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_KHUZESTAN }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+	}
+	else_if = {
+		limit = { var:sp_turan_stage = 3 }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_TURKMENIA }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_MERZ }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_KHIVA }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_UZBEKIA }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+	}
+	else_if = {
+		limit = { var:sp_turan_stage = 4 }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_FERGANA }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_KIRGHIZIA }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_SYRDARYA }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_AKTOBE }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_AKMOLINSK }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_URALSK }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_SEMIRECHE }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_JETISY }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_DZUNGARIA }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_TIANSHAN }
+			change_variable = { name = sp_turan_stage_progress add = 1 }
+		}
+	}
+}
+
+sp_i28_try_add_turan_je = {
+	if = {
+		limit = {
+			sp_i28_turan_eligible = yes
+			NOT = { has_journal_entry = sp_je_turanian_ideal }
+		}
+		add_journal_entry = {
+			type = sp_je_turanian_ideal
+		}
+	}
+}
+
+sp_i28_finalize_turan_reward = {
+	set_variable = sp_turan_ideal_complete
+	set_variable = {
+		name = sp_turan_stage
+		value = 6
+	}
+	add_modifier = {
+		name = sp_unifier_of_turan
+		months = -1
+	}
+}

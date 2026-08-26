@@ -1,0 +1,164 @@
+﻿# I-28 umbrella gameplay JE — The Turanian Ideal / Turan Ülküsü
+
+sp_je_turanian_ideal = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+	weight = 10000
+	should_be_pinned_by_default_uninvolved_or_context = yes
+
+	is_shown_when_inactive = {
+		sp_i28_turan_eligible = yes
+	}
+
+	possible = {
+		sp_i28_turan_eligible = yes
+	}
+
+	immediate = {
+		set_variable = {
+			name = sp_turan_stage
+			value = 1
+		}
+		set_variable = {
+			name = sp_turan_stage_goal
+			value = 4
+		}
+		set_variable = {
+			name = sp_turan_stage_progress
+			value = 0
+		}
+		sp_i28_grant_stage_1_claims = yes
+		sp_i28_recount_stage_progress = yes
+		trigger_event = {
+			id = sp_i28.2
+			popup = yes
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_turan_stage_4_done
+					NOT = { has_variable = sp_turan_ideal_complete }
+				}
+				desc = sp_je_turanian_ideal_status_final
+			}
+			triggered_desc = {
+				trigger = { var:sp_turan_stage = 4 }
+				desc = sp_je_turanian_ideal_status_stage_4
+			}
+			triggered_desc = {
+				trigger = { var:sp_turan_stage = 3 }
+				desc = sp_je_turanian_ideal_status_stage_3
+			}
+			triggered_desc = {
+				trigger = { var:sp_turan_stage = 2 }
+				desc = sp_je_turanian_ideal_status_stage_2
+			}
+			desc = sp_je_turanian_ideal_status_stage_1
+		}
+	}
+
+	current_value = {
+		value = var:sp_turan_stage_progress
+	}
+
+	goal_add_value = {
+		value = var:sp_turan_stage_goal
+	}
+
+	progressbar = yes
+
+	complete = {
+		has_variable = sp_turan_ideal_complete
+	}
+
+	on_complete = {
+		custom_tooltip = sp_je_turanian_ideal_complete_tt
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			AND = {
+				NOT = { has_variable = sp_turkism_selected }
+				NOT = { has_variable = sp_turan_ideal_complete }
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			sp_i28_recount_stage_progress = yes
+
+			# Stage 4 second claim wave
+			if = {
+				limit = {
+					var:sp_turan_stage = 4
+					NOT = { has_variable = sp_turan_claims_4b_granted }
+				}
+				change_variable = {
+					name = sp_turan_stage4_months
+					add = 1
+				}
+				if = {
+					limit = {
+						OR = {
+							var:sp_turan_stage_progress >= 3
+							var:sp_turan_stage4_months >= 60
+						}
+					}
+					sp_i28_grant_stage_4b_claims = yes
+					set_variable = sp_turan_claims_4b_granted
+				}
+			}
+
+			# Stage advances (one-shot via done flags)
+			if = {
+				limit = {
+					var:sp_turan_stage = 1
+					NOT = { has_variable = sp_turan_stage_1_done }
+					sp_i28_stage_1_complete = yes
+				}
+				trigger_event = {
+					id = sp_i28.10
+					popup = yes
+				}
+			}
+			else_if = {
+				limit = {
+					var:sp_turan_stage = 2
+					NOT = { has_variable = sp_turan_stage_2_done }
+					sp_i28_stage_2_complete = yes
+				}
+				trigger_event = {
+					id = sp_i28.11
+					popup = yes
+				}
+			}
+			else_if = {
+				limit = {
+					var:sp_turan_stage = 3
+					NOT = { has_variable = sp_turan_stage_3_done }
+					sp_i28_stage_3_complete = yes
+				}
+				trigger_event = {
+					id = sp_i28.12
+					popup = yes
+				}
+			}
+			else_if = {
+				limit = {
+					var:sp_turan_stage = 4
+					NOT = { has_variable = sp_turan_stage_4_done }
+					sp_i28_stage_4_complete = yes
+				}
+				trigger_event = {
+					id = sp_i28.20
+					popup = yes
+				}
+			}
+		}
+	}
+}

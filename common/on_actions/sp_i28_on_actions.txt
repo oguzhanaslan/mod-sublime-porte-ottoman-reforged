@@ -1,0 +1,16 @@
+﻿# I-28 additive pulses. Do not edit other feature on_action files.
+
+on_yearly_pulse_country = {
+	on_actions = {
+		sp_i28_yearly_pulse
+	}
+}
+
+sp_i28_yearly_pulse = {
+	events = {
+		sp_i28.1
+	}
+	effect = {
+		sp_i28_try_add_turan_je = yes
+	}
+}

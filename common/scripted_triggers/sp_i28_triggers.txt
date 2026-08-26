@@ -1,0 +1,59 @@
+﻿# I-28 Turanian Ideal — scripted triggers.
+# Reads I-05/I-06/I-18 vars; does not redefine them.
+
+sp_i28_post_tanzimat = {
+	OR = {
+		has_variable = sick_man_complete
+		sp_i18_has_domestic_tanzimat_reform = yes
+		has_variable = completed_sick_man_bureaucracy_je
+		has_variable = completed_sick_man_education_je
+		has_variable = completed_sick_man_army_je
+		has_variable = completed_sick_man_economy_je
+		has_variable = completed_separatism_sick_man_je
+	}
+}
+
+sp_i28_identity_unset = {
+	NOR = {
+		has_variable = sp_imperial_identity_chosen
+		has_variable = sp_ottomanism_selected
+		has_variable = sp_islamism_selected
+		has_variable = sp_turkism_selected
+	}
+}
+
+sp_i28_identity_eligible = {
+	c:TUR ?= this
+	sp_i28_post_tanzimat = yes
+	sp_i28_identity_unset = yes
+}
+
+sp_i28_turan_eligible = {
+	c:TUR ?= this
+	has_variable = sp_turkism_selected
+	has_technology_researched = pan-nationalism
+	sp_i28_post_tanzimat = yes
+	NOT = { has_variable = sp_turan_ideal_complete }
+}
+
+sp_i28_stage_1_complete = {
+	country_or_subject_owns_entire_state_region = STATE_AZERBAIJAN
+	country_or_subject_owns_entire_state_region = STATE_ELIZAVETPOL
+	country_or_subject_owns_entire_state_region = STATE_TABRIZ
+	country_or_subject_owns_entire_state_region = STATE_URMIA
+}
+
+sp_i28_stage_2_complete = {
+	var:sp_turan_stage_progress >= 9
+}
+
+sp_i28_stage_3_complete = {
+	country_or_subject_owns_entire_state_region = STATE_TURKMENIA
+	country_or_subject_owns_entire_state_region = STATE_MERZ
+	country_or_subject_owns_entire_state_region = STATE_KHIVA
+	country_or_subject_owns_entire_state_region = STATE_UZBEKIA
+}
+
+sp_i28_stage_4_complete = {
+	var:sp_turan_stage_progress >= 8
+}

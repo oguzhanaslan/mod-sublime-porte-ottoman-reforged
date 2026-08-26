@@ -1,0 +1,26 @@
+﻿# I-28 Great Ottoman Empire dynamic name.
+# Tiger requires REPLACE: to redefine TUR names. This block preserves vanilla
+# Ottoman Empire monarchy naming and adds Great Ottoman when proclaimed.
+# Country is never named Turan.
+
+REPLACE:TUR = {
+	dynamic_country_name = {
+		name = dyn_c_sp_great_ottoman_empire
+		adjective = dyn_c_sp_great_ottoman_empire_adj
+		is_main_tag_only = yes
+		priority = 100
+		trigger = {
+			has_variable = sp_great_ottoman_empire_proclaimed
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_ottoman_empire
+		adjective = dyn_c_ottoman_empire_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+			NOT = { has_variable = sp_great_ottoman_empire_proclaimed }
+		}
+	}
+}

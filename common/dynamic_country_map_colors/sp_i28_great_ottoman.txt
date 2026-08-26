@@ -1,0 +1,10 @@
+﻿# I-28 optional Great Ottoman map color (tag TUR unchanged).
+
+sp_great_ottoman_empire_map_color = {
+	color = "burgundy_burgundy"
+	possible = {
+		exists = c:TUR
+		c:TUR ?= THIS
+		has_variable = sp_great_ottoman_empire_proclaimed
+	}
+}

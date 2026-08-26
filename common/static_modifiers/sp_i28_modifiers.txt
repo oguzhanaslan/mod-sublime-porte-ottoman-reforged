@@ -1,0 +1,11 @@
+﻿# I-28 permanent Unifier of Turan prestige reward (modest).
+
+sp_unifier_of_turan = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_prestige_add = 20
+}
+
+sp_i28_stage_complete_prestige = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_add = 10
+}

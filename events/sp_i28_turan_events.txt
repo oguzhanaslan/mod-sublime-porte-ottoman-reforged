@@ -1,0 +1,277 @@
+﻿namespace = sp_i28
+
+# 1 — Post-Tanzimat imperial identity choice (one-shot).
+sp_i28.1 = {
+	type = country_event
+	placement = root
+	title = sp_i28.1.t
+	desc = sp_i28.1.d
+	flavor = sp_i28.1.f
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i28_identity_eligible = yes
+	}
+
+	immediate = {
+		set_variable = sp_imperial_identity_chosen
+	}
+
+	option = {
+		name = sp_i28.1.a
+		default_option = yes
+		set_variable = sp_ottomanism_selected
+		custom_tooltip = sp_i28.1.a_tt
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = {
+		name = sp_i28.1.b
+		set_variable = sp_islamism_selected
+		custom_tooltip = sp_i28.1.b_tt
+		ai_chance = {
+			base = 30
+		}
+	}
+
+	option = {
+		name = sp_i28.1.c
+		set_variable = sp_turkism_selected
+		custom_tooltip = sp_i28.1.c_tt
+		sp_i28_try_add_turan_je = yes
+		ai_chance = {
+			base = 0
+			modifier = {
+				trigger = {
+					country_rank >= rank_value:great_power
+					has_technology_researched = pan-nationalism
+					ig:ig_armed_forces ?= {
+						is_powerful = yes
+					}
+				}
+				add = 5
+			}
+		}
+	}
+}
+
+# 2 — Turanian Ideal opened (JE immediate toast).
+sp_i28.2 = {
+	type = country_event
+	placement = root
+	title = sp_i28.2.t
+	desc = sp_i28.2.d
+	flavor = sp_i28.2.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		always = yes
+	}
+
+	option = {
+		name = sp_i28.2.a
+		default_option = yes
+		custom_tooltip = sp_i28.2.a_tt
+	}
+}
+
+# 10 — Stage 1 complete → Stage 2.
+sp_i28.10 = {
+	type = country_event
+	placement = root
+	title = sp_i28.10.t
+	desc = sp_i28.10.d
+	flavor = sp_i28.10.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		var:sp_turan_stage = 1
+		NOT = { has_variable = sp_turan_stage_1_done }
+		sp_i28_stage_1_complete = yes
+	}
+
+	immediate = {
+		set_variable = sp_turan_stage_1_done
+		set_variable = {
+			name = sp_turan_stage
+			value = 2
+		}
+		set_variable = {
+			name = sp_turan_stage_goal
+			value = 9
+		}
+		sp_i28_grant_stage_2_claims = yes
+		sp_i28_recount_stage_progress = yes
+	}
+
+	option = {
+		name = sp_i28.10.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i28_stage_complete_prestige
+			months = 60
+		}
+	}
+}
+
+# 11 — Stage 2 complete → Stage 3.
+sp_i28.11 = {
+	type = country_event
+	placement = root
+	title = sp_i28.11.t
+	desc = sp_i28.11.d
+	flavor = sp_i28.11.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+	event_image = {
+		video = "middleeast_islam"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		var:sp_turan_stage = 2
+		NOT = { has_variable = sp_turan_stage_2_done }
+		sp_i28_stage_2_complete = yes
+	}
+
+	immediate = {
+		set_variable = sp_turan_stage_2_done
+		set_variable = {
+			name = sp_turan_stage
+			value = 3
+		}
+		set_variable = {
+			name = sp_turan_stage_goal
+			value = 4
+		}
+		sp_i28_grant_stage_3_claims = yes
+		sp_i28_recount_stage_progress = yes
+	}
+
+	option = {
+		name = sp_i28.11.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i28_stage_complete_prestige
+			months = 60
+		}
+	}
+}
+
+# 12 — Stage 3 complete → Stage 4.
+sp_i28.12 = {
+	type = country_event
+	placement = root
+	title = sp_i28.12.t
+	desc = sp_i28.12.d
+	flavor = sp_i28.12.f
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		var:sp_turan_stage = 3
+		NOT = { has_variable = sp_turan_stage_3_done }
+		sp_i28_stage_3_complete = yes
+	}
+
+	immediate = {
+		set_variable = sp_turan_stage_3_done
+		set_variable = {
+			name = sp_turan_stage
+			value = 4
+		}
+		set_variable = {
+			name = sp_turan_stage_goal
+			value = 8
+		}
+		set_variable = {
+			name = sp_turan_stage4_months
+			value = 0
+		}
+		sp_i28_grant_stage_4a_claims = yes
+		sp_i28_recount_stage_progress = yes
+	}
+
+	option = {
+		name = sp_i28.12.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i28_stage_complete_prestige
+			months = 60
+		}
+	}
+}
+
+# 20 — Great Turan final choice.
+sp_i28.20 = {
+	type = country_event
+	placement = root
+	title = sp_i28.20.t
+	desc = sp_i28.20.d
+	flavor = sp_i28.20.f
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 7
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		var:sp_turan_stage = 4
+		NOT = { has_variable = sp_turan_stage_4_done }
+		sp_i28_stage_4_complete = yes
+	}
+
+	immediate = {
+		set_variable = sp_turan_stage_4_done
+		set_variable = {
+			name = sp_turan_stage
+			value = 5
+		}
+	}
+
+	option = {
+		name = sp_i28.20.a
+		default_option = yes
+		sp_i28_finalize_turan_reward = yes
+		custom_tooltip = sp_i28.20.a_tt
+		ai_chance = {
+			base = 70
+		}
+	}
+
+	option = {
+		name = sp_i28.20.b
+		set_variable = sp_great_ottoman_empire_proclaimed
+		sp_i28_finalize_turan_reward = yes
+		custom_tooltip = sp_i28.20.b_tt
+		ai_chance = {
+			base = 30
+		}
+	}
+}
