@@ -134,8 +134,12 @@ types sp_campaign_tree_types {
 					shortcut = "close_window"
 				}
 
-				flowcontainer = {
-					direction = horizontal
+				# Vanilla popup/fullscreen pattern: overlay back/close, independently
+				# centered content group. hbox sizes to children (preferred);
+				# parentanchor = center on that group, not on each child.
+				# Canonical: block_windows.gui default_popup header + journal.gui
+				# resizeparent lesson — do NOT resizeparent here (would shrink the strip).
+				hbox = {
 					parentanchor = center
 					spacing = 10
 					icon = {
@@ -481,7 +485,7 @@ types sp_campaign_tree_types {
 
 								flowcontainer = {
 									direction = vertical
-									spacing = 8
+									spacing = 6
 									minimumsize = { 320 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_identity = {
@@ -679,7 +683,7 @@ types sp_campaign_tree_types {
 
 								flowcontainer = {
 									direction = vertical
-									spacing = 8
+									spacing = 6
 									minimumsize = { 320 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_identity = {
@@ -985,7 +989,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1001,7 +1005,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1073,8 +1077,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -1194,7 +1198,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1210,7 +1214,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1290,8 +1294,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -1418,7 +1422,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1434,7 +1438,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1503,8 +1507,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -1557,7 +1561,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1573,7 +1577,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1632,8 +1636,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -1686,7 +1690,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1702,7 +1706,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1761,8 +1765,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -1816,7 +1820,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1832,7 +1836,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1890,7 +1894,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1906,7 +1910,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1964,7 +1968,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -1980,7 +1984,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2038,7 +2042,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2054,7 +2058,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2082,8 +2086,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -2136,7 +2140,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2152,7 +2156,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2210,7 +2214,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2226,7 +2230,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2284,7 +2288,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2300,7 +2304,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2358,7 +2362,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2374,7 +2378,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2402,8 +2406,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -2448,9 +2452,9 @@ types sp_campaign_tree_types {
 								blockoverride "insp_status_available" { visible = no }
 								blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 							}
-							textbox = { text = "sp_ct_sec_description" autoresize = yes align = left|nobaseline default_format = "#gold" using = fontsize_small margin_top = 8 }
+							textbox = { text = "sp_ct_sec_description" autoresize = yes align = left|nobaseline default_format = "#title" using = fontsize_small margin_top = 8 }
 							textbox = { text = "sp_ct_insp_constitutional_ottoman_desc" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
-							textbox = { text = "sp_ct_sec_flavor" autoresize = yes align = left|nobaseline default_format = "#gold" using = fontsize_small margin_top = 8 }
+							textbox = { text = "sp_ct_sec_flavor" autoresize = yes align = left|nobaseline default_format = "#title" using = fontsize_small margin_top = 8 }
 							textbox = { text = "sp_ct_insp_constitutional_ottoman_flavor" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
 							sp_ct_insp_section_header = {
 								blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -2505,9 +2509,9 @@ types sp_campaign_tree_types {
 								blockoverride "insp_status_available" { visible = no }
 								blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 							}
-							textbox = { text = "sp_ct_sec_description" autoresize = yes align = left|nobaseline default_format = "#gold" using = fontsize_small margin_top = 8 }
+							textbox = { text = "sp_ct_sec_description" autoresize = yes align = left|nobaseline default_format = "#title" using = fontsize_small margin_top = 8 }
 							textbox = { text = "sp_ct_insp_great_caliphate_desc" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
-							textbox = { text = "sp_ct_sec_flavor" autoresize = yes align = left|nobaseline default_format = "#gold" using = fontsize_small margin_top = 8 }
+							textbox = { text = "sp_ct_sec_flavor" autoresize = yes align = left|nobaseline default_format = "#title" using = fontsize_small margin_top = 8 }
 							textbox = { text = "sp_ct_insp_great_caliphate_flavor" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
 							sp_ct_insp_section_header = {
 								blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -2569,7 +2573,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2585,7 +2589,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2644,8 +2648,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -2698,7 +2702,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2714,7 +2718,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2824,8 +2828,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -2952,7 +2956,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2968,7 +2972,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -2988,8 +2992,8 @@ types sp_campaign_tree_types {
 									text = "sp_ct_sec_progress"
 									autoresize = yes
 									align = left|nobaseline
-									default_format = "#header"
-									using = fontsize_medium
+									default_format = "#title"
+									using = fontsize_small
 								}
 								flowcontainer = {
 									direction = horizontal
@@ -3052,8 +3056,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -3180,7 +3184,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -3196,7 +3200,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -3216,8 +3220,8 @@ types sp_campaign_tree_types {
 									text = "sp_ct_sec_progress"
 									autoresize = yes
 									align = left|nobaseline
-									default_format = "#header"
-									using = fontsize_medium
+									default_format = "#title"
+									using = fontsize_small
 								}
 								flowcontainer = {
 									direction = horizontal
@@ -3332,8 +3336,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -3460,7 +3464,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -3476,7 +3480,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -3496,8 +3500,8 @@ types sp_campaign_tree_types {
 									text = "sp_ct_sec_progress"
 									autoresize = yes
 									align = left|nobaseline
-									default_format = "#header"
-									using = fontsize_medium
+									default_format = "#title"
+									using = fontsize_small
 								}
 								flowcontainer = {
 									direction = horizontal
@@ -3560,8 +3564,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -3688,7 +3692,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -3704,7 +3708,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -3724,8 +3728,8 @@ types sp_campaign_tree_types {
 									text = "sp_ct_sec_progress"
 									autoresize = yes
 									align = left|nobaseline
-									default_format = "#header"
-									using = fontsize_medium
+									default_format = "#title"
+									using = fontsize_small
 								}
 								flowcontainer = {
 									direction = horizontal
@@ -3835,8 +3839,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -3963,7 +3967,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_description"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -3979,7 +3983,7 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_flavor"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#gold"
+								default_format = "#title"
 								using = fontsize_small
 								margin_top = 8
 							}
@@ -4027,8 +4031,8 @@ types sp_campaign_tree_types {
 								text = "sp_ct_sec_navigation"
 								autoresize = yes
 								align = left|nobaseline
-								default_format = "#header"
-								using = fontsize_medium
+								default_format = "#title"
+								using = fontsize_small
 								margin_top = 12
 							}
 							textbox = {
@@ -4135,29 +4139,29 @@ types sp_campaign_tree_types {
 	}
 
 
+	# Card family shell: entry_bg_simple + simple_frame (vanilla backgrounds.gui).
+	# Click overlay: glow_button_border (buttons.gui; objectives screen).
+	# Selected: highlighted_square_selection (selections.gui).
 	type sp_ct_node_major = widget {
 		size = { 320 68 }
 		parentanchor = hcenter
+		background = {
+			using = entry_bg_simple
+		}
+		background = {
+			using = simple_frame
+		}
 
 		button = {
 			size = { 100% 100% }
-			using = default_button_action
+			using = glow_button_border
 			using = confirm_button_sound
+			using = tooltip_above
 			block "node_onclick" {
 				onclick = "[GetPlayer.IsValid]"
 			}
 			block "node_tooltip" {
 				tooltip = "sp_ct_node_placeholder_tt"
-			}
-			background = {
-				using = default_header_bg
-			}
-			widget = {
-				size = { 100% 100% }
-				background = {
-					using = dark_area
-					alpha = 0.46
-				}
 			}
 			widget = {
 				size = { 100% 100% }
@@ -4175,19 +4179,12 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.70
+					alpha = 0.45
 				}
 			}
-			widget = {
-				size = { 100% 100% }
+			icon = {
 				block "node_selected" { visible = no }
-				background = {
-					texture = "gfx/interface/buttons/default_button_mouseover.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					blend_mode = colordodge
-					alpha = 0.55
-				}
+				using = highlighted_square_selection
 			}
 			widget = {
 				size = { 100% 2 }
@@ -4202,6 +4199,7 @@ types sp_campaign_tree_types {
 
 			widget = {
 				size = { 100% 100% }
+				alwaystransparent = yes
 				flowcontainer = {
 					direction = horizontal
 					parentanchor = center
@@ -4225,41 +4223,77 @@ types sp_campaign_tree_types {
 							block "node_title" { text = "sp_ct_node_placeholder" }
 							autoresize = yes
 							align = left|nobaseline
-							default_format = "#header"
+							default_format = "#title"
 							using = fontsize_medium
 							max_width = 220
 							elide = right
 						}
-						textbox = {
+						widget = {
 							block "state_completed" { visible = no }
-							text = "sp_ct_state_completed"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#G"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#G"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_active" { visible = no }
-							text = "sp_ct_state_active"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#Y"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#Y"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_available" { visible = no }
-							text = "sp_ct_state_available"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_available"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_locked" { visible = no }
-							text = "sp_ct_state_locked"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#I"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#I"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
 					}
 				}
@@ -4271,26 +4305,23 @@ types sp_campaign_tree_types {
 	type sp_ct_node_identity = widget {
 		size = { 220 88 }
 		parentanchor = hcenter
+		background = {
+			using = entry_bg_simple
+		}
+		background = {
+			using = simple_frame
+		}
 
 		button = {
 			size = { 100% 100% }
-			using = default_button_action
+			using = glow_button_border
 			using = confirm_button_sound
+			using = tooltip_above
 			block "node_onclick" {
 				onclick = "[GetPlayer.IsValid]"
 			}
 			block "node_tooltip" {
 				tooltip = "sp_ct_node_placeholder_tt"
-			}
-			background = {
-				using = default_header_bg
-			}
-			widget = {
-				size = { 100% 100% }
-				background = {
-					using = dark_area
-					alpha = 0.50
-				}
 			}
 			widget = {
 				size = { 100% 100% }
@@ -4308,19 +4339,12 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.78
+					alpha = 0.55
 				}
 			}
-			widget = {
-				size = { 100% 100% }
+			icon = {
 				block "node_selected" { visible = no }
-				background = {
-					texture = "gfx/interface/buttons/default_button_mouseover.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					blend_mode = colordodge
-					alpha = 0.65
-				}
+				using = highlighted_square_selection
 			}
 
 			widget = {
@@ -4346,17 +4370,26 @@ types sp_campaign_tree_types {
 
 			widget = {
 				size = { 100% 100% }
+				alwaystransparent = yes
 				flowcontainer = {
 					direction = horizontal
 					parentanchor = center
 					spacing = 8
 					margin_left = 10
 					margin_right = 10
-					icon = {
-						size = { 72 36 }
+					widget = {
+						size = { 80 40 }
 						parentanchor = vcenter
-						block "node_icon" {
-							texture = "gfx/interface/icons/event_icons/event_default.dds"
+						icon = {
+							size = { 100% 100% }
+							using = simple_frame_mask
+							block "node_icon" {
+								texture = "gfx/interface/icons/event_icons/event_default.dds"
+							}
+						}
+						icon = {
+							size = { 100% 100% }
+							using = simple_frame
 						}
 					}
 					flowcontainer = {
@@ -4369,41 +4402,77 @@ types sp_campaign_tree_types {
 							block "node_title" { text = "sp_ct_node_placeholder" }
 							autoresize = yes
 							align = left|nobaseline
-							default_format = "#header"
+							default_format = "#title"
 							using = fontsize_medium
-							max_width = 124
+							max_width = 110
 							elide = right
 						}
-						textbox = {
+						widget = {
 							block "state_completed" { visible = no }
-							text = "sp_ct_state_completed"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#G"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#G"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_active" { visible = no }
-							text = "sp_ct_state_active"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#Y"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#Y"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_available" { visible = no }
-							text = "sp_ct_state_available"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_available"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_locked" { visible = no }
-							text = "sp_ct_state_locked"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#I"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#I"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
 					}
 				}
@@ -4415,26 +4484,23 @@ types sp_campaign_tree_types {
 	type sp_ct_node_grand = widget {
 		size = { 280 84 }
 		parentanchor = hcenter
+		background = {
+			using = entry_bg_simple
+		}
+		background = {
+			using = simple_frame
+		}
 
 		button = {
 			size = { 100% 100% }
-			using = default_button_action
+			using = glow_button_border
 			using = confirm_button_sound
+			using = tooltip_above
 			block "node_onclick" {
 				onclick = "[GetPlayer.IsValid]"
 			}
 			block "node_tooltip" {
 				tooltip = "sp_ct_node_placeholder_tt"
-			}
-			background = {
-				using = default_header_bg
-			}
-			widget = {
-				size = { 100% 100% }
-				background = {
-					using = dark_area
-					alpha = 0.48
-				}
 			}
 			widget = {
 				size = { 100% 100% }
@@ -4452,19 +4518,12 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.70
+					alpha = 0.45
 				}
 			}
-			widget = {
-				size = { 100% 100% }
+			icon = {
 				block "node_selected" { visible = no }
-				background = {
-					texture = "gfx/interface/buttons/default_button_mouseover.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					blend_mode = colordodge
-					alpha = 0.55
-				}
+				using = highlighted_square_selection
 			}
 
 			widget = {
@@ -4491,6 +4550,7 @@ types sp_campaign_tree_types {
 
 			widget = {
 				size = { 100% 100% }
+				alwaystransparent = yes
 				flowcontainer = {
 					direction = horizontal
 					parentanchor = center
@@ -4514,41 +4574,77 @@ types sp_campaign_tree_types {
 							block "node_title" { text = "sp_ct_node_placeholder" }
 							autoresize = yes
 							align = left|nobaseline
-							default_format = "#header"
+							default_format = "#title"
 							using = fontsize_medium
 							max_width = 180
 							elide = right
 						}
-						textbox = {
+						widget = {
 							block "state_completed" { visible = no }
-							text = "sp_ct_state_completed"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#G"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#G"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_active" { visible = no }
-							text = "sp_ct_state_active"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#Y"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#Y"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_available" { visible = no }
-							text = "sp_ct_state_available"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_available"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_locked" { visible = no }
-							text = "sp_ct_state_locked"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#I"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#I"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
 					}
 				}
@@ -4560,26 +4656,23 @@ types sp_campaign_tree_types {
 	type sp_ct_node_final = widget {
 		size = { 320 88 }
 		parentanchor = hcenter
+		background = {
+			using = entry_bg_simple
+		}
+		background = {
+			using = simple_frame
+		}
 
 		button = {
 			size = { 100% 100% }
-			using = default_button_action
+			using = glow_button_border
 			using = confirm_button_sound
+			using = tooltip_above
 			block "node_onclick" {
 				onclick = "[GetPlayer.IsValid]"
 			}
 			block "node_tooltip" {
 				tooltip = "sp_ct_node_placeholder_tt"
-			}
-			background = {
-				using = default_header_bg
-			}
-			widget = {
-				size = { 100% 100% }
-				background = {
-					using = dark_area
-					alpha = 0.52
-				}
 			}
 			widget = {
 				size = { 100% 100% }
@@ -4597,19 +4690,12 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.70
+					alpha = 0.45
 				}
 			}
-			widget = {
-				size = { 100% 100% }
+			icon = {
 				block "node_selected" { visible = no }
-				background = {
-					texture = "gfx/interface/buttons/default_button_mouseover.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					blend_mode = colordodge
-					alpha = 0.55
-				}
+				using = highlighted_square_selection
 			}
 
 			widget = {
@@ -4635,6 +4721,7 @@ types sp_campaign_tree_types {
 
 			widget = {
 				size = { 100% 100% }
+				alwaystransparent = yes
 				flowcontainer = {
 					direction = horizontal
 					parentanchor = center
@@ -4658,41 +4745,77 @@ types sp_campaign_tree_types {
 							block "node_title" { text = "sp_ct_node_placeholder" }
 							autoresize = yes
 							align = left|nobaseline
-							default_format = "#header"
+							default_format = "#title"
 							using = fontsize_large
 							max_width = 210
 							elide = right
 						}
-						textbox = {
+						widget = {
 							block "state_completed" { visible = no }
-							text = "sp_ct_state_completed"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#G"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_completed"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#G"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_active" { visible = no }
-							text = "sp_ct_state_active"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#Y"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_active"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#Y"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_available" { visible = no }
-							text = "sp_ct_state_available"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_available"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								margin_left = 6
+								margin_right = 6
+							}
 						}
-						textbox = {
+						widget = {
 							block "state_locked" { visible = no }
-							text = "sp_ct_state_locked"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							default_format = "#I"
+							minimumsize = { 64 16 }
+							background = {
+								using = entry_bg_simple
+							}
+							textbox = {
+								parentanchor = center
+								text = "sp_ct_state_locked"
+								autoresize = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								default_format = "#I"
+								margin_left = 6
+								margin_right = 6
+							}
 						}
 					}
 				}
@@ -4704,26 +4827,20 @@ types sp_campaign_tree_types {
 	type sp_ct_node_stage = widget {
 		size = { 148 64 }
 		parentanchor = hcenter
+		background = {
+			using = entry_bg_simple
+		}
 
 		button = {
 			size = { 100% 100% }
-			using = default_button_action
+			using = glow_button_border
 			using = confirm_button_sound
+			using = tooltip_above
 			block "node_onclick" {
 				onclick = "[GetPlayer.IsValid]"
 			}
 			block "node_tooltip" {
 				tooltip = "sp_ct_node_placeholder_tt"
-			}
-			background = {
-				using = default_header_bg_faded
-			}
-			widget = {
-				size = { 100% 100% }
-				background = {
-					using = dark_area
-					alpha = 0.44
-				}
 			}
 			widget = {
 				size = { 100% 100% }
@@ -4741,19 +4858,12 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.70
+					alpha = 0.40
 				}
 			}
-			widget = {
-				size = { 100% 100% }
+			icon = {
 				block "node_selected" { visible = no }
-				background = {
-					texture = "gfx/interface/buttons/default_button_mouseover.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					blend_mode = colordodge
-					alpha = 0.55
-				}
+				using = highlighted_square_selection
 			}
 
 			widget = {
@@ -4769,6 +4879,7 @@ types sp_campaign_tree_types {
 
 			widget = {
 				size = { 100% 100% }
+				alwaystransparent = yes
 				vbox = {
 					parentanchor = center
 					spacing = 2
@@ -4779,7 +4890,7 @@ types sp_campaign_tree_types {
 						block "node_title" { text = "sp_ct_node_placeholder" }
 						autoresize = yes
 						align = hcenter|nobaseline
-						default_format = "#header"
+						default_format = "#title"
 						using = fontsize_small
 						max_width = 132
 						elide = right
@@ -4824,20 +4935,20 @@ types sp_campaign_tree_types {
 	type sp_ct_node_objective = widget {
 		size = { 200 44 }
 		parentanchor = hcenter
+		background = {
+			using = entry_bg_simple
+		}
 
 		button = {
 			size = { 100% 100% }
-			using = default_button_action
+			using = glow_button_border
 			using = confirm_button_sound
+			using = tooltip_above
 			block "node_onclick" {
 				onclick = "[GetPlayer.IsValid]"
 			}
 			block "node_tooltip" {
 				tooltip = "sp_ct_node_placeholder_tt"
-			}
-			background = {
-				using = dark_area
-				alpha = 0.42
 			}
 			widget = {
 				size = { 100% 100% }
@@ -4855,19 +4966,12 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.70
+					alpha = 0.40
 				}
 			}
-			widget = {
-				size = { 100% 100% }
+			icon = {
 				block "node_selected" { visible = no }
-				background = {
-					texture = "gfx/interface/buttons/default_button_mouseover.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					blend_mode = colordodge
-					alpha = 0.55
-				}
+				using = highlighted_square_selection
 			}
 			widget = {
 				size = { 100% 1 }
@@ -4892,6 +4996,7 @@ types sp_campaign_tree_types {
 
 			widget = {
 				size = { 100% 100% }
+				alwaystransparent = yes
 				flowcontainer = {
 					direction = horizontal
 					parentanchor = center
@@ -4915,7 +5020,7 @@ types sp_campaign_tree_types {
 							block "node_title" { text = "sp_ct_node_placeholder" }
 							autoresize = yes
 							align = left|nobaseline
-							default_format = "#header"
+							default_format = "#title"
 							using = fontsize_small
 							max_width = 140
 							elide = right
@@ -4959,7 +5064,7 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_connector_trunk_v = widget {
-		size = { 4 10 }
+		size = { 4 8 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
@@ -4970,32 +5075,32 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_connector_v = widget {
-		size = { 3 6 }
+		size = { 2 4 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.68
+			alpha = 0.58
 		}
 	}
 
 	type sp_ct_connector_h = widget {
-		size = { 6 3 }
+		size = { 4 2 }
 		parentanchor = vcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.68
+			alpha = 0.58
 		}
 	}
 
 	type sp_ct_branch_fork = widget {
-		size = { 992 14 }
+		size = { 992 10 }
 		parentanchor = hcenter
 		widget = {
-			size = { 992 4 }
+			size = { 992 3 }
 			parentanchor = top|hcenter
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
@@ -5005,143 +5110,194 @@ types sp_campaign_tree_types {
 			}
 		}
 		widget = {
-			size = { 3 10 }
-			position = { 160 4 }
+			size = { 2 7 }
+			position = { 160 3 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.68
+				alpha = 0.58
 			}
 		}
 		widget = {
-			size = { 3 10 }
-			position = { 496 4 }
+			size = { 2 7 }
+			position = { 496 3 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.68
+				alpha = 0.58
 			}
 		}
 		widget = {
-			size = { 3 10 }
-			position = { 832 4 }
+			size = { 2 7 }
+			position = { 832 3 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.68
+				alpha = 0.58
 			}
 		}
 	}
 
-	type sp_ct_insp_section_header = flowcontainer {
-		direction = vertical
-		spacing = 4
+	type sp_ct_insp_section_header = widget {
+		size = { 100% 28 }
 		margin_top = 6
 		margin_bottom = 2
-		minimumsize = { 480 -1 }
+		background = {
+			using = default_header_bg_faded
+		}
 		textbox = {
 			block "section_title" { text = "sp_ct_node_placeholder" }
+			parentanchor = left|vcenter
+			margin_left = 10
 			autoresize = yes
-			align = left|nobaseline
-			default_format = "#gold"
+			align = left|vcenter|nobaseline
+			default_format = "#title"
 			using = fontsize_small
-		}
-		widget = {
-			size = { 100% 2 }
-			background = {
-				texture = "gfx/interface/backgrounds/divider_gold.dds"
-				spriteType = Corneredstretched
-				spriteborder = { 0 0 }
-				alpha = 0.55
-			}
 		}
 	}
 
 	type sp_ct_insp_req_row = widget {
-		size = { 100% 24 }
+		size = { 100% 26 }
 		background = {
-			using = dark_area
-			alpha = 0.20
-			margin = { 0 1 }
+			using = entry_bg_simple
 		}
-		flowcontainer = {
-			direction = horizontal
-			spacing = 8
-			margin = { 6 4 }
+		textbox = {
+			block "req_label" { text = "sp_ct_node_placeholder" }
+			block "req_tooltip" {}
+			parentanchor = vcenter
+			margin_left = 28
+			margin_right = 80
+			autoresize = yes
+			align = left|vcenter|nobaseline
+			using = fontsize_small
+			max_width = 360
+			elide = right
+		}
+		widget = {
+			size = { 100% 100% }
+			block "req_met_icon" { visible = no }
 			icon = {
 				size = { 16 16 }
-				parentanchor = vcenter
-				block "req_met_icon" {
-					visible = no
-					texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
-				}
-			}
-			icon = {
-				size = { 16 16 }
-				parentanchor = vcenter
-				block "req_fail_icon" {
-					visible = no
-					texture = "gfx/interface/icons/generic_icons/red_cross.dds"
-				}
+				parentanchor = left|vcenter
+				position = { 8 0 }
+				texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
 			}
 			textbox = {
-				block "req_label" { text = "sp_ct_node_placeholder" }
-				block "req_tooltip" {}
+				parentanchor = right|vcenter
+				position = { -8 0 }
+				text = "sp_ct_req_met"
 				autoresize = yes
-				align = left|vcenter|nobaseline
+				align = right|vcenter|nobaseline
 				using = fontsize_small
-				layoutpolicy_horizontal = expanding
-				max_width = 440
-				multiline = yes
+				default_format = "#G"
+			}
+		}
+		widget = {
+			size = { 100% 100% }
+			block "req_fail_icon" { visible = no }
+			icon = {
+				size = { 16 16 }
+				parentanchor = left|vcenter
+				position = { 8 0 }
+				texture = "gfx/interface/icons/generic_icons/red_cross.dds"
+			}
+			textbox = {
+				parentanchor = right|vcenter
+				position = { -8 0 }
+				text = "sp_ct_req_missing"
+				autoresize = yes
+				align = right|vcenter|nobaseline
+				using = fontsize_small
 			}
 		}
 	}
 
-	type sp_ct_insp_panel_header = flowcontainer {
-		direction = horizontal
-		spacing = 8
-		minimumsize = { 480 26 }
+	type sp_ct_insp_panel_header = widget {
+		size = { 100% 28 }
+		minimumsize = { 480 28 }
 		textbox = {
 			block "insp_title" { text = "sp_ct_node_placeholder" }
+			parentanchor = left|vcenter
 			autoresize = yes
 			align = left|vcenter|nobaseline
 			default_format = "#header"
 			using = fontsize_medium
-			layoutpolicy_horizontal = expanding
+			max_width = 340
+			elide = right
 		}
-		textbox = {
+		widget = {
 			block "insp_status_completed" { visible = no }
-			text = "sp_ct_state_completed"
-			autoresize = yes
-			align = right|vcenter|nobaseline
-			using = fontsize_small
-			default_format = "#G"
+			parentanchor = right|vcenter
+			minimumsize = { 72 18 }
+			background = {
+				using = entry_bg_simple
+			}
+			textbox = {
+				parentanchor = center
+				text = "sp_ct_state_completed"
+				autoresize = yes
+				align = hcenter|vcenter|nobaseline
+				using = fontsize_small
+				default_format = "#G"
+				margin_left = 8
+				margin_right = 8
+			}
 		}
-		textbox = {
+		widget = {
 			block "insp_status_active" { visible = no }
-			text = "sp_ct_state_active"
-			autoresize = yes
-			align = right|vcenter|nobaseline
-			using = fontsize_small
-			default_format = "#Y"
+			parentanchor = right|vcenter
+			minimumsize = { 72 18 }
+			background = {
+				using = entry_bg_simple
+			}
+			textbox = {
+				parentanchor = center
+				text = "sp_ct_state_active"
+				autoresize = yes
+				align = hcenter|vcenter|nobaseline
+				using = fontsize_small
+				default_format = "#Y"
+				margin_left = 8
+				margin_right = 8
+			}
 		}
-		textbox = {
+		widget = {
 			block "insp_status_available" { visible = no }
-			text = "sp_ct_state_available"
-			autoresize = yes
-			align = right|vcenter|nobaseline
-			using = fontsize_small
+			parentanchor = right|vcenter
+			minimumsize = { 72 18 }
+			background = {
+				using = entry_bg_simple
+			}
+			textbox = {
+				parentanchor = center
+				text = "sp_ct_state_available"
+				autoresize = yes
+				align = hcenter|vcenter|nobaseline
+				using = fontsize_small
+				margin_left = 8
+				margin_right = 8
+			}
 		}
-		textbox = {
+		widget = {
 			block "insp_status_locked" { visible = no }
-			text = "sp_ct_state_locked"
-			autoresize = yes
-			align = right|vcenter|nobaseline
-			using = fontsize_small
-			default_format = "#I"
+			parentanchor = right|vcenter
+			minimumsize = { 72 18 }
+			background = {
+				using = entry_bg_simple
+			}
+			textbox = {
+				parentanchor = center
+				text = "sp_ct_state_locked"
+				autoresize = yes
+				align = hcenter|vcenter|nobaseline
+				using = fontsize_small
+				default_format = "#I"
+				margin_left = 8
+				margin_right = 8
+			}
 		}
 	}
 
@@ -5149,62 +5305,51 @@ types sp_campaign_tree_types {
 		size = { 100% 3 }
 		margin_top = 8
 		margin_bottom = 4
-		background = {
-			texture = "gfx/interface/backgrounds/divider_gold.dds"
-			spriteType = Corneredstretched
-			spriteborder = { 0 0 }
-			alpha = 0.75
-		}
+		divider_gold = {}
 	}
 
-	type sp_ct_insp_stat_row = flowcontainer {
-		direction = horizontal
-		spacing = 8
-		minimumsize = { 480 22 }
+	type sp_ct_insp_stat_row = widget {
+		size = { 100% 26 }
+		background = {
+			using = entry_bg_simple
+		}
 		icon = {
 			size = { 20 20 }
-			parentanchor = vcenter
+			parentanchor = left|vcenter
+			position = { 8 0 }
 			block "stat_icon" {
 				texture = "gfx/interface/icons/generic_icons/prestige.dds"
 			}
 		}
 		textbox = {
 			block "stat_label" { text = "sp_ct_node_placeholder" }
+			parentanchor = vcenter
+			margin_left = 32
+			margin_right = 100
 			autoresize = yes
 			align = left|vcenter|nobaseline
 			using = fontsize_small
-			layoutpolicy_horizontal = expanding
 		}
 		textbox = {
 			block "stat_value" { text = "sp_ct_node_placeholder" }
+			parentanchor = right|vcenter
+			position = { -8 0 }
 			autoresize = yes
 			align = right|vcenter|nobaseline
 			using = fontsize_small
-			default_format = "#G"
+			default_format = "#v"
 		}
 	}
 
 	type sp_ct_insp_progress_card = widget {
 		size = { 100% -1 }
 		background = {
-			using = dark_area
-			alpha = 0.32
-			margin = { 2 2 }
-		}
-		widget = {
-			size = { 100% 1 }
-			parentanchor = top
-			background = {
-				texture = "gfx/interface/backgrounds/divider_gold.dds"
-				spriteType = Corneredstretched
-				spriteborder = { 0 0 }
-				alpha = 0.45
-			}
+			using = entry_bg_simple
 		}
 		flowcontainer = {
 			direction = horizontal
-			spacing = 6
-			margin = { 8 6 }
+			spacing = 8
+			margin = { 10 8 }
 			block "progress_card_content" {}
 		}
 	}
@@ -5225,12 +5370,16 @@ types sp_campaign_tree_types {
 				size = { 520 260 }
 				texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_empty.dds"
 			}
+			icon = {
+				size = { 100% 100% }
+				using = simple_frame
+			}
 		}
 		textbox = {
 			text = "sp_ct_insp_empty_title"
 			autoresize = yes
 			align = hcenter|nobaseline
-			default_format = "#header"
+			default_format = "#title"
 			using = fontsize_xl
 		}
 		textbox = {
