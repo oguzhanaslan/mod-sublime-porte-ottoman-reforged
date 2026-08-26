@@ -14,20 +14,9 @@ widget = {
 	size = { 100% 100% }
 	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
 
-	# CMF scripted-widget shell: top margin + expanding host (com_gui_international_organizations_panel pattern).
-	vbox = {
-		parentanchor = top|left
-		layoutpolicy_horizontal = expanding
-		layoutpolicy_vertical = expanding
-		margin_top = 85
-
-		widget = {
-			layoutpolicy_horizontal = expanding
-			layoutpolicy_vertical = expanding
-
-			sp_campaign_tree_window = {}
-		}
-	}
+	# fullscreen_top_header inside sp_campaign_tree_window clears vanilla top HUD;
+	# no outer margin_top offset (that strip was redundant dead space).
+	sp_campaign_tree_window = {}
 }
 
 types sp_campaign_tree_types {
@@ -66,7 +55,7 @@ types sp_campaign_tree_types {
 
 		background = {
 			using = default_bg
-			margin = { 20 20 }
+			margin = { 16 16 }
 		}
 
 		fullscreen_top_header = {}
@@ -103,16 +92,16 @@ types sp_campaign_tree_types {
 
 		vbox = {
 			using = clickthrough_blocker
-			margin_top = 76
-			margin_left = 20
-			margin_right = 20
-			margin_bottom = 14
+			margin_top = 72
+			margin_left = 16
+			margin_right = 16
+			margin_bottom = 16
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
-			spacing = 6
+			spacing = 8
 
 			widget = {
-				size = { 100% 84 }
+				size = { 100% 68 }
 				layoutpolicy_horizontal = expanding
 				background = {
 					texture = "gfx/interface/icons/sp_campaign_tree/sp_ct_header_logo.dds"
@@ -134,26 +123,26 @@ types sp_campaign_tree_types {
 				}
 
 				back_button_large = {
-					position = { 8 16 }
-					parentanchor = top|left
+					position = { 12 0 }
+					parentanchor = left|vcenter
 					onclick = "[GetVariableSystem.Clear('com_open_window')]"
 					onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
 					input_action = "back"
 				}
 
 				close_button_large = {
-					parentanchor = top|right
-					position = { -8 16 }
+					parentanchor = right|vcenter
+					position = { -12 0 }
 					onclick = "[GetVariableSystem.Clear('com_open_window')]"
 					onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
 					shortcut = "close_window"
 				}
 
 				hbox = {
-					parentanchor = center
+					parentanchor = hcenter|vcenter
 					spacing = 12
 					icon = {
-						size = { 48 48 }
+						size = { 44 44 }
 						parentanchor = vcenter
 						texture = "gfx/interface/icons/sp_campaign_tree/sp_ct_sidebar_icon.dds"
 					}
@@ -161,7 +150,7 @@ types sp_campaign_tree_types {
 						text = "sp_ct_window_title"
 						autoresize = yes
 						parentanchor = vcenter
-						align = left|nobaseline
+						align = left|vcenter|nobaseline
 						default_format = "#header"
 						using = header_font_fancy
 						using = header_font_fancy_size
@@ -172,7 +161,7 @@ types sp_campaign_tree_types {
 			hbox = {
 				layoutpolicy_vertical = expanding
 				layoutpolicy_horizontal = expanding
-				spacing = 10
+				spacing = 12
 
 				scrollarea = {
 					layoutpolicy_horizontal = expanding
@@ -187,10 +176,10 @@ types sp_campaign_tree_types {
 						flowcontainer = {
 							direction = vertical
 							parentanchor = top|hcenter
-							spacing = 6
-							margin_top = 4
-							margin_bottom = 20
-							minimumsize = { 1310 -1 }
+							spacing = 8
+							margin_top = 8
+							margin_bottom = 16
+							minimumsize = { 808 -1 }
 
 							sp_ct_node_major = {
 								blockoverride "node_onclick" {
@@ -294,12 +283,12 @@ types sp_campaign_tree_types {
 							flowcontainer = {
 								direction = horizontal
 								parentanchor = top|hcenter
-								spacing = 36
+								spacing = 32
 
 								flowcontainer = {
 									direction = vertical
-									spacing = 6
-									minimumsize = { 230 -1 }
+									spacing = 8
+									minimumsize = { 248 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_identity = {
 								blockoverride "node_onclick" {
@@ -460,12 +449,44 @@ types sp_campaign_tree_types {
 									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
 								}
 							}
+								sp_ct_connector_v = {}
+							sp_ct_node_final = {
+								blockoverride "node_onclick" {
+									onclick = "[GetScriptedGui('sp_ct_select_constitutional_ottoman').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "node_title" { text = "sp_ct_node_constitutional_ottoman_short" }
+								blockoverride "node_tooltip" { tooltip = "sp_ct_tt_constitutional_ottoman" }
+								blockoverride "node_selected" {
+									visible = "[GetScriptedGui('sp_ct_vis_sel_constitutional_ottoman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_completed" {
+									visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_active" {
+									visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_active_glow" {
+									visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_available" {
+									visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_locked" {
+									visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_locked_dim" {
+									visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "node_icon" {
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+								}
+							}
 								}
 
 								flowcontainer = {
 									direction = vertical
-									spacing = 6
-									minimumsize = { 230 -1 }
+									spacing = 8
+									minimumsize = { 248 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_identity = {
 								blockoverride "node_onclick" {
@@ -626,12 +647,44 @@ types sp_campaign_tree_types {
 									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
 								}
 							}
+								sp_ct_connector_v = {}
+							sp_ct_node_final = {
+								blockoverride "node_onclick" {
+									onclick = "[GetScriptedGui('sp_ct_select_great_caliphate').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "node_title" { text = "sp_ct_node_great_caliphate_short" }
+								blockoverride "node_tooltip" { tooltip = "sp_ct_tt_great_caliphate" }
+								blockoverride "node_selected" {
+									visible = "[GetScriptedGui('sp_ct_vis_sel_great_caliphate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_completed" {
+									visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_active" {
+									visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_active_glow" {
+									visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_available" {
+									visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_locked" {
+									visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_locked_dim" {
+									visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "node_icon" {
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+								}
+							}
 								}
 
 								flowcontainer = {
 									direction = vertical
-									spacing = 6
-									minimumsize = { 740 -1 }
+									spacing = 8
+									minimumsize = { 680 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_identity = {
 								blockoverride "node_onclick" {
@@ -700,7 +753,7 @@ types sp_campaign_tree_types {
 									flowcontainer = {
 										direction = horizontal
 										parentanchor = hcenter
-										spacing = 4
+										spacing = 8
 							sp_ct_node_stage = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turan_s1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -880,8 +933,8 @@ types sp_campaign_tree_types {
 
 					vbox = {
 						size = { 100% 100% }
-						margin = { 6 6 }
-						spacing = 4
+						margin = { 12 12 }
+						spacing = 8
 
 						scrollarea = {
 							layoutpolicy_vertical = expanding
@@ -905,7 +958,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -964,7 +1017,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_tanzimat_desc"
@@ -980,7 +1033,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_tanzimat_flavor"
@@ -996,11 +1049,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_obj_bureaucracy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1024,7 +1077,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_obj_education').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1048,7 +1101,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_obj_army').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1072,7 +1125,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_obj_economy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1096,7 +1149,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_obj_separatism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1124,11 +1177,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_obj_syria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1156,7 +1209,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_tanzimat_rewards"
@@ -1173,7 +1226,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_none"
@@ -1195,7 +1248,7 @@ types sp_campaign_tree_types {
 								direction = vertical
 								visible = "[GetScriptedGui('sp_ct_vis_req_je_sick_man').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								spacing = 4
-								margin_top = 8
+								margin_top = 16
 								flowcontainer = {
 									direction = vertical
 									datamodel = "[AccessPlayer.AccessActivePlayerObjectiveJournalEntries]"
@@ -1266,7 +1319,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -1325,7 +1378,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_post_tanzimat_desc"
@@ -1341,7 +1394,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_post_tanzimat_flavor"
@@ -1357,11 +1410,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1389,11 +1442,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_i18_debate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1417,7 +1470,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_i18_young_ottomans').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1441,7 +1494,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_i18_constitution').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1465,7 +1518,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_i18_kanun').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1489,7 +1542,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_i18_hamidian').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1525,7 +1578,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_post_tanzimat_rewards"
@@ -1542,7 +1595,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_tanzimat"
@@ -1564,7 +1617,7 @@ types sp_campaign_tree_types {
 								direction = vertical
 								visible = "[GetScriptedGui('sp_ct_vis_req_je_post_tanzimat').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								spacing = 4
-								margin_top = 8
+								margin_top = 16
 								flowcontainer = {
 									direction = vertical
 									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
@@ -1642,7 +1695,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -1693,7 +1746,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_identity_desc"
@@ -1709,7 +1762,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_identity_flavor"
@@ -1725,11 +1778,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1757,11 +1810,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_identity_chosen').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1789,11 +1842,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1817,7 +1870,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1841,7 +1894,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1869,7 +1922,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_identity_rewards"
@@ -1886,7 +1939,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_post_tanzimat"
@@ -1912,7 +1965,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -1971,7 +2024,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_desc"
@@ -1987,7 +2040,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_flavor"
@@ -2003,11 +2056,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -2035,11 +2088,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -2067,7 +2120,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_path"
@@ -2083,7 +2136,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_rewards"
@@ -2100,7 +2153,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_identity"
@@ -2126,7 +2179,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -2185,7 +2238,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_desc"
@@ -2201,7 +2254,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_flavor"
@@ -2217,11 +2270,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -2249,11 +2302,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -2281,7 +2334,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_path"
@@ -2297,7 +2350,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_rewards"
@@ -2314,7 +2367,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_identity"
@@ -2341,7 +2394,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 							widget = {
 								size = { 520 260 }
@@ -2393,7 +2446,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s1_desc"
@@ -2409,7 +2462,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s1_flavor"
@@ -2425,7 +2478,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s1_rewards"
@@ -2443,7 +2496,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 							widget = {
 								size = { 520 260 }
@@ -2495,7 +2548,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s2_desc"
@@ -2511,7 +2564,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s2_flavor"
@@ -2527,7 +2580,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s2_rewards"
@@ -2545,7 +2598,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 							widget = {
 								size = { 520 260 }
@@ -2597,7 +2650,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s3_desc"
@@ -2613,7 +2666,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s3_flavor"
@@ -2629,7 +2682,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s3_rewards"
@@ -2647,7 +2700,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 							widget = {
 								size = { 520 260 }
@@ -2699,7 +2752,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s4_desc"
@@ -2715,7 +2768,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s4_flavor"
@@ -2731,10 +2784,34 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_ottomanism_s4_rewards"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 500
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 12
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_ottomanism_s3"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 500
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_constitutional_ottoman"
 								autoresize = yes
 								align = left|nobaseline
 								using = fontsize_small
@@ -2749,7 +2826,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 							widget = {
 								size = { 520 260 }
@@ -2801,7 +2878,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s1_desc"
@@ -2817,7 +2894,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s1_flavor"
@@ -2833,7 +2910,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s1_rewards"
@@ -2851,7 +2928,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 							widget = {
 								size = { 520 260 }
@@ -2903,7 +2980,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s2_desc"
@@ -2919,7 +2996,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s2_flavor"
@@ -2935,7 +3012,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s2_rewards"
@@ -2953,7 +3030,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 							widget = {
 								size = { 520 260 }
@@ -3005,7 +3082,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s3_desc"
@@ -3021,7 +3098,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s3_flavor"
@@ -3037,7 +3114,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s3_rewards"
@@ -3055,7 +3132,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 							widget = {
 								size = { 520 260 }
@@ -3107,7 +3184,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s4_desc"
@@ -3123,7 +3200,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s4_flavor"
@@ -3139,7 +3216,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_islamism_s4_rewards"
@@ -3149,6 +3226,130 @@ types sp_campaign_tree_types {
 								max_width = 500
 								multiline = yes
 							}
+							textbox = {
+								text = "sp_ct_sec_navigation"
+								autoresize = yes
+								align = left|nobaseline
+								default_format = "#header"
+								using = fontsize_medium
+								margin_top = 12
+							}
+							textbox = {
+								text = "sp_ct_nav_prev_islamism_s3"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 500
+								multiline = yes
+							}
+							textbox = {
+								text = "sp_ct_nav_next_great_caliphate"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								max_width = 500
+								multiline = yes
+							}
+						}
+					}
+					widget = {
+						visible = "[GetScriptedGui('sp_ct_vis_sel_constitutional_ottoman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 12
+							minimumsize = { 500 -1 }
+							widget = {
+								size = { 520 260 }
+								parentanchor = hcenter
+								background = { using = dark_area alpha = 0.55 }
+								icon = {
+									parentanchor = center
+									size = { 520 260 }
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+								}
+							}
+							textbox = { text = "sp_ct_node_constitutional_ottoman" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_large }
+							textbox = { visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" text = "sp_ct_state_completed" autoresize = yes align = left|nobaseline using = fontsize_medium default_format = "#G" }
+							textbox = { visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" text = "sp_ct_state_active" autoresize = yes align = left|nobaseline using = fontsize_medium default_format = "#Y" }
+							textbox = { visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" text = "sp_ct_state_locked" autoresize = yes align = left|nobaseline using = fontsize_medium default_format = "#I" }
+							textbox = { text = "sp_ct_sec_description" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							textbox = { text = "sp_ct_insp_constitutional_ottoman_desc" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
+							textbox = { text = "sp_ct_sec_flavor" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							textbox = { text = "sp_ct_insp_constitutional_ottoman_flavor" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
+							textbox = { text = "sp_ct_sec_unlock" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							flowcontainer = {
+								direction = horizontal
+								spacing = 12
+								minimumsize = { 500 18 }
+								icon = { visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism_s4_done').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" size = { 16 16 } texture = "gfx/interface/icons/generic_icons/green_checkmark.dds" }
+								icon = { visible = "[Not(GetScriptedGui('sp_ct_vis_req_ottomanism_s4_done').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" size = { 16 16 } texture = "gfx/interface/icons/generic_icons/red_cross.dds" }
+								textbox = { text = "sp_ct_req_ottomanism_s4_done" tooltip = "sp_ct_req_ottomanism_s4_done_tt" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 480 multiline = yes }
+							}
+							textbox = { text = "sp_ct_sec_completion" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							flowcontainer = {
+								direction = horizontal
+								spacing = 12
+								minimumsize = { 500 18 }
+								icon = { visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism_ideal_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" size = { 16 16 } texture = "gfx/interface/icons/generic_icons/green_checkmark.dds" }
+								icon = { visible = "[Not(GetScriptedGui('sp_ct_vis_req_ottomanism_ideal_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" size = { 16 16 } texture = "gfx/interface/icons/generic_icons/red_cross.dds" }
+								textbox = { text = "sp_ct_req_ottomanism_ideal_complete" tooltip = "sp_ct_req_ottomanism_ideal_complete_tt" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 480 multiline = yes }
+							}
+							textbox = { text = "sp_ct_sec_rewards" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							textbox = { text = "sp_ct_insp_constitutional_ottoman_rewards" tooltip = "sp_ct_insp_constitutional_ottoman_rewards_tt" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
+							textbox = { text = "sp_ct_sec_navigation" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							textbox = { text = "sp_ct_nav_prev_ottomanism_s4" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
+							textbox = { text = "sp_ct_nav_next_none" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
+						}
+					}
+					widget = {
+						visible = "[GetScriptedGui('sp_ct_vis_sel_great_caliphate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						size = { 100% -1 }
+						flowcontainer = {
+							direction = vertical
+							spacing = 12
+							minimumsize = { 500 -1 }
+							widget = {
+								size = { 520 260 }
+								parentanchor = hcenter
+								background = { using = dark_area alpha = 0.55 }
+								icon = {
+									parentanchor = center
+									size = { 520 260 }
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+								}
+							}
+							textbox = { text = "sp_ct_node_great_caliphate" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_large }
+							textbox = { visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" text = "sp_ct_state_completed" autoresize = yes align = left|nobaseline using = fontsize_medium default_format = "#G" }
+							textbox = { visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" text = "sp_ct_state_active" autoresize = yes align = left|nobaseline using = fontsize_medium default_format = "#Y" }
+							textbox = { visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" text = "sp_ct_state_locked" autoresize = yes align = left|nobaseline using = fontsize_medium default_format = "#I" }
+							textbox = { text = "sp_ct_sec_description" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							textbox = { text = "sp_ct_insp_great_caliphate_desc" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
+							textbox = { text = "sp_ct_sec_flavor" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							textbox = { text = "sp_ct_insp_great_caliphate_flavor" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
+							textbox = { text = "sp_ct_sec_unlock" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							flowcontainer = {
+								direction = horizontal
+								spacing = 12
+								minimumsize = { 500 18 }
+								icon = { visible = "[GetScriptedGui('sp_ct_vis_req_islamism_s4_done').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" size = { 16 16 } texture = "gfx/interface/icons/generic_icons/green_checkmark.dds" }
+								icon = { visible = "[Not(GetScriptedGui('sp_ct_vis_req_islamism_s4_done').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" size = { 16 16 } texture = "gfx/interface/icons/generic_icons/red_cross.dds" }
+								textbox = { text = "sp_ct_req_islamism_s4_done" tooltip = "sp_ct_req_islamism_s4_done_tt" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 480 multiline = yes }
+							}
+							textbox = { text = "sp_ct_sec_completion" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							flowcontainer = {
+								direction = horizontal
+								spacing = 12
+								minimumsize = { 500 18 }
+								icon = { visible = "[GetScriptedGui('sp_ct_vis_req_great_caliphate_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" size = { 16 16 } texture = "gfx/interface/icons/generic_icons/green_checkmark.dds" }
+								icon = { visible = "[Not(GetScriptedGui('sp_ct_vis_req_great_caliphate_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" size = { 16 16 } texture = "gfx/interface/icons/generic_icons/red_cross.dds" }
+								textbox = { text = "sp_ct_req_great_caliphate_complete" tooltip = "sp_ct_req_great_caliphate_complete_tt" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 480 multiline = yes }
+							}
+							textbox = { text = "sp_ct_sec_rewards" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							textbox = { text = "sp_ct_insp_great_caliphate_rewards" tooltip = "sp_ct_insp_great_caliphate_rewards_tt" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
+							textbox = { text = "sp_ct_sec_navigation" autoresize = yes align = left|nobaseline default_format = "#header" using = fontsize_medium margin_top = 12 }
+							textbox = { text = "sp_ct_nav_prev_islamism_s4" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
+							textbox = { text = "sp_ct_nav_next_none" autoresize = yes align = left|nobaseline using = fontsize_small max_width = 500 multiline = yes }
 						}
 					}
 					widget = {
@@ -3156,7 +3357,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -3207,7 +3408,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turkism_desc"
@@ -3223,7 +3424,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turkism_flavor"
@@ -3239,11 +3440,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -3271,11 +3472,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -3303,7 +3504,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turkism_path"
@@ -3319,7 +3520,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turkism_rewards"
@@ -3336,7 +3537,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_identity"
@@ -3362,7 +3563,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -3421,7 +3622,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_desc"
@@ -3437,7 +3638,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_flavor"
@@ -3453,11 +3654,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -3481,7 +3682,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_pan_nationalism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -3505,7 +3706,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -3533,7 +3734,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
@@ -3577,11 +3778,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_turan_ideal_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -3609,7 +3810,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_rewards"
@@ -3626,7 +3827,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_turkism"
@@ -3648,7 +3849,7 @@ types sp_campaign_tree_types {
 								direction = vertical
 								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								spacing = 4
-								margin_top = 8
+								margin_top = 16
 								flowcontainer = {
 									direction = vertical
 									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
@@ -3726,7 +3927,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -3778,7 +3979,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s1_desc"
@@ -3794,7 +3995,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s1_flavor"
@@ -3841,11 +4042,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_azerbaijan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -3868,7 +4069,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_elizavetpol').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -3891,7 +4092,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_tabriz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -3914,7 +4115,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_urmia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -3941,7 +4142,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s1_rewards"
@@ -3958,7 +4159,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_turan"
@@ -3980,7 +4181,7 @@ types sp_campaign_tree_types {
 								direction = vertical
 								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								spacing = 4
-								margin_top = 8
+								margin_top = 16
 								flowcontainer = {
 									direction = vertical
 									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
@@ -4058,7 +4259,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -4110,7 +4311,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s2_desc"
@@ -4126,7 +4327,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s2_flavor"
@@ -4173,11 +4374,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_irakajemi').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4200,7 +4401,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_isfahan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4223,7 +4424,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_fars').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4246,7 +4447,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_kerman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4269,7 +4470,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_khorasan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4292,7 +4493,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_mazandaran').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4315,7 +4516,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_semnan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4338,7 +4539,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_laristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4361,7 +4562,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_luristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4384,7 +4585,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_persian_kurdistan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4407,7 +4608,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_khuzestan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4434,11 +4635,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_persia_subject').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4474,7 +4675,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s2_rewards"
@@ -4491,7 +4692,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_turan_s1"
@@ -4513,7 +4714,7 @@ types sp_campaign_tree_types {
 								direction = vertical
 								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								spacing = 4
-								margin_top = 8
+								margin_top = 16
 								flowcontainer = {
 									direction = vertical
 									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
@@ -4591,7 +4792,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -4643,7 +4844,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s3_desc"
@@ -4659,7 +4860,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s3_flavor"
@@ -4706,11 +4907,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_turkmenia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4733,7 +4934,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_merz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4756,7 +4957,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_khiva').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4779,7 +4980,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_uzbekia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -4806,7 +5007,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s3_rewards"
@@ -4823,7 +5024,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_turan_s2"
@@ -4845,7 +5046,7 @@ types sp_campaign_tree_types {
 								direction = vertical
 								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								spacing = 4
-								margin_top = 8
+								margin_top = 16
 								flowcontainer = {
 									direction = vertical
 									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
@@ -4923,7 +5124,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -4975,7 +5176,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s4_desc"
@@ -4991,7 +5192,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s4_flavor"
@@ -5038,11 +5239,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_fergana').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5065,7 +5266,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_kirghizia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5088,7 +5289,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_syrdarya').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5111,7 +5312,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_aktobe').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5134,7 +5335,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_akmolinsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5157,7 +5358,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_uralsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5180,7 +5381,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_semireche').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5203,7 +5404,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_jetisy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5226,7 +5427,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_dzungaria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5249,7 +5450,7 @@ types sp_campaign_tree_types {
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_ctrl_tianshan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5276,11 +5477,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_claims_4b').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5316,7 +5517,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_turan_s4_rewards"
@@ -5333,7 +5534,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_turan_s3"
@@ -5355,7 +5556,7 @@ types sp_campaign_tree_types {
 								direction = vertical
 								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								spacing = 4
-								margin_top = 8
+								margin_top = 16
 								flowcontainer = {
 									direction = vertical
 									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
@@ -5433,7 +5634,7 @@ types sp_campaign_tree_types {
 						size = { 100% -1 }
 						flowcontainer = {
 							direction = vertical
-							spacing = 6
+							spacing = 12
 							minimumsize = { 500 -1 }
 														widget = {
 							size = { 520 260 }
@@ -5485,7 +5686,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_great_ottoman_desc"
@@ -5501,7 +5702,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_great_ottoman_flavor"
@@ -5517,11 +5718,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_turan_s4_done').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5549,11 +5750,11 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							flowcontainer = {
 								direction = horizontal
-								spacing = 6
+								spacing = 12
 								minimumsize = { 500 18 }
 																icon = {
 									visible = "[GetScriptedGui('sp_ct_vis_req_great_ottoman_proclaimed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -5581,7 +5782,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_insp_great_ottoman_rewards"
@@ -5598,7 +5799,7 @@ types sp_campaign_tree_types {
 								align = left|nobaseline
 								default_format = "#header"
 								using = fontsize_medium
-								margin_top = 6
+								margin_top = 12
 							}
 							textbox = {
 								text = "sp_ct_nav_prev_turan_s4"
@@ -5620,7 +5821,7 @@ types sp_campaign_tree_types {
 								direction = vertical
 								visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								spacing = 4
-								margin_top = 8
+								margin_top = 16
 								flowcontainer = {
 									direction = vertical
 									datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
@@ -5703,8 +5904,9 @@ types sp_campaign_tree_types {
 		}
 	}
 
+
 	type sp_ct_node_major = widget {
-		size = { 400 78 }
+		size = { 400 72 }
 		parentanchor = hcenter
 
 		button = {
@@ -5750,75 +5952,68 @@ types sp_campaign_tree_types {
 					alpha = 0.72
 				}
 			}
+
 			widget = {
-				size = { 100% 3 }
-				parentanchor = bottom
-				background = {
-					texture = "gfx/interface/backgrounds/divider_gold.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					alpha = 0.55
-				}
-			}
-
-			flowcontainer = {
-				direction = horizontal
 				size = { 100% 100% }
-				spacing = 8
-				margin_left = 10
-				margin_right = 8
-				icon = {
-					size = { 88 44 }
-					parentanchor = vcenter
-					block "node_icon" {
-						texture = "gfx/interface/icons/event_icons/event_default.dds"
-					}
-				}
 				flowcontainer = {
-					direction = vertical
+					direction = horizontal
 					parentanchor = vcenter
-					layoutpolicy_horizontal = expanding
-					spacing = 1
+					spacing = 8
+					margin_left = 12
+					margin_right = 12
+					icon = {
+						size = { 80 40 }
+						parentanchor = vcenter
+						block "node_icon" {
+							texture = "gfx/interface/icons/event_icons/event_default.dds"
+						}
+					}
+					flowcontainer = {
+						direction = vertical
+						parentanchor = vcenter
+						layoutpolicy_horizontal = expanding
+						spacing = 2
 
-					textbox = {
-						block "node_title" { text = "sp_ct_node_placeholder" }
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#header"
-						using = fontsize_large
-						max_width = 280
-						elide = right
-					}
-					textbox = {
-						block "state_completed" { visible = no }
-						text = "sp_ct_state_completed"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#G"
-					}
-					textbox = {
-						block "state_active" { visible = no }
-						text = "sp_ct_state_active"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#Y"
-					}
-					textbox = {
-						block "state_available" { visible = no }
-						text = "sp_ct_state_available"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-					}
-					textbox = {
-						block "state_locked" { visible = no }
-						text = "sp_ct_state_locked"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#I"
+						textbox = {
+							block "node_title" { text = "sp_ct_node_placeholder" }
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#header"
+							using = fontsize_large
+							max_width = 280
+							elide = right
+						}
+						textbox = {
+							block "state_completed" { visible = no }
+							text = "sp_ct_state_completed"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#G"
+						}
+						textbox = {
+							block "state_active" { visible = no }
+							text = "sp_ct_state_active"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#Y"
+						}
+						textbox = {
+							block "state_available" { visible = no }
+							text = "sp_ct_state_available"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+						}
+						textbox = {
+							block "state_locked" { visible = no }
+							text = "sp_ct_state_locked"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#I"
+						}
 					}
 				}
 			}
@@ -5827,7 +6022,7 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_node_identity = widget {
-		size = { 230 96 }
+		size = { 248 88 }
 		parentanchor = hcenter
 
 		button = {
@@ -5848,7 +6043,7 @@ types sp_campaign_tree_types {
 				block "state_locked_dim" { visible = no }
 				background = {
 					using = dark_area
-					alpha = 0.42
+					alpha = 0.45
 				}
 			}
 			widget = {
@@ -5859,7 +6054,7 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.92
+					alpha = 0.88
 				}
 			}
 			widget = {
@@ -5870,11 +6065,12 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.85
+					alpha = 0.72
 				}
 			}
+
 			widget = {
-				size = { 100% 4 }
+				size = { 100% 3 }
 				parentanchor = bottom
 				background = {
 					texture = "gfx/interface/backgrounds/divider_gold.dds"
@@ -5884,64 +6080,67 @@ types sp_campaign_tree_types {
 				}
 			}
 
-			flowcontainer = {
-				direction = horizontal
+			widget = {
 				size = { 100% 100% }
-				spacing = 8
-				margin_left = 8
-				margin_right = 6
-				icon = {
-					size = { 88 44 }
-					parentanchor = vcenter
-					block "node_icon" {
-						texture = "gfx/interface/icons/event_icons/event_default.dds"
-					}
-				}
 				flowcontainer = {
-					direction = vertical
+					direction = horizontal
 					parentanchor = vcenter
-					layoutpolicy_horizontal = expanding
-					spacing = 1
+					spacing = 8
+					margin_left = 10
+					margin_right = 10
+					icon = {
+						size = { 80 40 }
+						parentanchor = vcenter
+						block "node_icon" {
+							texture = "gfx/interface/icons/event_icons/event_default.dds"
+						}
+					}
+					flowcontainer = {
+						direction = vertical
+						parentanchor = vcenter
+						layoutpolicy_horizontal = expanding
+						spacing = 2
 
-					textbox = {
-						block "node_title" { text = "sp_ct_node_placeholder" }
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#header"
-						using = fontsize_medium
-						max_width = 120
-						elide = right
-					}
-					textbox = {
-						block "state_completed" { visible = no }
-						text = "sp_ct_state_completed"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#G"
-					}
-					textbox = {
-						block "state_active" { visible = no }
-						text = "sp_ct_state_active"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#Y"
-					}
-					textbox = {
-						block "state_available" { visible = no }
-						text = "sp_ct_state_available"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-					}
-					textbox = {
-						block "state_locked" { visible = no }
-						text = "sp_ct_state_locked"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#I"
+						textbox = {
+							block "node_title" { text = "sp_ct_node_placeholder" }
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#header"
+							using = fontsize_medium
+							max_width = 140
+							elide = right
+						}
+						textbox = {
+							block "state_completed" { visible = no }
+							text = "sp_ct_state_completed"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#G"
+						}
+						textbox = {
+							block "state_active" { visible = no }
+							text = "sp_ct_state_active"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#Y"
+						}
+						textbox = {
+							block "state_available" { visible = no }
+							text = "sp_ct_state_available"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+						}
+						textbox = {
+							block "state_locked" { visible = no }
+							text = "sp_ct_state_locked"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#I"
+						}
 					}
 				}
 			}
@@ -5950,7 +6149,7 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_node_grand = widget {
-		size = { 700 100 }
+		size = { 680 88 }
 		parentanchor = hcenter
 
 		button = {
@@ -5982,7 +6181,7 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.9
+					alpha = 0.88
 				}
 			}
 			widget = {
@@ -5993,11 +6192,12 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.78
+					alpha = 0.72
 				}
 			}
+
 			widget = {
-				size = { 100% 4 }
+				size = { 100% 3 }
 				parentanchor = bottom
 				background = {
 					texture = "gfx/interface/backgrounds/divider_gold.dds"
@@ -6007,64 +6207,67 @@ types sp_campaign_tree_types {
 				}
 			}
 
-			flowcontainer = {
-				direction = horizontal
+			widget = {
 				size = { 100% 100% }
-				spacing = 10
-				margin_left = 12
-				margin_right = 10
-				icon = {
-					size = { 112 56 }
-					parentanchor = vcenter
-					block "node_icon" {
-						texture = "gfx/interface/icons/event_icons/event_default.dds"
-					}
-				}
 				flowcontainer = {
-					direction = vertical
+					direction = horizontal
 					parentanchor = vcenter
-					layoutpolicy_horizontal = expanding
-					spacing = 1
+					spacing = 8
+					margin_left = 12
+					margin_right = 12
+					icon = {
+						size = { 96 48 }
+						parentanchor = vcenter
+						block "node_icon" {
+							texture = "gfx/interface/icons/event_icons/event_default.dds"
+						}
+					}
+					flowcontainer = {
+						direction = vertical
+						parentanchor = vcenter
+						layoutpolicy_horizontal = expanding
+						spacing = 2
 
-					textbox = {
-						block "node_title" { text = "sp_ct_node_placeholder" }
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#header"
-						using = fontsize_large
-						max_width = 540
-						elide = right
-					}
-					textbox = {
-						block "state_completed" { visible = no }
-						text = "sp_ct_state_completed"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#G"
-					}
-					textbox = {
-						block "state_active" { visible = no }
-						text = "sp_ct_state_active"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#Y"
-					}
-					textbox = {
-						block "state_available" { visible = no }
-						text = "sp_ct_state_available"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-					}
-					textbox = {
-						block "state_locked" { visible = no }
-						text = "sp_ct_state_locked"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#I"
+						textbox = {
+							block "node_title" { text = "sp_ct_node_placeholder" }
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#header"
+							using = fontsize_large
+							max_width = 520
+							elide = right
+						}
+						textbox = {
+							block "state_completed" { visible = no }
+							text = "sp_ct_state_completed"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#G"
+						}
+						textbox = {
+							block "state_active" { visible = no }
+							text = "sp_ct_state_active"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#Y"
+						}
+						textbox = {
+							block "state_available" { visible = no }
+							text = "sp_ct_state_available"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+						}
+						textbox = {
+							block "state_locked" { visible = no }
+							text = "sp_ct_state_locked"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#I"
+						}
 					}
 				}
 			}
@@ -6073,7 +6276,7 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_node_final = widget {
-		size = { 720 112 }
+		size = { 680 96 }
 		parentanchor = hcenter
 
 		button = {
@@ -6105,7 +6308,7 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.95
+					alpha = 0.88
 				}
 			}
 			widget = {
@@ -6116,11 +6319,12 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.82
+					alpha = 0.72
 				}
 			}
+
 			widget = {
-				size = { 100% 5 }
+				size = { 100% 4 }
 				parentanchor = top
 				background = {
 					texture = "gfx/interface/backgrounds/divider_gold.dds"
@@ -6130,7 +6334,7 @@ types sp_campaign_tree_types {
 				}
 			}
 			widget = {
-				size = { 100% 5 }
+				size = { 100% 4 }
 				parentanchor = bottom
 				background = {
 					texture = "gfx/interface/backgrounds/divider_gold.dds"
@@ -6140,64 +6344,67 @@ types sp_campaign_tree_types {
 				}
 			}
 
-			flowcontainer = {
-				direction = horizontal
+			widget = {
 				size = { 100% 100% }
-				spacing = 10
-				margin_left = 14
-				margin_right = 12
-				icon = {
-					size = { 120 60 }
-					parentanchor = vcenter
-					block "node_icon" {
-						texture = "gfx/interface/icons/event_icons/event_default.dds"
-					}
-				}
 				flowcontainer = {
-					direction = vertical
+					direction = horizontal
 					parentanchor = vcenter
-					layoutpolicy_horizontal = expanding
-					spacing = 1
+					spacing = 8
+					margin_left = 12
+					margin_right = 12
+					icon = {
+						size = { 96 48 }
+						parentanchor = vcenter
+						block "node_icon" {
+							texture = "gfx/interface/icons/event_icons/event_default.dds"
+						}
+					}
+					flowcontainer = {
+						direction = vertical
+						parentanchor = vcenter
+						layoutpolicy_horizontal = expanding
+						spacing = 2
 
-					textbox = {
-						block "node_title" { text = "sp_ct_node_placeholder" }
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#header"
-						using = fontsize_large
-						max_width = 550
-						elide = right
-					}
-					textbox = {
-						block "state_completed" { visible = no }
-						text = "sp_ct_state_completed"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#G"
-					}
-					textbox = {
-						block "state_active" { visible = no }
-						text = "sp_ct_state_active"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#Y"
-					}
-					textbox = {
-						block "state_available" { visible = no }
-						text = "sp_ct_state_available"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-					}
-					textbox = {
-						block "state_locked" { visible = no }
-						text = "sp_ct_state_locked"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#I"
+						textbox = {
+							block "node_title" { text = "sp_ct_node_placeholder" }
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#header"
+							using = fontsize_large
+							max_width = 520
+							elide = right
+						}
+						textbox = {
+							block "state_completed" { visible = no }
+							text = "sp_ct_state_completed"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#G"
+						}
+						textbox = {
+							block "state_active" { visible = no }
+							text = "sp_ct_state_active"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#Y"
+						}
+						textbox = {
+							block "state_available" { visible = no }
+							text = "sp_ct_state_available"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+						}
+						textbox = {
+							block "state_locked" { visible = no }
+							text = "sp_ct_state_locked"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#I"
+						}
 					}
 				}
 			}
@@ -6206,7 +6413,7 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_node_stage = widget {
-		size = { 168 78 }
+		size = { 160 72 }
 		parentanchor = hcenter
 
 		button = {
@@ -6253,11 +6460,13 @@ types sp_campaign_tree_types {
 				}
 			}
 
-			vbox = {
-				parentanchor = center
-				spacing = 1
-				margin_left = 6
-				margin_right = 6
+			widget = {
+				size = { 100% 100% }
+				vbox = {
+					parentanchor = vcenter
+					spacing = 2
+					margin_left = 8
+					margin_right = 8
 
 					textbox = {
 						block "node_title" { text = "sp_ct_node_placeholder" }
@@ -6265,7 +6474,7 @@ types sp_campaign_tree_types {
 						align = hcenter|nobaseline
 						default_format = "#header"
 						using = fontsize_small
-						max_width = 154
+						max_width = 144
 						elide = right
 					}
 					textbox = {
@@ -6300,12 +6509,13 @@ types sp_campaign_tree_types {
 						default_format = "#I"
 					}
 				}
+			}
 
 		}
 	}
 
 	type sp_ct_node_objective = widget {
-		size = { 230 48 }
+		size = { 248 44 }
 		parentanchor = hcenter
 
 		button = {
@@ -6337,7 +6547,7 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.82
+					alpha = 0.88
 				}
 			}
 			widget = {
@@ -6348,68 +6558,71 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.68
+					alpha = 0.72
 				}
 			}
 
-			flowcontainer = {
-				direction = horizontal
+			widget = {
 				size = { 100% 100% }
-				spacing = 6
-				margin_left = 8
-				margin_right = 6
-				icon = {
-					size = { 40 20 }
-					parentanchor = vcenter
-					block "node_icon" {
-						texture = "gfx/interface/icons/event_icons/event_default.dds"
-					}
-				}
 				flowcontainer = {
-					direction = vertical
+					direction = horizontal
 					parentanchor = vcenter
-					layoutpolicy_horizontal = expanding
-					spacing = 0
+					spacing = 8
+					margin_left = 8
+					margin_right = 8
+					icon = {
+						size = { 40 20 }
+						parentanchor = vcenter
+						block "node_icon" {
+							texture = "gfx/interface/icons/event_icons/event_default.dds"
+						}
+					}
+					flowcontainer = {
+						direction = vertical
+						parentanchor = vcenter
+						layoutpolicy_horizontal = expanding
+						spacing = 2
 
-					textbox = {
-						block "node_title" { text = "sp_ct_node_placeholder" }
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#header"
-						using = fontsize_small
-						max_width = 160
-						elide = right
-					}
-					textbox = {
-						block "state_completed" { visible = no }
-						text = "sp_ct_state_completed"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#G"
-					}
-					textbox = {
-						block "state_active" { visible = no }
-						text = "sp_ct_state_active"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#Y"
-					}
-					textbox = {
-						block "state_available" { visible = no }
-						text = "sp_ct_state_available"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-					}
-					textbox = {
-						block "state_locked" { visible = no }
-						text = "sp_ct_state_locked"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						default_format = "#I"
+						textbox = {
+							block "node_title" { text = "sp_ct_node_placeholder" }
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#header"
+							using = fontsize_small
+							max_width = 168
+							elide = right
+						}
+						textbox = {
+							block "state_completed" { visible = no }
+							text = "sp_ct_state_completed"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#G"
+						}
+						textbox = {
+							block "state_active" { visible = no }
+							text = "sp_ct_state_active"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#Y"
+						}
+						textbox = {
+							block "state_available" { visible = no }
+							text = "sp_ct_state_available"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+						}
+						textbox = {
+							block "state_locked" { visible = no }
+							text = "sp_ct_state_locked"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#I"
+						}
 					}
 				}
 			}
@@ -6418,18 +6631,18 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_connector_v = widget {
-		size = { 6 24 }
+		size = { 4 16 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.7
+			alpha = 0.75
 		}
 	}
 
 	type sp_ct_connector_h = widget {
-		size = { 18 6 }
+		size = { 12 4 }
 		parentanchor = vcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
@@ -6440,10 +6653,10 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_branch_fork = widget {
-		size = { 1272 22 }
+		size = { 808 16 }
 		parentanchor = hcenter
 		widget = {
-			size = { 1272 6 }
+			size = { 808 4 }
 			parentanchor = center
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
@@ -6457,7 +6670,7 @@ types sp_campaign_tree_types {
 	type sp_ct_insp_empty = flowcontainer {
 		direction = vertical
 		parentanchor = center
-		spacing = 10
+		spacing = 12
 		widget = {
 			size = { 520 260 }
 			parentanchor = hcenter
@@ -6487,5 +6700,4 @@ types sp_campaign_tree_types {
 			multiline = yes
 		}
 	}
-
 }
