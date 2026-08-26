@@ -1,16 +1,18 @@
-# I-30 Campaign Tree — node component types (Phase B/C).
+# I-30 Campaign Tree — node component types (Phase B/C + visual pass).
 # Compact node: icon + title + status (objective/stage family).
 # Artwork node: 2:1 illustration band + title/status footer (milestone family).
 # Frame: entry_bg_simple + simple_frame (vanilla backgrounds.gui).
-# Artwork band: journal_entry.gui top illu + objective_types.gui full-bleed pattern.
 
 types sp_ct_node_types {
 
 	type sp_ct_node_compact = widget {
-		size = { 200 44 }
+		size = { 200 48 }
 		parentanchor = hcenter
 		background = {
 			using = entry_bg_simple
+		}
+		background = {
+			using = simple_frame
 		}
 
 		button = {
@@ -29,7 +31,7 @@ types sp_ct_node_types {
 				block "state_locked_dim" { visible = no }
 				background = {
 					using = dark_area
-					alpha = 0.58
+					alpha = 0.42
 				}
 			}
 			widget = {
@@ -40,32 +42,12 @@ types sp_ct_node_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.40
+					alpha = 0.28
 				}
 			}
 			icon = {
 				block "node_selected" { visible = no }
 				using = highlighted_square_selection
-			}
-			widget = {
-				size = { 100% 1 }
-				parentanchor = top
-				background = {
-					texture = "gfx/interface/backgrounds/divider_gold.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					alpha = 0.65
-				}
-			}
-			widget = {
-				size = { 100% 1 }
-				parentanchor = bottom
-				background = {
-					texture = "gfx/interface/backgrounds/divider_gold.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					alpha = 0.65
-				}
 			}
 
 			widget = {
@@ -75,10 +57,10 @@ types sp_ct_node_types {
 					direction = horizontal
 					parentanchor = center
 					spacing = 8
-					margin_left = 8
-					margin_right = 8
+					margin_left = 10
+					margin_right = 10
 					icon = {
-						size = { 36 18 }
+						size = { 40 20 }
 						parentanchor = vcenter
 						block "node_icon" {
 							texture = "gfx/interface/icons/event_icons/event_default.dds"
@@ -96,7 +78,7 @@ types sp_ct_node_types {
 							align = left|nobaseline
 							default_format = "#title"
 							using = fontsize_small
-							max_width = 140
+							max_width = 132
 							elide = right
 						}
 						textbox = {
@@ -137,12 +119,11 @@ types sp_ct_node_types {
 		}
 	}
 
-	# Phase C prototype — major campaign milestone card (Imperial Identity first).
-	# Artwork 240×120 (2:1); card total 240×156.
+	# Major campaign milestone card — 240×120 artwork (2:1) + 36px footer.
 	type sp_ct_node_artwork = widget {
-		size = { 240 156 }
+		size = { 240 160 }
 		parentanchor = hcenter
-		margin_bottom = 6
+		margin_bottom = 4
 
 		background = {
 			using = entry_bg_simple
@@ -164,21 +145,13 @@ types sp_ct_node_types {
 			}
 			widget = {
 				size = { 100% 100% }
-				block "state_locked_dim" { visible = no }
-				background = {
-					using = dark_area
-					alpha = 0.58
-				}
-			}
-			widget = {
-				size = { 100% 100% }
 				block "state_active_glow" { visible = no }
 				background = {
 					texture = "gfx/interface/buttons/default_button_mouseover.dds"
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.45
+					alpha = 0.30
 				}
 			}
 			icon = {
@@ -196,7 +169,7 @@ types sp_ct_node_types {
 					parentanchor = hcenter
 					background = {
 						using = dark_area
-						alpha = 0.55
+						alpha = 0.40
 					}
 					icon = {
 						size = { 240 120 }
@@ -205,30 +178,45 @@ types sp_ct_node_types {
 							texture = "gfx/interface/icons/event_icons/event_default.dds"
 						}
 					}
-					icon = {
+					widget = {
 						size = { 100% 100% }
-						using = simple_frame
+						block "state_locked_dim" { visible = no }
+						background = {
+							using = dark_area
+							alpha = 0.50
+						}
 					}
 				}
 
 				widget = {
-					size = { 240 2 }
+					size = { 240 1 }
 					background = {
 						texture = "gfx/interface/backgrounds/divider_gold.dds"
 						spriteType = Corneredstretched
 						spriteborder = { 0 0 }
-						alpha = 0.78
+						alpha = 0.52
 					}
 				}
 
 				widget = {
-					size = { 240 34 }
+					size = { 240 39 }
+					widget = {
+						size = { 100% 2 }
+						parentanchor = bottom
+						block "node_capstone_accent" { visible = no }
+						background = {
+							texture = "gfx/interface/backgrounds/divider_gold.dds"
+							spriteType = Corneredstretched
+							spriteborder = { 0 0 }
+							alpha = 0.62
+						}
+					}
 					flowcontainer = {
 						direction = horizontal
 						parentanchor = center
-						margin_left = 8
-						margin_right = 8
-						spacing = 6
+						margin_left = 10
+						margin_right = 10
+						spacing = 8
 
 						textbox = {
 							block "node_title" { text = "sp_ct_node_placeholder" }
@@ -237,80 +225,44 @@ types sp_ct_node_types {
 							align = left|vcenter|nobaseline
 							default_format = "#title"
 							using = fontsize_small
-							max_width = 148
+							max_width = 156
 							elide = right
 						}
 
-						widget = {
-							size = { 72 18 }
+						textbox = {
+							block "state_completed" { visible = no }
+							text = "sp_ct_state_completed"
 							parentanchor = vcenter
-							widget = {
-								size = { 100% 100% }
-								block "state_completed" { visible = no }
-								background = {
-									using = entry_bg_simple
-								}
-								textbox = {
-									parentanchor = center
-									text = "sp_ct_state_completed"
-									autoresize = yes
-									align = hcenter|vcenter|nobaseline
-									using = fontsize_small
-									default_format = "#G"
-									margin_left = 6
-									margin_right = 6
-								}
-							}
-							widget = {
-								size = { 100% 100% }
-								block "state_active" { visible = no }
-								background = {
-									using = entry_bg_simple
-								}
-								textbox = {
-									parentanchor = center
-									text = "sp_ct_state_active"
-									autoresize = yes
-									align = hcenter|vcenter|nobaseline
-									using = fontsize_small
-									default_format = "#Y"
-									margin_left = 6
-									margin_right = 6
-								}
-							}
-							widget = {
-								size = { 100% 100% }
-								block "state_available" { visible = no }
-								background = {
-									using = entry_bg_simple
-								}
-								textbox = {
-									parentanchor = center
-									text = "sp_ct_state_available"
-									autoresize = yes
-									align = hcenter|vcenter|nobaseline
-									using = fontsize_small
-									margin_left = 6
-									margin_right = 6
-								}
-							}
-							widget = {
-								size = { 100% 100% }
-								block "state_locked" { visible = no }
-								background = {
-									using = entry_bg_simple
-								}
-								textbox = {
-									parentanchor = center
-									text = "sp_ct_state_locked"
-									autoresize = yes
-									align = hcenter|vcenter|nobaseline
-									using = fontsize_small
-									default_format = "#I"
-									margin_left = 6
-									margin_right = 6
-								}
-							}
+							autoresize = yes
+							align = right|vcenter|nobaseline
+							using = fontsize_small
+							default_format = "#G"
+						}
+						textbox = {
+							block "state_active" { visible = no }
+							text = "sp_ct_state_active"
+							parentanchor = vcenter
+							autoresize = yes
+							align = right|vcenter|nobaseline
+							using = fontsize_small
+							default_format = "#Y"
+						}
+						textbox = {
+							block "state_available" { visible = no }
+							text = "sp_ct_state_available"
+							parentanchor = vcenter
+							autoresize = yes
+							align = right|vcenter|nobaseline
+							using = fontsize_small
+						}
+						textbox = {
+							block "state_locked" { visible = no }
+							text = "sp_ct_state_locked"
+							parentanchor = vcenter
+							autoresize = yes
+							align = right|vcenter|nobaseline
+							using = fontsize_small
+							default_format = "#I"
 						}
 					}
 				}
