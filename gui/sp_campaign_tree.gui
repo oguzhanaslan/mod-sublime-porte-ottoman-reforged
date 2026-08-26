@@ -5,6 +5,7 @@
 # Node classes: major / identity / grand / final / stage / objective.
 # Connectors are GUI widgets (vanilla techtree_spline is CPP-backed and unavailable).
 # Shared primitives: gui/sp_campaign_tree/00_sp_ct_shared.gui
+# Node components: gui/sp_campaign_tree/sp_ct_nodes.gui
 
 widget = {
 	name = "sp_campaign_tree_root"
@@ -352,7 +353,7 @@ types sp_campaign_tree_types {
 								}
 							}
 								sp_ct_connector_v = {}
-							sp_ct_node_objective = {
+							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_ottomanism_s2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}

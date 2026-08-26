@@ -1,0 +1,137 @@
+# I-30 Campaign Tree — node component types (Phase B).
+# Compact node: icon + title + status badge row (objective/stage family).
+# Structural pattern copied from sp_ct_node_objective in gui/sp_campaign_tree.gui.
+
+types sp_ct_node_types {
+
+	type sp_ct_node_compact = widget {
+		size = { 200 44 }
+		parentanchor = hcenter
+		background = {
+			using = entry_bg_simple
+		}
+
+		button = {
+			size = { 100% 100% }
+			using = glow_button_border
+			using = confirm_button_sound
+			using = tooltip_above
+			block "node_onclick" {
+				onclick = "[GetPlayer.IsValid]"
+			}
+			block "node_tooltip" {
+				tooltip = "sp_ct_node_placeholder_tt"
+			}
+			widget = {
+				size = { 100% 100% }
+				block "state_locked_dim" { visible = no }
+				background = {
+					using = dark_area
+					alpha = 0.58
+				}
+			}
+			widget = {
+				size = { 100% 100% }
+				block "state_active_glow" { visible = no }
+				background = {
+					texture = "gfx/interface/buttons/default_button_mouseover.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = colordodge
+					alpha = 0.40
+				}
+			}
+			icon = {
+				block "node_selected" { visible = no }
+				using = highlighted_square_selection
+			}
+			widget = {
+				size = { 100% 1 }
+				parentanchor = top
+				background = {
+					texture = "gfx/interface/backgrounds/divider_gold.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					alpha = 0.65
+				}
+			}
+			widget = {
+				size = { 100% 1 }
+				parentanchor = bottom
+				background = {
+					texture = "gfx/interface/backgrounds/divider_gold.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					alpha = 0.65
+				}
+			}
+
+			widget = {
+				size = { 100% 100% }
+				alwaystransparent = yes
+				flowcontainer = {
+					direction = horizontal
+					parentanchor = center
+					spacing = 8
+					margin_left = 8
+					margin_right = 8
+					icon = {
+						size = { 36 18 }
+						parentanchor = vcenter
+						block "node_icon" {
+							texture = "gfx/interface/icons/event_icons/event_default.dds"
+						}
+					}
+					flowcontainer = {
+						direction = vertical
+						parentanchor = vcenter
+						layoutpolicy_horizontal = expanding
+						spacing = 2
+
+						textbox = {
+							block "node_title" { text = "sp_ct_node_placeholder" }
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+							max_width = 140
+							elide = right
+						}
+						textbox = {
+							block "state_completed" { visible = no }
+							text = "sp_ct_state_completed"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#G"
+						}
+						textbox = {
+							block "state_active" { visible = no }
+							text = "sp_ct_state_active"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#Y"
+						}
+						textbox = {
+							block "state_available" { visible = no }
+							text = "sp_ct_state_available"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+						}
+						textbox = {
+							block "state_locked" { visible = no }
+							text = "sp_ct_state_locked"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							default_format = "#I"
+						}
+					}
+				}
+			}
+
+		}
+	}
+}
