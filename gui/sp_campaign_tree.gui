@@ -272,7 +272,9 @@ types sp_campaign_tree_types {
 							sp_ct_connector_v = {}
 							sp_ct_branch_fork = {}
 
-							hbox = {
+							# flowcontainer cannot nest hbox/vbox (engine: pdx_gui_container.cpp → stack overflow)
+							flowcontainer = {
+								direction = horizontal
 								parentanchor = top|hcenter
 								spacing = 24
 
