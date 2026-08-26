@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""I-30 layout normalization — presentation-only pass on sp_campaign_tree.gui."""
+"""I-30 layout normalization — one-shot DEV helper (NOT runtime, NOT source of truth).
+
+Used to generate layout commit ae6fd02. Authoritative UI: gui/sp_campaign_tree.gui.
+Do not re-run blindly after manual GUI edits. See docs/development/PARADOX_GUI_GUIDE.md §8.
+"""
 from __future__ import annotations
 
 import re
