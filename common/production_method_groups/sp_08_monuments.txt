@@ -1,0 +1,28 @@
+﻿# I-27 palace production method groups.
+
+pmg_sp_topkapi_palace = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	ai_selection = most_productive
+	is_hidden_when_unavailable = yes
+
+	production_methods = {
+		sp_pm_topkapi_imperial_complex
+		sp_pm_topkapi_former_palace
+		sp_pm_topkapi_imperial_museum
+		pm_monument_prestige_only
+		pm_monument_no_effects
+	}
+}
+
+pmg_sp_dolmabahce_palace = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	ai_selection = most_productive
+	is_hidden_when_unavailable = yes
+
+	production_methods = {
+		sp_pm_dolmabahce_new_palace
+		sp_pm_dolmabahce_imperial_court
+		pm_monument_prestige_only
+		pm_monument_no_effects
+	}
+}

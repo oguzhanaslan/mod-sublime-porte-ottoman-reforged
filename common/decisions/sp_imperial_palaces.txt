@@ -1,0 +1,51 @@
+﻿# I-27 Imperial Palaces — decisions (country scope).
+
+sp_decision_transfer_imperial_court = {
+	is_shown = {
+		c:TUR ?= this
+		has_law = law_type:law_monarchy
+		sp_i27_topkapi_is_imperial_complex = yes
+		any_scope_state = {
+			state_region = s:STATE_EASTERN_THRACE
+			owner ?= {
+				c:TUR ?= this
+			}
+			has_building = sp_building_dolmabahce_palace
+		}
+	}
+
+	possible = {
+		sp_i27_can_transfer_imperial_court = yes
+	}
+
+	when_taken = {
+		sp_i27_transfer_court_effect = yes
+		trigger_event = {
+			id = sp_i27.1
+			popup = yes
+		}
+	}
+
+	ai_chance = {
+		value = 50
+	}
+}
+
+sp_decision_topkapi_imperial_museum = {
+	is_shown = {
+		c:TUR ?= this
+		sp_i27_topkapi_is_former = yes
+	}
+
+	possible = {
+		sp_i27_can_open_topkapi_museum = yes
+	}
+
+	when_taken = {
+		sp_i27_open_topkapi_museum_effect = yes
+	}
+
+	ai_chance = {
+		value = 20
+	}
+}

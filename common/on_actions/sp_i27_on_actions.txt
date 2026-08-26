@@ -1,0 +1,42 @@
+﻿# I-27 Imperial Palaces — additive on_actions.
+# Ownership: on_state_owner_change (state root). Monarchy: on_law_activated (law root; use c:TUR).
+
+on_state_owner_change = {
+	on_actions = {
+		sp_i27_on_state_owner_change
+	}
+}
+
+sp_i27_on_state_owner_change = {
+	effect = {
+		if = {
+			limit = {
+				state_region = s:STATE_EASTERN_THRACE
+				NOT = {
+					owner ?= {
+						c:TUR ?= this
+					}
+				}
+				OR = {
+					has_building = sp_building_topkapi_palace
+					has_building = sp_building_dolmabahce_palace
+				}
+			}
+			sp_i27_strip_imperial_pms_on_state = yes
+		}
+	}
+}
+
+on_law_activated = {
+	on_actions = {
+		sp_i27_on_law_activated
+	}
+}
+
+sp_i27_on_law_activated = {
+	effect = {
+		c:TUR ?= {
+			sp_i27_deactivate_court_if_not_monarchy = yes
+		}
+	}
+}

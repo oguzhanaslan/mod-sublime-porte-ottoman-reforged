@@ -1,0 +1,89 @@
+﻿# I-27 Ottoman Imperial Palaces — buildings
+# Additive unique monuments. Do not copy Gates assets or numbers.
+
+sp_building_topkapi_palace = {
+	building_group = bg_monuments
+	icon = "gfx/interface/icons/building_icons/forbidden_city.dds"
+	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_monuments.dds"
+
+	expandable = no
+	buildable = no
+	downsizeable = no
+	unique = yes
+
+	entity_not_constructed = { }
+	entity_under_construction = { "building_construction_3x3_entity" }
+	entity_constructed = { }
+
+	production_method_groups = {
+		pmg_sp_topkapi_palace
+	}
+
+	required_construction = construction_cost_monument
+
+	potential = {
+		state_region = s:STATE_EASTERN_THRACE
+	}
+
+	can_build_government = {
+		always = no
+	}
+
+	can_build_private = {
+		always = no
+	}
+
+	ai_value = 0
+}
+
+sp_building_dolmabahce_palace = {
+	building_group = bg_monuments
+	icon = "gfx/interface/icons/building_icons/white_house.dds"
+	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_monuments.dds"
+
+	expandable = no
+	downsizeable = no
+	unique = yes
+
+	entity_not_constructed = { }
+	entity_under_construction = { "building_construction_3x3_entity" }
+	entity_constructed = { }
+
+	production_method_groups = {
+		pmg_sp_dolmabahce_palace
+	}
+
+	required_construction = construction_cost_monument
+
+	potential = {
+		state_region = s:STATE_EASTERN_THRACE
+	}
+
+	possible = {
+		owner ?= {
+			c:TUR ?= this
+			has_law = law_type:law_monarchy
+			game_date >= 1843.1.1
+			has_technology_researched = romanticism
+			sp_i27_dolmabahce_tanzimat_gate = yes
+			sp_i27_has_construction_capacity = yes
+		}
+	}
+
+	can_build_government = {
+		owner ?= {
+			c:TUR ?= this
+			has_law = law_type:law_monarchy
+			game_date >= 1843.1.1
+			has_technology_researched = romanticism
+			sp_i27_dolmabahce_tanzimat_gate = yes
+			sp_i27_has_construction_capacity = yes
+		}
+	}
+
+	can_build_private = {
+		always = no
+	}
+
+	ai_value = 8000
+}

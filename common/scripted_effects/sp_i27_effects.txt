@@ -1,0 +1,124 @@
+﻿# I-27 Imperial Palaces — scripted effects.
+
+sp_i27_transfer_court_effect = {
+	every_scope_state = {
+		limit = {
+			state_region = s:STATE_EASTERN_THRACE
+			owner ?= {
+				c:TUR ?= this
+			}
+		}
+		activate_production_method = {
+			building_type = sp_building_topkapi_palace
+			production_method = sp_pm_topkapi_former_palace
+		}
+		activate_production_method = {
+			building_type = sp_building_dolmabahce_palace
+			production_method = sp_pm_dolmabahce_imperial_court
+		}
+	}
+	set_variable = sp_imperial_court_at_dolmabahce
+}
+
+sp_i27_open_topkapi_museum_effect = {
+	every_scope_state = {
+		limit = {
+			state_region = s:STATE_EASTERN_THRACE
+			owner ?= {
+				c:TUR ?= this
+			}
+			has_building = sp_building_topkapi_palace
+		}
+		activate_production_method = {
+			building_type = sp_building_topkapi_palace
+			production_method = sp_pm_topkapi_imperial_museum
+		}
+	}
+}
+
+# Root = state (on_state_owner_change). Strips Ottoman imperial PMs; does not delete buildings.
+sp_i27_strip_imperial_pms_on_state = {
+	if = {
+		limit = {
+			has_building = sp_building_topkapi_palace
+			OR = {
+				is_production_method_active = {
+					building_type = sp_building_topkapi_palace
+					production_method = sp_pm_topkapi_imperial_complex
+				}
+				is_production_method_active = {
+					building_type = sp_building_topkapi_palace
+					production_method = sp_pm_topkapi_imperial_museum
+				}
+			}
+		}
+		activate_production_method = {
+			building_type = sp_building_topkapi_palace
+			production_method = sp_pm_topkapi_former_palace
+		}
+	}
+	if = {
+		limit = {
+			has_building = sp_building_dolmabahce_palace
+			is_production_method_active = {
+				building_type = sp_building_dolmabahce_palace
+				production_method = sp_pm_dolmabahce_imperial_court
+			}
+		}
+		activate_production_method = {
+			building_type = sp_building_dolmabahce_palace
+			production_method = sp_pm_dolmabahce_new_palace
+		}
+	}
+	c:TUR ?= {
+		if = {
+			limit = {
+				has_variable = sp_imperial_court_at_dolmabahce
+			}
+			remove_variable = sp_imperial_court_at_dolmabahce
+		}
+	}
+}
+
+# Country scope (call from c:TUR). Deactivate court when TUR is not a monarchy.
+sp_i27_deactivate_court_if_not_monarchy = {
+	if = {
+		limit = {
+			NOT = { has_law = law_type:law_monarchy }
+		}
+		every_scope_state = {
+			limit = {
+				state_region = s:STATE_EASTERN_THRACE
+				has_building = sp_building_dolmabahce_palace
+				is_production_method_active = {
+					building_type = sp_building_dolmabahce_palace
+					production_method = sp_pm_dolmabahce_imperial_court
+				}
+			}
+			activate_production_method = {
+				building_type = sp_building_dolmabahce_palace
+				production_method = sp_pm_dolmabahce_new_palace
+			}
+		}
+		if = {
+			limit = {
+				has_variable = sp_imperial_court_at_dolmabahce
+			}
+			remove_variable = sp_imperial_court_at_dolmabahce
+		}
+		every_scope_state = {
+			limit = {
+				state_region = s:STATE_EASTERN_THRACE
+				has_building = sp_building_topkapi_palace
+				is_production_method_active = {
+					building_type = sp_building_topkapi_palace
+					production_method = sp_pm_topkapi_imperial_complex
+				}
+			}
+			activate_production_method = {
+				building_type = sp_building_topkapi_palace
+				production_method = sp_pm_topkapi_former_palace
+			}
+		}
+	}
+}

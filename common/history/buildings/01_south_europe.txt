@@ -4410,6 +4410,12 @@
 				building="building_hagia_sophia"
 				level=1
 			}
+			# I-27: Topkapi Imperial Palace Complex (starting functional monument).
+			create_building={
+				building="sp_building_topkapi_palace"
+				level=1
+				activate_production_methods={ "sp_pm_topkapi_imperial_complex" }
+			}
 			create_building={
 				building="building_naval_fortification"
 				add_ownership={

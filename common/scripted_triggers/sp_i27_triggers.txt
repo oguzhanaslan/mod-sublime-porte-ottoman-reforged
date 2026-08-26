@@ -1,0 +1,74 @@
+﻿# I-27 Imperial Palaces — scripted triggers (country scope unless noted).
+
+# Correction 1: active Sick Man JE OR at least one domestic I-05 objective.
+# Reuses sp_i18_has_domestic_tanzimat_reform (reads completed_sick_man_* / completed_separatism_*).
+# Do NOT use bare sick_man_complete (set on success and failure by I-06).
+sp_i27_dolmabahce_tanzimat_gate = {
+	OR = {
+		has_journal_entry = je_sick_man_main
+		sp_i18_has_domestic_tanzimat_reform = yes
+	}
+}
+
+sp_i27_has_construction_capacity = {
+	any_scope_building = {
+		is_building_type = building_construction_sector
+		level >= 2
+	}
+}
+
+sp_i27_topkapi_is_imperial_complex = {
+	any_scope_state = {
+		state_region = s:STATE_EASTERN_THRACE
+		owner ?= {
+			c:TUR ?= this
+		}
+		has_building = sp_building_topkapi_palace
+		is_production_method_active = {
+			building_type = sp_building_topkapi_palace
+			production_method = sp_pm_topkapi_imperial_complex
+		}
+	}
+}
+
+sp_i27_topkapi_is_former = {
+	any_scope_state = {
+		state_region = s:STATE_EASTERN_THRACE
+		owner ?= {
+			c:TUR ?= this
+		}
+		has_building = sp_building_topkapi_palace
+		is_production_method_active = {
+			building_type = sp_building_topkapi_palace
+			production_method = sp_pm_topkapi_former_palace
+		}
+	}
+}
+
+sp_i27_dolmabahce_is_inactive = {
+	any_scope_state = {
+		state_region = s:STATE_EASTERN_THRACE
+		owner ?= {
+			c:TUR ?= this
+		}
+		has_building = sp_building_dolmabahce_palace
+		is_production_method_active = {
+			building_type = sp_building_dolmabahce_palace
+			production_method = sp_pm_dolmabahce_new_palace
+		}
+	}
+}
+
+sp_i27_can_transfer_imperial_court = {
+	c:TUR ?= this
+	has_law = law_type:law_monarchy
+	sp_i27_topkapi_is_imperial_complex = yes
+	sp_i27_dolmabahce_is_inactive = yes
+}
+
+sp_i27_can_open_topkapi_museum = {
+	c:TUR ?= this
+	sp_i27_topkapi_is_former = yes
+	has_technology_researched = realism
+	literacy_rate >= 0.20
+}

@@ -1,0 +1,29 @@
+﻿namespace = sp_i27
+
+# I-27 transfer acknowledgement. NO EFFECT beyond the decision's already-applied PM switch.
+
+sp_i27.1 = {
+	type = country_event
+	placement = root
+	title = sp_i27.1.t
+	desc = sp_i27.1.d
+	flavor = sp_i27.1.f
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		always = no
+	}
+
+	option = {
+		name = sp_i27.1.a
+		default_option = yes
+		ai_chance = {
+			base = 100
+		}
+	}
+}
