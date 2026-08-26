@@ -1,0 +1,11 @@
+﻿category = {
+	id = "sp_mx_category_ottoman"
+	name = "sp_ottoman_soundtrack"
+	tracks = {
+		"sp_mx_mood_tr_bab_i_ali"
+		"sp_mx_mood_tr_echoes_of_rumelia"
+		"sp_mx_mood_tr_ones_who_never_returned"
+		"sp_mx_mood_tr_instrumental_ottoman_court"
+		"sp_mx_mood_tr_sancak_i_humayun"
+	}
+}

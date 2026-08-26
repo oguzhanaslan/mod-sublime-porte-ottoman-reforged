@@ -1,0 +1,70 @@
+﻿##### SUBLIME PORTE — OTTOMAN MOOD (TUR-only)
+
+# Assets: bab-i-ali.ogg, Echoes-of-Rumelia.ogg, The_Ones_Who_Never_Returned.ogg, Instrumental_Ottoman_Court.ogg, Sancak_i_Humayun.ogg (user-authored).
+# Path A file:/ pattern from R-28. Country gate is community-attested; runtime proof required.
+
+sp_mx_mood_tr_bab_i_ali = {
+	music = "file:/music/bab-i-ali.ogg"
+	name = "sp_music_bab_i_ali"
+	pause_factor = 50
+	mood = yes
+	can_be_interrupted = yes
+	# prioritized_mood is in vanilla music.md but Tiger 1.19.0 / schema 1.13.5 rejects it as unknown-field.
+	trigger_prio_override = no
+	is_valid = {
+		exists = c:TUR
+		c:TUR = ROOT
+	}
+}
+
+sp_mx_mood_tr_echoes_of_rumelia = {
+	music = "file:/music/Echoes-of-Rumelia.ogg"
+	name = "sp_music_echoes_of_rumelia"
+	pause_factor = 50
+	mood = yes
+	can_be_interrupted = yes
+	trigger_prio_override = no
+	is_valid = {
+		exists = c:TUR
+		c:TUR = ROOT
+	}
+}
+
+sp_mx_mood_tr_ones_who_never_returned = {
+	music = "file:/music/The_Ones_Who_Never_Returned.ogg"
+	name = "sp_music_ones_who_never_returned"
+	pause_factor = 50
+	mood = yes
+	can_be_interrupted = yes
+	trigger_prio_override = no
+	is_valid = {
+		exists = c:TUR
+		c:TUR = ROOT
+	}
+}
+
+sp_mx_mood_tr_instrumental_ottoman_court = {
+	music = "file:/music/Instrumental_Ottoman_Court.ogg"
+	name = "sp_music_instrumental_ottoman_court"
+	pause_factor = 50
+	mood = yes
+	can_be_interrupted = yes
+	trigger_prio_override = no
+	is_valid = {
+		exists = c:TUR
+		c:TUR = ROOT
+	}
+}
+
+sp_mx_mood_tr_sancak_i_humayun = {
+	music = "file:/music/Sancak_i_Humayun.ogg"
+	name = "sp_music_sancak_i_humayun"
+	pause_factor = 50
+	mood = yes
+	can_be_interrupted = yes
+	trigger_prio_override = no
+	is_valid = {
+		exists = c:TUR
+		c:TUR = ROOT
+	}
+}

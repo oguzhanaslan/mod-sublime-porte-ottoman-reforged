@@ -138,6 +138,7 @@ Do not place unverified historical claims in this file. Cite sources when resear
 ## Turkism
 
 - **R-20 mapping:** late `movement_cultural_majority` / `ideology_ethno_nationalist` / vanilla Enver. Do not back-project into 1836. Turan and new Turkic cultures remain deferred. **RESEARCH ONLY.**
+- **R-30 — Turan / Pan-Turkic conquest path (audit + proposal only):** [`docs/research/R30_turan_pan_turkic_conquest_path.md`](docs/research/R30_turan_pan_turkic_conquest_path.md). Sublime Porte has **no** shipped “TUR selected Turkism” flag; Autumnnus uses `otf_turanic_idea_vr`. Proposed SP gate key: `sp_turkism_selected` (not implemented). Recommended architecture: staged JE + staged claims; final reward **A** (keep Ottoman + status). Implementation-ready: **NO**. **RESEARCH ONLY — NO GAMEPLAY.**
 
 ## Young Ottomans
 

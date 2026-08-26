@@ -3,7 +3,7 @@
 
 sp_building_topkapi_palace = {
 	building_group = bg_monuments
-	icon = "gfx/interface/icons/building_icons/forbidden_city.dds"
+	icon = "gfx/interface/icons/building_icons/sp_building_topkapi_palace.dds"
 	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_monuments.dds"
 
 	expandable = no
@@ -38,7 +38,7 @@ sp_building_topkapi_palace = {
 
 sp_building_dolmabahce_palace = {
 	building_group = bg_monuments
-	icon = "gfx/interface/icons/building_icons/white_house.dds"
+	icon = "gfx/interface/icons/building_icons/sp_building_dolmabahce_palace.dds"
 	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_monuments.dds"
 
 	expandable = no
