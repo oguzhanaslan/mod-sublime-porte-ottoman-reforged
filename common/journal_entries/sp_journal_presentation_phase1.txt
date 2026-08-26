@@ -2,7 +2,7 @@
 # No immediate effects, no pulses, no modifiers, no progress bars.
 
 sp_je_hunkar_iskelesi = {
-	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	icon = "gfx/interface/icons/event_icons/sp_je_hunkar_iskelesi.dds"
 	group = je_group_foreign_affairs
 
 	is_shown_when_inactive = {
@@ -112,7 +112,7 @@ sp_je_eastern_provinces = {
 }
 
 sp_je_post_tanzimat_era = {
-	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	icon = "gfx/interface/icons/event_icons/sp_je_post_tanzimat_era.dds"
 	group = je_group_internal_affairs
 
 	is_shown_when_inactive = {

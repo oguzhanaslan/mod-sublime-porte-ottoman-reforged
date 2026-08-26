@@ -2,7 +2,7 @@
 # Do not edit vanilla company files. No shipyard primary or extension.
 
 company_sp_sirket_i_hayriye = {
-	icon = "gfx/interface/icons/company_icons/historical_company_icons/ap_moller.dds"
+	icon = "gfx/interface/icons/company_icons/historical_company_icons/sp_company_sirket_i_hayriye.dds"
 	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_harbor_shipbuilding.dds"
 
 	category = bureaucrat_owned

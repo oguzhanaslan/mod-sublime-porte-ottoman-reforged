@@ -11,9 +11,9 @@ sp_i10b.1 = { # Fevzi Çakmak
 	flavor = sp_i10b.1.f
 
 	event_image = {
-		video = "unspecific_military_parade"
+		texture = "gfx/event_pictures/sp_i10b_officer_event_scene.dds"
 	}
-	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	icon = "gfx/interface/icons/event_icons/sp_i10b_officer_event.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
 	duration = 3
@@ -55,9 +55,9 @@ sp_i10b.2 = { # Mustafa Kemal
 	flavor = sp_i10b.2.f
 
 	event_image = {
-		video = "unspecific_military_parade"
+		texture = "gfx/event_pictures/sp_i10b_officer_event_scene.dds"
 	}
-	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	icon = "gfx/interface/icons/event_icons/sp_i10b_officer_event.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
 	duration = 3
@@ -99,9 +99,9 @@ sp_i10b.3 = { # Kâzım Karabekir
 	flavor = sp_i10b.3.f
 
 	event_image = {
-		video = "unspecific_military_parade"
+		texture = "gfx/event_pictures/sp_i10b_officer_event_scene.dds"
 	}
-	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	icon = "gfx/interface/icons/event_icons/sp_i10b_officer_event.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
 	duration = 3
