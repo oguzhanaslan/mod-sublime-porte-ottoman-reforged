@@ -2,7 +2,7 @@
 # Additive scripted widget. No vanilla GUI overwrite.
 # Custom near-fullscreen chrome (not InformationPanelBar) so com_open_window /
 # com_fullscreen clear reliably on close/back.
-# Node classes: major / identity / grand / final / stage / objective.
+# Node classes: sp_ct_node_artwork / sp_ct_node_compact (componentized).
 # Connectors are GUI widgets (vanilla techtree_spline is CPP-backed and unavailable).
 # Shared primitives: gui/sp_campaign_tree/00_sp_ct_shared.gui
 # Node components: gui/sp_campaign_tree/sp_ct_nodes.gui
@@ -140,7 +140,7 @@ types sp_campaign_tree_types {
 						flowcontainer = {
 							direction = vertical
 							parentanchor = top|hcenter
-							spacing = 6
+							spacing = 8
 							margin_bottom = 12
 							minimumsize = { 992 -1 }
 
@@ -250,7 +250,7 @@ types sp_campaign_tree_types {
 
 								flowcontainer = {
 									direction = vertical
-									spacing = 6
+									spacing = 8
 									minimumsize = { 320 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_artwork = {
@@ -418,6 +418,7 @@ types sp_campaign_tree_types {
 									onclick = "[GetScriptedGui('sp_ct_select_constitutional_ottoman').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_title" { text = "sp_ct_node_constitutional_ottoman_short" }
+								blockoverride "node_capstone_accent" { visible = yes }
 								blockoverride "node_tooltip" { tooltip = "sp_ct_tt_constitutional_ottoman" }
 								blockoverride "node_selected" {
 									visible = "[GetScriptedGui('sp_ct_vis_sel_constitutional_ottoman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -448,7 +449,7 @@ types sp_campaign_tree_types {
 
 								flowcontainer = {
 									direction = vertical
-									spacing = 6
+									spacing = 8
 									minimumsize = { 320 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_artwork = {
@@ -616,6 +617,7 @@ types sp_campaign_tree_types {
 									onclick = "[GetScriptedGui('sp_ct_select_great_caliphate').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_title" { text = "sp_ct_node_great_caliphate_short" }
+								blockoverride "node_capstone_accent" { visible = yes }
 								blockoverride "node_tooltip" { tooltip = "sp_ct_tt_great_caliphate" }
 								blockoverride "node_selected" {
 									visible = "[GetScriptedGui('sp_ct_vis_sel_great_caliphate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -646,7 +648,7 @@ types sp_campaign_tree_types {
 
 								flowcontainer = {
 									direction = vertical
-									spacing = 6
+									spacing = 8
 									minimumsize = { 320 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_artwork = {
@@ -851,6 +853,7 @@ types sp_campaign_tree_types {
 									onclick = "[GetScriptedGui('sp_ct_select_great_ottoman').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_title" { text = "sp_ct_node_great_ottoman_short" }
+								blockoverride "node_capstone_accent" { visible = yes }
 								blockoverride "node_tooltip" { tooltip = "sp_ct_tt_great_ottoman" }
 								blockoverride "node_selected" {
 									visible = "[GetScriptedGui('sp_ct_vis_sel_great_ottoman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -890,20 +893,20 @@ types sp_campaign_tree_types {
 					minimumsize = { 440 -1 }
 					background = {
 						using = dark_area
-						alpha = 0.38
+						alpha = 0.42
 						margin = { 4 4 }
 					}
 					background = {
 						using = default_header_bg_faded
-						alpha = 0.35
+						alpha = 0.32
 						margin = { 4 4 }
 					}
 
 					vbox = {
 						size = { 100% 100% }
 						layoutpolicy_vertical = expanding
-						margin = { 8 8 }
-						spacing = 0
+						margin = { 12 12 }
+						spacing = 4
 
 						sp_ct_insp_empty = {
 							visible = "[Not(GetScriptedGui('sp_ct_vis_has_selection').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
