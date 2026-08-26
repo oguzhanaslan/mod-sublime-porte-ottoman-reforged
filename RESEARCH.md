@@ -22,7 +22,7 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Ottoman Debt
 
-- **R-19 companion finding:** Düyun-u Umumiye is not an I-14 company. Vanilla `company_ottoman_tobacco_regie` already represents the 1883 Régie tobacco monopoly created under the Public Debt Administration. A named OPDA constraint JE belongs to later debt/capitulations work (R-16 already marked that design **LATER**). See [`docs/research/R19_ottoman_companies_institutions_inventory.md`](docs/research/R19_ottoman_companies_institutions_inventory.md).
+- **Düyûn-ı Umûmiye / OPDA:** **DROPPED / OUT OF SCOPE.** Not a queued research or implementation package. I-14 already rejected it as a prosperity company because vanilla `company_ottoman_tobacco_regie` covers the 1883 Régie tobacco-monopoly slice created under the Public Debt Administration. A named OPDA constraint JE is **not planned**. Do not assign an I-ID. See the closed inventory note in [`docs/research/R19_ottoman_companies_institutions_inventory.md`](docs/research/R19_ottoman_companies_institutions_inventory.md).
 
 ## Capitulations
 
@@ -156,7 +156,7 @@ Do not place unverified historical claims in this file. Cite sources when resear
 ## Historical Companies
 
 - **R-19 — Ottoman companies/institutions inventory:** canonical dossier [`docs/research/R19_ottoman_companies_institutions_inventory.md`](docs/research/R19_ottoman_companies_institutions_inventory.md). Do not confuse with [`docs/research/R19_tanzimat_gameplay_design.md`](docs/research/R19_tanzimat_gameplay_design.md), which is the I-05 Tanzimat design file under a colliding filename. **COMPLETE AND USED IN I-14.**
-- **I-14 — Ottoman company/institution flavor:** proposal [`docs/research/I14_ottoman_company_institution_proposal.md`](docs/research/I14_ottoman_company_institution_proposal.md); implementation [`docs/implementation/I14_ottoman_company_institution_flavor.md`](docs/implementation/I14_ottoman_company_institution_flavor.md). Hayriye company + Ottoman Bank one-shot event. Gameplay `77397d57901284b68dcce37769fa470a7d851a08`; docs `109d43e514a0a1b4e3caf98204588a37c3b0539e`. **IMPLEMENTED; TIGER CLEAN FOR I-14; 1836 VISUAL PASS; 1863 BANK EVENT DEFERRED TO FINAL RELEASE VALIDATION.** Do not expand (no Düyun / Memleket companies).
+- **I-14 — Ottoman company/institution flavor:** proposal [`docs/research/I14_ottoman_company_institution_proposal.md`](docs/research/I14_ottoman_company_institution_proposal.md); implementation [`docs/implementation/I14_ottoman_company_institution_flavor.md`](docs/implementation/I14_ottoman_company_institution_flavor.md). Hayriye company + Ottoman Bank one-shot event. Gameplay `77397d57901284b68dcce37769fa470a7d851a08`; docs `109d43e514a0a1b4e3caf98204588a37c3b0539e`. **IMPLEMENTED; TIGER CLEAN FOR I-14; 1836 VISUAL PASS; 1863 BANK EVENT DEFERRED TO FINAL RELEASE VALIDATION.** Do not expand. **Düyûn-ı Umûmiye / OPDA is DROPPED / OUT OF SCOPE.** Memleket Sandıkları remain deferred.
 
 ## Journal Presentation
 
