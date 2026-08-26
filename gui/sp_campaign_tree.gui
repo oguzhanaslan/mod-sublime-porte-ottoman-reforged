@@ -1,4 +1,4 @@
-# I-30 Campaign Tree UI — visual overhaul (presentation only).
+# I-30 Campaign Tree UI ? visual overhaul (presentation only).
 # Additive scripted widget. No vanilla GUI overwrite.
 # Custom near-fullscreen chrome (not InformationPanelBar) so com_open_window /
 # com_fullscreen clear reliably on close/back.
@@ -144,7 +144,7 @@ types sp_campaign_tree_types {
 							margin_bottom = 12
 							minimumsize = { 992 -1 }
 
-							sp_ct_node_major = {
+							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_tanzimat').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -176,7 +176,7 @@ types sp_campaign_tree_types {
 								}
 							}
 							sp_ct_connector_trunk_v = {}
-							sp_ct_node_major = {
+							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_post_tanzimat').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -242,7 +242,7 @@ types sp_campaign_tree_types {
 							sp_ct_connector_trunk_v = {}
 							sp_ct_branch_fork = {}
 
-							# flowcontainer cannot nest hbox/vbox (engine: pdx_gui_container.cpp › stack overflow)
+							# flowcontainer cannot nest hbox/vbox (engine: pdx_gui_container.cpp ? stack overflow)
 							flowcontainer = {
 								direction = horizontal
 								parentanchor = top|hcenter
@@ -253,7 +253,7 @@ types sp_campaign_tree_types {
 									spacing = 6
 									minimumsize = { 320 -1 }
 									sp_ct_connector_v = {}
-							sp_ct_node_identity = {
+							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_ottomanism').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -285,7 +285,7 @@ types sp_campaign_tree_types {
 								}
 							}
 									sp_ct_connector_v = {}
-																sp_ct_node_objective = {
+																sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_ottomanism_s1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -349,7 +349,7 @@ types sp_campaign_tree_types {
 								}
 							}
 								sp_ct_connector_v = {}
-							sp_ct_node_objective = {
+							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_ottomanism_s3').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -381,7 +381,7 @@ types sp_campaign_tree_types {
 								}
 							}
 								sp_ct_connector_v = {}
-							sp_ct_node_objective = {
+							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_ottomanism_s4').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -413,7 +413,7 @@ types sp_campaign_tree_types {
 								}
 							}
 								sp_ct_connector_v = {}
-							sp_ct_node_final = {
+							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_constitutional_ottoman').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -451,7 +451,7 @@ types sp_campaign_tree_types {
 									spacing = 6
 									minimumsize = { 320 -1 }
 									sp_ct_connector_v = {}
-							sp_ct_node_identity = {
+							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_islamism').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -483,7 +483,7 @@ types sp_campaign_tree_types {
 								}
 							}
 									sp_ct_connector_v = {}
-																sp_ct_node_objective = {
+																sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_islamism_s1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -515,7 +515,7 @@ types sp_campaign_tree_types {
 								}
 							}
 								sp_ct_connector_v = {}
-							sp_ct_node_objective = {
+							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_islamism_s2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -547,7 +547,7 @@ types sp_campaign_tree_types {
 								}
 							}
 								sp_ct_connector_v = {}
-							sp_ct_node_objective = {
+							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_islamism_s3').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -579,7 +579,7 @@ types sp_campaign_tree_types {
 								}
 							}
 								sp_ct_connector_v = {}
-							sp_ct_node_objective = {
+							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_islamism_s4').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -611,7 +611,7 @@ types sp_campaign_tree_types {
 								}
 							}
 								sp_ct_connector_v = {}
-							sp_ct_node_final = {
+							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_great_caliphate').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -649,7 +649,7 @@ types sp_campaign_tree_types {
 									spacing = 6
 									minimumsize = { 320 -1 }
 									sp_ct_connector_v = {}
-							sp_ct_node_identity = {
+							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turkism').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -681,7 +681,7 @@ types sp_campaign_tree_types {
 								}
 							}
 									sp_ct_connector_v = {}
-							sp_ct_node_grand = {
+							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turan').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -717,7 +717,7 @@ types sp_campaign_tree_types {
 										direction = horizontal
 										parentanchor = hcenter
 										spacing = 8
-							sp_ct_node_stage = {
+							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turan_s1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -749,7 +749,7 @@ types sp_campaign_tree_types {
 								}
 							}
 									sp_ct_connector_h = {}
-							sp_ct_node_stage = {
+							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turan_s2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -781,7 +781,7 @@ types sp_campaign_tree_types {
 								}
 							}
 									sp_ct_connector_h = {}
-							sp_ct_node_stage = {
+							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turan_s3').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -813,7 +813,7 @@ types sp_campaign_tree_types {
 								}
 							}
 									sp_ct_connector_h = {}
-							sp_ct_node_stage = {
+							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turan_s4').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -846,7 +846,7 @@ types sp_campaign_tree_types {
 							}
 									}
 									sp_ct_connector_v = {}
-							sp_ct_node_final = {
+							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_great_ottoman').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
@@ -1029,7 +1029,7 @@ types sp_campaign_tree_types {
 	# Card family shell: entry_bg_simple + simple_frame (vanilla backgrounds.gui).
 	# Click overlay: glow_button_border (buttons.gui; objectives screen).
 	# Selected: highlighted_square_selection (selections.gui).
-	type sp_ct_node_major = widget {
+	type sp_ct_node_artwork = widget {
 		size = { 320 68 }
 		parentanchor = hcenter
 		background = {
@@ -1189,7 +1189,7 @@ types sp_campaign_tree_types {
 		}
 	}
 
-	type sp_ct_node_identity = widget {
+	type sp_ct_node_artwork = widget {
 		size = { 220 88 }
 		parentanchor = hcenter
 		background = {
@@ -1368,7 +1368,7 @@ types sp_campaign_tree_types {
 		}
 	}
 
-	type sp_ct_node_grand = widget {
+	type sp_ct_node_artwork = widget {
 		size = { 280 84 }
 		parentanchor = hcenter
 		background = {
@@ -1540,7 +1540,7 @@ types sp_campaign_tree_types {
 		}
 	}
 
-	type sp_ct_node_final = widget {
+	type sp_ct_node_artwork = widget {
 		size = { 320 88 }
 		parentanchor = hcenter
 		background = {
@@ -1711,7 +1711,7 @@ types sp_campaign_tree_types {
 		}
 	}
 
-	type sp_ct_node_stage = widget {
+	type sp_ct_node_compact = widget {
 		size = { 148 64 }
 		parentanchor = hcenter
 		background = {
@@ -1819,7 +1819,7 @@ types sp_campaign_tree_types {
 		}
 	}
 
-	type sp_ct_node_objective = widget {
+	type sp_ct_node_compact = widget {
 		size = { 200 44 }
 		parentanchor = hcenter
 		background = {
