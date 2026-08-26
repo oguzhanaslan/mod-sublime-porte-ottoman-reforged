@@ -1,8 +1,6 @@
 # I-30 Campaign Tree — native fullscreen header (Phase F + runtime fix).
-# Structural source: Victoria 3 1.13.11 block_windows.gui fullscreen_block_window
-# header row (L868–914): 70px band, back top|left {11 15}, close top|right {-11 15},
-# title hbox margin {250 0}, centered textbox size {0 50}.
-# Presentation only; onclick blocks are overridden from sp_campaign_tree_window.
+# Structural source: Victoria 3 1.13.11 block_windows.gui (L376–424 centered title +
+# overlay back/close). Presentation only; onclick blocks overridden from sp_campaign_tree_window.
 
 types sp_ct_header_types {
 
@@ -10,9 +8,22 @@ types sp_ct_header_types {
 		size = { 0 70 }
 		layoutpolicy_horizontal = expanding
 
+		textbox = {
+			parentanchor = center
+			size = { 100% 50 }
+			maximumsize = { -1 50 }
+			fontsize_min = 14
+			using = header_font_fancy
+			using = header_font_fancy_size
+			text = "sp_ct_window_title"
+			default_format = "#header"
+			align = hcenter|vcenter|nobaseline
+			autoresize = yes
+		}
+
 		block "header_back_button" {
 			back_button_large = {
-				position = { 11 15 }
+				position = { 11 11 }
 				parentanchor = top|left
 				onclick = "[GetPlayer.IsValid]"
 				input_action = "back"
@@ -22,27 +33,9 @@ types sp_ct_header_types {
 		block "header_close_button" {
 			close_button_large = {
 				parentanchor = top|right
-				position = { -11 15 }
+				position = { -11 11 }
 				onclick = "[GetPlayer.IsValid]"
 				shortcut = "close_window"
-			}
-		}
-
-		hbox = {
-			layoutpolicy_vertical = expanding
-			layoutpolicy_horizontal = expanding
-			margin = { 250 0 }
-			margin_bottom = 8
-
-			textbox = {
-				size = { 0 50 }
-				layoutpolicy_horizontal = expanding
-				fontsize_min = 14
-				using = header_font_fancy
-				using = header_font_fancy_size
-				text = "sp_ct_window_title"
-				default_format = "#header"
-				align = center|nobaseline
 			}
 		}
 	}
