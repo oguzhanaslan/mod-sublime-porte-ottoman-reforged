@@ -131,7 +131,7 @@ types sp_campaign_tree_types {
 					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = expanding
 					size = { -1 100% }
-					scrollbarpolicy_horizontal = as_needed
+					scrollbarpolicy_horizontal = always_off
 					scrollbar_horizontal = { using = horizontal_scrollbar }
 					scrollbar_vertical = { using = vertical_scrollbar }
 
@@ -716,7 +716,7 @@ types sp_campaign_tree_types {
 							}
 									sp_ct_connector_v = {}
 									flowcontainer = {
-										direction = horizontal
+										direction = vertical
 										parentanchor = hcenter
 										spacing = 8
 							sp_ct_node_compact = {
@@ -750,7 +750,7 @@ types sp_campaign_tree_types {
 									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_turan_s1.dds"
 								}
 							}
-									sp_ct_connector_h = {}
+									sp_ct_connector_v = {}
 							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turan_s2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -782,7 +782,7 @@ types sp_campaign_tree_types {
 									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_turan_s2.dds"
 								}
 							}
-									sp_ct_connector_h = {}
+									sp_ct_connector_v = {}
 							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turan_s3').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -814,7 +814,7 @@ types sp_campaign_tree_types {
 									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_turan_s3.dds"
 								}
 							}
-									sp_ct_connector_h = {}
+									sp_ct_connector_v = {}
 							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turan_s4').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
