@@ -29,6 +29,7 @@
  sp_ct_sec_alternatives: "Tabi devlet denetimi alternatifi"
  sp_ct_sec_path: "Seçilen kimlik / yol"
  sp_ct_sec_navigation: "Gezinme"
+ sp_ct_sec_actions: "Eylemler"
  sp_ct_sec_optional: "İsteğe bağlı (Tanzimat hedefi sayılmaz)"
 
  sp_ct_progress_controlled: "Kontrol:"

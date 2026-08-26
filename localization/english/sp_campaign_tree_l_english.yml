@@ -29,6 +29,7 @@
  sp_ct_sec_alternatives: "Subject-control alternative"
  sp_ct_sec_path: "Selected identity / path"
  sp_ct_sec_navigation: "Navigation"
+ sp_ct_sec_actions: "Actions"
  sp_ct_sec_optional: "Optional (does not count as a Tanzimat objective)"
 
  sp_ct_progress_controlled: "Controlled:"
