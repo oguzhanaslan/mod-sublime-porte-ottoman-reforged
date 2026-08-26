@@ -66,7 +66,7 @@ types sp_campaign_tree_types {
 
 		background = {
 			using = default_bg
-			margin = { 28 28 }
+			margin = { 20 20 }
 		}
 
 		fullscreen_top_header = {}
@@ -103,25 +103,25 @@ types sp_campaign_tree_types {
 
 		vbox = {
 			using = clickthrough_blocker
-			margin_top = 88
-			margin_left = 28
-			margin_right = 28
-			margin_bottom = 20
+			margin_top = 76
+			margin_left = 20
+			margin_right = 20
+			margin_bottom = 14
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
-			spacing = 8
+			spacing = 6
 
 			widget = {
-				size = { 100% 108 }
+				size = { 100% 84 }
 				layoutpolicy_horizontal = expanding
 				background = {
 					texture = "gfx/interface/icons/sp_campaign_tree/sp_ct_header_logo.dds"
 					spriteType = Corneredstretched
-					spriteborder = { 120 0 }
+					spriteborder = { 100 0 }
 				}
 				background = {
 					using = dark_area
-					alpha = 0.28
+					alpha = 0.16
 				}
 				widget = {
 					size = { 100% 4 }
@@ -134,7 +134,7 @@ types sp_campaign_tree_types {
 				}
 
 				back_button_large = {
-					position = { 8 24 }
+					position = { 8 16 }
 					parentanchor = top|left
 					onclick = "[GetVariableSystem.Clear('com_open_window')]"
 					onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
@@ -143,7 +143,7 @@ types sp_campaign_tree_types {
 
 				close_button_large = {
 					parentanchor = top|right
-					position = { -8 24 }
+					position = { -8 16 }
 					onclick = "[GetVariableSystem.Clear('com_open_window')]"
 					onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
 					shortcut = "close_window"
@@ -151,9 +151,9 @@ types sp_campaign_tree_types {
 
 				hbox = {
 					parentanchor = center
-					spacing = 14
+					spacing = 12
 					icon = {
-						size = { 56 56 }
+						size = { 48 48 }
 						parentanchor = vcenter
 						texture = "gfx/interface/icons/sp_campaign_tree/sp_ct_sidebar_icon.dds"
 					}
@@ -172,7 +172,7 @@ types sp_campaign_tree_types {
 			hbox = {
 				layoutpolicy_vertical = expanding
 				layoutpolicy_horizontal = expanding
-				spacing = 12
+				spacing = 10
 
 				scrollarea = {
 					layoutpolicy_horizontal = expanding
@@ -187,10 +187,10 @@ types sp_campaign_tree_types {
 						flowcontainer = {
 							direction = vertical
 							parentanchor = top|hcenter
-							spacing = 4
-							margin_top = 8
-							margin_bottom = 28
-							minimumsize = { 1204 -1 }
+							spacing = 6
+							margin_top = 4
+							margin_bottom = 20
+							minimumsize = { 1310 -1 }
 
 							sp_ct_node_major = {
 								blockoverride "node_onclick" {
@@ -294,12 +294,12 @@ types sp_campaign_tree_types {
 							flowcontainer = {
 								direction = horizontal
 								parentanchor = top|hcenter
-								spacing = 24
+								spacing = 36
 
 								flowcontainer = {
 									direction = vertical
-									spacing = 4
-									minimumsize = { 260 -1 }
+									spacing = 6
+									minimumsize = { 230 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_identity = {
 								blockoverride "node_onclick" {
@@ -464,8 +464,8 @@ types sp_campaign_tree_types {
 
 								flowcontainer = {
 									direction = vertical
-									spacing = 4
-									minimumsize = { 260 -1 }
+									spacing = 6
+									minimumsize = { 230 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_identity = {
 								blockoverride "node_onclick" {
@@ -630,8 +630,8 @@ types sp_campaign_tree_types {
 
 								flowcontainer = {
 									direction = vertical
-									spacing = 4
-									minimumsize = { 636 -1 }
+									spacing = 6
+									minimumsize = { 740 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_identity = {
 								blockoverride "node_onclick" {
@@ -700,7 +700,7 @@ types sp_campaign_tree_types {
 									flowcontainer = {
 										direction = horizontal
 										parentanchor = hcenter
-										spacing = 0
+										spacing = 4
 							sp_ct_node_stage = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turan_s1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -874,14 +874,14 @@ types sp_campaign_tree_types {
 					minimumsize = { 440 -1 }
 					background = {
 						using = dark_area
-						alpha = 0.42
+						alpha = 0.48
 						margin = { 2 2 }
 					}
 
 					vbox = {
 						size = { 100% 100% }
-						margin = { 10 10 }
-						spacing = 6
+						margin = { 6 6 }
+						spacing = 4
 
 						scrollarea = {
 							layoutpolicy_vertical = expanding
@@ -891,7 +891,7 @@ types sp_campaign_tree_types {
 							scrollwidget = {
 								flowcontainer = {
 									direction = vertical
-									spacing = 4
+									spacing = 3
 									minimumsize = { 500 -1 }
 
 									sp_ct_insp_empty = {
@@ -5704,7 +5704,7 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_node_major = widget {
-		size = { 420 84 }
+		size = { 400 78 }
 		parentanchor = hcenter
 
 		button = {
@@ -5725,7 +5725,7 @@ types sp_campaign_tree_types {
 				block "state_locked_dim" { visible = no }
 				background = {
 					using = dark_area
-					alpha = 0.58
+					alpha = 0.45
 				}
 			}
 			widget = {
@@ -5736,7 +5736,7 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.82
+					alpha = 0.88
 				}
 			}
 			widget = {
@@ -5747,7 +5747,17 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.58
+					alpha = 0.72
+				}
+			}
+			widget = {
+				size = { 100% 3 }
+				parentanchor = bottom
+				background = {
+					texture = "gfx/interface/backgrounds/divider_gold.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					alpha = 0.55
 				}
 			}
 
@@ -5758,7 +5768,7 @@ types sp_campaign_tree_types {
 				margin_left = 10
 				margin_right = 8
 				icon = {
-					size = { 80 40 }
+					size = { 88 44 }
 					parentanchor = vcenter
 					block "node_icon" {
 						texture = "gfx/interface/icons/event_icons/event_default.dds"
@@ -5776,7 +5786,7 @@ types sp_campaign_tree_types {
 						align = left|nobaseline
 						default_format = "#header"
 						using = fontsize_large
-						max_width = 300
+						max_width = 280
 						elide = right
 					}
 					textbox = {
@@ -5817,7 +5827,7 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_node_identity = widget {
-		size = { 260 178 }
+		size = { 230 96 }
 		parentanchor = hcenter
 
 		button = {
@@ -5838,7 +5848,7 @@ types sp_campaign_tree_types {
 				block "state_locked_dim" { visible = no }
 				background = {
 					using = dark_area
-					alpha = 0.58
+					alpha = 0.42
 				}
 			}
 			widget = {
@@ -5849,7 +5859,7 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.82
+					alpha = 0.92
 				}
 			}
 			widget = {
@@ -5860,41 +5870,53 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.58
+					alpha = 0.85
+				}
+			}
+			widget = {
+				size = { 100% 4 }
+				parentanchor = bottom
+				background = {
+					texture = "gfx/interface/backgrounds/divider_gold.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					alpha = 0.9
 				}
 			}
 
-			vbox = {
+			flowcontainer = {
+				direction = horizontal
 				size = { 100% 100% }
+				spacing = 8
+				margin_left = 8
+				margin_right = 6
 				icon = {
-					size = { 260 130 }
-					parentanchor = hcenter
+					size = { 88 44 }
+					parentanchor = vcenter
 					block "node_icon" {
 						texture = "gfx/interface/icons/event_icons/event_default.dds"
 					}
 				}
-				vbox = {
-					parentanchor = hcenter
+				flowcontainer = {
+					direction = vertical
+					parentanchor = vcenter
 					layoutpolicy_horizontal = expanding
 					spacing = 1
-					margin_left = 8
-					margin_right = 8
-					margin_top = 2
 
 					textbox = {
 						block "node_title" { text = "sp_ct_node_placeholder" }
 						autoresize = yes
-						align = hcenter|nobaseline
+						align = left|nobaseline
 						default_format = "#header"
 						using = fontsize_medium
-						max_width = 244
+						max_width = 120
 						elide = right
 					}
 					textbox = {
 						block "state_completed" { visible = no }
 						text = "sp_ct_state_completed"
 						autoresize = yes
-						align = hcenter|nobaseline
+						align = left|nobaseline
 						using = fontsize_small
 						default_format = "#G"
 					}
@@ -5902,7 +5924,7 @@ types sp_campaign_tree_types {
 						block "state_active" { visible = no }
 						text = "sp_ct_state_active"
 						autoresize = yes
-						align = hcenter|nobaseline
+						align = left|nobaseline
 						using = fontsize_small
 						default_format = "#Y"
 					}
@@ -5910,14 +5932,14 @@ types sp_campaign_tree_types {
 						block "state_available" { visible = no }
 						text = "sp_ct_state_available"
 						autoresize = yes
-						align = hcenter|nobaseline
+						align = left|nobaseline
 						using = fontsize_small
 					}
 					textbox = {
 						block "state_locked" { visible = no }
 						text = "sp_ct_state_locked"
 						autoresize = yes
-						align = hcenter|nobaseline
+						align = left|nobaseline
 						using = fontsize_small
 						default_format = "#I"
 					}
@@ -5928,7 +5950,7 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_node_grand = widget {
-		size = { 636 88 }
+		size = { 700 100 }
 		parentanchor = hcenter
 
 		button = {
@@ -5949,7 +5971,7 @@ types sp_campaign_tree_types {
 				block "state_locked_dim" { visible = no }
 				background = {
 					using = dark_area
-					alpha = 0.58
+					alpha = 0.45
 				}
 			}
 			widget = {
@@ -5960,7 +5982,7 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.82
+					alpha = 0.9
 				}
 			}
 			widget = {
@@ -5971,18 +5993,28 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.58
+					alpha = 0.78
+				}
+			}
+			widget = {
+				size = { 100% 4 }
+				parentanchor = bottom
+				background = {
+					texture = "gfx/interface/backgrounds/divider_gold.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					alpha = 0.85
 				}
 			}
 
 			flowcontainer = {
 				direction = horizontal
 				size = { 100% 100% }
-				spacing = 8
-				margin_left = 10
-				margin_right = 8
+				spacing = 10
+				margin_left = 12
+				margin_right = 10
 				icon = {
-					size = { 96 48 }
+					size = { 112 56 }
 					parentanchor = vcenter
 					block "node_icon" {
 						texture = "gfx/interface/icons/event_icons/event_default.dds"
@@ -6000,7 +6032,7 @@ types sp_campaign_tree_types {
 						align = left|nobaseline
 						default_format = "#header"
 						using = fontsize_large
-						max_width = 500
+						max_width = 540
 						elide = right
 					}
 					textbox = {
@@ -6041,7 +6073,7 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_node_final = widget {
-		size = { 636 92 }
+		size = { 720 112 }
 		parentanchor = hcenter
 
 		button = {
@@ -6062,7 +6094,7 @@ types sp_campaign_tree_types {
 				block "state_locked_dim" { visible = no }
 				background = {
 					using = dark_area
-					alpha = 0.58
+					alpha = 0.45
 				}
 			}
 			widget = {
@@ -6073,7 +6105,7 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.82
+					alpha = 0.95
 				}
 			}
 			widget = {
@@ -6084,18 +6116,38 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.58
+					alpha = 0.82
+				}
+			}
+			widget = {
+				size = { 100% 5 }
+				parentanchor = top
+				background = {
+					texture = "gfx/interface/backgrounds/divider_gold.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					alpha = 0.95
+				}
+			}
+			widget = {
+				size = { 100% 5 }
+				parentanchor = bottom
+				background = {
+					texture = "gfx/interface/backgrounds/divider_gold.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					alpha = 0.95
 				}
 			}
 
 			flowcontainer = {
 				direction = horizontal
 				size = { 100% 100% }
-				spacing = 8
-				margin_left = 10
-				margin_right = 8
+				spacing = 10
+				margin_left = 14
+				margin_right = 12
 				icon = {
-					size = { 96 48 }
+					size = { 120 60 }
 					parentanchor = vcenter
 					block "node_icon" {
 						texture = "gfx/interface/icons/event_icons/event_default.dds"
@@ -6113,7 +6165,7 @@ types sp_campaign_tree_types {
 						align = left|nobaseline
 						default_format = "#header"
 						using = fontsize_large
-						max_width = 500
+						max_width = 550
 						elide = right
 					}
 					textbox = {
@@ -6154,7 +6206,7 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_node_stage = widget {
-		size = { 150 72 }
+		size = { 168 78 }
 		parentanchor = hcenter
 
 		button = {
@@ -6175,7 +6227,7 @@ types sp_campaign_tree_types {
 				block "state_locked_dim" { visible = no }
 				background = {
 					using = dark_area
-					alpha = 0.58
+					alpha = 0.45
 				}
 			}
 			widget = {
@@ -6186,7 +6238,7 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.82
+					alpha = 0.88
 				}
 			}
 			widget = {
@@ -6197,7 +6249,7 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.58
+					alpha = 0.72
 				}
 			}
 
@@ -6213,7 +6265,7 @@ types sp_campaign_tree_types {
 						align = hcenter|nobaseline
 						default_format = "#header"
 						using = fontsize_small
-						max_width = 138
+						max_width = 154
 						elide = right
 					}
 					textbox = {
@@ -6253,7 +6305,7 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_node_objective = widget {
-		size = { 260 52 }
+		size = { 230 48 }
 		parentanchor = hcenter
 
 		button = {
@@ -6274,7 +6326,7 @@ types sp_campaign_tree_types {
 				block "state_locked_dim" { visible = no }
 				background = {
 					using = dark_area
-					alpha = 0.58
+					alpha = 0.45
 				}
 			}
 			widget = {
@@ -6296,16 +6348,16 @@ types sp_campaign_tree_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.58
+					alpha = 0.68
 				}
 			}
 
 			flowcontainer = {
 				direction = horizontal
 				size = { 100% 100% }
-				spacing = 8
-				margin_left = 10
-				margin_right = 8
+				spacing = 6
+				margin_left = 8
+				margin_right = 6
 				icon = {
 					size = { 40 20 }
 					parentanchor = vcenter
@@ -6317,7 +6369,7 @@ types sp_campaign_tree_types {
 					direction = vertical
 					parentanchor = vcenter
 					layoutpolicy_horizontal = expanding
-					spacing = 1
+					spacing = 0
 
 					textbox = {
 						block "node_title" { text = "sp_ct_node_placeholder" }
@@ -6325,7 +6377,7 @@ types sp_campaign_tree_types {
 						align = left|nobaseline
 						default_format = "#header"
 						using = fontsize_small
-						max_width = 200
+						max_width = 160
 						elide = right
 					}
 					textbox = {
@@ -6366,37 +6418,39 @@ types sp_campaign_tree_types {
 	}
 
 	type sp_ct_connector_v = widget {
-		size = { 4 18 }
+		size = { 6 24 }
 		parentanchor = hcenter
 		background = {
-			texture = "gfx/interface/dividers/divider_clean_vertical.dds"
+			texture = "gfx/interface/backgrounds/divider_gold.dds"
+			spriteType = Corneredstretched
+			spriteborder = { 0 0 }
+			alpha = 0.7
+		}
+	}
+
+	type sp_ct_connector_h = widget {
+		size = { 18 6 }
+		parentanchor = vcenter
+		background = {
+			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
 			alpha = 0.85
 		}
 	}
 
-	type sp_ct_connector_h = widget {
-		size = { 12 4 }
-		parentanchor = vcenter
-		background = {
-			texture = "gfx/interface/backgrounds/divider_gold.dds"
-			spriteType = Corneredstretched
-			spriteborder = { 0 0 }
-			alpha = 0.9
-		}
-	}
-
 	type sp_ct_branch_fork = widget {
-		size = { 828 20 }
+		size = { 1272 22 }
 		parentanchor = hcenter
-		icon = {
-			size = { 100% 4 }
+		widget = {
+			size = { 1272 6 }
 			parentanchor = center
-			texture = "gfx/interface/backgrounds/divider_gold.dds"
-			spriteType = Corneredstretched
-			spriteborder = { 0 0 }
-			alpha = 0.95
+			background = {
+				texture = "gfx/interface/backgrounds/divider_gold.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				alpha = 0.95
+			}
 		}
 	}
 
