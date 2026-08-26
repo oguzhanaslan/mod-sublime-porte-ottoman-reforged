@@ -1,0 +1,12 @@
+﻿# I-28 Great Ottoman Empire coat of arms (full custom flag texture).
+# Used only when sp_great_ottoman_empire_proclaimed is set.
+
+sp_coa_great_ottoman = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+
+	textured_emblem = {
+		texture = "te_sp_great_ottoman.dds"
+		instance = { scale = { 1.0 1.0 } position = { 0.5 0.5 } }
+	}
+}

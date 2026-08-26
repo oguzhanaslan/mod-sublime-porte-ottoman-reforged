@@ -1,0 +1,97 @@
+﻿# I-28 Great Ottoman Empire flag for tag TUR.
+# Tiger requires REPLACE: to redefine TUR flag_definitions. Vanilla entries preserved.
+# Custom CoA applies only after Option B sets sp_great_ottoman_empire_proclaimed.
+
+REPLACE:TUR = { # Turkey
+	flag_definition = {
+		coa = TUR
+		subject_canton = TUR
+		allow_overlord_canton = yes
+		coa_with_overlord_canton = TUR_subject
+		priority = 1
+	}
+	flag_definition = {
+		coa = TUR_monarchy
+		subject_canton = TUR_monarchy
+		allow_overlord_canton = yes
+		coa_with_overlord_canton = TUR_subject
+		priority = 5
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = TUR
+		subject_canton = TUR
+		allow_overlord_canton = yes
+		coa_with_overlord_canton = TUR_subject
+		priority = 20
+		trigger = {
+			coa_def_absolute_monarchy_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = TUR_republic
+		allow_overlord_canton = yes
+		coa_with_overlord_canton = TUR_republic_subject
+		priority = 10
+		trigger = {
+			coa_def_republic_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = TUR_dictatorship
+		subject_canton = TUR_dictatorship
+		allow_overlord_canton = yes
+		coa_with_overlord_canton = TUR_republic_subject
+		priority = 20
+		trigger = {
+			coa_def_dictatorship_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = TUR_theocracy
+		subject_canton = TUR_theocracy
+		priority = 20
+		trigger = {
+			coa_def_theocracy_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = TUR_subject_GBR
+		allow_overlord_canton = yes
+		priority = 50
+		trigger = {
+			coa_def_british_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = TUR_subject
+		allow_overlord_canton = yes
+		overlord_canton_offset = { 0.01 0.015 }
+		overlord_canton_scale = { 0.48 0.47 }
+		priority = 50
+		trigger = {
+			coa_def_french_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = TUR_subject_GBR
+		subject_canton = TUR
+		allow_overlord_canton = yes
+		priority = 50
+		trigger = {
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = sp_coa_great_ottoman
+		subject_canton = sp_coa_great_ottoman
+		allow_overlord_canton = yes
+		coa_with_overlord_canton = TUR_subject
+		priority = 2000
+		trigger = {
+			has_variable = sp_great_ottoman_empire_proclaimed
+		}
+	}
+}
