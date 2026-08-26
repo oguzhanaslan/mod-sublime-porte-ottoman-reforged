@@ -1,0 +1,582 @@
+﻿namespace = sp_i25
+
+# I-25 Ottoman everyday flavor. Ten one-shot TUR country events. No JE, no character spawn,
+# no laws, no tech, no buildings, no treasury, no Tanzimat points, no permanent modifiers.
+# Cooldown is set only in immediate so a queued trigger_event cannot fail flavor_ready.
+
+# 1 — The Men of the Porte, 1846–1860. No create_character (I-10A already has Âlî/Fuad).
+sp_i25.1 = {
+	type = country_event
+	placement = root
+	title = sp_i25.1.t
+	desc = sp_i25.1.d
+	flavor = sp_i25.1.f
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i25_can_fire_1 = yes
+	}
+
+	immediate = {
+		set_variable = sp_i25_porte_men_fired
+		sp_i25_set_flavor_cooldown = yes
+	}
+
+	option = {
+		name = sp_i25.1.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i25_porte_new_men
+			days = very_short_modifier_time
+		}
+		add_loyalists = {
+			value = very_small_radicals
+			pop_type = academics
+		}
+		ai_chance = {
+			base = 40
+			modifier = {
+				trigger = {
+					ig:ig_intelligentsia ?= {
+						is_in_government = yes
+					}
+				}
+				add = 15
+			}
+		}
+	}
+
+	option = {
+		name = sp_i25.1.b
+		add_modifier = {
+			name = sp_i25_porte_old_balance
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 60
+			modifier = {
+				trigger = {
+					ig:ig_landowners ?= {
+						is_in_government = yes
+					}
+				}
+				add = 15
+			}
+		}
+	}
+}
+
+# 2 — The New Schools, 1847–1870. I-24 flag is loc variant only.
+sp_i25.2 = {
+	type = country_event
+	placement = root
+	title = sp_i25.2.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i24_education_reorganized
+				}
+				desc = sp_i25.2.d_maarif
+			}
+			triggered_desc = {
+				desc = sp_i25.2.d
+			}
+		}
+	}
+	flavor = sp_i25.2.f
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 3
+	event_image = {
+		video = "asia_politician_parliament_motion"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i25_can_fire_2 = yes
+	}
+
+	immediate = {
+		set_variable = sp_i25_new_schools_fired
+		sp_i25_set_flavor_cooldown = yes
+	}
+
+	option = {
+		name = sp_i25.2.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i25_expand_mektebs
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 30
+			modifier = {
+				trigger = {
+					ig:ig_intelligentsia ?= {
+						is_in_government = yes
+					}
+				}
+				add = 15
+			}
+		}
+	}
+
+	option = {
+		name = sp_i25.2.b
+		add_modifier = {
+			name = sp_i25_communal_schools
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 55
+		}
+	}
+}
+
+# 3 — The Telegraph Reaches the Provinces, 1855+. Requires electric_telegraph.
+sp_i25.3 = {
+	type = country_event
+	placement = root
+	title = sp_i25.3.t
+	desc = sp_i25.3.d
+	flavor = sp_i25.3.f
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i25_can_fire_3 = yes
+	}
+
+	immediate = {
+		set_variable = sp_i25_telegraph_fired
+		sp_i25_set_flavor_cooldown = yes
+	}
+
+	option = {
+		name = sp_i25.3.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i25_telegraph_correspondence
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = {
+		name = sp_i25.3.b
+		add_modifier = {
+			name = sp_i25_telegraph_local_offices
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+# 4 — The Istanbul Press, 1850–1865. Hard close so I-18.2 owns 1865+.
+sp_i25.4 = {
+	type = country_event
+	placement = root
+	title = sp_i25.4.t
+	desc = sp_i25.4.d
+	flavor = sp_i25.4.f
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 3
+	event_image = {
+		video = "ep1_printing_press"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i25_can_fire_4 = yes
+	}
+
+	immediate = {
+		set_variable = sp_i25_press_fired
+		sp_i25_set_flavor_cooldown = yes
+	}
+
+	option = {
+		name = sp_i25.4.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i25_press_tolerate
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				trigger = {
+					OR = {
+						has_law_or_variant = law_type:law_right_of_assembly
+						has_law_or_variant = law_type:law_protected_speech
+					}
+				}
+				add = 15
+			}
+		}
+	}
+
+	option = {
+		name = sp_i25.4.b
+		add_modifier = {
+			name = sp_i25_press_supervise
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				trigger = {
+					has_law_or_variant = law_type:law_censorship
+				}
+				add = 15
+			}
+		}
+	}
+}
+
+# 5 — Foreign Advisers, 1851–1870. No GP save_scope. No change_relations (user-approved deviation).
+sp_i25.5 = {
+	type = country_event
+	placement = root
+	title = sp_i25.5.t
+	desc = sp_i25.5.d
+	flavor = sp_i25.5.f
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i25_can_fire_5 = yes
+	}
+
+	immediate = {
+		set_variable = sp_i25_advisers_fired
+		sp_i25_set_flavor_cooldown = yes
+	}
+
+	option = {
+		name = sp_i25.5.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i25_keep_experts
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = {
+		name = sp_i25.5.b
+		add_modifier = {
+			name = sp_i25_domestic_cadres
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+# 6 — Railway Concessions, 1856+. Requires railways tech and a TUR railway building.
+sp_i25.6 = {
+	type = country_event
+	placement = root
+	title = sp_i25.6.t
+	desc = sp_i25.6.d
+	flavor = sp_i25.6.f
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i25_can_fire_6 = yes
+	}
+
+	immediate = {
+		set_variable = sp_i25_railway_fired
+		sp_i25_set_flavor_cooldown = yes
+	}
+
+	option = {
+		name = sp_i25.6.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i25_foreign_rail_capital
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				trigger = {
+					ig:ig_industrialists ?= {
+						is_in_government = yes
+					}
+				}
+				add = 15
+			}
+		}
+	}
+
+	option = {
+		name = sp_i25.6.b
+		add_modifier = {
+			name = sp_i25_porte_rail_oversight
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+# 7 — Petitions from the Provinces, 1850–1872. No ethnic names in loc or effects.
+sp_i25.7 = {
+	type = country_event
+	placement = scope:sp_i25_petition_state
+	title = sp_i25.7.t
+	desc = sp_i25.7.d
+	flavor = sp_i25.7.f
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	event_image = {
+		video = "asia_politician_parliament_motion"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i25_can_fire_7 = yes
+	}
+
+	immediate = {
+		set_variable = sp_i25_petitions_fired
+		sp_i25_set_flavor_cooldown = yes
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				OR = {
+					turmoil >= 0.10
+					tax_capacity < tax_capacity_usage
+				}
+			}
+			save_scope_as = sp_i25_petition_state
+		}
+	}
+
+	option = {
+		name = sp_i25.7.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i25_hear_petition
+			days = very_short_modifier_time
+		}
+		scope:sp_i25_petition_state = {
+			add_loyalists_in_state = {
+				value = very_small_radicals
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = {
+		name = sp_i25.7.b
+		add_modifier = {
+			name = sp_i25_refer_governor
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+# 8 — The Port Cities, 1848–1870. Beirut only if TUR owns Lebanon. No Hayriye requirement.
+sp_i25.8 = {
+	type = country_event
+	placement = scope:sp_i25_port_state
+	title = sp_i25.8.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					exists = scope:sp_i25_port_state
+					scope:sp_i25_port_state = {
+						state_region = s:STATE_MACEDONIA
+					}
+				}
+				desc = sp_i25.8.d_port
+			}
+			triggered_desc = {
+				desc = sp_i25.8.d
+			}
+		}
+	}
+	flavor = sp_i25.8.f
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 3
+	event_image = {
+		video = "africa_city_center"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i25_can_fire_8 = yes
+	}
+
+	immediate = {
+		set_variable = sp_i25_ports_fired
+		sp_i25_set_flavor_cooldown = yes
+		random_scope_state = {
+			limit = {
+				sp_i25_is_eligible_port_city_state = yes
+			}
+			save_scope_as = sp_i25_port_state
+		}
+	}
+
+	option = {
+		name = sp_i25.8.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i25_favor_merchants
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = {
+		name = sp_i25.8.b
+		add_modifier = {
+			name = sp_i25_traditional_urban
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+# 9 — The New Street, 1855–1875. PM read attested on building scope; level >= 2 is the OR fallback.
+sp_i25.9 = {
+	type = country_event
+	placement = root
+	title = sp_i25.9.t
+	desc = sp_i25.9.d
+	flavor = sp_i25.9.f
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i25_can_fire_9 = yes
+	}
+
+	immediate = {
+		set_variable = sp_i25_new_street_fired
+		sp_i25_set_flavor_cooldown = yes
+	}
+
+	option = {
+		name = sp_i25.9.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i25_fund_new_street
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = {
+		name = sp_i25.9.b
+		add_modifier = {
+			name = sp_i25_local_street_notables
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+# 10 — Translation and the New Knowledge, 1851–1876. Innovation 0.50 weekly / 365d only.
+sp_i25.10 = {
+	type = country_event
+	placement = root
+	title = sp_i25.10.t
+	desc = sp_i25.10.d
+	flavor = sp_i25.10.f
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 3
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		sp_i25_can_fire_10 = yes
+	}
+
+	immediate = {
+		set_variable = sp_i25_translation_fired
+		sp_i25_set_flavor_cooldown = yes
+	}
+
+	option = {
+		name = sp_i25.10.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i25_sponsor_translation
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 40
+			modifier = {
+				trigger = {
+					ig:ig_intelligentsia ?= {
+						is_in_government = yes
+					}
+				}
+				add = 15
+			}
+		}
+	}
+
+	option = {
+		name = sp_i25.10.b
+		add_modifier = {
+			name = sp_i25_private_scholars
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+}

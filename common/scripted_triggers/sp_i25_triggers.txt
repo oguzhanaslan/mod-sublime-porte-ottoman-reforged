@@ -1,0 +1,266 @@
+﻿# I-25 shared gates. Cooldown and one-shot flags only. No JE.
+
+sp_i25_is_tur = {
+	c:TUR ?= this
+}
+
+sp_i25_flavor_ready = {
+	sp_i25_is_tur = yes
+	NOT = { has_variable = sp_i25_flavor_cooldown }
+}
+
+sp_i25_has_eastern_thrace = {
+	any_scope_state = {
+		state_region = s:STATE_EASTERN_THRACE
+		is_incorporated = yes
+	}
+}
+
+sp_i25_has_eastern_thrace_school_presence = {
+	any_scope_state = {
+		state_region = s:STATE_EASTERN_THRACE
+		is_incorporated = yes
+		OR = {
+			has_building = building_university
+			has_building = building_urban_center
+		}
+	}
+}
+
+sp_i25_has_staffed_administration = {
+	any_scope_state = {
+		is_incorporated = yes
+		any_scope_building = {
+			is_building_type = building_government_administration
+			occupancy >= 0.50
+		}
+	}
+}
+
+sp_i25_has_university_building = {
+	any_scope_building = {
+		is_building_type = building_university
+	}
+}
+
+sp_i25_has_staffed_university = {
+	any_scope_building = {
+		is_building_type = building_university
+		occupancy >= 0.50
+	}
+}
+
+# Numeric relations is attested (romania_events.txt: relations:root >= 25).
+sp_i25_has_european_contact_or_tech = {
+	OR = {
+		AND = {
+			exists = c:GBR
+			c:GBR = { relations:root >= 20 }
+		}
+		AND = {
+			exists = c:FRA
+			c:FRA = { relations:root >= 20 }
+		}
+		AND = {
+			exists = c:AUS
+			c:AUS = { relations:root >= 20 }
+		}
+		AND = {
+			exists = c:PRU
+			c:PRU = { relations:root >= 20 }
+		}
+		has_technology_researched = railways
+		has_technology_researched = mechanical_tools
+	}
+}
+
+sp_i25_has_railway_presence = {
+	any_scope_state = {
+		owner ?= root
+		any_scope_building = {
+			is_building_type = building_railway
+			level >= 1
+		}
+	}
+}
+
+sp_i25_has_petition_state = {
+	any_scope_state = {
+		is_incorporated = yes
+		OR = {
+			turmoil >= 0.10
+			tax_capacity < tax_capacity_usage
+		}
+	}
+}
+
+sp_i25_is_eligible_port_city_state = {
+	is_incorporated = yes
+	OR = {
+		AND = {
+			state_region = s:STATE_EASTERN_THRACE
+			any_scope_building = {
+				is_building_type = building_port
+				level >= 4
+			}
+		}
+		AND = {
+			state_region = s:STATE_AYDIN
+			any_scope_building = {
+				is_building_type = building_port
+				level >= 2
+			}
+		}
+		AND = {
+			state_region = s:STATE_MACEDONIA
+			any_scope_building = {
+				is_building_type = building_port
+				level >= 1
+			}
+		}
+		AND = {
+			state_region = s:STATE_LEBANON
+			any_scope_building = {
+				is_building_type = building_port
+				level >= 1
+			}
+		}
+	}
+}
+
+sp_i25_has_eligible_port_city = {
+	any_scope_state = {
+		sp_i25_is_eligible_port_city_state = yes
+	}
+}
+
+# has_active_production_method attested on building scope (society_tech_events.txt).
+sp_i25_has_new_street_urban = {
+	any_scope_state = {
+		state_region = s:STATE_EASTERN_THRACE
+		is_incorporated = yes
+		any_scope_building = {
+			is_building_type = building_urban_center
+			OR = {
+				has_active_production_method = pm_gas_streetlights
+				has_active_production_method = pm_market_squares
+				level >= 2
+			}
+		}
+	}
+}
+
+sp_i25_has_incorporated_province_outside_capital = {
+	any_scope_state = {
+		is_incorporated = yes
+		NOT = { state_region = s:STATE_EASTERN_THRACE }
+	}
+}
+
+########################################
+# Per-event eligibility (dispatch + event trigger)
+########################################
+
+sp_i25_can_fire_1 = {
+	sp_i25_flavor_ready = yes
+	game_date >= 1846.1.1
+	game_date < 1860.1.1
+	NOT = { has_variable = sp_i25_porte_men_fired }
+	ig:ig_intelligentsia ?= {
+		ig_counts_as_marginal = no
+	}
+	OR = {
+		NOT = { has_law_or_variant = law_type:law_hereditary_bureaucrats }
+		has_variable = completed_sick_man_bureaucracy_je
+		sp_i25_has_staffed_administration = yes
+	}
+}
+
+sp_i25_can_fire_2 = {
+	sp_i25_flavor_ready = yes
+	game_date >= 1847.1.1
+	game_date < 1870.1.1
+	NOT = { has_variable = sp_i25_new_schools_fired }
+	NOT = { has_law_or_variant = law_type:law_no_schools }
+	institution_investment_level = {
+		institution = institution_schools
+		value >= 1
+	}
+	sp_i25_has_eastern_thrace_school_presence = yes
+}
+
+sp_i25_can_fire_3 = {
+	sp_i25_flavor_ready = yes
+	game_date >= 1855.1.1
+	NOT = { has_variable = sp_i25_telegraph_fired }
+	has_technology_researched = electric_telegraph
+	sp_i25_has_incorporated_province_outside_capital = yes
+}
+
+sp_i25_can_fire_4 = {
+	sp_i25_flavor_ready = yes
+	game_date >= 1850.1.1
+	game_date < 1865.1.1
+	NOT = { has_variable = sp_i25_press_fired }
+	NOT = { has_law = law_type:law_outlawed_dissent }
+	OR = {
+		literacy_rate >= 0.12
+		sp_i25_has_staffed_university = yes
+	}
+}
+
+sp_i25_can_fire_5 = {
+	sp_i25_flavor_ready = yes
+	game_date >= 1851.1.1
+	game_date < 1870.1.1
+	NOT = { has_variable = sp_i25_advisers_fired }
+	sp_i25_has_european_contact_or_tech = yes
+	sp_i25_has_university_building = yes
+}
+
+sp_i25_can_fire_6 = {
+	sp_i25_flavor_ready = yes
+	game_date >= 1856.1.1
+	NOT = { has_variable = sp_i25_railway_fired }
+	has_technology_researched = railways
+	sp_i25_has_railway_presence = yes
+}
+
+sp_i25_can_fire_7 = {
+	sp_i25_flavor_ready = yes
+	game_date >= 1850.1.1
+	game_date < 1872.1.1
+	NOT = { has_variable = sp_i25_petitions_fired }
+	sp_i25_has_petition_state = yes
+}
+
+sp_i25_can_fire_8 = {
+	sp_i25_flavor_ready = yes
+	game_date >= 1848.1.1
+	game_date < 1870.1.1
+	NOT = { has_variable = sp_i25_ports_fired }
+	sp_i25_has_eligible_port_city = yes
+}
+
+sp_i25_can_fire_9 = {
+	sp_i25_flavor_ready = yes
+	game_date >= 1855.1.1
+	game_date < 1875.1.1
+	NOT = { has_variable = sp_i25_new_street_fired }
+	sp_i25_has_new_street_urban = yes
+}
+
+sp_i25_can_fire_10 = {
+	sp_i25_flavor_ready = yes
+	game_date >= 1851.1.1
+	game_date < 1876.1.1
+	NOT = { has_variable = sp_i25_translation_fired }
+	OR = {
+		sp_i25_has_staffed_university = yes
+		has_technology_researched = empiricism
+	}
+	OR = {
+		literacy_rate >= 0.10
+		has_variable = completed_sick_man_education_je
+	}
+}

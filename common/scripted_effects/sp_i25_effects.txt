@@ -1,0 +1,49 @@
+﻿# I-25 yearly dispatch. At most one event per pulse. Cooldown is set in event immediate,
+# not here: trigger_event may be queued, and setting cooldown first would fail the event trigger.
+
+sp_i25_set_flavor_cooldown = {
+	set_variable = { name = sp_i25_flavor_cooldown days = 547 }
+}
+
+sp_i25_dispatch_yearly_flavor = {
+	if = {
+		limit = { sp_i25_can_fire_1 = yes }
+		trigger_event = { id = sp_i25.1 popup = yes }
+	}
+	else_if = {
+		limit = { sp_i25_can_fire_2 = yes }
+		trigger_event = { id = sp_i25.2 popup = yes }
+	}
+	else_if = {
+		limit = { sp_i25_can_fire_3 = yes }
+		trigger_event = { id = sp_i25.3 popup = yes }
+	}
+	else_if = {
+		limit = { sp_i25_can_fire_4 = yes }
+		trigger_event = { id = sp_i25.4 popup = yes }
+	}
+	else_if = {
+		limit = { sp_i25_can_fire_5 = yes }
+		trigger_event = { id = sp_i25.5 popup = yes }
+	}
+	else_if = {
+		limit = { sp_i25_can_fire_6 = yes }
+		trigger_event = { id = sp_i25.6 popup = yes }
+	}
+	else_if = {
+		limit = { sp_i25_can_fire_7 = yes }
+		trigger_event = { id = sp_i25.7 popup = yes }
+	}
+	else_if = {
+		limit = { sp_i25_can_fire_8 = yes }
+		trigger_event = { id = sp_i25.8 popup = yes }
+	}
+	else_if = {
+		limit = { sp_i25_can_fire_9 = yes }
+		trigger_event = { id = sp_i25.9 popup = yes }
+	}
+	else_if = {
+		limit = { sp_i25_can_fire_10 = yes }
+		trigger_event = { id = sp_i25.10 popup = yes }
+	}
+}

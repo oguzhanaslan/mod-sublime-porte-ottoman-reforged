@@ -1,0 +1,124 @@
+﻿# I-25 timed flavor modifiers. All 365 days (very_short_modifier_time). No permanent keys.
+
+sp_i25_porte_new_men = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_intelligentsia_approval_add = 2
+	interest_group_ig_landowners_approval_add = -1
+}
+
+sp_i25_porte_old_balance = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_landowners_approval_add = 2
+	interest_group_ig_intelligentsia_approval_add = -1
+}
+
+sp_i25_expand_mektebs = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	interest_group_ig_intelligentsia_approval_add = 2
+	interest_group_ig_devout_approval_add = -1
+}
+
+sp_i25_communal_schools = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_devout_approval_add = 2
+	interest_group_ig_intelligentsia_approval_add = -1
+}
+
+sp_i25_telegraph_correspondence = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_intelligentsia_approval_add = 1
+	interest_group_ig_landowners_approval_add = -1
+	country_bureaucracy_mult = 0.03
+}
+
+sp_i25_telegraph_local_offices = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_landowners_approval_add = 1
+	interest_group_ig_petty_bourgeoisie_approval_add = 1
+}
+
+sp_i25_press_tolerate = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_intelligentsia_approval_add = 2
+	interest_group_ig_landowners_approval_add = -1
+}
+
+sp_i25_press_supervise = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	interest_group_ig_landowners_approval_add = 1
+	interest_group_ig_devout_approval_add = 1
+	interest_group_ig_intelligentsia_approval_add = -1
+}
+
+sp_i25_keep_experts = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	interest_group_ig_intelligentsia_approval_add = 1
+	interest_group_ig_armed_forces_approval_add = -1
+}
+
+sp_i25_domestic_cadres = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_armed_forces_approval_add = 1
+	interest_group_ig_industrialists_approval_add = 1
+	interest_group_ig_intelligentsia_approval_add = -1
+}
+
+sp_i25_foreign_rail_capital = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	interest_group_ig_industrialists_approval_add = 2
+	interest_group_ig_intelligentsia_approval_add = -1
+}
+
+sp_i25_porte_rail_oversight = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_intelligentsia_approval_add = 1
+	interest_group_ig_petty_bourgeoisie_approval_add = 1
+	interest_group_ig_industrialists_approval_add = -1
+}
+
+sp_i25_hear_petition = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_landowners_approval_add = 1
+	interest_group_ig_rural_folk_approval_add = 1
+}
+
+sp_i25_refer_governor = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_petty_bourgeoisie_approval_add = 1
+	interest_group_ig_landowners_approval_add = 1
+}
+
+sp_i25_favor_merchants = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	interest_group_ig_industrialists_approval_add = 2
+	interest_group_ig_landowners_approval_add = -1
+}
+
+sp_i25_traditional_urban = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_petty_bourgeoisie_approval_add = 2
+	interest_group_ig_industrialists_approval_add = -1
+}
+
+sp_i25_fund_new_street = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	interest_group_ig_industrialists_approval_add = 1
+	interest_group_ig_petty_bourgeoisie_approval_add = 1
+}
+
+sp_i25_local_street_notables = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_petty_bourgeoisie_approval_add = 1
+	interest_group_ig_landowners_approval_add = 1
+}
+
+sp_i25_sponsor_translation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	interest_group_ig_intelligentsia_approval_add = 2
+	country_weekly_innovation_add = 0.50
+}
+
+sp_i25_private_scholars = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_intelligentsia_approval_add = 1
+}

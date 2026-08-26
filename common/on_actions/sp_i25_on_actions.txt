@@ -1,0 +1,14 @@
+﻿# I-25 additive pulse. Do not edit other sp_* on_action files.
+# No events = {} list: dispatch effect fires at most one I-25 event.
+
+on_yearly_pulse_country = {
+	on_actions = {
+		sp_i25_yearly_events
+	}
+}
+
+sp_i25_yearly_events = {
+	effect = {
+		sp_i25_dispatch_yearly_flavor = yes
+	}
+}
