@@ -129,11 +129,13 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Ottomanism
 
-- **R-20 mapping:** inclusive citizenship/subjecthood, legitimacy and I-05/I-08 equality/reform routes. Not a custom movement. See [`docs/research/R20_post_tanzimat_political_development.md`](docs/research/R20_post_tanzimat_political_development.md). **RESEARCH ONLY.**
+- **R-20 mapping:** inclusive citizenship/subjecthood, legitimacy and I-05/I-08 equality/reform routes. Not a custom movement. See [`docs/research/R20_post_tanzimat_political_development.md`](docs/research/R20_post_tanzimat_political_development.md). **RESEARCH ONLY** (direction mapping; superseded as product scope by R-32/I-31 grand path).
+- **R-32 / I-31 — Ottomanism & Islamism grand paths:** audit [`docs/research/R32_ottomanism_islamism_grand_paths.md`](docs/research/R32_ottomanism_islamism_grand_paths.md); proposal [`docs/research/I31_ottomanism_islamism_grand_paths_proposal.md`](docs/research/I31_ottomanism_islamism_grand_paths_proposal.md); dossier [`docs/implementation/I31_ottomanism_islamism_grand_paths.md`](docs/implementation/I31_ottomanism_islamism_grand_paths.md). Uses I-28 flags `sp_ottomanism_selected` / `sp_islamism_selected`; Ottomanism = 0-claim reform JE; Islamism = base 5 / max 11 claims + Caliph Calls. **I-28 semantic diff = 0.** **R-32 COMPLETE — USED IN I-31. I-31 IMPLEMENTED — STATIC VALIDATED / RUNTIME PENDING.**
 
 ## Islamism
 
-- **R-20 mapping:** `law_millet_system`, Devout IG, `movement_religious_majority`, traditionalist/theocrat characters (including I-10A Ahmed Cevdet). Not a theocracy mandate or custom Islamist ideology. **RESEARCH ONLY.**
+- **R-20 mapping:** `law_millet_system`, Devout IG, `movement_religious_majority`, traditionalist/theocrat characters (including I-10A Ahmed Cevdet). Not a theocracy mandate or custom Islamist ideology. **RESEARCH ONLY** (direction mapping; grand-path design in R-32/I-31).
+- **R-32 / I-31:** same dossiers as Ottomanism section above. Pan-Islamic Unity / İttihad-ı İslam staged JE + Caliph Calls + soft Christian-GP isolation. **IMPLEMENTED — STATIC VALIDATED / RUNTIME PENDING.**
 
 ## Turkism
 
