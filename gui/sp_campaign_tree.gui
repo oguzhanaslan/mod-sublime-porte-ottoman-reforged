@@ -1,0 +1,666 @@
+﻿# I-30 Campaign Tree UI — Phase 1 window + Phase 2 identity/Turan slice.
+# Additive scripted widget. No vanilla GUI overwrite.
+# Custom near-fullscreen chrome (not InformationPanelBar) so com_open_window /
+# com_fullscreen clear reliably on close/back.
+
+@sp_ct_node_width = 260
+@sp_ct_node_height = 60
+@sp_ct_compact_width = 190
+@sp_ct_compact_height = 54
+@sp_ct_branch_gap = 14
+@sp_ct_tree_width = 980
+
+widget = {
+	name = "sp_campaign_tree_root"
+	layer = layer_ingame_menu
+	size = { 100% 100% }
+	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+
+	sp_campaign_tree_window = {}
+}
+
+types sp_campaign_tree_types {
+
+	type sp_campaign_tree_window = widget {
+		name = "sp_campaign_tree_window"
+		datacontext = "[AccessPlayer]"
+		size = { 100% 100% }
+		using = clickthrough_blocker
+
+		visible = "[GetVariableSystem.HasValue('com_open_window', 'gui_sidebar_sp_campaign_tree')]"
+
+		state = {
+			name = _show
+			alpha = 1
+			duration = 0
+			on_start = "[InformationPanelBar.ClosePanel]"
+			on_start = "[MapListPanelManager.CloseCurrentPanel]"
+			on_finish = "[GetVariableSystem.Set('com_fullscreen', 'com_fullscreen')]"
+			start_sound = {
+				soundeffect = "event:/SFX/UI/SideBar/journal"
+			}
+		}
+		state = {
+			name = _hide
+			alpha = 0
+			duration = 0.2
+			using = Animation_Curve_Default
+			on_finish = "[GetVariableSystem.Clear('com_fullscreen')]"
+			start_sound = {
+				soundeffect = "event:/SFX/UI/SideBar/journal_stop"
+			}
+		}
+
+		background = {
+			using = default_bg
+			margin = { 36 36 }
+		}
+
+		fullscreen_top_header = {}
+
+		# Left / right fades (vanilla fullscreen language)
+		widget = {
+			size = { 50 100% }
+			parentanchor = left
+			background = {
+				using = dark_area
+				alpha = 0.5
+				mirror = horizontal
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_horizontal_left_full.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = alphamultiply
+				}
+			}
+		}
+		widget = {
+			size = { 50 100% }
+			parentanchor = right
+			background = {
+				using = dark_area
+				alpha = 0.5
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_horizontal_left_full.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = alphamultiply
+				}
+			}
+		}
+
+		vbox = {
+			using = clickthrough_blocker
+			margin_top = 92
+			margin_left = 56
+			margin_right = 56
+			layoutpolicy_vertical = expanding
+			layoutpolicy_horizontal = expanding
+
+			# Header row
+			widget = {
+				size = { 100% 72 }
+				layoutpolicy_horizontal = expanding
+
+				back_button_large = {
+					position = { 0 12 }
+					parentanchor = top|left
+					onclick = "[GetVariableSystem.Clear('com_open_window')]"
+					onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+					input_action = "back"
+				}
+
+				close_button_large = {
+					parentanchor = top|right
+					position = { 0 12 }
+					onclick = "[GetVariableSystem.Clear('com_open_window')]"
+					onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+					shortcut = "close_window"
+				}
+
+				flowcontainer = {
+					direction = horizontal
+					parentanchor = center
+					spacing = 12
+
+					icon = {
+						size = { 44 44 }
+						texture = "gfx/interface/icons/event_icons/sp_je_post_tanzimat_era.dds"
+					}
+
+					vbox = {
+						spacing = 2
+						textbox = {
+							text = "sp_ct_window_title"
+							autoresize = yes
+							align = hcenter|nobaseline
+							default_format = "#header"
+							using = header_font_fancy
+							using = header_font_fancy_size
+						}
+						textbox = {
+							text = "sp_ct_window_subtitle"
+							autoresize = yes
+							align = hcenter|nobaseline
+							using = fontsize_medium
+						}
+					}
+				}
+			}
+
+			# Selection status strip (Phase 3 inspector hook)
+			widget = {
+				size = { 100% 40 }
+				layoutpolicy_horizontal = expanding
+				margin_bottom = 8
+				background = {
+					using = dark_area
+					alpha = 0.4
+					margin = { 4 2 }
+				}
+				textbox = {
+					parentanchor = left|vcenter
+					position = { 16 0 }
+					text = "sp_ct_selection_hint"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_medium
+					visible = "[Not(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet)]"
+				}
+				textbox = {
+					parentanchor = left|vcenter
+					position = { 16 0 }
+					text = "sp_ct_selection_active"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_medium
+					visible = "[GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet]"
+				}
+			}
+
+			scrollarea = {
+				layoutpolicy_vertical = expanding
+				layoutpolicy_horizontal = expanding
+				scrollbarpolicy_horizontal = as_needed
+				scrollbar_horizontal = { using = horizontal_scrollbar }
+				scrollbar_vertical = { using = vertical_scrollbar }
+
+				scrollwidget = {
+					flowcontainer = {
+						direction = vertical
+						parentanchor = top|hcenter
+						spacing = 14
+						margin_top = 8
+						margin_bottom = 36
+						minimumsize = { @sp_ct_tree_width -1 }
+
+						sp_ct_node = {
+							blockoverride "node_onclick" {
+								onclick = "[GetScriptedGui('sp_ct_select_tanzimat').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "node_title" { text = "sp_ct_node_tanzimat" }
+							blockoverride "node_selected" {
+								visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_tanzimat'))]"
+							}
+							blockoverride "state_completed" {
+								visible = "[GetScriptedGui('sp_ct_vis_tanzimat_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_active" {
+								visible = "[GetScriptedGui('sp_ct_vis_tanzimat_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_available" {
+								visible = "[GetScriptedGui('sp_ct_vis_tanzimat_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_locked" {
+								visible = "[GetScriptedGui('sp_ct_vis_tanzimat_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "node_icon" {
+								texture = "gfx/interface/icons/event_icons/event_scales.dds"
+							}
+						}
+
+						sp_ct_connector_down = {}
+
+						sp_ct_node = {
+							blockoverride "node_onclick" {
+								onclick = "[GetScriptedGui('sp_ct_select_post_tanzimat').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "node_title" { text = "sp_ct_node_post_tanzimat" }
+							blockoverride "node_selected" {
+								visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_post_tanzimat'))]"
+							}
+							blockoverride "state_completed" {
+								visible = "[GetScriptedGui('sp_ct_vis_post_tanzimat_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_active" {
+								visible = "[GetScriptedGui('sp_ct_vis_post_tanzimat_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_available" {
+								visible = "[GetScriptedGui('sp_ct_vis_post_tanzimat_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_locked" {
+								visible = "[GetScriptedGui('sp_ct_vis_post_tanzimat_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "node_icon" {
+								texture = "gfx/interface/icons/event_icons/sp_je_post_tanzimat_era.dds"
+							}
+						}
+
+						sp_ct_connector_down = {}
+
+						sp_ct_node = {
+							blockoverride "node_onclick" {
+								onclick = "[GetScriptedGui('sp_ct_select_identity').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "node_title" { text = "sp_ct_node_identity" }
+							blockoverride "node_selected" {
+								visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_identity'))]"
+							}
+							blockoverride "state_completed" {
+								visible = "[GetScriptedGui('sp_ct_vis_identity_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_active" { visible = no }
+							blockoverride "state_available" {
+								visible = "[GetScriptedGui('sp_ct_vis_identity_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_locked" {
+								visible = "[GetScriptedGui('sp_ct_vis_identity_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "node_icon" {
+								texture = "gfx/interface/icons/event_icons/event_election.dds"
+							}
+						}
+
+						sp_ct_connector_down = {}
+
+						flowcontainer = {
+							direction = horizontal
+							parentanchor = hcenter
+							spacing = @sp_ct_branch_gap
+
+							sp_ct_node_compact = {
+								blockoverride "node_onclick" {
+									onclick = "[GetScriptedGui('sp_ct_select_ottomanism').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "node_title" { text = "sp_ct_node_ottomanism" }
+								blockoverride "node_selected" {
+									visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_ottomanism'))]"
+								}
+								blockoverride "state_completed" {
+									visible = "[GetScriptedGui('sp_ct_vis_ottomanism_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_active" { visible = no }
+								blockoverride "state_available" {
+									visible = "[GetScriptedGui('sp_ct_vis_ottomanism_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_locked" {
+									visible = "[GetScriptedGui('sp_ct_vis_ottomanism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+							}
+
+							sp_ct_node_compact = {
+								blockoverride "node_onclick" {
+									onclick = "[GetScriptedGui('sp_ct_select_islamism').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "node_title" { text = "sp_ct_node_islamism" }
+								blockoverride "node_selected" {
+									visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_islamism'))]"
+								}
+								blockoverride "state_completed" {
+									visible = "[GetScriptedGui('sp_ct_vis_islamism_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_active" { visible = no }
+								blockoverride "state_available" {
+									visible = "[GetScriptedGui('sp_ct_vis_islamism_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_locked" {
+									visible = "[GetScriptedGui('sp_ct_vis_islamism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+							}
+
+							sp_ct_node_compact = {
+								blockoverride "node_onclick" {
+									onclick = "[GetScriptedGui('sp_ct_select_turkism').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "node_title" { text = "sp_ct_node_turkism" }
+								blockoverride "node_selected" {
+									visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turkism'))]"
+								}
+								blockoverride "state_completed" {
+									visible = "[GetScriptedGui('sp_ct_vis_turkism_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_active" { visible = no }
+								blockoverride "state_available" {
+									visible = "[GetScriptedGui('sp_ct_vis_turkism_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_locked" {
+									visible = "[GetScriptedGui('sp_ct_vis_turkism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+							}
+						}
+
+						sp_ct_connector_down = {}
+
+						sp_ct_node = {
+							blockoverride "node_onclick" {
+								onclick = "[GetScriptedGui('sp_ct_select_turan').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "node_title" { text = "sp_ct_node_turan" }
+							blockoverride "node_selected" {
+								visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turan'))]"
+							}
+							blockoverride "state_completed" {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_active" {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_available" {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_locked" {
+								visible = "[GetScriptedGui('sp_ct_vis_turan_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "node_icon" {
+								texture = "gfx/interface/icons/event_icons/event_military.dds"
+							}
+						}
+
+						sp_ct_connector_down = {}
+
+						flowcontainer = {
+							direction = horizontal
+							parentanchor = hcenter
+							spacing = 10
+
+							sp_ct_node_compact = {
+								blockoverride "node_onclick" {
+									onclick = "[GetScriptedGui('sp_ct_select_turan_s1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "node_title" { text = "sp_ct_node_turan_s1" }
+								blockoverride "node_selected" {
+									visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turan_s1'))]"
+								}
+								blockoverride "state_completed" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s1_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_active" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s1_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_available" { visible = no }
+								blockoverride "state_locked" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s1_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+							}
+
+							sp_ct_node_compact = {
+								blockoverride "node_onclick" {
+									onclick = "[GetScriptedGui('sp_ct_select_turan_s2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "node_title" { text = "sp_ct_node_turan_s2" }
+								blockoverride "node_selected" {
+									visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turan_s2'))]"
+								}
+								blockoverride "state_completed" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s2_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_active" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s2_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_available" { visible = no }
+								blockoverride "state_locked" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s2_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+							}
+
+							sp_ct_node_compact = {
+								blockoverride "node_onclick" {
+									onclick = "[GetScriptedGui('sp_ct_select_turan_s3').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "node_title" { text = "sp_ct_node_turan_s3" }
+								blockoverride "node_selected" {
+									visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turan_s3'))]"
+								}
+								blockoverride "state_completed" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s3_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_active" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s3_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_available" { visible = no }
+								blockoverride "state_locked" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s3_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+							}
+
+							sp_ct_node_compact = {
+								blockoverride "node_onclick" {
+									onclick = "[GetScriptedGui('sp_ct_select_turan_s4').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "node_title" { text = "sp_ct_node_turan_s4" }
+								blockoverride "node_selected" {
+									visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_turan_s4'))]"
+								}
+								blockoverride "state_completed" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s4_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_active" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s4_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								blockoverride "state_available" { visible = no }
+								blockoverride "state_locked" {
+									visible = "[GetScriptedGui('sp_ct_vis_turan_s4_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+							}
+						}
+
+						sp_ct_connector_down = {}
+
+						sp_ct_node = {
+							blockoverride "node_onclick" {
+								onclick = "[GetScriptedGui('sp_ct_select_great_ottoman').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "node_title" { text = "sp_ct_node_great_ottoman" }
+							blockoverride "node_selected" {
+								visible = "[And(GetPlayer.MakeScope.Var('sp_ct_selected_node').IsSet, ObjectsEqual(GetPlayer.MakeScope.Var('sp_ct_selected_node').GetFlagName, 'sp_ct_node_great_ottoman'))]"
+							}
+							blockoverride "state_completed" {
+								visible = "[GetScriptedGui('sp_ct_vis_great_ottoman_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_active" {
+								visible = "[GetScriptedGui('sp_ct_vis_great_ottoman_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "state_available" { visible = no }
+							blockoverride "state_locked" {
+								visible = "[GetScriptedGui('sp_ct_vis_great_ottoman_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							}
+							blockoverride "node_icon" {
+								texture = "gfx/coat_of_arms/textured_emblems/te_sp_great_ottoman.dds"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	type sp_ct_node = widget {
+		size = { @sp_ct_node_width @sp_ct_node_height }
+		parentanchor = hcenter
+
+		button = {
+			size = { 100% 100% }
+			using = default_button_action
+			using = confirm_button_sound
+			block "node_onclick" {
+				onclick = "[GetPlayer.IsValid]"
+			}
+
+			background = {
+				using = default_header_bg
+			}
+
+			widget = {
+				size = { 100% 100% }
+				block "node_selected" { visible = no }
+				background = {
+					texture = "gfx/interface/buttons/default_button_mouseover.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = colordodge
+					alpha = 0.55
+				}
+			}
+
+			flowcontainer = {
+				direction = horizontal
+				size = { 100% 100% }
+				spacing = 8
+				margin_left = 10
+				margin_right = 8
+
+				icon = {
+					size = { 38 38 }
+					parentanchor = vcenter
+					block "node_icon" {
+						texture = "gfx/interface/icons/event_icons/event_default.dds"
+					}
+				}
+
+				vbox = {
+					parentanchor = vcenter
+					layoutpolicy_horizontal = expanding
+					spacing = 1
+
+					textbox = {
+						block "node_title" { text = "sp_ct_node_placeholder" }
+						autoresize = yes
+						align = left|nobaseline
+						default_format = "#header"
+						using = fontsize_medium
+						max_width = 170
+						elide = right
+					}
+					textbox = {
+						block "state_completed" { visible = no }
+						text = "sp_ct_state_completed"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						default_format = "#G"
+					}
+					textbox = {
+						block "state_active" { visible = no }
+						text = "sp_ct_state_active"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						default_format = "#Y"
+					}
+					textbox = {
+						block "state_available" { visible = no }
+						text = "sp_ct_state_available"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+					}
+					textbox = {
+						block "state_locked" { visible = no }
+						text = "sp_ct_state_locked"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						default_format = "#I"
+					}
+				}
+			}
+		}
+	}
+
+	type sp_ct_node_compact = widget {
+		size = { @sp_ct_compact_width @sp_ct_compact_height }
+		parentanchor = hcenter
+
+		button = {
+			size = { 100% 100% }
+			using = default_button_action
+			using = confirm_button_sound
+			block "node_onclick" { onclick = "[GetPlayer.IsValid]" }
+
+			background = {
+				using = dark_area
+				alpha = 0.6
+			}
+
+			widget = {
+				size = { 100% 100% }
+				block "node_selected" { visible = no }
+				background = {
+					texture = "gfx/interface/buttons/default_button_mouseover.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = colordodge
+					alpha = 0.5
+				}
+			}
+
+			vbox = {
+				parentanchor = center
+				spacing = 1
+				textbox = {
+					block "node_title" { text = "sp_ct_node_placeholder" }
+					autoresize = yes
+					align = hcenter|nobaseline
+					default_format = "#header"
+					using = fontsize_small
+					max_width = 170
+					elide = right
+				}
+				textbox = {
+					block "state_completed" { visible = no }
+					text = "sp_ct_state_completed"
+					autoresize = yes
+					align = hcenter|nobaseline
+					using = fontsize_small
+					default_format = "#G"
+				}
+				textbox = {
+					block "state_active" { visible = no }
+					text = "sp_ct_state_active"
+					autoresize = yes
+					align = hcenter|nobaseline
+					using = fontsize_small
+					default_format = "#Y"
+				}
+				textbox = {
+					block "state_available" { visible = no }
+					text = "sp_ct_state_available"
+					autoresize = yes
+					align = hcenter|nobaseline
+					using = fontsize_small
+				}
+				textbox = {
+					block "state_locked" { visible = no }
+					text = "sp_ct_state_locked"
+					autoresize = yes
+					align = hcenter|nobaseline
+					using = fontsize_small
+					default_format = "#I"
+				}
+			}
+		}
+	}
+
+	type sp_ct_connector_down = widget {
+		size = { 24 16 }
+		parentanchor = hcenter
+		textbox = {
+			parentanchor = center
+			raw_text = "▼"
+			autoresize = yes
+			align = hcenter|nobaseline
+			using = fontsize_medium
+			default_format = "#I"
+		}
+	}
+}

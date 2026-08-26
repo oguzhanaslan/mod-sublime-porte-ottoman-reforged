@@ -1,0 +1,367 @@
+﻿# I-30 Campaign Tree — read-only node state triggers.
+# No progression writers. Priority: COMPLETED > ACTIVE > AVAILABLE > LOCKED.
+
+### Shared gates
+
+sp_ct_is_tur = {
+	c:TUR ?= this
+}
+
+sp_ct_post_tanzimat_gate = {
+	sp_i28_post_tanzimat = yes
+}
+
+sp_ct_post_tanzimat_arc_complete = {
+	OR = {
+		has_variable = sp_i18_hamidian_fired
+		AND = {
+			has_variable = sp_i18_kanun_i_esasi_fired
+			game_date >= 1886.1.1
+		}
+	}
+}
+
+sp_ct_post_tanzimat_arc_active = {
+	OR = {
+		has_journal_entry = sp_je_post_tanzimat_era
+		has_variable = sp_i18_debate_fired
+		has_variable = sp_i18_young_ottomans_fired
+		has_variable = sp_i18_early_constitution_fired
+		has_variable = sp_i18_constitution_seen
+		has_variable = sp_i18_kanun_i_esasi_fired
+	}
+	NOT = { sp_ct_post_tanzimat_arc_complete = yes }
+}
+
+### Tanzimat / Sick Man
+
+sp_ct_tanzimat_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sick_man_complete
+}
+
+sp_ct_tanzimat_active = {
+	sp_ct_is_tur = yes
+	has_journal_entry = je_sick_man_main
+	NOT = { has_variable = sick_man_complete }
+}
+
+sp_ct_tanzimat_available = {
+	sp_ct_is_tur = yes
+	NOT = { has_variable = sick_man_complete }
+	NOT = { has_journal_entry = je_sick_man_main }
+}
+
+sp_ct_tanzimat_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_tanzimat_completed = yes }
+			NOT = { sp_ct_tanzimat_active = yes }
+			NOT = { sp_ct_tanzimat_available = yes }
+		}
+	}
+}
+
+### Post-Tanzimat
+
+sp_ct_post_tanzimat_completed = {
+	sp_ct_is_tur = yes
+	sp_ct_post_tanzimat_arc_complete = yes
+}
+
+sp_ct_post_tanzimat_active = {
+	sp_ct_is_tur = yes
+	sp_ct_post_tanzimat_arc_active = yes
+}
+
+sp_ct_post_tanzimat_available = {
+	sp_ct_is_tur = yes
+	sp_ct_post_tanzimat_gate = yes
+	NOT = { sp_ct_post_tanzimat_arc_complete = yes }
+	NOT = { sp_ct_post_tanzimat_arc_active = yes }
+}
+
+sp_ct_post_tanzimat_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_post_tanzimat_completed = yes }
+			NOT = { sp_ct_post_tanzimat_active = yes }
+			NOT = { sp_ct_post_tanzimat_available = yes }
+		}
+	}
+}
+
+### Imperial Identity hub
+
+sp_ct_identity_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_imperial_identity_chosen
+}
+
+sp_ct_identity_active = {
+	always = no
+}
+
+sp_ct_identity_available = {
+	sp_ct_is_tur = yes
+	sp_i28_identity_eligible = yes
+}
+
+sp_ct_identity_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_identity_completed = yes }
+			NOT = { sp_ct_identity_available = yes }
+		}
+	}
+}
+
+### Ottomanism
+
+sp_ct_ottomanism_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_selected
+}
+
+sp_ct_ottomanism_active = {
+	always = no
+}
+
+sp_ct_ottomanism_available = {
+	sp_ct_is_tur = yes
+	sp_i28_identity_eligible = yes
+}
+
+sp_ct_ottomanism_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_ottomanism_completed = yes }
+			NOT = { sp_ct_ottomanism_available = yes }
+		}
+	}
+}
+
+### Islamism
+
+sp_ct_islamism_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_islamism_selected
+}
+
+sp_ct_islamism_active = {
+	always = no
+}
+
+sp_ct_islamism_available = {
+	sp_ct_is_tur = yes
+	sp_i28_identity_eligible = yes
+}
+
+sp_ct_islamism_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_islamism_completed = yes }
+			NOT = { sp_ct_islamism_available = yes }
+		}
+	}
+}
+
+### Turkism
+
+sp_ct_turkism_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_turkism_selected
+}
+
+sp_ct_turkism_active = {
+	always = no
+}
+
+sp_ct_turkism_available = {
+	sp_ct_is_tur = yes
+	sp_i28_identity_eligible = yes
+}
+
+sp_ct_turkism_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_turkism_completed = yes }
+			NOT = { sp_ct_turkism_available = yes }
+		}
+	}
+}
+
+### Turanian Ideal hub
+
+sp_ct_turan_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_turan_ideal_complete
+}
+
+sp_ct_turan_active = {
+	sp_ct_is_tur = yes
+	has_journal_entry = sp_je_turanian_ideal
+	NOT = { has_variable = sp_turan_ideal_complete }
+}
+
+sp_ct_turan_available = {
+	sp_ct_is_tur = yes
+	sp_i28_turan_eligible = yes
+	NOT = { has_journal_entry = sp_je_turanian_ideal }
+}
+
+sp_ct_turan_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_turan_completed = yes }
+			NOT = { sp_ct_turan_active = yes }
+			NOT = { sp_ct_turan_available = yes }
+		}
+	}
+}
+
+### Turan Stage 1
+
+sp_ct_turan_s1_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_turan_stage_1_done
+}
+
+sp_ct_turan_s1_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_turan_stage
+	var:sp_turan_stage = 1
+	NOT = { has_variable = sp_turan_stage_1_done }
+}
+
+sp_ct_turan_s1_available = {
+	always = no
+}
+
+sp_ct_turan_s1_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_turan_s1_completed = yes }
+			NOT = { sp_ct_turan_s1_active = yes }
+		}
+	}
+}
+
+### Turan Stage 2
+
+sp_ct_turan_s2_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_turan_stage_2_done
+}
+
+sp_ct_turan_s2_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_turan_stage
+	var:sp_turan_stage = 2
+	NOT = { has_variable = sp_turan_stage_2_done }
+}
+
+sp_ct_turan_s2_available = {
+	always = no
+}
+
+sp_ct_turan_s2_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_turan_s2_completed = yes }
+			NOT = { sp_ct_turan_s2_active = yes }
+		}
+	}
+}
+
+### Turan Stage 3
+
+sp_ct_turan_s3_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_turan_stage_3_done
+}
+
+sp_ct_turan_s3_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_turan_stage
+	var:sp_turan_stage = 3
+	NOT = { has_variable = sp_turan_stage_3_done }
+}
+
+sp_ct_turan_s3_available = {
+	always = no
+}
+
+sp_ct_turan_s3_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_turan_s3_completed = yes }
+			NOT = { sp_ct_turan_s3_active = yes }
+		}
+	}
+}
+
+### Turan Stage 4
+
+sp_ct_turan_s4_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_turan_stage_4_done
+}
+
+sp_ct_turan_s4_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_turan_stage
+	var:sp_turan_stage = 4
+	NOT = { has_variable = sp_turan_stage_4_done }
+}
+
+sp_ct_turan_s4_available = {
+	always = no
+}
+
+sp_ct_turan_s4_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_turan_s4_completed = yes }
+			NOT = { sp_ct_turan_s4_active = yes }
+		}
+	}
+}
+
+### Great Ottoman
+
+sp_ct_great_ottoman_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_great_ottoman_empire_proclaimed
+}
+
+sp_ct_great_ottoman_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_turan_stage_4_done
+	NOT = { has_variable = sp_turan_ideal_complete }
+}
+
+sp_ct_great_ottoman_available = {
+	always = no
+}
+
+sp_ct_great_ottoman_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_great_ottoman_completed = yes }
+			NOT = { sp_ct_great_ottoman_active = yes }
+		}
+	}
+}

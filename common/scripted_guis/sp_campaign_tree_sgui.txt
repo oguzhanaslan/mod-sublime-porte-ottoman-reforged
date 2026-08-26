@@ -1,0 +1,318 @@
+﻿# I-30 Phase 2 — Campaign Tree node select + state visibility scripted GUIs.
+# Selection writes UI-only sp_ct_selected_node (flag). No gameplay progression.
+
+### Selectors
+
+sp_ct_select_tanzimat = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_tanzimat
+		}
+	}
+}
+
+sp_ct_select_post_tanzimat = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_post_tanzimat
+		}
+	}
+}
+
+sp_ct_select_identity = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_identity
+		}
+	}
+}
+
+sp_ct_select_ottomanism = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_ottomanism
+		}
+	}
+}
+
+sp_ct_select_islamism = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_islamism
+		}
+	}
+}
+
+sp_ct_select_turkism = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_turkism
+		}
+	}
+}
+
+sp_ct_select_turan = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_turan
+		}
+	}
+}
+
+sp_ct_select_turan_s1 = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_turan_s1
+		}
+	}
+}
+
+sp_ct_select_turan_s2 = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_turan_s2
+		}
+	}
+}
+
+sp_ct_select_turan_s3 = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_turan_s3
+		}
+	}
+}
+
+sp_ct_select_turan_s4 = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_turan_s4
+		}
+	}
+}
+
+sp_ct_select_great_ottoman = {
+	scope = country
+	is_shown = { c:TUR ?= this }
+	is_valid = { c:TUR ?= this }
+	effect = {
+		set_variable = {
+			name = sp_ct_selected_node
+			value = flag:sp_ct_node_great_ottoman
+		}
+	}
+}
+
+### State visibility helpers (GUI IsShown)
+
+sp_ct_vis_tanzimat_completed = {
+	scope = country
+	is_shown = { sp_ct_tanzimat_completed = yes }
+}
+sp_ct_vis_tanzimat_active = {
+	scope = country
+	is_shown = { sp_ct_tanzimat_active = yes }
+}
+sp_ct_vis_tanzimat_available = {
+	scope = country
+	is_shown = { sp_ct_tanzimat_available = yes }
+}
+sp_ct_vis_tanzimat_locked = {
+	scope = country
+	is_shown = { sp_ct_tanzimat_locked = yes }
+}
+
+sp_ct_vis_post_tanzimat_completed = {
+	scope = country
+	is_shown = { sp_ct_post_tanzimat_completed = yes }
+}
+sp_ct_vis_post_tanzimat_active = {
+	scope = country
+	is_shown = { sp_ct_post_tanzimat_active = yes }
+}
+sp_ct_vis_post_tanzimat_available = {
+	scope = country
+	is_shown = { sp_ct_post_tanzimat_available = yes }
+}
+sp_ct_vis_post_tanzimat_locked = {
+	scope = country
+	is_shown = { sp_ct_post_tanzimat_locked = yes }
+}
+
+sp_ct_vis_identity_completed = {
+	scope = country
+	is_shown = { sp_ct_identity_completed = yes }
+}
+sp_ct_vis_identity_available = {
+	scope = country
+	is_shown = { sp_ct_identity_available = yes }
+}
+sp_ct_vis_identity_locked = {
+	scope = country
+	is_shown = { sp_ct_identity_locked = yes }
+}
+
+sp_ct_vis_ottomanism_completed = {
+	scope = country
+	is_shown = { sp_ct_ottomanism_completed = yes }
+}
+sp_ct_vis_ottomanism_available = {
+	scope = country
+	is_shown = { sp_ct_ottomanism_available = yes }
+}
+sp_ct_vis_ottomanism_locked = {
+	scope = country
+	is_shown = { sp_ct_ottomanism_locked = yes }
+}
+
+sp_ct_vis_islamism_completed = {
+	scope = country
+	is_shown = { sp_ct_islamism_completed = yes }
+}
+sp_ct_vis_islamism_available = {
+	scope = country
+	is_shown = { sp_ct_islamism_available = yes }
+}
+sp_ct_vis_islamism_locked = {
+	scope = country
+	is_shown = { sp_ct_islamism_locked = yes }
+}
+
+sp_ct_vis_turkism_completed = {
+	scope = country
+	is_shown = { sp_ct_turkism_completed = yes }
+}
+sp_ct_vis_turkism_available = {
+	scope = country
+	is_shown = { sp_ct_turkism_available = yes }
+}
+sp_ct_vis_turkism_locked = {
+	scope = country
+	is_shown = { sp_ct_turkism_locked = yes }
+}
+
+sp_ct_vis_turan_completed = {
+	scope = country
+	is_shown = { sp_ct_turan_completed = yes }
+}
+sp_ct_vis_turan_active = {
+	scope = country
+	is_shown = { sp_ct_turan_active = yes }
+}
+sp_ct_vis_turan_available = {
+	scope = country
+	is_shown = { sp_ct_turan_available = yes }
+}
+sp_ct_vis_turan_locked = {
+	scope = country
+	is_shown = { sp_ct_turan_locked = yes }
+}
+
+sp_ct_vis_turan_s1_completed = {
+	scope = country
+	is_shown = { sp_ct_turan_s1_completed = yes }
+}
+sp_ct_vis_turan_s1_active = {
+	scope = country
+	is_shown = { sp_ct_turan_s1_active = yes }
+}
+sp_ct_vis_turan_s1_locked = {
+	scope = country
+	is_shown = { sp_ct_turan_s1_locked = yes }
+}
+
+sp_ct_vis_turan_s2_completed = {
+	scope = country
+	is_shown = { sp_ct_turan_s2_completed = yes }
+}
+sp_ct_vis_turan_s2_active = {
+	scope = country
+	is_shown = { sp_ct_turan_s2_active = yes }
+}
+sp_ct_vis_turan_s2_locked = {
+	scope = country
+	is_shown = { sp_ct_turan_s2_locked = yes }
+}
+
+sp_ct_vis_turan_s3_completed = {
+	scope = country
+	is_shown = { sp_ct_turan_s3_completed = yes }
+}
+sp_ct_vis_turan_s3_active = {
+	scope = country
+	is_shown = { sp_ct_turan_s3_active = yes }
+}
+sp_ct_vis_turan_s3_locked = {
+	scope = country
+	is_shown = { sp_ct_turan_s3_locked = yes }
+}
+
+sp_ct_vis_turan_s4_completed = {
+	scope = country
+	is_shown = { sp_ct_turan_s4_completed = yes }
+}
+sp_ct_vis_turan_s4_active = {
+	scope = country
+	is_shown = { sp_ct_turan_s4_active = yes }
+}
+sp_ct_vis_turan_s4_locked = {
+	scope = country
+	is_shown = { sp_ct_turan_s4_locked = yes }
+}
+
+sp_ct_vis_great_ottoman_completed = {
+	scope = country
+	is_shown = { sp_ct_great_ottoman_completed = yes }
+}
+sp_ct_vis_great_ottoman_active = {
+	scope = country
+	is_shown = { sp_ct_great_ottoman_active = yes }
+}
+sp_ct_vis_great_ottoman_locked = {
+	scope = country
+	is_shown = { sp_ct_great_ottoman_locked = yes }
+}

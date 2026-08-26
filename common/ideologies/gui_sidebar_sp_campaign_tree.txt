@@ -1,0 +1,23 @@
+﻿# CMF sidebar button ideology — never a real ideology.
+# Temporary Phase 1/2 icon; custom sidebar DDS deferred.
+
+gui_sidebar_sp_campaign_tree = {
+	icon = "gfx/interface/main_hud/journal_btn.dds"
+	show_in_list = no
+	character_ideology = yes
+	country_trigger = {
+		always = no
+	}
+	interest_group_leader_trigger = {
+		always = no
+	}
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	interest_group_leader_weight = {
+		value = 0
+	}
+	non_interest_group_leader_weight = {
+		value = 0
+	}
+}

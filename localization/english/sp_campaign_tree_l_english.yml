@@ -1,0 +1,28 @@
+﻿l_english:
+ gui_sidebar_sp_campaign_tree: "gui_sidebar_sp_campaign_tree"
+ gui_sidebar_sp_campaign_tree_desc: "Sublime Porte: Ottoman Reforged"
+ gui_sidebar_sp_campaign_tree_tooltip: "Open the Sublime Porte campaign overview."
+
+ sp_ct_window_title: "Sublime Porte: Ottoman Reforged"
+ sp_ct_window_subtitle: "Campaign overview — reform, identity, and the Turanian Ideal"
+ sp_ct_selection_hint: "Select a node to inspect it. Detail panel arrives in a later update."
+ sp_ct_selection_active: "Node selected — detail inspector coming in Phase 3."
+
+ sp_ct_state_completed: "Completed"
+ sp_ct_state_active: "Active"
+ sp_ct_state_available: "Available"
+ sp_ct_state_locked: "Locked"
+
+ sp_ct_node_placeholder: "Objective"
+ sp_ct_node_tanzimat: "Tanzimat"
+ sp_ct_node_post_tanzimat: "Post-Tanzimat"
+ sp_ct_node_identity: "Imperial Identity"
+ sp_ct_node_ottomanism: "Ottomanism"
+ sp_ct_node_islamism: "Islamism"
+ sp_ct_node_turkism: "Turkism"
+ sp_ct_node_turan: "Turanian Ideal"
+ sp_ct_node_turan_s1: "Stage I — Azerbaijan"
+ sp_ct_node_turan_s2: "Stage II — Iran"
+ sp_ct_node_turan_s3: "Stage III — Caspian"
+ sp_ct_node_turan_s4: "Stage IV — Turkestan"
+ sp_ct_node_great_ottoman: "Great Ottoman Empire"

@@ -1,0 +1,16 @@
+﻿# I-30 Phase 1 — CMF sidebar scripted GUI (name must match ideology + flag).
+
+gui_sidebar_sp_campaign_tree = {
+	scope = country
+
+	is_shown = {
+		c:TUR ?= this
+	}
+
+	is_valid = {
+		c:TUR ?= this
+	}
+
+	effect = {
+	}
+}

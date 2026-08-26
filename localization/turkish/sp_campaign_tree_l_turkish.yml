@@ -1,0 +1,28 @@
+﻿l_turkish:
+ gui_sidebar_sp_campaign_tree: "gui_sidebar_sp_campaign_tree"
+ gui_sidebar_sp_campaign_tree_desc: "Sublime Porte: Ottoman Reforged"
+ gui_sidebar_sp_campaign_tree_tooltip: "Sublime Porte kampanya genel görünümünü aç."
+
+ sp_ct_window_title: "Sublime Porte: Ottoman Reforged"
+ sp_ct_window_subtitle: "Kampanya genel görünümü — reform, kimlik ve Turan Ülküsü"
+ sp_ct_selection_hint: "İncelemek için bir düğüm seçin. Ayrıntı paneli sonraki güncellemede gelecek."
+ sp_ct_selection_active: "Düğüm seçildi — ayrıntı paneli Faz 3'te gelecek."
+
+ sp_ct_state_completed: "Tamamlandı"
+ sp_ct_state_active: "Aktif"
+ sp_ct_state_available: "Açık"
+ sp_ct_state_locked: "Kilitli"
+
+ sp_ct_node_placeholder: "Hedef"
+ sp_ct_node_tanzimat: "Tanzimat"
+ sp_ct_node_post_tanzimat: "Tanzimat Sonrası"
+ sp_ct_node_identity: "Emperyal Kimlik"
+ sp_ct_node_ottomanism: "Osmanlıcılık"
+ sp_ct_node_islamism: "İslamcılık"
+ sp_ct_node_turkism: "Türkçülük"
+ sp_ct_node_turan: "Turan Ülküsü"
+ sp_ct_node_turan_s1: "Aşama I — Azerbaycan"
+ sp_ct_node_turan_s2: "Aşama II — İran"
+ sp_ct_node_turan_s3: "Aşama III — Hazar"
+ sp_ct_node_turan_s4: "Aşama IV — Türkistan"
+ sp_ct_node_great_ottoman: "Büyük Osmanlı İmparatorluğu"

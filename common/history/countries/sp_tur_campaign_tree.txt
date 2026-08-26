@@ -1,0 +1,11 @@
+﻿# I-30 Phase 1 — register CMF sidebar button for TUR only.
+# Additive COUNTRIES merge; does not replace vanilla TUR history.
+
+COUNTRIES = {
+	c:TUR ?= {
+		add_to_variable_list = {
+			name = custom_button_list_flag
+			target = flag:gui_sidebar_sp_campaign_tree
+		}
+	}
+}
