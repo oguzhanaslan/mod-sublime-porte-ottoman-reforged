@@ -1,0 +1,6 @@
+﻿# I-29 day-one Turkic kinship tradition (not a new culture).
+# Alphabetical placement among vanilla tradition_* keys is not required for mod files.
+
+tradition_turkic = {
+	type = tradition
+}

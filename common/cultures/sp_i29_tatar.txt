@@ -1,0 +1,57 @@
+﻿# I-29: vanilla tatar culture + tradition_turkic (day-one Turkic kinship).
+# Full REPLACE required; culture tradition lists are not additive.
+REPLACE:tatar = {
+	color= hsv{ 0.53 0.24 0.28 }
+	religion = sunni
+	heritage = heritage_tatar
+	language = language_kipchak
+	traditions = { tradition_russosphere tradition_turkic }
+	male_common_first_names = {
+		Asaf
+		Baqi
+		Bekbulat
+		Fatxelbayan
+		Galiaskar
+		Ismail
+		Iskander
+		Makhmut
+		Mullanur
+		Musa
+		Rizaeddin
+		Rustam
+		Xosayen
+		Yadegar
+		Yusuf
+	}
+	female_common_first_names = {
+		Masrura
+		Riza
+		Zeyneb
+	}
+	noble_last_names = {
+		Mamleeva
+	}
+	common_last_names = {
+		Amirkhanov
+		Agumov
+		Borhan
+		Faysi
+		Gizzat
+		Ibragimov
+		Ibrahim
+		Kamal
+		Khusainov
+		Sultan-Galiev
+		Tinchurin
+		Tukay
+		Waxitov
+		Yanbayev
+		Yamasev
+	}
+	ethnicities = {
+		1 = central_asian
+		1 = arab
+	}
+	graphics = east_asian
+	seal_and_signature_texture = "gfx/interface/diplomatic_treaties/seal_and_signature_cultures/diplomatic_treaties_seal_and_signature_middle_east.dds"
+}

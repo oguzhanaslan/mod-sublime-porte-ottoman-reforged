@@ -137,9 +137,10 @@ Do not place unverified historical claims in this file. Cite sources when resear
 
 ## Turkism
 
-- **R-20 mapping:** late `movement_cultural_majority` / `ideology_ethno_nationalist` / vanilla Enver. Do not back-project into 1836. Turan and new Turkic cultures remain deferred. **RESEARCH ONLY.**
-- **R-30 — Turan / Pan-Turkic conquest path:** [`docs/research/R30_turan_pan_turkic_conquest_path.md`](docs/research/R30_turan_pan_turkic_conquest_path.md) (revised). No shipped Turkism flag; Autumnnus `otf_turanic_idea_vr` is reference only.
+- **R-20 mapping:** late `movement_cultural_majority` / `ideology_ethno_nationalist` / vanilla Enver. Do not back-project into 1836. Mega-`turkic` culture merge remains rejected. **RESEARCH ONLY** for ideology chronology.
+- **R-30 — Turan / Pan-Turkic conquest path:** [`docs/research/R30_turan_pan_turkic_conquest_path.md`](docs/research/R30_turan_pan_turkic_conquest_path.md) (revised). Autumnnus `otf_turanic_idea_vr` is reference only.
 - **I-28 — Turanian Ideal:** [`docs/research/I28_turanian_ideal_proposal.md`](docs/research/I28_turanian_ideal_proposal.md); implementation [`docs/implementation/I28_turanian_ideal.md`](docs/implementation/I28_turanian_ideal.md). Identity picker + Turan Ülküsü JE (29 staged claims). Final Option B = Great Ottoman Empire / Büyük Osmanlı on `TUR` (never named Turan). **IMPLEMENTED — STATIC VALIDATED / RUNTIME PENDING.**
+- **R-31 / I-29 — Day-one Türkî kinship:** [`docs/research/R31_tradition_turkic_kinship.md`](docs/research/R31_tradition_turkic_kinship.md); implementation [`docs/implementation/I29_tradition_turkic_kinship.md`](docs/implementation/I29_tradition_turkic_kinship.md). Shared `tradition_turkic` on eight cultures (incl. tatar); no mega-culture. **IMPLEMENTED — STATIC VALIDATED / RUNTIME PENDING.**
 
 ## Young Ottomans
 

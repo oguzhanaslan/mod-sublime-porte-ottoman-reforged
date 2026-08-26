@@ -1,0 +1,87 @@
+﻿# I-29: vanilla azerbaijani culture + tradition_turkic (day-one Turkic kinship).
+# Full REPLACE required; culture tradition lists are not additive.
+REPLACE:azerbaijani = {
+	color= hsv{ 0.67 0.38 0.41 }
+	religion = shiite
+	heritage = heritage_anatolian
+	language = language_oghuz
+	traditions = { tradition_caucasian tradition_persianate tradition_turkic }
+	male_common_first_names = {
+		Ahmad
+		Ali
+		Aliagha
+		Bahram
+		Elbay
+		Farhad
+		Firudin
+		Hamid
+		Hasan
+		Heydar
+		Huseyin
+		Ibrahim
+		Ismayil
+		Jalil
+		Mahmud
+		Malik
+		Mehdi
+		Mohammad
+		Murad
+		Samad
+		Tahir
+		Zahid
+	}
+	female_common_first_names = {
+		Alaviyya
+		Amaliya
+		Aziza
+		Hagigat
+		Hamida
+		Heyran
+		Izzet
+		Maryam
+		Munavvar
+		Nasiba
+		Nesrin
+		Nuriyya
+		Sakina
+		Shargiyya
+		Shirin
+	}
+	noble_last_names = {
+		Akhundzade
+		Ashurbeyov
+		Bahmani-Qajar
+		Bakikhanov
+		Kazembek
+		Kengerli
+		Ibrahimbek
+		Javanshir
+		Kalantarli
+		Mammadbeyov
+		Mehmandarov
+		Nakhchivanski
+		Narimanbekov
+		Qasimbek
+		Topchubashi
+	}
+	common_last_names = {
+		Ahmadbek
+		Ahmadzade
+		Akbarzade
+		Edigar
+		Ganjavi
+		Ildyrym
+		Mehmandar
+		Nakhchivani
+		Qasimzade
+		Rasulzade
+		Tahirzade
+		Talishkhan
+		Zardabi
+	}
+	ethnicities = {
+		1 = arab
+	}
+	graphics = arabic
+	seal_and_signature_texture = "gfx/interface/diplomatic_treaties/seal_and_signature_cultures/diplomatic_treaties_seal_and_signature_ottoman.dds"
+}

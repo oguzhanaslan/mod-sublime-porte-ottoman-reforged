@@ -1,11 +1,12 @@
 ﻿# Complete late-loading culture definition: Victoria 3 culture entries do not expose additive name-pool extension.
+# I-29: also appends tradition_turkic for day-one Turkic kinship.
 REPLACE:turkish = {
 	color = hsv{ 0.99 0.48 0.80 }
 	religion = sunni
 	heritage = heritage_anatolian
 	language = language_oghuz
 	obsessions = { coffee }
-	traditions = { tradition_rumelian }
+	traditions = { tradition_rumelian tradition_turkic }
 
 	male_common_first_names = {
 		Abdurrahman Abdulaziz Abdulhamid Abdulkadir Abdulkerim Abdullatif Abdulmecid Abdulrahim Abdullah Ahmed

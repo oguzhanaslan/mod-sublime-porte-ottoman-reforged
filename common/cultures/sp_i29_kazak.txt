@@ -1,0 +1,60 @@
+﻿# I-29: vanilla kazak culture + tradition_turkic (day-one Turkic kinship).
+# Full REPLACE required; culture tradition lists are not additive.
+REPLACE:kazak = {
+	color= { 83 102 46 }
+	religion = sunni
+	heritage = heritage_kipchak
+	language = language_kipchak
+	traditions = { tradition_turkic }
+	male_common_first_names = {
+		Ablai
+		Abu_al-Khayr
+		Aryn
+		Baitursyn
+		Bukei
+		Chokan
+		Dulat
+		Ibirai
+		Isatai
+		Ishim
+		Jangir
+		Kenisary
+		Mashur
+		Murat
+		Nur_Ali
+		Qayip
+		Sadyk
+		Sarzhan
+		Sirim
+		Tenek
+		Tolshan
+		Vali
+	}
+	female_common_first_names = {
+		Aisha
+		Balzhan
+		Bayan
+		Demesh
+		Gulshat
+		Samal
+	}
+	noble_last_names = {
+		Bukeikhanov
+		Beg
+		Khan
+	}
+	common_last_names = {
+		Baitursynov
+		Dulatuli
+		Konanbai_uli
+		Kutebar_uli
+		Muhammad_uli
+		Qasim_uli
+		Shoshak-ula
+	}
+	ethnicities = {
+		1 = central_asian
+	}
+	graphics = east_asian
+	seal_and_signature_texture = "gfx/interface/diplomatic_treaties/seal_and_signature_cultures/diplomatic_treaties_seal_and_signature_middle_east.dds"
+}

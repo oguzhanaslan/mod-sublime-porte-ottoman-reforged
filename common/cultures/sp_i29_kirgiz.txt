@@ -1,0 +1,51 @@
+﻿# I-29: vanilla kirgiz culture + tradition_turkic (day-one Turkic kinship).
+# Full REPLACE required; culture tradition lists are not additive.
+REPLACE:kirgiz = {
+	color= { 62 73 41 }
+	religion = sunni
+	heritage = heritage_kipchak
+	language = language_kipchak
+	traditions = { tradition_turkic }
+	male_common_first_names = {
+		Askar
+		Bayymbet
+		Chingiz
+		Ishim
+		Izzat
+		Jangir
+		Kasim
+		Kurman
+		Murat
+		Nasiridin
+		Sadyk
+		Toktogul
+		Torokul
+		Turdakun
+		Vali
+		Zhurahon
+	}
+	female_common_first_names = {
+		Asylgul
+		Kuluypa
+		Roza
+		Sabira
+		Tattybubu
+		Toktayum
+		Zamira
+	}
+	noble_last_names = {
+		Madali
+		Beg
+		Khan
+	}
+	common_last_names = {
+		Boryak
+		Ibraimov
+		Kutebar
+	}
+	ethnicities = {
+		1 = central_asian
+	}
+	graphics = east_asian
+	seal_and_signature_texture = "gfx/interface/diplomatic_treaties/seal_and_signature_cultures/diplomatic_treaties_seal_and_signature_middle_east.dds"
+}

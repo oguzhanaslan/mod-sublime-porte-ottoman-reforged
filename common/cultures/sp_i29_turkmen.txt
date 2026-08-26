@@ -1,0 +1,45 @@
+﻿# I-29: vanilla turkmen culture + tradition_turkic (day-one Turkic kinship).
+# Full REPLACE required; culture tradition lists are not additive.
+REPLACE:turkmen = {
+	color= hsv{ 0.84 0.21 0.75 }
+	religion = sunni
+	heritage = heritage_turkmen
+	language = language_oghuz
+	traditions = { tradition_persianate tradition_turkic }
+	male_common_first_names = {
+		Ahmed
+		Borkluce
+		Byashim
+		Haydar
+		Mehmed
+		Murad
+		Nurberdi
+		Orazgeldi
+		Qilich
+	}
+	female_common_first_names = {
+		Aksoltan
+		Bakhargul
+		Gozel
+		Gulsat
+		Medeniyet
+		Muza
+		Semsat
+	}
+	noble_last_names = {
+		Beg
+		Khan
+	}
+	common_last_names = {
+		Aytakov
+		Bayramov
+		Hamdan
+		Hydyr
+		Nurali
+	}
+	ethnicities = {
+		1 = arab
+	}
+	graphics = east_asian
+	seal_and_signature_texture = "gfx/interface/diplomatic_treaties/seal_and_signature_cultures/diplomatic_treaties_seal_and_signature_middle_east.dds"
+}
