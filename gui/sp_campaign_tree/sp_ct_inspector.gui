@@ -1,0 +1,448 @@
+# I-30 Campaign Tree — inspector components (Phase D1).
+# Scroll pattern: block_windows.gui default_block_window scrollarea (L525–569)
+# + fullscreen_scrollarea expanding policies (L927–953).
+# Reuses sp_ct_insp_req_row, sp_ct_insp_stat_row, sp_ct_insp_progress_card from 00_sp_ct_shared.gui.
+
+types sp_ct_inspector_types {
+
+	type sp_ct_insp_artwork_band = widget {
+		size = { @sp_ct_insp_art_w @sp_ct_insp_art_h }
+		parentanchor = hcenter
+		background = {
+			using = dark_area
+			alpha = 0.55
+		}
+		icon = {
+			size = { @sp_ct_insp_art_w @sp_ct_insp_art_h }
+			parentanchor = center
+			block "artwork_texture" {
+				texture = "gfx/interface/icons/event_icons/event_default.dds"
+			}
+		}
+		icon = {
+			size = { 100% 100% }
+			using = simple_frame
+		}
+	}
+
+	type sp_ct_insp_status_header = widget {
+		size = { 100% 32 }
+		minimumsize = { 480 32 }
+		textbox = {
+			block "insp_title" { text = "sp_ct_node_placeholder" }
+			parentanchor = left|vcenter
+			autoresize = yes
+			align = left|vcenter|nobaseline
+			default_format = "#header"
+			using = fontsize_medium
+			max_width = 360
+			elide = right
+		}
+		widget = {
+			size = { 72 18 }
+			parentanchor = right|vcenter
+			block "insp_status_completed" { visible = no }
+			background = {
+				using = entry_bg_simple
+			}
+			textbox = {
+				parentanchor = center
+				text = "sp_ct_state_completed"
+				autoresize = yes
+				align = hcenter|vcenter|nobaseline
+				using = fontsize_small
+				default_format = "#G"
+				margin_left = 6
+				margin_right = 6
+			}
+		}
+		widget = {
+			size = { 72 18 }
+			parentanchor = right|vcenter
+			block "insp_status_active" { visible = no }
+			background = {
+				using = entry_bg_simple
+			}
+			textbox = {
+				parentanchor = center
+				text = "sp_ct_state_active"
+				autoresize = yes
+				align = hcenter|vcenter|nobaseline
+				using = fontsize_small
+				default_format = "#Y"
+				margin_left = 6
+				margin_right = 6
+			}
+		}
+		widget = {
+			size = { 72 18 }
+			parentanchor = right|vcenter
+			block "insp_status_available" { visible = no }
+			background = {
+				using = entry_bg_simple
+			}
+			textbox = {
+				parentanchor = center
+				text = "sp_ct_state_available"
+				autoresize = yes
+				align = hcenter|vcenter|nobaseline
+				using = fontsize_small
+				margin_left = 6
+				margin_right = 6
+			}
+		}
+		widget = {
+			size = { 72 18 }
+			parentanchor = right|vcenter
+			block "insp_status_locked" { visible = no }
+			background = {
+				using = entry_bg_simple
+			}
+			textbox = {
+				parentanchor = center
+				text = "sp_ct_state_locked"
+				autoresize = yes
+				align = hcenter|vcenter|nobaseline
+				using = fontsize_small
+				default_format = "#I"
+				margin_left = 6
+				margin_right = 6
+			}
+		}
+	}
+
+	type sp_ct_insp_section_panel = flowcontainer {
+		direction = vertical
+		spacing = 0
+		minimumsize = { 500 -1 }
+
+		background = {
+			using = entry_bg_simple
+			margin = { 0 0 }
+		}
+		background = {
+			using = simple_frame
+			margin = { 0 0 }
+		}
+
+		textbox = {
+			block "section_title" { text = "sp_ct_node_placeholder" }
+			margin = { 10 8 }
+			autoresize = yes
+			align = left|nobaseline
+			default_format = "#title"
+			using = fontsize_small
+		}
+
+		flowcontainer = {
+			direction = vertical
+			spacing = 2
+			margin = { 6 10 }
+			margin_bottom = 10
+			block "section_body" {}
+		}
+	}
+
+	type sp_ct_insp_scroll_panel = scrollarea {
+		layoutpolicy_vertical = expanding
+		layoutpolicy_horizontal = expanding
+		size = { 100% -1 }
+		minimumsize = { 500 80 }
+		scrollbarpolicy_horizontal = always_off
+		scrollbarpolicy_vertical = as_needed
+
+		scrollbar_vertical = {
+			using = vertical_scrollbar
+		}
+
+		scrollwidget = {
+			block "scroll_content" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 8
+					minimumsize = { 500 -1 }
+				}
+			}
+		}
+	}
+
+	# Phase D1 pilot — Turanian Ideal only.
+	type sp_ct_inspector_pilot_turan = widget {
+		size = { 100% -1 }
+		layoutpolicy_vertical = expanding
+		minimumsize = { 500 -1 }
+
+		vbox = {
+			size = { 100% 100% }
+			layoutpolicy_vertical = expanding
+			spacing = 8
+
+			sp_ct_insp_artwork_band = {
+				blockoverride "artwork_texture" {
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_turan.dds"
+				}
+			}
+
+			sp_ct_insp_status_header = {
+				blockoverride "insp_title" { text = "sp_ct_node_turan" }
+				blockoverride "insp_status_completed" { visible = "[GetScriptedGui('sp_ct_vis_turan_completed').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+				blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_turan_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+				blockoverride "insp_status_available" { visible = "[GetScriptedGui('sp_ct_vis_turan_available').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_turan_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+			}
+
+			widget = {
+				flowcontainer = {
+					direction = vertical
+					spacing = 4
+					textbox = {
+						text = "sp_ct_sec_description"
+						autoresize = yes
+						align = left|nobaseline
+						default_format = "#title"
+						using = fontsize_small
+					}
+					textbox = {
+						text = "sp_ct_insp_turan_desc"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						max_width = 500
+						multiline = yes
+					}
+					textbox = {
+						text = "sp_ct_sec_flavor"
+						autoresize = yes
+						align = left|nobaseline
+						default_format = "#title"
+						using = fontsize_small
+						margin_top = 4
+					}
+					textbox = {
+						text = "sp_ct_insp_turan_flavor"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						max_width = 500
+						multiline = yes
+					}
+				}
+			}
+
+			sp_ct_insp_scroll_panel = {
+				blockoverride "scroll_content" {
+					flowcontainer = {
+						direction = vertical
+						spacing = 8
+						minimumsize = { 500 -1 }
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
+							blockoverride "section_body" {
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_path_turkism" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_turkism_tt" }
+								}
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_pan_nationalism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_pan_nationalism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_pan_nationalism" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_pan_nationalism_tt" }
+								}
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_progress" }
+							blockoverride "section_body" {
+								flowcontainer = {
+									direction = horizontal
+									spacing = 4
+									visible = "[GetPlayer.MakeScope.Var('sp_turan_stage').IsSet]"
+									textbox = {
+										text = "sp_ct_progress_stage"
+										autoresize = yes
+										align = left|nobaseline
+										using = fontsize_medium
+									}
+									textbox = {
+										raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage').GetValue|0]"
+										autoresize = yes
+										align = left|nobaseline
+										using = fontsize_medium
+									}
+								}
+								sp_ct_insp_progress_card = {
+									visible = "[And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet)]"
+									blockoverride "progress_card_content" {
+										textbox = {
+											text = "sp_ct_progress_controlled"
+											autoresize = yes
+											align = left|nobaseline
+											using = fontsize_small
+											default_format = "#Y"
+										}
+										textbox = {
+											raw_text = "[GetPlayer.MakeScope.Var('sp_turan_stage_progress').GetValue|0] / [GetPlayer.MakeScope.Var('sp_turan_stage_goal').GetValue|0]"
+											autoresize = yes
+											align = left|nobaseline
+											using = fontsize_small
+											default_format = "#G"
+										}
+									}
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_completion" }
+							blockoverride "section_body" {
+								sp_ct_insp_req_row = {
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_turan_ideal_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_turan_ideal_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_turan_ideal_complete" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_turan_ideal_complete_tt" }
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
+							blockoverride "section_body" {
+								textbox = {
+									text = "sp_ct_insp_turan_rewards"
+									tooltip = "sp_ct_insp_turan_rewards_tt"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+									margin_bottom = 4
+								}
+								sp_ct_insp_stat_row = {
+									blockoverride "stat_icon" { texture = "gfx/interface/icons/generic_icons/prestige.dds" }
+									blockoverride "stat_label" { text = "sp_ct_reward_prestige" }
+									blockoverride "stat_value" { text = "sp_ct_reward_prestige_10_val" }
+								}
+								sp_ct_insp_stat_row = {
+									blockoverride "stat_icon" { texture = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds" }
+									blockoverride "stat_label" { text = "sp_ct_reward_modifier" }
+									blockoverride "stat_value" { text = "sp_ct_reward_modifier_unifier_val" }
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
+							blockoverride "section_body" {
+								textbox = {
+									text = "sp_ct_nav_prev_turkism"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+								textbox = {
+									text = "sp_ct_nav_next_turan_s1"
+									autoresize = yes
+									align = left|nobaseline
+									using = fontsize_small
+									max_width = 480
+									multiline = yes
+								}
+							}
+						}
+
+						sp_ct_insp_section_panel = {
+							visible = "[GetScriptedGui('sp_ct_vis_req_je_turan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							blockoverride "section_title" { text = "sp_ct_sec_actions" }
+							blockoverride "section_body" {
+								flowcontainer = {
+									direction = horizontal
+									spacing = 8
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+										item = {
+											flowcontainer = {
+												direction = vertical
+												datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+												item = {
+													flowcontainer = {
+														direction = horizontal
+														spacing = 8
+														visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
+														datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+														button = {
+															size = { 200 36 }
+															using = default_button_action
+															using = confirm_button_sound
+															visible = "[JournalEntry.IsValid]"
+															enabled = "[JournalEntry.IsValid]"
+															onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+															onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+															onclick = "[GetVariableSystem.Clear('com_open_window')]"
+															tooltip = "sp_ct_btn_open_je_tt"
+															textbox = {
+																parentanchor = center
+																text = "sp_ct_btn_open_je"
+																autoresize = yes
+																align = hcenter|nobaseline
+																using = fontsize_small
+															}
+														}
+														button = {
+															size = { 140 36 }
+															using = default_button_action
+															using = check_button_sound
+															visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
+															enabled = "[JournalEntry.IsValid]"
+															onclick = "[JournalEntry.TogglePinInOutliner]"
+															tooltip = "PIN_JOURNAL_ENTRY"
+															textbox = {
+																parentanchor = center
+																text = "sp_ct_btn_pin_je"
+																autoresize = yes
+																align = hcenter|nobaseline
+																using = fontsize_small
+															}
+														}
+														button = {
+															size = { 140 36 }
+															using = default_button_action
+															using = check_button_sound
+															visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+															enabled = "[JournalEntry.IsValid]"
+															onclick = "[JournalEntry.TogglePinInOutliner]"
+															tooltip = "UNPIN_JOURNAL_ENTRY"
+															textbox = {
+																parentanchor = center
+																text = "sp_ct_btn_unpin_je"
+																autoresize = yes
+																align = hcenter|nobaseline
+																using = fontsize_small
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
