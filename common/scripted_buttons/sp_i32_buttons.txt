@@ -798,8 +798,7 @@ sp_i32_btn_primary_partner = {
 				exists = c:FRA
 				exists = c:GBR
 				exists = c:AUS
-				exists = c:GER
-				exists = c:PRU
+				sp_i32_german_sphere_exists = yes
 			}
 		}
 	}

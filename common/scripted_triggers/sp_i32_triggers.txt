@@ -4,6 +4,33 @@ sp_i32_is_tur = {
 	c:TUR ?= this
 }
 
+# Scope: country. GER or PRU still exists (unification-safe german sphere).
+sp_i32_german_sphere_exists = {
+	OR = {
+		exists = c:GER
+		exists = c:PRU
+	}
+}
+
+# Scope: partner country (THIS). ROOT = evaluating TUR.
+# Shared antagonistic/belligerent/domineering NOR used by Students, Wave B+ partners, and Naval GBR.
+sp_i32_country_attitude_not_hostile_to_root = {
+	NOR = {
+		has_attitude = {
+			who = root
+			attitude = antagonistic
+		}
+		has_attitude = {
+			who = root
+			attitude = belligerent
+		}
+		has_attitude = {
+			who = root
+			attitude = domineering
+		}
+	}
+}
+
 sp_i32_has_staffed_university = {
 	any_scope_building = {
 		is_building_type = building_university
@@ -111,20 +138,7 @@ sp_i32_students_can_use_country = {
 	NOT = { has_war_with = $PARTNER$ }
 	$PARTNER$ = {
 		relations:root > -20
-		NOR = {
-			has_attitude = {
-				who = root
-				attitude = antagonistic
-			}
-			has_attitude = {
-				who = root
-				attitude = belligerent
-			}
-			has_attitude = {
-				who = root
-				attitude = domineering
-			}
-		}
+		sp_i32_country_attitude_not_hostile_to_root = yes
 	}
 }
 
@@ -134,19 +148,22 @@ sp_i32_partner_ok_neutral = {
 	NOT = { has_war_with = $PARTNER$ }
 	$PARTNER$ = {
 		relations:root >= 0
-		NOR = {
-			has_attitude = {
-				who = root
-				attitude = antagonistic
-			}
-			has_attitude = {
-				who = root
-				attitude = belligerent
-			}
-			has_attitude = {
-				who = root
-				attitude = domineering
-			}
+		sp_i32_country_attitude_not_hostile_to_root = yes
+	}
+}
+
+# Scope: TUR country. GER if it exists and is a neutral partner, else PRU.
+# Students keep a separate host check (relations > −20).
+sp_i32_german_host_ok_neutral = {
+	OR = {
+		AND = {
+			exists = c:GER
+			sp_i32_partner_ok_neutral = { PARTNER = c:GER }
+		}
+		AND = {
+			NOT = { exists = c:GER }
+			exists = c:PRU
+			sp_i32_partner_ok_neutral = { PARTNER = c:PRU }
 		}
 	}
 }
@@ -256,10 +273,7 @@ sp_i32_students_partner_still_exists = {
 		}
 		AND = {
 			has_variable = sp_i32_students_partner_german
-			OR = {
-				exists = c:GER
-				exists = c:PRU
-			}
+			sp_i32_german_sphere_exists = yes
 		}
 	}
 }
@@ -363,17 +377,7 @@ sp_i32_technical_unlocked = {
 }
 
 sp_i32_technical_german_host_ok = {
-	OR = {
-		AND = {
-			exists = c:GER
-			sp_i32_partner_ok_neutral = { PARTNER = c:GER }
-		}
-		AND = {
-			NOT = { exists = c:GER }
-			exists = c:PRU
-			sp_i32_partner_ok_neutral = { PARTNER = c:PRU }
-		}
-	}
+	sp_i32_german_host_ok_neutral = yes
 }
 
 sp_i32_any_technical_destination_diplomatic = {
@@ -419,10 +423,7 @@ sp_i32_technical_partner_still_exists = {
 		}
 		AND = {
 			has_variable = sp_i32_technical_partner_german
-			OR = {
-				exists = c:GER
-				exists = c:PRU
-			}
+			sp_i32_german_sphere_exists = yes
 		}
 	}
 }
@@ -457,17 +458,7 @@ sp_i32_education_unlocked = {
 }
 
 sp_i32_education_german_host_ok = {
-	OR = {
-		AND = {
-			exists = c:GER
-			sp_i32_partner_ok_neutral = { PARTNER = c:GER }
-		}
-		AND = {
-			NOT = { exists = c:GER }
-			exists = c:PRU
-			sp_i32_partner_ok_neutral = { PARTNER = c:PRU }
-		}
-	}
+	sp_i32_german_host_ok_neutral = yes
 }
 
 # Diplomatic pathways (no gold) — used by gold_required / tooltip_pay / destination gates.
@@ -602,10 +593,7 @@ sp_i32_education_partner_still_exists = {
 		}
 		AND = {
 			has_variable = sp_i32_education_partner_german
-			OR = {
-				exists = c:GER
-				exists = c:PRU
-			}
+			sp_i32_german_sphere_exists = yes
 		}
 	}
 }
@@ -629,17 +617,7 @@ sp_i32_military_busy = {
 }
 
 sp_i32_military_german_host_ok = {
-	OR = {
-		AND = {
-			exists = c:GER
-			sp_i32_partner_ok_neutral = { PARTNER = c:GER }
-		}
-		AND = {
-			NOT = { exists = c:GER }
-			exists = c:PRU
-			sp_i32_partner_ok_neutral = { PARTNER = c:PRU }
-		}
-	}
+	sp_i32_german_host_ok_neutral = yes
 }
 
 # GBR land requires sp_i32_primary_partner_gbr (Wave E).
@@ -749,10 +727,7 @@ sp_i32_military_partner_still_exists = {
 		}
 		AND = {
 			has_variable = sp_i32_military_partner_german
-			OR = {
-				exists = c:GER
-				exists = c:PRU
-			}
+			sp_i32_german_sphere_exists = yes
 		}
 	}
 }
@@ -801,17 +776,7 @@ sp_i32_industrial_unlocked = {
 }
 
 sp_i32_industrial_german_host_ok = {
-	OR = {
-		AND = {
-			exists = c:GER
-			sp_i32_partner_ok_neutral = { PARTNER = c:GER }
-		}
-		AND = {
-			NOT = { exists = c:GER }
-			exists = c:PRU
-			sp_i32_partner_ok_neutral = { PARTNER = c:PRU }
-		}
-	}
+	sp_i32_german_host_ok_neutral = yes
 }
 
 sp_i32_any_industrial_destination_diplomatic = {
@@ -920,10 +885,7 @@ sp_i32_industrial_partner_still_exists = {
 		}
 		AND = {
 			has_variable = sp_i32_industrial_partner_german
-			OR = {
-				exists = c:GER
-				exists = c:PRU
-			}
+			sp_i32_german_sphere_exists = yes
 		}
 	}
 }
@@ -958,20 +920,7 @@ sp_i32_naval_gbr_ok = {
 	exists = c:GBR
 	NOT = { has_war_with = c:GBR }
 	c:GBR = {
-		NOR = {
-			has_attitude = {
-				who = root
-				attitude = antagonistic
-			}
-			has_attitude = {
-				who = root
-				attitude = belligerent
-			}
-			has_attitude = {
-				who = root
-				attitude = domineering
-			}
-		}
+		sp_i32_country_attitude_not_hostile_to_root = yes
 	}
 	OR = {
 		has_variable = sp_i32_primary_partner_gbr
@@ -1118,10 +1067,7 @@ sp_i32_primary_partner_country_exists = {
 		}
 		AND = {
 			has_variable = sp_i32_primary_partner_german
-			OR = {
-				exists = c:GER
-				exists = c:PRU
-			}
+			sp_i32_german_sphere_exists = yes
 		}
 	}
 }
