@@ -143,7 +143,7 @@ types sp_campaign_tree_types {
 						flowcontainer = {
 							direction = vertical
 							parentanchor = top|hcenter
-							spacing = 10
+							spacing = 8
 							margin_top = 8
 							margin_bottom = 16
 							minimumsize = { 992 -1 }
@@ -918,7 +918,7 @@ types sp_campaign_tree_types {
 					vbox = {
 						size = { 100% 100% }
 						layoutpolicy_vertical = expanding
-						margin = { 12 12 }
+						margin = { 16 12 }
 						spacing = 4
 
 						sp_ct_insp_empty = {

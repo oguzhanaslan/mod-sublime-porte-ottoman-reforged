@@ -5,25 +5,25 @@ types sp_ct_shared_types {
 
 	# Common trunk vertical connector — stronger than ideology-lane connectors.
 	type sp_ct_connector_trunk_v = widget {
-		size = { 3 12 }
+		size = { 3 16 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.72
+			alpha = 0.82
 		}
 	}
 
 	# Ideology-lane vertical connector.
 	type sp_ct_connector_v = widget {
-		size = { 2 6 }
+		size = { 2 10 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.48
+			alpha = 0.58
 		}
 	}
 
@@ -34,53 +34,53 @@ types sp_ct_shared_types {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.48
+			alpha = 0.58
 		}
 	}
 
 	# Identity fork bar — width matches tree content (992).
 	# Tick X = lane centers: 160 / 496 / 832 for 320+16+320+16+320.
 	type sp_ct_branch_fork = widget {
-		size = { 992 10 }
+		size = { 992 12 }
 		parentanchor = hcenter
 		widget = {
-			size = { 992 2 }
+			size = { 992 3 }
 			parentanchor = top|hcenter
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.72
+				alpha = 0.84
 			}
 		}
 		widget = {
-			size = { 2 8 }
+			size = { 2 10 }
 			position = { 160 2 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.48
+				alpha = 0.62
 			}
 		}
 		widget = {
-			size = { 2 8 }
+			size = { 2 10 }
 			position = { 496 2 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.48
+				alpha = 0.62
 			}
 		}
 		widget = {
-			size = { 2 8 }
+			size = { 2 10 }
 			position = { 832 2 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.48
+				alpha = 0.62
 			}
 		}
 	}

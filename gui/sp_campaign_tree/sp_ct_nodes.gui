@@ -6,7 +6,7 @@
 types sp_ct_node_types {
 
 	type sp_ct_node_compact = widget {
-		size = { 200 48 }
+		size = { 200 52 }
 		parentanchor = hcenter
 		background = {
 			using = entry_bg_simple
@@ -31,7 +31,7 @@ types sp_ct_node_types {
 				block "state_locked_dim" { visible = no }
 				background = {
 					using = dark_area
-					alpha = 0.42
+					alpha = 0.52
 				}
 			}
 			widget = {
@@ -70,13 +70,13 @@ types sp_ct_node_types {
 						direction = vertical
 						parentanchor = vcenter
 						layoutpolicy_horizontal = expanding
-						spacing = 2
+						spacing = 1
 
 						textbox = {
 							block "node_title" { text = "sp_ct_node_placeholder" }
 							autoresize = yes
 							align = left|nobaseline
-							default_format = "#title"
+							default_format = "#header"
 							using = fontsize_small
 							max_width = 132
 							elide = right
@@ -194,7 +194,7 @@ types sp_ct_node_types {
 						texture = "gfx/interface/backgrounds/divider_gold.dds"
 						spriteType = Corneredstretched
 						spriteborder = { 0 0 }
-						alpha = 0.52
+						alpha = 0.68
 					}
 				}
 

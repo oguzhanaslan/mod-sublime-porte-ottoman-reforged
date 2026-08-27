@@ -23,7 +23,7 @@ types sp_ct_header_types {
 
 		block "header_back_button" {
 			back_button_large = {
-				position = { 11 11 }
+				position = { 11 15 }
 				parentanchor = top|left
 				onclick = "[GetPlayer.IsValid]"
 				input_action = "back"
@@ -33,7 +33,7 @@ types sp_ct_header_types {
 		block "header_close_button" {
 			close_button_large = {
 				parentanchor = top|right
-				position = { -11 11 }
+				position = { -11 15 }
 				onclick = "[GetPlayer.IsValid]"
 				shortcut = "close_window"
 			}

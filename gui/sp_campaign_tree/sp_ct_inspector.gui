@@ -87,7 +87,7 @@ types sp_ct_inspector_types {
 		spacing = 0
 		layoutpolicy_horizontal = expanding
 		layoutpolicy_vertical = preferred
-		margin_bottom = 8
+		margin_bottom = 10
 		minimumsize = { 480 -1 }
 
 		background = {
@@ -104,7 +104,7 @@ types sp_ct_inspector_types {
 			textbox = {
 				block "section_title" { text = "sp_ct_node_placeholder" }
 				parentanchor = left|vcenter
-				margin_left = 12
+				margin_left = 14
 				autoresize = yes
 				align = left|vcenter|nobaseline
 				default_format = "#title"
@@ -115,8 +115,8 @@ types sp_ct_inspector_types {
 		flowcontainer = {
 			direction = vertical
 			spacing = 4
-			margin = { 12 10 }
-			margin_bottom = 10
+			margin = { 14 12 }
+			margin_bottom = 12
 			layoutpolicy_vertical = preferred
 			layoutpolicy_horizontal = expanding
 			block "section_body" {}
@@ -144,7 +144,7 @@ types sp_ct_inspector_types {
 				# Content-driven total height only — never expanding / never viewport-sized.
 				flowcontainer = {
 					direction = vertical
-					spacing = 10
+					spacing = 12
 					margin_bottom = 16
 					layoutpolicy_vertical = preferred
 					minimumsize = { 480 -1 }
@@ -185,7 +185,7 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 10
+						spacing = 12
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
@@ -348,7 +348,7 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 10
+						spacing = 12
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
@@ -503,7 +503,7 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 10
+						spacing = 12
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
@@ -1002,7 +1002,7 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 10
+						spacing = 12
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
@@ -1157,7 +1157,7 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 10
+						spacing = 12
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
@@ -1880,7 +1880,7 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 10
+						spacing = 12
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
@@ -2074,7 +2074,7 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 10
+						spacing = 12
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
@@ -2245,7 +2245,7 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 10
+						spacing = 12
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
@@ -2425,7 +2425,7 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 10
+						spacing = 12
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
@@ -2580,7 +2580,7 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 10
+						spacing = 12
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
