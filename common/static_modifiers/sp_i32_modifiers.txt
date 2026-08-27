@@ -1,4 +1,4 @@
-﻿# I-32 Wave A+B+C+D modifiers. Verified 1.13.11 types only. No combat, construction, minting, tax, or research-speed.
+﻿# I-32 Wave A–E modifiers. Verified 1.13.11 types only. No combat, construction, minting, tax, or research-speed.
 
 # Active Students — France (society + qualifications).
 sp_i32_students_fra_act = {
@@ -302,4 +302,174 @@ sp_i32_nav_complete_qual = {
 sp_i32_nav_overrun = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
 	country_expenses_add = 1500
+}
+
+# === Wave E — Primary-partner expense twins (−15% country_expenses_add) ===
+
+sp_i32_students_fra_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_society_tech_spread_mult = 0.10
+	state_pop_qualifications_mult = 0.05
+	country_expenses_add = 680
+	country_bureaucracy_add = -20
+	interest_group_ig_intelligentsia_approval_add = 1
+	interest_group_ig_intelligentsia_pop_attraction_mult = 0.05
+}
+
+sp_i32_students_gbr_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_production_tech_spread_mult = 0.10
+	state_pop_qualifications_mult = 0.05
+	country_expenses_add = 680
+	country_bureaucracy_add = -20
+	interest_group_ig_industrialists_approval_add = 1
+}
+
+sp_i32_students_pru_act_spread_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_military_tech_spread_mult = 0.10
+	state_pop_qualifications_mult = 0.05
+	country_expenses_add = 680
+	country_bureaucracy_add = -20
+	interest_group_ig_armed_forces_approval_add = 1
+}
+
+sp_i32_students_pru_act_qual_only_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	state_pop_qualifications_mult = 0.05
+	country_expenses_add = 680
+	country_bureaucracy_add = -20
+	interest_group_ig_armed_forces_approval_add = 1
+}
+
+sp_i32_students_aus_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_society_tech_spread_mult = 0.05
+	country_bureaucracy_mult = 0.02
+	country_expenses_add = 510
+	country_bureaucracy_add = -15
+	interest_group_ig_intelligentsia_approval_add = 1
+}
+
+sp_i32_tech_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_production_tech_spread_mult = 0.10
+	state_pop_qualifications_mult = 0.05
+	country_expenses_add = 1530
+	country_bureaucracy_add = -35
+	interest_group_ig_industrialists_approval_add = 1
+	interest_group_ig_intelligentsia_approval_add = 1
+}
+
+sp_i32_edu_expand_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_society_tech_spread_mult = 0.10
+	state_education_access_add = 0.02
+	country_expenses_add = 1020
+	country_bureaucracy_add = -40
+	interest_group_ig_intelligentsia_approval_add = 2
+	interest_group_ig_devout_approval_add = -3
+	interest_group_ig_landowners_approval_add = -1
+}
+
+sp_i32_edu_limit_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_society_tech_spread_mult = 0.05
+	state_pop_qualifications_mult = 0.05
+	country_expenses_add = 1020
+	country_bureaucracy_add = -40
+	interest_group_ig_armed_forces_approval_add = 1
+	interest_group_ig_devout_approval_add = -1
+	interest_group_ig_intelligentsia_approval_add = 1
+}
+
+sp_i32_edu_integrate_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_society_tech_spread_mult = 0.05
+	country_bureaucracy_mult = 0.03
+	country_expenses_add = 850
+	country_bureaucracy_add = -30
+	interest_group_ig_petty_bourgeoisie_approval_add = 1
+}
+
+sp_i32_mil_pru_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_military_tech_spread_mult = 0.10
+	state_pop_qualifications_mult = 0.10
+	country_expenses_add = 1275
+	country_bureaucracy_add = -30
+	interest_group_ig_armed_forces_approval_add = 1
+	interest_group_ig_armed_forces_pop_attraction_mult = 0.10
+}
+
+sp_i32_mil_fra_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_military_tech_spread_mult = 0.05
+	state_pop_qualifications_mult = 0.10
+	country_expenses_add = 1275
+	country_bureaucracy_add = -30
+	interest_group_ig_armed_forces_approval_add = 1
+	interest_group_ig_intelligentsia_approval_add = 1
+}
+
+sp_i32_mil_gbr_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	state_pop_qualifications_mult = 0.10
+	country_expenses_add = 1275
+	country_bureaucracy_add = -30
+	interest_group_ig_armed_forces_approval_add = 1
+}
+
+sp_i32_mil_aus_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_military_tech_spread_mult = 0.05
+	state_pop_qualifications_mult = 0.05
+	country_expenses_add = 1020
+	country_bureaucracy_add = -25
+	interest_group_ig_armed_forces_approval_add = 1
+}
+
+sp_i32_ind_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_production_tech_spread_mult = 0.10
+	state_pop_qualifications_mult = 0.05
+	country_expenses_add = 1870
+	country_bureaucracy_add = -40
+	interest_group_ig_industrialists_pop_attraction_mult = 0.10
+	interest_group_ig_landowners_approval_add = -1
+}
+
+sp_i32_nav_act_spread_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_military_tech_spread_mult = 0.05
+	state_pop_qualifications_mult = 0.05
+	country_expenses_add = 2550
+	country_bureaucracy_add = -50
+	interest_group_ig_armed_forces_approval_add = 1
+	interest_group_ig_industrialists_approval_add = 1
+}
+
+sp_i32_nav_act_qual_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	state_pop_qualifications_mult = 0.10
+	country_expenses_add = 2550
+	country_bureaucracy_add = -50
+	interest_group_ig_armed_forces_approval_add = 1
+	interest_group_ig_industrialists_approval_add = 1
+}
+
+# Primary-change IG dump (1 year). AUS has no dump per contract.
+sp_i32_dump_ig_int = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_ig_intelligentsia_approval_add = -1
+}
+
+sp_i32_dump_ig_ind = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_ig_industrialists_approval_add = -1
+}
+
+sp_i32_dump_ig_af = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	interest_group_ig_armed_forces_approval_add = -1
 }

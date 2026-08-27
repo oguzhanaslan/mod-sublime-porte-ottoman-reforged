@@ -1,4 +1,4 @@
-﻿# I-32 Wave A+B+C+D — persistent hub. Tanzimat is not a prerequisite. Does not complete/fail.
+﻿# I-32 Wave A–E — persistent hub. Tanzimat is not a prerequisite. Does not complete/fail.
 
 sp_je_learning_from_europe = {
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
@@ -18,6 +18,7 @@ sp_je_learning_from_europe = {
 		c:TUR ?= this
 	}
 
+	scripted_button = sp_i32_btn_primary_partner
 	scripted_button = sp_i32_btn_send_students
 	scripted_button = sp_i32_btn_cancel_students
 	scripted_button = sp_i32_btn_send_military
@@ -300,6 +301,37 @@ sp_je_learning_from_europe = {
 					has_variable = sp_i32_naval_cooldown
 				}
 				desc = sp_je_learning_from_europe_status_naval_cooldown
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_primary_partner_fra
+				}
+				desc = sp_je_learning_from_europe_status_primary_fra
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_primary_partner_gbr
+				}
+				desc = sp_je_learning_from_europe_status_primary_gbr
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_primary_partner_german
+					exists = c:GER
+				}
+				desc = sp_je_learning_from_europe_status_primary_ger
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_primary_partner_german
+				}
+				desc = sp_je_learning_from_europe_status_primary_pru
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_primary_partner_aus
+				}
+				desc = sp_je_learning_from_europe_status_primary_aus
 			}
 			triggered_desc = {
 				trigger = {

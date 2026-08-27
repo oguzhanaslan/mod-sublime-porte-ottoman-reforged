@@ -1,4 +1,4 @@
-﻿# I-32 Wave A+B+C+D buttons. Destination / focus choice is an event, not permanent JE buttons.
+﻿# I-32 Wave A–E buttons. Destination / focus / primary choice is an event, not permanent JE buttons.
 
 sp_i32_btn_send_students = {
 	name = sp_i32_btn_send_students
@@ -775,5 +775,47 @@ sp_i32_btn_cancel_naval = {
 			}
 		}
 		trigger_event = { id = sp_i32.35 popup = yes }
+	}
+}
+
+# Wave E — Primary European Partner (always visible while JE is active).
+sp_i32_btn_primary_partner = {
+	name = sp_i32_btn_primary_partner
+	desc = sp_i32_btn_primary_partner_desc
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sp_i32_primary_change_cd_tt
+			sp_i32_primary_can_change = yes
+		}
+		custom_tooltip = {
+			text = sp_i32_primary_partner_exists_tt
+			OR = {
+				exists = c:FRA
+				exists = c:GBR
+				exists = c:AUS
+				exists = c:GER
+				exists = c:PRU
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 5
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+			}
+			add = -5
+		}
+	}
+
+	effect = {
+		custom_tooltip = sp_i32_btn_primary_partner_effect_tt
+		trigger_event = { id = sp_i32.20 popup = yes }
 	}
 }

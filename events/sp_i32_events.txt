@@ -37,7 +37,16 @@ sp_i32.11 = {
 	option = {
 		name = sp_i32.11.fra
 		trigger = {
-			gold_reserves >= sp_i32_students_upfront_standard
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_students_upfront_standard_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_students_upfront_standard
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_students_fra_diplo_tt
 				sp_i32_students_can_use_country = { PARTNER = c:FRA }
@@ -46,13 +55,29 @@ sp_i32.11 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_students_fra_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_students_pay_standard
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_fra
+			}
+			add_treasury = {
+				value = sp_i32_students_pay_standard_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_students_fra_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_students_fra_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_students_pay_standard
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_students_fra_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -64,7 +89,16 @@ sp_i32.11 = {
 	option = {
 		name = sp_i32.11.gbr
 		trigger = {
-			gold_reserves >= sp_i32_students_upfront_standard
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_gbr
+					gold_reserves >= sp_i32_students_upfront_standard_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_gbr }
+					gold_reserves >= sp_i32_students_upfront_standard
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_students_gbr_diplo_tt
 				sp_i32_students_can_use_country = { PARTNER = c:GBR }
@@ -73,13 +107,29 @@ sp_i32.11 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_students_gbr_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_students_pay_standard
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_gbr
+			}
+			add_treasury = {
+				value = sp_i32_students_pay_standard_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_students_gbr_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_students_gbr_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_students_pay_standard
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_students_gbr_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -91,7 +141,16 @@ sp_i32.11 = {
 	option = {
 		name = sp_i32.11.ger
 		trigger = {
-			gold_reserves >= sp_i32_students_upfront_standard
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_german
+					gold_reserves >= sp_i32_students_upfront_standard_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_german }
+					gold_reserves >= sp_i32_students_upfront_standard
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_students_german_diplo_tt
 				sp_i32_students_german_host_ok = yes
@@ -100,25 +159,54 @@ sp_i32.11 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_students_german_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_students_pay_standard
-		}
 		if = {
 			limit = {
-				sp_i32_mil_spread_occupied = yes
+				has_variable = sp_i32_primary_partner_german
 			}
-			je:sp_je_learning_from_europe = {
-				add_modifier = {
-					name = sp_i32_students_pru_act_qual_only
-					years = 6
+			add_treasury = {
+				value = sp_i32_students_pay_standard_pri
+			}
+			if = {
+				limit = {
+					sp_i32_mil_spread_occupied = yes
+				}
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_students_pru_act_qual_only_pri
+						years = 5
+					}
+				}
+			}
+			else = {
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_students_pru_act_spread_pri
+						years = 5
+					}
 				}
 			}
 		}
 		else = {
-			je:sp_je_learning_from_europe = {
-				add_modifier = {
-					name = sp_i32_students_pru_act_spread
-					years = 6
+			add_treasury = {
+				value = sp_i32_students_pay_standard
+			}
+			if = {
+				limit = {
+					sp_i32_mil_spread_occupied = yes
+				}
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_students_pru_act_qual_only
+						years = 6
+					}
+				}
+			}
+			else = {
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_students_pru_act_spread
+						years = 6
+					}
 				}
 			}
 		}
@@ -131,7 +219,16 @@ sp_i32.11 = {
 	option = {
 		name = sp_i32.11.aus
 		trigger = {
-			gold_reserves >= sp_i32_students_upfront_austria
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_aus
+					gold_reserves >= sp_i32_students_upfront_austria_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_aus }
+					gold_reserves >= sp_i32_students_upfront_austria
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_students_aus_diplo_tt
 				sp_i32_students_can_use_country = { PARTNER = c:AUS }
@@ -140,13 +237,29 @@ sp_i32.11 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_students_aus_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_students_pay_austria
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_aus
+			}
+			add_treasury = {
+				value = sp_i32_students_pay_austria_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_students_aus_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_students_aus_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_students_pay_austria
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_students_aus_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -495,7 +608,16 @@ sp_i32.13 = {
 	option = {
 		name = sp_i32.13.rail_gbr
 		trigger = {
-			gold_reserves >= sp_i32_technical_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_gbr
+					gold_reserves >= sp_i32_technical_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_gbr }
+					gold_reserves >= sp_i32_technical_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_gbr_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
@@ -504,13 +626,29 @@ sp_i32.13 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_technical_gbr_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_technical_pay
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_gbr
+			}
+			add_treasury = {
+				value = sp_i32_technical_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_tech_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_technical_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -530,7 +668,16 @@ sp_i32.13 = {
 	option = {
 		name = sp_i32.13.rail_fra
 		trigger = {
-			gold_reserves >= sp_i32_technical_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_technical_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_technical_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_fra_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
@@ -539,13 +686,29 @@ sp_i32.13 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_technical_fra_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_technical_pay
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_fra
+			}
+			add_treasury = {
+				value = sp_i32_technical_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_tech_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_technical_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -565,7 +728,16 @@ sp_i32.13 = {
 	option = {
 		name = sp_i32.13.mining_fra
 		trigger = {
-			gold_reserves >= sp_i32_technical_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_technical_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_technical_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_fra_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
@@ -574,13 +746,29 @@ sp_i32.13 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_technical_fra_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_technical_pay
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_fra
+			}
+			add_treasury = {
+				value = sp_i32_technical_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_tech_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_technical_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -600,7 +788,16 @@ sp_i32.13 = {
 	option = {
 		name = sp_i32.13.mining_gbr
 		trigger = {
-			gold_reserves >= sp_i32_technical_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_gbr
+					gold_reserves >= sp_i32_technical_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_gbr }
+					gold_reserves >= sp_i32_technical_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_gbr_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
@@ -609,13 +806,29 @@ sp_i32.13 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_technical_gbr_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_technical_pay
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_gbr
+			}
+			add_treasury = {
+				value = sp_i32_technical_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_tech_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_technical_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -635,7 +848,16 @@ sp_i32.13 = {
 	option = {
 		name = sp_i32.13.ship_gbr
 		trigger = {
-			gold_reserves >= sp_i32_technical_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_gbr
+					gold_reserves >= sp_i32_technical_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_gbr }
+					gold_reserves >= sp_i32_technical_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_gbr_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
@@ -644,13 +866,29 @@ sp_i32.13 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_technical_gbr_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_technical_pay
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_gbr
+			}
+			add_treasury = {
+				value = sp_i32_technical_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_tech_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_technical_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -670,7 +908,16 @@ sp_i32.13 = {
 	option = {
 		name = sp_i32.13.ship_fra
 		trigger = {
-			gold_reserves >= sp_i32_technical_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_technical_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_technical_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_fra_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
@@ -679,13 +926,29 @@ sp_i32.13 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_technical_fra_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_technical_pay
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_fra
+			}
+			add_treasury = {
+				value = sp_i32_technical_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_tech_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_technical_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -705,7 +968,16 @@ sp_i32.13 = {
 	option = {
 		name = sp_i32.13.mach_gbr
 		trigger = {
-			gold_reserves >= sp_i32_technical_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_gbr
+					gold_reserves >= sp_i32_technical_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_gbr }
+					gold_reserves >= sp_i32_technical_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_gbr_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
@@ -714,13 +986,29 @@ sp_i32.13 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_technical_gbr_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_technical_pay
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_gbr
+			}
+			add_treasury = {
+				value = sp_i32_technical_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_tech_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_technical_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -740,7 +1028,16 @@ sp_i32.13 = {
 	option = {
 		name = sp_i32.13.mach_german
 		trigger = {
-			gold_reserves >= sp_i32_technical_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_german
+					gold_reserves >= sp_i32_technical_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_german }
+					gold_reserves >= sp_i32_technical_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_german_neutral_tt
 				sp_i32_technical_german_host_ok = yes
@@ -749,13 +1046,29 @@ sp_i32.13 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_technical_german_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_technical_pay
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_german
+			}
+			add_treasury = {
+				value = sp_i32_technical_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_tech_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_technical_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_tech_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -815,7 +1128,16 @@ sp_i32.14 = {
 	option = {
 		name = sp_i32.14.expand_fra
 		trigger = {
-			gold_reserves >= sp_i32_education_upfront_standard
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_education_upfront_standard_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_education_upfront_standard
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_education_expand_i24_tt
 				NOT = { has_modifier = sp_i24_education_reorganized_mod }
@@ -828,13 +1150,29 @@ sp_i32.14 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_education_expand_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_education_pay_standard
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_fra
+			}
+			add_treasury = {
+				value = sp_i32_education_pay_standard_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_edu_expand_act_pri
+					years = 7
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_edu_expand_act
-				years = 8
+		else = {
+			add_treasury = {
+				value = sp_i32_education_pay_standard
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_edu_expand_act
+					years = 8
+				}
 			}
 		}
 		hidden_effect = {
@@ -845,14 +1183,7 @@ sp_i32.14 = {
 				sp_i32_clear_education_flags = yes
 				set_variable = sp_i32_education_focus_expand
 				set_variable = sp_i32_education_partner_fra
-				set_variable = {
-					name = sp_i32_education_duration_months
-					value = 96
-				}
-				set_variable = {
-					name = sp_i32_education_months_left
-					value = 96
-				}
+				sp_i32_apply_education_duration = yes
 				sp_i32_start_education_shared = yes
 			}
 		}
@@ -862,7 +1193,16 @@ sp_i32.14 = {
 	option = {
 		name = sp_i32.14.limit_fra
 		trigger = {
-			gold_reserves >= sp_i32_education_upfront_standard
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_education_upfront_standard_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_education_upfront_standard
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_fra_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
@@ -871,13 +1211,29 @@ sp_i32.14 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_education_limit_fra_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_education_pay_standard
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_fra
+			}
+			add_treasury = {
+				value = sp_i32_education_pay_standard_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_edu_limit_act_pri
+					years = 7
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_edu_limit_act
-				years = 8
+		else = {
+			add_treasury = {
+				value = sp_i32_education_pay_standard
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_edu_limit_act
+					years = 8
+				}
 			}
 		}
 		hidden_effect = {
@@ -888,14 +1244,7 @@ sp_i32.14 = {
 				sp_i32_clear_education_flags = yes
 				set_variable = sp_i32_education_focus_limit
 				set_variable = sp_i32_education_partner_fra
-				set_variable = {
-					name = sp_i32_education_duration_months
-					value = 96
-				}
-				set_variable = {
-					name = sp_i32_education_months_left
-					value = 96
-				}
+				sp_i32_apply_education_duration = yes
 				sp_i32_start_education_shared = yes
 			}
 		}
@@ -905,7 +1254,16 @@ sp_i32.14 = {
 	option = {
 		name = sp_i32.14.limit_german
 		trigger = {
-			gold_reserves >= sp_i32_education_upfront_standard
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_german
+					gold_reserves >= sp_i32_education_upfront_standard_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_german }
+					gold_reserves >= sp_i32_education_upfront_standard
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_german_neutral_tt
 				sp_i32_education_german_host_ok = yes
@@ -914,13 +1272,29 @@ sp_i32.14 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_education_limit_german_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_education_pay_standard
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_german
+			}
+			add_treasury = {
+				value = sp_i32_education_pay_standard_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_edu_limit_act_pri
+					years = 7
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_edu_limit_act
-				years = 8
+		else = {
+			add_treasury = {
+				value = sp_i32_education_pay_standard
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_edu_limit_act
+					years = 8
+				}
 			}
 		}
 		hidden_effect = {
@@ -931,14 +1305,7 @@ sp_i32.14 = {
 				sp_i32_clear_education_flags = yes
 				set_variable = sp_i32_education_focus_limit
 				set_variable = sp_i32_education_partner_german
-				set_variable = {
-					name = sp_i32_education_duration_months
-					value = 96
-				}
-				set_variable = {
-					name = sp_i32_education_months_left
-					value = 96
-				}
+				sp_i32_apply_education_duration = yes
 				sp_i32_start_education_shared = yes
 			}
 		}
@@ -948,7 +1315,16 @@ sp_i32.14 = {
 	option = {
 		name = sp_i32.14.integrate_aus
 		trigger = {
-			gold_reserves >= sp_i32_education_upfront_integrate
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_aus
+					gold_reserves >= sp_i32_education_upfront_integrate_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_aus }
+					gold_reserves >= sp_i32_education_upfront_integrate
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_aus_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:AUS }
@@ -957,13 +1333,29 @@ sp_i32.14 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_education_integrate_aus_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_education_pay_integrate
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_aus
+			}
+			add_treasury = {
+				value = sp_i32_education_pay_integrate_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_edu_integrate_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_edu_integrate_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_education_pay_integrate
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_edu_integrate_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -974,14 +1366,7 @@ sp_i32.14 = {
 				sp_i32_clear_education_flags = yes
 				set_variable = sp_i32_education_focus_integrate
 				set_variable = sp_i32_education_partner_aus
-				set_variable = {
-					name = sp_i32_education_duration_months
-					value = 72
-				}
-				set_variable = {
-					name = sp_i32_education_months_left
-					value = 72
-				}
+				sp_i32_apply_education_duration = yes
 				sp_i32_start_education_shared = yes
 			}
 		}
@@ -991,7 +1376,16 @@ sp_i32.14 = {
 	option = {
 		name = sp_i32.14.integrate_fra
 		trigger = {
-			gold_reserves >= sp_i32_education_upfront_integrate
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_education_upfront_integrate_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_education_upfront_integrate
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_fra_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
@@ -1000,13 +1394,29 @@ sp_i32.14 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_education_integrate_fra_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_education_pay_integrate
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_fra
+			}
+			add_treasury = {
+				value = sp_i32_education_pay_integrate_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_edu_integrate_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_edu_integrate_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_education_pay_integrate
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_edu_integrate_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -1017,14 +1427,7 @@ sp_i32.14 = {
 				sp_i32_clear_education_flags = yes
 				set_variable = sp_i32_education_focus_integrate
 				set_variable = sp_i32_education_partner_fra
-				set_variable = {
-					name = sp_i32_education_duration_months
-					value = 72
-				}
-				set_variable = {
-					name = sp_i32_education_months_left
-					value = 72
-				}
+				sp_i32_apply_education_duration = yes
 				sp_i32_start_education_shared = yes
 			}
 		}
@@ -1508,7 +1911,16 @@ sp_i32.12 = {
 	option = {
 		name = sp_i32.12.ger
 		trigger = {
-			gold_reserves >= sp_i32_military_upfront_standard
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_german
+					gold_reserves >= sp_i32_military_upfront_standard_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_german }
+					gold_reserves >= sp_i32_military_upfront_standard
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_german_neutral_tt
 				sp_i32_military_german_host_ok = yes
@@ -1517,13 +1929,29 @@ sp_i32.12 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_military_german_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_military_pay_standard
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_german
+			}
+			add_treasury = {
+				value = sp_i32_military_pay_standard_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_mil_pru_act_pri
+					years = 7
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_mil_pru_act
-				years = 8
+		else = {
+			add_treasury = {
+				value = sp_i32_military_pay_standard
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_mil_pru_act
+					years = 8
+				}
 			}
 		}
 		hidden_effect = {
@@ -1534,14 +1962,7 @@ sp_i32.12 = {
 				}
 				sp_i32_clear_military_flags = yes
 				set_variable = sp_i32_military_partner_german
-				set_variable = {
-					name = sp_i32_military_duration_months
-					value = 96
-				}
-				set_variable = {
-					name = sp_i32_military_months_left
-					value = 96
-				}
+				sp_i32_apply_military_duration = yes
 				sp_i32_start_military_shared = yes
 			}
 		}
@@ -1551,7 +1972,16 @@ sp_i32.12 = {
 	option = {
 		name = sp_i32.12.fra
 		trigger = {
-			gold_reserves >= sp_i32_military_upfront_standard
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_military_upfront_standard_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_military_upfront_standard
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_military_egypt_gate_tt
 				NOT = { sp_i32_egypt_crisis_window = yes }
@@ -1564,13 +1994,29 @@ sp_i32.12 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_military_fra_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_military_pay_standard
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_fra
+			}
+			add_treasury = {
+				value = sp_i32_military_pay_standard_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_mil_fra_act_pri
+					years = 7
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_mil_fra_act
-				years = 8
+		else = {
+			add_treasury = {
+				value = sp_i32_military_pay_standard
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_mil_fra_act
+					years = 8
+				}
 			}
 		}
 		hidden_effect = {
@@ -1581,14 +2027,7 @@ sp_i32.12 = {
 				}
 				sp_i32_clear_military_flags = yes
 				set_variable = sp_i32_military_partner_fra
-				set_variable = {
-					name = sp_i32_military_duration_months
-					value = 96
-				}
-				set_variable = {
-					name = sp_i32_military_months_left
-					value = 96
-				}
+				sp_i32_apply_military_duration = yes
 				sp_i32_start_military_shared = yes
 			}
 		}
@@ -1598,7 +2037,16 @@ sp_i32.12 = {
 	option = {
 		name = sp_i32.12.gbr
 		trigger = {
-			gold_reserves >= sp_i32_military_upfront_standard
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_gbr
+					gold_reserves >= sp_i32_military_upfront_standard_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_gbr }
+					gold_reserves >= sp_i32_military_upfront_standard
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_military_gbr_primary_tt
 				has_variable = sp_i32_primary_partner_gbr
@@ -1615,13 +2063,29 @@ sp_i32.12 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_military_gbr_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_military_pay_standard
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_gbr
+			}
+			add_treasury = {
+				value = sp_i32_military_pay_standard_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_mil_gbr_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_mil_gbr_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_military_pay_standard
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_mil_gbr_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -1632,14 +2096,7 @@ sp_i32.12 = {
 				}
 				sp_i32_clear_military_flags = yes
 				set_variable = sp_i32_military_partner_gbr
-				set_variable = {
-					name = sp_i32_military_duration_months
-					value = 72
-				}
-				set_variable = {
-					name = sp_i32_military_months_left
-					value = 72
-				}
+				sp_i32_apply_military_duration = yes
 				sp_i32_start_military_shared = yes
 			}
 		}
@@ -1649,7 +2106,16 @@ sp_i32.12 = {
 	option = {
 		name = sp_i32.12.aus
 		trigger = {
-			gold_reserves >= sp_i32_military_upfront_austria
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_aus
+					gold_reserves >= sp_i32_military_upfront_austria_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_aus }
+					gold_reserves >= sp_i32_military_upfront_austria
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_aus_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:AUS }
@@ -1658,13 +2124,29 @@ sp_i32.12 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_military_aus_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_military_pay_austria
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_aus
+			}
+			add_treasury = {
+				value = sp_i32_military_pay_austria_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_mil_aus_act_pri
+					years = 5
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_mil_aus_act
-				years = 6
+		else = {
+			add_treasury = {
+				value = sp_i32_military_pay_austria
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_mil_aus_act
+					years = 6
+				}
 			}
 		}
 		hidden_effect = {
@@ -1675,14 +2157,7 @@ sp_i32.12 = {
 				}
 				sp_i32_clear_military_flags = yes
 				set_variable = sp_i32_military_partner_aus
-				set_variable = {
-					name = sp_i32_military_duration_months
-					value = 72
-				}
-				set_variable = {
-					name = sp_i32_military_months_left
-					value = 72
-				}
+				sp_i32_apply_military_duration = yes
 				sp_i32_start_military_shared = yes
 			}
 		}
@@ -1926,7 +2401,16 @@ sp_i32.15 = {
 	option = {
 		name = sp_i32.15.gbr
 		trigger = {
-			gold_reserves >= sp_i32_industrial_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_gbr
+					gold_reserves >= sp_i32_industrial_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_gbr }
+					gold_reserves >= sp_i32_industrial_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_gbr_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
@@ -1935,13 +2419,29 @@ sp_i32.15 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_industrial_gbr_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_industrial_pay
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_gbr
+			}
+			add_treasury = {
+				value = sp_i32_industrial_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act_pri
+					years = 7
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_ind_act
-				years = 8
+		else = {
+			add_treasury = {
+				value = sp_i32_industrial_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act
+					years = 8
+				}
 			}
 		}
 		hidden_effect = {
@@ -1960,7 +2460,16 @@ sp_i32.15 = {
 	option = {
 		name = sp_i32.15.fra
 		trigger = {
-			gold_reserves >= sp_i32_industrial_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_industrial_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_industrial_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_fra_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
@@ -1969,13 +2478,29 @@ sp_i32.15 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_industrial_fra_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_industrial_pay
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_fra
+			}
+			add_treasury = {
+				value = sp_i32_industrial_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act_pri
+					years = 7
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_ind_act
-				years = 8
+		else = {
+			add_treasury = {
+				value = sp_i32_industrial_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act
+					years = 8
+				}
 			}
 		}
 		hidden_effect = {
@@ -1994,7 +2519,16 @@ sp_i32.15 = {
 	option = {
 		name = sp_i32.15.german
 		trigger = {
-			gold_reserves >= sp_i32_industrial_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_german
+					gold_reserves >= sp_i32_industrial_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_german }
+					gold_reserves >= sp_i32_industrial_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_german_neutral_tt
 				sp_i32_industrial_german_host_ok = yes
@@ -2003,13 +2537,29 @@ sp_i32.15 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_industrial_german_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_industrial_pay
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_german
+			}
+			add_treasury = {
+				value = sp_i32_industrial_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act_pri
+					years = 7
+				}
+			}
 		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = sp_i32_ind_act
-				years = 8
+		else = {
+			add_treasury = {
+				value = sp_i32_industrial_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act
+					years = 8
+				}
 			}
 		}
 		hidden_effect = {
@@ -2223,7 +2773,16 @@ sp_i32.16 = {
 	option = {
 		name = sp_i32.16.gbr
 		trigger = {
-			gold_reserves >= sp_i32_naval_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_gbr
+					gold_reserves >= sp_i32_naval_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_gbr }
+					gold_reserves >= sp_i32_naval_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_naval_gbr_cordial_tt
 				sp_i32_naval_gbr_ok = yes
@@ -2232,25 +2791,54 @@ sp_i32.16 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_naval_gbr_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_naval_pay
-		}
 		if = {
 			limit = {
-				sp_i32_naval_mil_spread_free = yes
+				has_variable = sp_i32_primary_partner_gbr
 			}
-			je:sp_je_learning_from_europe = {
-				add_modifier = {
-					name = sp_i32_nav_act_spread
-					years = 8
+			add_treasury = {
+				value = sp_i32_naval_pay_pri
+			}
+			if = {
+				limit = {
+					sp_i32_naval_mil_spread_free = yes
+				}
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_spread_pri
+						years = 7
+					}
+				}
+			}
+			else = {
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_qual_pri
+						years = 7
+					}
 				}
 			}
 		}
 		else = {
-			je:sp_je_learning_from_europe = {
-				add_modifier = {
-					name = sp_i32_nav_act_qual
-					years = 8
+			add_treasury = {
+				value = sp_i32_naval_pay
+			}
+			if = {
+				limit = {
+					sp_i32_naval_mil_spread_free = yes
+				}
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_spread
+						years = 8
+					}
+				}
+			}
+			else = {
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_qual
+						years = 8
+					}
 				}
 			}
 		}
@@ -2276,7 +2864,16 @@ sp_i32.16 = {
 	option = {
 		name = sp_i32.16.fra
 		trigger = {
-			gold_reserves >= sp_i32_naval_upfront
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_naval_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_naval_upfront
+				}
+			}
 			custom_tooltip = {
 				text = sp_i32_partner_fra_neutral_tt
 				sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
@@ -2285,25 +2882,54 @@ sp_i32.16 = {
 		show_as_unavailable = {
 			NOT = { sp_i32_naval_fra_eligible = yes }
 		}
-		add_treasury = {
-			value = sp_i32_naval_pay
-		}
 		if = {
 			limit = {
-				sp_i32_naval_mil_spread_free = yes
+				has_variable = sp_i32_primary_partner_fra
 			}
-			je:sp_je_learning_from_europe = {
-				add_modifier = {
-					name = sp_i32_nav_act_spread
-					years = 8
+			add_treasury = {
+				value = sp_i32_naval_pay_pri
+			}
+			if = {
+				limit = {
+					sp_i32_naval_mil_spread_free = yes
+				}
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_spread_pri
+						years = 7
+					}
+				}
+			}
+			else = {
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_qual_pri
+						years = 7
+					}
 				}
 			}
 		}
 		else = {
-			je:sp_je_learning_from_europe = {
-				add_modifier = {
-					name = sp_i32_nav_act_qual
-					years = 8
+			add_treasury = {
+				value = sp_i32_naval_pay
+			}
+			if = {
+				limit = {
+					sp_i32_naval_mil_spread_free = yes
+				}
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_spread
+						years = 8
+					}
+				}
+			}
+			else = {
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_qual
+						years = 8
+					}
 				}
 			}
 		}
@@ -2498,3 +3124,460 @@ sp_i32.55 = {
 		}
 	}
 }
+
+# === Wave E — Primary European Partner ===
+sp_i32.20 = {
+	type = country_event
+	placement = root
+	title = sp_i32.20.t
+	desc = sp_i32.20.d
+	flavor = sp_i32.20.f
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 14
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = sp_je_learning_from_europe
+	}
+
+	immediate = {
+		c:FRA ?= { save_scope_as = sp_i32_fra }
+		c:GBR ?= { save_scope_as = sp_i32_gbr }
+		c:AUS ?= { save_scope_as = sp_i32_aus }
+		if = {
+			limit = { exists = c:GER }
+			c:GER = { save_scope_as = sp_i32_german }
+		}
+		else_if = {
+			limit = { exists = c:PRU }
+			c:PRU = { save_scope_as = sp_i32_german }
+		}
+	}
+
+	option = {
+		name = sp_i32.20.fra
+		trigger = {
+			exists = c:FRA
+			custom_tooltip = {
+				text = sp_i32_primary_change_cd_tt
+				sp_i32_primary_can_change = yes
+			}
+			NOT = { has_variable = sp_i32_primary_partner_fra }
+		}
+		show_as_unavailable = {
+			OR = {
+				NOT = { exists = c:FRA }
+				NOT = { sp_i32_primary_can_change = yes }
+				has_variable = sp_i32_primary_partner_fra
+			}
+		}
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_gbr
+				exists = c:GBR
+			}
+			change_relations = {
+				country = c:GBR
+				value = -10
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_ind
+				years = 1
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_german
+			}
+			if = {
+				limit = { exists = c:GER }
+				change_relations = {
+					country = c:GER
+					value = -10
+				}
+			}
+			else_if = {
+				limit = { exists = c:PRU }
+				change_relations = {
+					country = c:PRU
+					value = -10
+				}
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_af
+				years = 1
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_aus
+				exists = c:AUS
+			}
+			change_relations = {
+				country = c:AUS
+				value = -10
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					has_variable = sp_i32_primary_set_once
+				}
+				sp_i32_set_primary_change_cooldown = yes
+			}
+			else = {
+				set_variable = sp_i32_primary_set_once
+			}
+			sp_i32_clear_primary_flags = yes
+			set_variable = sp_i32_primary_partner_fra
+		}
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = sp_i32.20.gbr
+		trigger = {
+			exists = c:GBR
+			custom_tooltip = {
+				text = sp_i32_primary_change_cd_tt
+				sp_i32_primary_can_change = yes
+			}
+			NOT = { has_variable = sp_i32_primary_partner_gbr }
+		}
+		show_as_unavailable = {
+			OR = {
+				NOT = { exists = c:GBR }
+				NOT = { sp_i32_primary_can_change = yes }
+				has_variable = sp_i32_primary_partner_gbr
+			}
+		}
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_fra
+				exists = c:FRA
+			}
+			change_relations = {
+				country = c:FRA
+				value = -10
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_int
+				years = 1
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_german
+			}
+			if = {
+				limit = { exists = c:GER }
+				change_relations = {
+					country = c:GER
+					value = -10
+				}
+			}
+			else_if = {
+				limit = { exists = c:PRU }
+				change_relations = {
+					country = c:PRU
+					value = -10
+				}
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_af
+				years = 1
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_aus
+				exists = c:AUS
+			}
+			change_relations = {
+				country = c:AUS
+				value = -10
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					has_variable = sp_i32_primary_set_once
+				}
+				sp_i32_set_primary_change_cooldown = yes
+			}
+			else = {
+				set_variable = sp_i32_primary_set_once
+			}
+			sp_i32_clear_primary_flags = yes
+			set_variable = sp_i32_primary_partner_gbr
+		}
+		ai_chance = { base = 35 }
+	}
+
+	option = {
+		name = sp_i32.20.german
+		trigger = {
+			OR = {
+				exists = c:GER
+				exists = c:PRU
+			}
+			custom_tooltip = {
+				text = sp_i32_primary_change_cd_tt
+				sp_i32_primary_can_change = yes
+			}
+			NOT = { has_variable = sp_i32_primary_partner_german }
+		}
+		show_as_unavailable = {
+			OR = {
+				NOR = {
+					exists = c:GER
+					exists = c:PRU
+				}
+				NOT = { sp_i32_primary_can_change = yes }
+				has_variable = sp_i32_primary_partner_german
+			}
+		}
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_fra
+				exists = c:FRA
+			}
+			change_relations = {
+				country = c:FRA
+				value = -10
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_int
+				years = 1
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_gbr
+				exists = c:GBR
+			}
+			change_relations = {
+				country = c:GBR
+				value = -10
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_ind
+				years = 1
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_aus
+				exists = c:AUS
+			}
+			change_relations = {
+				country = c:AUS
+				value = -10
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					has_variable = sp_i32_primary_set_once
+				}
+				sp_i32_set_primary_change_cooldown = yes
+			}
+			else = {
+				set_variable = sp_i32_primary_set_once
+			}
+			sp_i32_clear_primary_flags = yes
+			set_variable = sp_i32_primary_partner_german
+		}
+		ai_chance = { base = 25 }
+	}
+
+	option = {
+		name = sp_i32.20.aus
+		trigger = {
+			exists = c:AUS
+			custom_tooltip = {
+				text = sp_i32_primary_change_cd_tt
+				sp_i32_primary_can_change = yes
+			}
+			NOT = { has_variable = sp_i32_primary_partner_aus }
+		}
+		show_as_unavailable = {
+			OR = {
+				NOT = { exists = c:AUS }
+				NOT = { sp_i32_primary_can_change = yes }
+				has_variable = sp_i32_primary_partner_aus
+			}
+		}
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_fra
+				exists = c:FRA
+			}
+			change_relations = {
+				country = c:FRA
+				value = -10
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_int
+				years = 1
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_gbr
+				exists = c:GBR
+			}
+			change_relations = {
+				country = c:GBR
+				value = -10
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_ind
+				years = 1
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i32_primary_set_once
+				has_variable = sp_i32_primary_partner_german
+			}
+			if = {
+				limit = { exists = c:GER }
+				change_relations = {
+					country = c:GER
+					value = -10
+				}
+			}
+			else_if = {
+				limit = { exists = c:PRU }
+				change_relations = {
+					country = c:PRU
+					value = -10
+				}
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_af
+				years = 1
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					has_variable = sp_i32_primary_set_once
+				}
+				sp_i32_set_primary_change_cooldown = yes
+			}
+			else = {
+				set_variable = sp_i32_primary_set_once
+			}
+			sp_i32_clear_primary_flags = yes
+			set_variable = sp_i32_primary_partner_aus
+		}
+		ai_chance = { base = 10 }
+	}
+
+	option = {
+		name = sp_i32.20.clear
+		trigger = {
+			sp_i32_primary_is_set = yes
+			custom_tooltip = {
+				text = sp_i32_primary_change_cd_tt
+				sp_i32_primary_can_change = yes
+			}
+		}
+		show_as_unavailable = {
+			OR = {
+				NOT = { sp_i32_primary_is_set = yes }
+				NOT = { sp_i32_primary_can_change = yes }
+			}
+		}
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_fra
+				exists = c:FRA
+			}
+			change_relations = {
+				country = c:FRA
+				value = -10
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_int
+				years = 1
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_gbr
+				exists = c:GBR
+			}
+			change_relations = {
+				country = c:GBR
+				value = -10
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_ind
+				years = 1
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_german
+			}
+			if = {
+				limit = { exists = c:GER }
+				change_relations = {
+					country = c:GER
+					value = -10
+				}
+			}
+			else_if = {
+				limit = { exists = c:PRU }
+				change_relations = {
+					country = c:PRU
+					value = -10
+				}
+			}
+			add_modifier = {
+				name = sp_i32_dump_ig_af
+				years = 1
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_aus
+				exists = c:AUS
+			}
+			change_relations = {
+				country = c:AUS
+				value = -10
+			}
+		}
+		hidden_effect = {
+			sp_i32_set_primary_change_cooldown = yes
+			sp_i32_clear_primary_flags = yes
+		}
+		ai_chance = { base = 0 }
+	}
+
+	option = {
+		name = sp_i32.20.none
+		default_option = yes
+		ai_chance = { base = 0 }
+	}
+}
+

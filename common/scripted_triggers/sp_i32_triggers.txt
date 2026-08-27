@@ -152,17 +152,44 @@ sp_i32_partner_ok_neutral = {
 }
 
 sp_i32_students_fra_eligible = {
-	gold_reserves >= sp_i32_students_upfront_standard
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_fra
+			gold_reserves >= sp_i32_students_upfront_standard_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_fra }
+			gold_reserves >= sp_i32_students_upfront_standard
+		}
+	}
 	sp_i32_students_can_use_country = { PARTNER = c:FRA }
 }
 
 sp_i32_students_gbr_eligible = {
-	gold_reserves >= sp_i32_students_upfront_standard
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_gbr
+			gold_reserves >= sp_i32_students_upfront_standard_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_gbr }
+			gold_reserves >= sp_i32_students_upfront_standard
+		}
+	}
 	sp_i32_students_can_use_country = { PARTNER = c:GBR }
 }
 
 sp_i32_students_aus_eligible = {
-	gold_reserves >= sp_i32_students_upfront_austria
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_aus
+			gold_reserves >= sp_i32_students_upfront_austria_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_aus }
+			gold_reserves >= sp_i32_students_upfront_austria
+		}
+	}
 	sp_i32_students_can_use_country = { PARTNER = c:AUS }
 }
 
@@ -182,7 +209,16 @@ sp_i32_students_german_host_ok = {
 }
 
 sp_i32_students_german_eligible = {
-	gold_reserves >= sp_i32_students_upfront_standard
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_german
+			gold_reserves >= sp_i32_students_upfront_standard_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_german }
+			gold_reserves >= sp_i32_students_upfront_standard
+		}
+	}
 	sp_i32_students_german_host_ok = yes
 }
 
@@ -349,17 +385,17 @@ sp_i32_any_technical_destination_diplomatic = {
 }
 
 sp_i32_technical_fra_eligible = {
-	gold_reserves >= sp_i32_technical_upfront
+	gold_reserves >= sp_i32_technical_gold_required
 	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
 }
 
 sp_i32_technical_gbr_eligible = {
-	gold_reserves >= sp_i32_technical_upfront
+	gold_reserves >= sp_i32_technical_gold_required
 	sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
 }
 
 sp_i32_technical_german_eligible = {
-	gold_reserves >= sp_i32_technical_upfront
+	gold_reserves >= sp_i32_technical_gold_required
 	sp_i32_technical_german_host_ok = yes
 }
 
@@ -463,17 +499,44 @@ sp_i32_any_education_destination_diplomatic = {
 }
 
 sp_i32_education_expand_eligible = {
-	gold_reserves >= sp_i32_education_upfront_standard
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_fra
+			gold_reserves >= sp_i32_education_upfront_standard_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_fra }
+			gold_reserves >= sp_i32_education_upfront_standard
+		}
+	}
 	sp_i32_education_expand_diplomatic = yes
 }
 
 sp_i32_education_limit_fra_eligible = {
-	gold_reserves >= sp_i32_education_upfront_standard
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_fra
+			gold_reserves >= sp_i32_education_upfront_standard_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_fra }
+			gold_reserves >= sp_i32_education_upfront_standard
+		}
+	}
 	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
 }
 
 sp_i32_education_limit_german_eligible = {
-	gold_reserves >= sp_i32_education_upfront_standard
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_german
+			gold_reserves >= sp_i32_education_upfront_standard_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_german }
+			gold_reserves >= sp_i32_education_upfront_standard
+		}
+	}
 	sp_i32_education_german_host_ok = yes
 }
 
@@ -485,12 +548,30 @@ sp_i32_education_limit_eligible = {
 }
 
 sp_i32_education_integrate_fra_eligible = {
-	gold_reserves >= sp_i32_education_upfront_integrate
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_fra
+			gold_reserves >= sp_i32_education_upfront_integrate_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_fra }
+			gold_reserves >= sp_i32_education_upfront_integrate
+		}
+	}
 	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
 }
 
 sp_i32_education_integrate_aus_eligible = {
-	gold_reserves >= sp_i32_education_upfront_integrate
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_aus
+			gold_reserves >= sp_i32_education_upfront_integrate_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_aus }
+			gold_reserves >= sp_i32_education_upfront_integrate
+		}
+	}
 	sp_i32_partner_ok_neutral = { PARTNER = c:AUS }
 }
 
@@ -561,8 +642,8 @@ sp_i32_military_german_host_ok = {
 	}
 }
 
-# Wave E sets sp_i32_primary_partner_gbr. Until then GBR land stays unavailable.
-# Wave D sets sp_i32_naval_active; until then naval-empty is always true.
+# GBR land requires sp_i32_primary_partner_gbr (Wave E).
+# Naval-empty gate still applies while naval family is active.
 sp_i32_military_gbr_gates = {
 	has_variable = sp_i32_primary_partner_gbr
 	NOT = { has_variable = sp_i32_naval_active }
@@ -584,24 +665,60 @@ sp_i32_any_military_destination_diplomatic = {
 }
 
 sp_i32_military_fra_eligible = {
-	gold_reserves >= sp_i32_military_upfront_standard
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_fra
+			gold_reserves >= sp_i32_military_upfront_standard_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_fra }
+			gold_reserves >= sp_i32_military_upfront_standard
+		}
+	}
 	NOT = { sp_i32_egypt_crisis_window = yes }
 	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
 }
 
 sp_i32_military_gbr_eligible = {
-	gold_reserves >= sp_i32_military_upfront_standard
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_gbr
+			gold_reserves >= sp_i32_military_upfront_standard_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_gbr }
+			gold_reserves >= sp_i32_military_upfront_standard
+		}
+	}
 	sp_i32_military_gbr_gates = yes
 	sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
 }
 
 sp_i32_military_german_eligible = {
-	gold_reserves >= sp_i32_military_upfront_standard
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_german
+			gold_reserves >= sp_i32_military_upfront_standard_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_german }
+			gold_reserves >= sp_i32_military_upfront_standard
+		}
+	}
 	sp_i32_military_german_host_ok = yes
 }
 
 sp_i32_military_aus_eligible = {
-	gold_reserves >= sp_i32_military_upfront_austria
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_aus
+			gold_reserves >= sp_i32_military_upfront_austria_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_aus }
+			gold_reserves >= sp_i32_military_upfront_austria
+		}
+	}
 	sp_i32_partner_ok_neutral = { PARTNER = c:AUS }
 }
 
@@ -704,17 +821,44 @@ sp_i32_any_industrial_destination_diplomatic = {
 }
 
 sp_i32_industrial_fra_eligible = {
-	gold_reserves >= sp_i32_industrial_upfront
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_fra
+			gold_reserves >= sp_i32_industrial_upfront_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_fra }
+			gold_reserves >= sp_i32_industrial_upfront
+		}
+	}
 	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
 }
 
 sp_i32_industrial_gbr_eligible = {
-	gold_reserves >= sp_i32_industrial_upfront
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_gbr
+			gold_reserves >= sp_i32_industrial_upfront_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_gbr }
+			gold_reserves >= sp_i32_industrial_upfront
+		}
+	}
 	sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
 }
 
 sp_i32_industrial_german_eligible = {
-	gold_reserves >= sp_i32_industrial_upfront
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_german
+			gold_reserves >= sp_i32_industrial_upfront_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_german }
+			gold_reserves >= sp_i32_industrial_upfront
+		}
+	}
 	sp_i32_industrial_german_host_ok = yes
 }
 
@@ -813,12 +957,30 @@ sp_i32_any_naval_destination_diplomatic = {
 }
 
 sp_i32_naval_gbr_eligible = {
-	gold_reserves >= sp_i32_naval_upfront
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_gbr
+			gold_reserves >= sp_i32_naval_upfront_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_gbr }
+			gold_reserves >= sp_i32_naval_upfront
+		}
+	}
 	sp_i32_naval_gbr_ok = yes
 }
 
 sp_i32_naval_fra_eligible = {
-	gold_reserves >= sp_i32_naval_upfront
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_fra
+			gold_reserves >= sp_i32_naval_upfront_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_fra }
+			gold_reserves >= sp_i32_naval_upfront
+		}
+	}
 	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
 }
 
@@ -849,4 +1011,168 @@ sp_i32_can_start_naval = {
 	sp_i32_capacity_allows_new_programme = yes
 	sp_i32_naval_unlocked = yes
 	sp_i32_any_naval_destination_eligible = yes
+}
+
+# === Wave E — Primary European Partner ===
+
+sp_i32_primary_is_fra = {
+	has_variable = sp_i32_primary_partner_fra
+}
+
+sp_i32_primary_is_gbr = {
+	has_variable = sp_i32_primary_partner_gbr
+}
+
+sp_i32_primary_is_german = {
+	has_variable = sp_i32_primary_partner_german
+}
+
+sp_i32_primary_is_aus = {
+	has_variable = sp_i32_primary_partner_aus
+}
+
+sp_i32_primary_is_set = {
+	OR = {
+		has_variable = sp_i32_primary_partner_fra
+		has_variable = sp_i32_primary_partner_gbr
+		has_variable = sp_i32_primary_partner_german
+		has_variable = sp_i32_primary_partner_aus
+	}
+}
+
+sp_i32_primary_partner_country_exists = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_fra
+			exists = c:FRA
+		}
+		AND = {
+			has_variable = sp_i32_primary_partner_gbr
+			exists = c:GBR
+		}
+		AND = {
+			has_variable = sp_i32_primary_partner_aus
+			exists = c:AUS
+		}
+		AND = {
+			has_variable = sp_i32_primary_partner_german
+			OR = {
+				exists = c:GER
+				exists = c:PRU
+			}
+		}
+	}
+}
+
+sp_i32_primary_can_change = {
+	OR = {
+		NOT = { has_variable = sp_i32_primary_set_once }
+		NOT = { has_variable = sp_i32_primary_change_cd }
+	}
+}
+
+sp_i32_students_matches_primary = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_students_partner_fra
+			has_variable = sp_i32_primary_partner_fra
+		}
+		AND = {
+			has_variable = sp_i32_students_partner_gbr
+			has_variable = sp_i32_primary_partner_gbr
+		}
+		AND = {
+			has_variable = sp_i32_students_partner_german
+			has_variable = sp_i32_primary_partner_german
+		}
+		AND = {
+			has_variable = sp_i32_students_partner_aus
+			has_variable = sp_i32_primary_partner_aus
+		}
+	}
+}
+
+sp_i32_technical_matches_primary = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_technical_partner_fra
+			has_variable = sp_i32_primary_partner_fra
+		}
+		AND = {
+			has_variable = sp_i32_technical_partner_gbr
+			has_variable = sp_i32_primary_partner_gbr
+		}
+		AND = {
+			has_variable = sp_i32_technical_partner_german
+			has_variable = sp_i32_primary_partner_german
+		}
+	}
+}
+
+sp_i32_education_matches_primary = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_education_partner_fra
+			has_variable = sp_i32_primary_partner_fra
+		}
+		AND = {
+			has_variable = sp_i32_education_partner_german
+			has_variable = sp_i32_primary_partner_german
+		}
+		AND = {
+			has_variable = sp_i32_education_partner_aus
+			has_variable = sp_i32_primary_partner_aus
+		}
+	}
+}
+
+sp_i32_military_matches_primary = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_military_partner_fra
+			has_variable = sp_i32_primary_partner_fra
+		}
+		AND = {
+			has_variable = sp_i32_military_partner_gbr
+			has_variable = sp_i32_primary_partner_gbr
+		}
+		AND = {
+			has_variable = sp_i32_military_partner_german
+			has_variable = sp_i32_primary_partner_german
+		}
+		AND = {
+			has_variable = sp_i32_military_partner_aus
+			has_variable = sp_i32_primary_partner_aus
+		}
+	}
+}
+
+sp_i32_industrial_matches_primary = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_industrial_partner_fra
+			has_variable = sp_i32_primary_partner_fra
+		}
+		AND = {
+			has_variable = sp_i32_industrial_partner_gbr
+			has_variable = sp_i32_primary_partner_gbr
+		}
+		AND = {
+			has_variable = sp_i32_industrial_partner_german
+			has_variable = sp_i32_primary_partner_german
+		}
+	}
+}
+
+sp_i32_naval_matches_primary = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_naval_partner_fra
+			has_variable = sp_i32_primary_partner_fra
+		}
+		AND = {
+			has_variable = sp_i32_naval_partner_gbr
+			has_variable = sp_i32_primary_partner_gbr
+		}
+	}
 }

@@ -1,4 +1,4 @@
-﻿# I-32 Wave A+B+C+D effects. Students / Technical / Education / Military / Industrial / Naval.
+﻿# I-32 Wave A–E effects. Students / Technical / Education / Military / Industrial / Naval / Primary.
 
 sp_i32_init_capacity_cache = {
 	if = {
@@ -360,20 +360,40 @@ sp_i32_remove_students_active_modifiers = {
 				remove_modifier = sp_i32_students_fra_act
 			}
 			if = {
+				limit = { has_modifier = sp_i32_students_fra_act_pri }
+				remove_modifier = sp_i32_students_fra_act_pri
+			}
+			if = {
 				limit = { has_modifier = sp_i32_students_gbr_act }
 				remove_modifier = sp_i32_students_gbr_act
+			}
+			if = {
+				limit = { has_modifier = sp_i32_students_gbr_act_pri }
+				remove_modifier = sp_i32_students_gbr_act_pri
 			}
 			if = {
 				limit = { has_modifier = sp_i32_students_pru_act_spread }
 				remove_modifier = sp_i32_students_pru_act_spread
 			}
 			if = {
+				limit = { has_modifier = sp_i32_students_pru_act_spread_pri }
+				remove_modifier = sp_i32_students_pru_act_spread_pri
+			}
+			if = {
 				limit = { has_modifier = sp_i32_students_pru_act_qual_only }
 				remove_modifier = sp_i32_students_pru_act_qual_only
 			}
 			if = {
+				limit = { has_modifier = sp_i32_students_pru_act_qual_only_pri }
+				remove_modifier = sp_i32_students_pru_act_qual_only_pri
+			}
+			if = {
 				limit = { has_modifier = sp_i32_students_aus_act }
 				remove_modifier = sp_i32_students_aus_act
+			}
+			if = {
+				limit = { has_modifier = sp_i32_students_aus_act_pri }
+				remove_modifier = sp_i32_students_aus_act_pri
 			}
 		}
 	}
@@ -382,20 +402,40 @@ sp_i32_remove_students_active_modifiers = {
 		remove_modifier = sp_i32_students_fra_act
 	}
 	if = {
+		limit = { has_modifier = sp_i32_students_fra_act_pri }
+		remove_modifier = sp_i32_students_fra_act_pri
+	}
+	if = {
 		limit = { has_modifier = sp_i32_students_gbr_act }
 		remove_modifier = sp_i32_students_gbr_act
+	}
+	if = {
+		limit = { has_modifier = sp_i32_students_gbr_act_pri }
+		remove_modifier = sp_i32_students_gbr_act_pri
 	}
 	if = {
 		limit = { has_modifier = sp_i32_students_pru_act_spread }
 		remove_modifier = sp_i32_students_pru_act_spread
 	}
 	if = {
+		limit = { has_modifier = sp_i32_students_pru_act_spread_pri }
+		remove_modifier = sp_i32_students_pru_act_spread_pri
+	}
+	if = {
 		limit = { has_modifier = sp_i32_students_pru_act_qual_only }
 		remove_modifier = sp_i32_students_pru_act_qual_only
 	}
 	if = {
+		limit = { has_modifier = sp_i32_students_pru_act_qual_only_pri }
+		remove_modifier = sp_i32_students_pru_act_qual_only_pri
+	}
+	if = {
 		limit = { has_modifier = sp_i32_students_aus_act }
 		remove_modifier = sp_i32_students_aus_act
+	}
+	if = {
+		limit = { has_modifier = sp_i32_students_aus_act_pri }
+		remove_modifier = sp_i32_students_aus_act_pri
 	}
 }
 
@@ -441,13 +481,28 @@ sp_i32_save_students_partner_scope = {
 # inline add_modifier instead, so the native tooltip is not collapsed.
 sp_i32_start_students_shared = {
 	set_variable = sp_i32_students_active
-	set_variable = {
-		name = sp_i32_students_duration_months
-		value = 60
+	if = {
+		limit = {
+			sp_i32_students_matches_primary = yes
+		}
+		set_variable = {
+			name = sp_i32_students_duration_months
+			value = 48
+		}
+		set_variable = {
+			name = sp_i32_students_months_left
+			value = 48
+		}
 	}
-	set_variable = {
-		name = sp_i32_students_months_left
-		value = 60
+	else = {
+		set_variable = {
+			name = sp_i32_students_duration_months
+			value = 60
+		}
+		set_variable = {
+			name = sp_i32_students_months_left
+			value = 60
+		}
 	}
 	remove_variable = sp_i32_students_completing
 	remove_variable = sp_i32_students_midpoint_fired
@@ -553,6 +608,7 @@ sp_i32_cancel_students_cleanup = {
 sp_i32_try_students_midpoint_complication = {
 	if = {
 		limit = {
+			NOT = { has_variable = sp_i32_complication_lock }
 			has_variable = sp_i32_students_active
 			NOT = { has_variable = sp_i32_students_completing }
 			NOT = { has_variable = sp_i32_students_midpoint_fired }
@@ -571,6 +627,10 @@ sp_i32_try_students_midpoint_complication = {
 			random_list = {
 				65 = { }
 				35 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.50 popup = yes }
 				}
 			}
@@ -579,6 +639,10 @@ sp_i32_try_students_midpoint_complication = {
 			random_list = {
 				80 = { }
 				20 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.50 popup = yes }
 				}
 			}
@@ -602,7 +666,6 @@ sp_i32_tick_students = {
 			name = sp_i32_students_months_left
 			add = -1
 		}
-		sp_i32_try_students_midpoint_complication = yes
 		if = {
 			limit = {
 				var:sp_i32_students_months_left <= 0
@@ -635,11 +698,19 @@ sp_i32_remove_technical_active_modifiers = {
 				limit = { has_modifier = sp_i32_tech_act }
 				remove_modifier = sp_i32_tech_act
 			}
+			if = {
+				limit = { has_modifier = sp_i32_tech_act_pri }
+				remove_modifier = sp_i32_tech_act_pri
+			}
 		}
 	}
 	if = {
 		limit = { has_modifier = sp_i32_tech_act }
 		remove_modifier = sp_i32_tech_act
+	}
+	if = {
+		limit = { has_modifier = sp_i32_tech_act_pri }
+		remove_modifier = sp_i32_tech_act_pri
 	}
 }
 
@@ -677,13 +748,28 @@ sp_i32_save_technical_partner_scope = {
 # Bookkeeping only. Caller must guard with NOT busy, then set partner+spec flags, then call this.
 sp_i32_start_technical_shared = {
 	set_variable = sp_i32_technical_active
-	set_variable = {
-		name = sp_i32_technical_duration_months
-		value = 72
+	if = {
+		limit = {
+			sp_i32_technical_matches_primary = yes
+		}
+		set_variable = {
+			name = sp_i32_technical_duration_months
+			value = 60
+		}
+		set_variable = {
+			name = sp_i32_technical_months_left
+			value = 60
+		}
 	}
-	set_variable = {
-		name = sp_i32_technical_months_left
-		value = 72
+	else = {
+		set_variable = {
+			name = sp_i32_technical_duration_months
+			value = 72
+		}
+		set_variable = {
+			name = sp_i32_technical_months_left
+			value = 72
+		}
 	}
 	remove_variable = sp_i32_technical_completing
 	remove_variable = sp_i32_technical_midpoint_fired
@@ -739,6 +825,7 @@ sp_i32_cancel_technical_cleanup = {
 sp_i32_try_technical_midpoint_complication = {
 	if = {
 		limit = {
+			NOT = { has_variable = sp_i32_complication_lock }
 			has_variable = sp_i32_technical_active
 			NOT = { has_variable = sp_i32_technical_completing }
 			NOT = { has_variable = sp_i32_technical_midpoint_fired }
@@ -757,6 +844,10 @@ sp_i32_try_technical_midpoint_complication = {
 			random_list = {
 				65 = { }
 				35 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.51 popup = yes }
 				}
 			}
@@ -765,6 +856,10 @@ sp_i32_try_technical_midpoint_complication = {
 			random_list = {
 				80 = { }
 				20 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.51 popup = yes }
 				}
 			}
@@ -788,7 +883,6 @@ sp_i32_tick_technical = {
 			name = sp_i32_technical_months_left
 			add = -1
 		}
-		sp_i32_try_technical_midpoint_complication = yes
 		if = {
 			limit = {
 				var:sp_i32_technical_months_left <= 0
@@ -821,12 +915,24 @@ sp_i32_remove_education_active_modifiers = {
 				remove_modifier = sp_i32_edu_expand_act
 			}
 			if = {
+				limit = { has_modifier = sp_i32_edu_expand_act_pri }
+				remove_modifier = sp_i32_edu_expand_act_pri
+			}
+			if = {
 				limit = { has_modifier = sp_i32_edu_limit_act }
 				remove_modifier = sp_i32_edu_limit_act
 			}
 			if = {
+				limit = { has_modifier = sp_i32_edu_limit_act_pri }
+				remove_modifier = sp_i32_edu_limit_act_pri
+			}
+			if = {
 				limit = { has_modifier = sp_i32_edu_integrate_act }
 				remove_modifier = sp_i32_edu_integrate_act
+			}
+			if = {
+				limit = { has_modifier = sp_i32_edu_integrate_act_pri }
+				remove_modifier = sp_i32_edu_integrate_act_pri
 			}
 		}
 	}
@@ -835,12 +941,24 @@ sp_i32_remove_education_active_modifiers = {
 		remove_modifier = sp_i32_edu_expand_act
 	}
 	if = {
+		limit = { has_modifier = sp_i32_edu_expand_act_pri }
+		remove_modifier = sp_i32_edu_expand_act_pri
+	}
+	if = {
 		limit = { has_modifier = sp_i32_edu_limit_act }
 		remove_modifier = sp_i32_edu_limit_act
 	}
 	if = {
+		limit = { has_modifier = sp_i32_edu_limit_act_pri }
+		remove_modifier = sp_i32_edu_limit_act_pri
+	}
+	if = {
 		limit = { has_modifier = sp_i32_edu_integrate_act }
 		remove_modifier = sp_i32_edu_integrate_act
+	}
+	if = {
+		limit = { has_modifier = sp_i32_edu_integrate_act_pri }
+		remove_modifier = sp_i32_edu_integrate_act_pri
 	}
 }
 
@@ -930,6 +1048,7 @@ sp_i32_cancel_education_cleanup = {
 sp_i32_try_education_midpoint_complication = {
 	if = {
 		limit = {
+			NOT = { has_variable = sp_i32_complication_lock }
 			has_variable = sp_i32_education_active
 			NOT = { has_variable = sp_i32_education_completing }
 			NOT = { has_variable = sp_i32_education_midpoint_fired }
@@ -948,6 +1067,10 @@ sp_i32_try_education_midpoint_complication = {
 			random_list = {
 				65 = { }
 				35 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.52 popup = yes }
 				}
 			}
@@ -956,6 +1079,10 @@ sp_i32_try_education_midpoint_complication = {
 			random_list = {
 				80 = { }
 				20 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.52 popup = yes }
 				}
 			}
@@ -979,7 +1106,6 @@ sp_i32_tick_education = {
 			name = sp_i32_education_months_left
 			add = -1
 		}
-		sp_i32_try_education_midpoint_complication = yes
 		if = {
 			limit = {
 				var:sp_i32_education_months_left <= 0
@@ -1010,16 +1136,32 @@ sp_i32_remove_military_active_modifiers = {
 				remove_modifier = sp_i32_mil_pru_act
 			}
 			if = {
+				limit = { has_modifier = sp_i32_mil_pru_act_pri }
+				remove_modifier = sp_i32_mil_pru_act_pri
+			}
+			if = {
 				limit = { has_modifier = sp_i32_mil_fra_act }
 				remove_modifier = sp_i32_mil_fra_act
+			}
+			if = {
+				limit = { has_modifier = sp_i32_mil_fra_act_pri }
+				remove_modifier = sp_i32_mil_fra_act_pri
 			}
 			if = {
 				limit = { has_modifier = sp_i32_mil_gbr_act }
 				remove_modifier = sp_i32_mil_gbr_act
 			}
 			if = {
+				limit = { has_modifier = sp_i32_mil_gbr_act_pri }
+				remove_modifier = sp_i32_mil_gbr_act_pri
+			}
+			if = {
 				limit = { has_modifier = sp_i32_mil_aus_act }
 				remove_modifier = sp_i32_mil_aus_act
+			}
+			if = {
+				limit = { has_modifier = sp_i32_mil_aus_act_pri }
+				remove_modifier = sp_i32_mil_aus_act_pri
 			}
 		}
 	}
@@ -1028,16 +1170,32 @@ sp_i32_remove_military_active_modifiers = {
 		remove_modifier = sp_i32_mil_pru_act
 	}
 	if = {
+		limit = { has_modifier = sp_i32_mil_pru_act_pri }
+		remove_modifier = sp_i32_mil_pru_act_pri
+	}
+	if = {
 		limit = { has_modifier = sp_i32_mil_fra_act }
 		remove_modifier = sp_i32_mil_fra_act
+	}
+	if = {
+		limit = { has_modifier = sp_i32_mil_fra_act_pri }
+		remove_modifier = sp_i32_mil_fra_act_pri
 	}
 	if = {
 		limit = { has_modifier = sp_i32_mil_gbr_act }
 		remove_modifier = sp_i32_mil_gbr_act
 	}
 	if = {
+		limit = { has_modifier = sp_i32_mil_gbr_act_pri }
+		remove_modifier = sp_i32_mil_gbr_act_pri
+	}
+	if = {
 		limit = { has_modifier = sp_i32_mil_aus_act }
 		remove_modifier = sp_i32_mil_aus_act
+	}
+	if = {
+		limit = { has_modifier = sp_i32_mil_aus_act_pri }
+		remove_modifier = sp_i32_mil_aus_act_pri
 	}
 }
 
@@ -1135,6 +1293,7 @@ sp_i32_cancel_military_cleanup = {
 sp_i32_try_military_midpoint_complication = {
 	if = {
 		limit = {
+			NOT = { has_variable = sp_i32_complication_lock }
 			has_variable = sp_i32_military_active
 			NOT = { has_variable = sp_i32_military_completing }
 			NOT = { has_variable = sp_i32_military_midpoint_fired }
@@ -1153,6 +1312,10 @@ sp_i32_try_military_midpoint_complication = {
 			random_list = {
 				65 = { }
 				35 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.53 popup = yes }
 				}
 			}
@@ -1161,6 +1324,10 @@ sp_i32_try_military_midpoint_complication = {
 			random_list = {
 				80 = { }
 				20 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.53 popup = yes }
 				}
 			}
@@ -1184,7 +1351,6 @@ sp_i32_tick_military = {
 			name = sp_i32_military_months_left
 			add = -1
 		}
-		sp_i32_try_military_midpoint_complication = yes
 		if = {
 			limit = {
 				var:sp_i32_military_months_left <= 0
@@ -1213,11 +1379,19 @@ sp_i32_remove_industrial_active_modifiers = {
 				limit = { has_modifier = sp_i32_ind_act }
 				remove_modifier = sp_i32_ind_act
 			}
+			if = {
+				limit = { has_modifier = sp_i32_ind_act_pri }
+				remove_modifier = sp_i32_ind_act_pri
+			}
 		}
 	}
 	if = {
 		limit = { has_modifier = sp_i32_ind_act }
 		remove_modifier = sp_i32_ind_act
+	}
+	if = {
+		limit = { has_modifier = sp_i32_ind_act_pri }
+		remove_modifier = sp_i32_ind_act_pri
 	}
 }
 
@@ -1254,13 +1428,28 @@ sp_i32_save_industrial_partner_scope = {
 
 sp_i32_start_industrial_shared = {
 	set_variable = sp_i32_industrial_active
-	set_variable = {
-		name = sp_i32_industrial_duration_months
-		value = 96
+	if = {
+		limit = {
+			sp_i32_industrial_matches_primary = yes
+		}
+		set_variable = {
+			name = sp_i32_industrial_duration_months
+			value = 84
+		}
+		set_variable = {
+			name = sp_i32_industrial_months_left
+			value = 84
+		}
 	}
-	set_variable = {
-		name = sp_i32_industrial_months_left
-		value = 96
+	else = {
+		set_variable = {
+			name = sp_i32_industrial_duration_months
+			value = 96
+		}
+		set_variable = {
+			name = sp_i32_industrial_months_left
+			value = 96
+		}
 	}
 	remove_variable = sp_i32_industrial_completing
 	remove_variable = sp_i32_industrial_midpoint_fired
@@ -1314,6 +1503,7 @@ sp_i32_cancel_industrial_cleanup = {
 sp_i32_try_industrial_midpoint_complication = {
 	if = {
 		limit = {
+			NOT = { has_variable = sp_i32_complication_lock }
 			has_variable = sp_i32_industrial_active
 			NOT = { has_variable = sp_i32_industrial_completing }
 			NOT = { has_variable = sp_i32_industrial_midpoint_fired }
@@ -1332,6 +1522,10 @@ sp_i32_try_industrial_midpoint_complication = {
 			random_list = {
 				65 = { }
 				35 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.54 popup = yes }
 				}
 			}
@@ -1340,6 +1534,10 @@ sp_i32_try_industrial_midpoint_complication = {
 			random_list = {
 				80 = { }
 				20 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.54 popup = yes }
 				}
 			}
@@ -1363,7 +1561,6 @@ sp_i32_tick_industrial = {
 			name = sp_i32_industrial_months_left
 			add = -1
 		}
-		sp_i32_try_industrial_midpoint_complication = yes
 		if = {
 			limit = {
 				var:sp_i32_industrial_months_left <= 0
@@ -1393,8 +1590,16 @@ sp_i32_remove_naval_active_modifiers = {
 				remove_modifier = sp_i32_nav_act_spread
 			}
 			if = {
+				limit = { has_modifier = sp_i32_nav_act_spread_pri }
+				remove_modifier = sp_i32_nav_act_spread_pri
+			}
+			if = {
 				limit = { has_modifier = sp_i32_nav_act_qual }
 				remove_modifier = sp_i32_nav_act_qual
+			}
+			if = {
+				limit = { has_modifier = sp_i32_nav_act_qual_pri }
+				remove_modifier = sp_i32_nav_act_qual_pri
 			}
 		}
 	}
@@ -1403,8 +1608,16 @@ sp_i32_remove_naval_active_modifiers = {
 		remove_modifier = sp_i32_nav_act_spread
 	}
 	if = {
+		limit = { has_modifier = sp_i32_nav_act_spread_pri }
+		remove_modifier = sp_i32_nav_act_spread_pri
+	}
+	if = {
 		limit = { has_modifier = sp_i32_nav_act_qual }
 		remove_modifier = sp_i32_nav_act_qual
+	}
+	if = {
+		limit = { has_modifier = sp_i32_nav_act_qual_pri }
+		remove_modifier = sp_i32_nav_act_qual_pri
 	}
 }
 
@@ -1427,13 +1640,28 @@ sp_i32_save_naval_partner_scope = {
 
 sp_i32_start_naval_shared = {
 	set_variable = sp_i32_naval_active
-	set_variable = {
-		name = sp_i32_naval_duration_months
-		value = 96
+	if = {
+		limit = {
+			sp_i32_naval_matches_primary = yes
+		}
+		set_variable = {
+			name = sp_i32_naval_duration_months
+			value = 84
+		}
+		set_variable = {
+			name = sp_i32_naval_months_left
+			value = 84
+		}
 	}
-	set_variable = {
-		name = sp_i32_naval_months_left
-		value = 96
+	else = {
+		set_variable = {
+			name = sp_i32_naval_duration_months
+			value = 96
+		}
+		set_variable = {
+			name = sp_i32_naval_months_left
+			value = 96
+		}
 	}
 	remove_variable = sp_i32_naval_completing
 	remove_variable = sp_i32_naval_midpoint_fired
@@ -1487,6 +1715,7 @@ sp_i32_cancel_naval_cleanup = {
 sp_i32_try_naval_midpoint_complication = {
 	if = {
 		limit = {
+			NOT = { has_variable = sp_i32_complication_lock }
 			has_variable = sp_i32_naval_active
 			NOT = { has_variable = sp_i32_naval_completing }
 			NOT = { has_variable = sp_i32_naval_midpoint_fired }
@@ -1505,6 +1734,10 @@ sp_i32_try_naval_midpoint_complication = {
 			random_list = {
 				65 = { }
 				35 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.55 popup = yes }
 				}
 			}
@@ -1513,6 +1746,10 @@ sp_i32_try_naval_midpoint_complication = {
 			random_list = {
 				80 = { }
 				20 = {
+					set_variable = {
+						name = sp_i32_complication_lock
+						days = 30
+					}
 					trigger_event = { id = sp_i32.55 popup = yes }
 				}
 			}
@@ -1536,7 +1773,6 @@ sp_i32_tick_naval = {
 			name = sp_i32_naval_months_left
 			add = -1
 		}
-		sp_i32_try_naval_midpoint_complication = yes
 		if = {
 			limit = {
 				var:sp_i32_naval_months_left <= 0
@@ -1547,14 +1783,166 @@ sp_i32_tick_naval = {
 	}
 }
 
+
+sp_i32_apply_education_duration = {
+	if = {
+		limit = {
+			sp_i32_education_matches_primary = yes
+		}
+		if = {
+			limit = {
+				has_variable = sp_i32_education_focus_integrate
+			}
+			set_variable = {
+				name = sp_i32_education_duration_months
+				value = 60
+			}
+			set_variable = {
+				name = sp_i32_education_months_left
+				value = 60
+			}
+		}
+		else = {
+			set_variable = {
+				name = sp_i32_education_duration_months
+				value = 84
+			}
+			set_variable = {
+				name = sp_i32_education_months_left
+				value = 84
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = {
+				has_variable = sp_i32_education_focus_integrate
+			}
+			set_variable = {
+				name = sp_i32_education_duration_months
+				value = 72
+			}
+			set_variable = {
+				name = sp_i32_education_months_left
+				value = 72
+			}
+		}
+		else = {
+			set_variable = {
+				name = sp_i32_education_duration_months
+				value = 96
+			}
+			set_variable = {
+				name = sp_i32_education_months_left
+				value = 96
+			}
+		}
+	}
+}
+
+sp_i32_apply_military_duration = {
+	if = {
+		limit = {
+			OR = {
+				has_variable = sp_i32_military_partner_german
+				has_variable = sp_i32_military_partner_fra
+			}
+		}
+		if = {
+			limit = {
+				sp_i32_military_matches_primary = yes
+			}
+			set_variable = {
+				name = sp_i32_military_duration_months
+				value = 84
+			}
+			set_variable = {
+				name = sp_i32_military_months_left
+				value = 84
+			}
+		}
+		else = {
+			set_variable = {
+				name = sp_i32_military_duration_months
+				value = 96
+			}
+			set_variable = {
+				name = sp_i32_military_months_left
+				value = 96
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = {
+				sp_i32_military_matches_primary = yes
+			}
+			set_variable = {
+				name = sp_i32_military_duration_months
+				value = 60
+			}
+			set_variable = {
+				name = sp_i32_military_months_left
+				value = 60
+			}
+		}
+		else = {
+			set_variable = {
+				name = sp_i32_military_duration_months
+				value = 72
+			}
+			set_variable = {
+				name = sp_i32_military_months_left
+				value = 72
+			}
+		}
+	}
+}
+
+sp_i32_clear_primary_flags = {
+	remove_variable = sp_i32_primary_partner_fra
+	remove_variable = sp_i32_primary_partner_gbr
+	remove_variable = sp_i32_primary_partner_german
+	remove_variable = sp_i32_primary_partner_aus
+}
+
+sp_i32_tick_primary_partner = {
+	if = {
+		limit = {
+			sp_i32_primary_is_set = yes
+			NOT = { sp_i32_primary_partner_country_exists = yes }
+		}
+		sp_i32_clear_primary_flags = yes
+	}
+}
+
+sp_i32_set_primary_change_cooldown = {
+	set_variable = {
+		name = sp_i32_primary_change_cd
+		months = 18
+	}
+}
+
+sp_i32_try_all_midpoint_complications = {
+	# Fixed order. Shared 30-day lock prevents a second family mid-month.
+	sp_i32_try_students_midpoint_complication = yes
+	sp_i32_try_technical_midpoint_complication = yes
+	sp_i32_try_education_midpoint_complication = yes
+	sp_i32_try_military_midpoint_complication = yes
+	sp_i32_try_industrial_midpoint_complication = yes
+	sp_i32_try_naval_midpoint_complication = yes
+}
+
 sp_i32_monthly_pulse_effect = {
 	sp_i32_tick_capacity_cache = yes
+	sp_i32_tick_primary_partner = yes
 	sp_i32_tick_students = yes
 	sp_i32_tick_military = yes
 	sp_i32_tick_technical = yes
 	sp_i32_tick_education = yes
 	sp_i32_tick_industrial = yes
 	sp_i32_tick_naval = yes
+	sp_i32_try_all_midpoint_complications = yes
 	sp_i32_sync_cmf_presentation = yes
 }
 
