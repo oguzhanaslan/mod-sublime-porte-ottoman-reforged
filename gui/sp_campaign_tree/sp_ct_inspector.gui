@@ -1,10 +1,11 @@
 # I-30 Campaign Tree — inspector components (Phase D1 + D2A + D2B + D2C).
 # Canonical vertical geometry (ALL families):
 #   artwork (fixed 260) → status header (fixed 34) → ONE expanding scrollarea
-#   scrollwidget flow is content-driven (preferred): desc + flavor + sections + actions.
-# Vanilla pattern: journal_entry.gui journal_entry_panel blockoverride "scrollarea_content"
-#   (fixed window header + sequential content-driven children inside scroll).
-# Also: block_windows.gui default_block_window entire_scrollarea / scrollarea_content (L525–569).
+#   scrollwidget content is content-driven preferred height (preferscrollwidgetsize).
+# Vanilla scroll extent: outliner_framework.gui (preferscrollwidgetsize = yes)
+#   + building_browser_panel.gui expanding scrollarea → scrollwidget → vertical flowcontainer.
+# Also: journal_entry.gui / block_windows.gui scrollarea_content patterns.
+# stage_scroll_body must override a COMPLETE preferred flowcontainer (never empty block).
 # Reuses sp_ct_insp_req_row, sp_ct_insp_stat_row, sp_ct_insp_progress_card from 00_sp_ct_shared.gui.
 
 types sp_ct_inspector_types {
@@ -123,10 +124,14 @@ types sp_ct_inspector_types {
 		}
 	}
 
+	# Scroll viewport expands; content extent comes from scrollwidget preferred size.
+	# Vanilla: outliner_framework.gui outliner scrollarea (preferscrollwidgetsize = yes)
+	# + building_browser_panel.gui expanding scrollarea → scrollwidget → vertical flowcontainer.
 	type sp_ct_insp_scroll_panel = scrollarea {
 		layoutpolicy_vertical = expanding
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 480 120 }
+		preferscrollwidgetsize = yes
 		scrollbarpolicy_horizontal = always_off
 		scrollbarpolicy_vertical = as_needed
 
@@ -136,12 +141,12 @@ types sp_ct_inspector_types {
 
 		scrollwidget = {
 			block "scroll_content" {
+				# Content-driven total height only — never expanding / never viewport-sized.
 				flowcontainer = {
 					direction = vertical
 					spacing = 10
 					margin_bottom = 16
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
 					minimumsize = { 480 -1 }
 				}
 			}
@@ -183,7 +188,6 @@ types sp_ct_inspector_types {
 						spacing = 10
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
-						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
 
 						textbox = {
@@ -347,7 +351,6 @@ types sp_ct_inspector_types {
 						spacing = 10
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
-						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
 
 						textbox = {
@@ -503,7 +506,6 @@ types sp_ct_inspector_types {
 						spacing = 10
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
-						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
 
 						textbox = {
@@ -542,7 +544,16 @@ types sp_ct_inspector_types {
 								multiline = yes
 							}
 						}
-						block "stage_scroll_body" {}
+						# Must be a real preferred-height widget — empty block overrides do not
+						# contribute child heights to scroll content extent (Arabia/Iran clip).
+						block "stage_scroll_body" {
+							flowcontainer = {
+								direction = vertical
+								spacing = 10
+								layoutpolicy_vertical = preferred
+								minimumsize = { 480 -1 }
+							}
+						}
 					}
 				}
 			}
@@ -582,6 +593,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -609,6 +625,7 @@ types sp_ct_inspector_types {
 						multiline = yes
 						}
 					}
+				}
 				}
 			}
 		}
@@ -647,6 +664,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -674,6 +696,7 @@ types sp_ct_inspector_types {
 						multiline = yes
 						}
 					}
+				}
 				}
 			}
 		}
@@ -712,6 +735,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -739,6 +767,7 @@ types sp_ct_inspector_types {
 						multiline = yes
 						}
 					}
+				}
 				}
 			}
 		}
@@ -777,6 +806,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -828,6 +862,7 @@ types sp_ct_inspector_types {
 						}
 					}
 				}
+				}
 			}
 		}
 	}
@@ -865,6 +900,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_unlock" }
 					blockoverride "section_body" {
@@ -925,6 +965,7 @@ types sp_ct_inspector_types {
 						}
 					}
 				}
+				}
 			}
 		}
 	}
@@ -964,7 +1005,6 @@ types sp_ct_inspector_types {
 						spacing = 10
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
-						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
 
 						textbox = {
@@ -1120,7 +1160,6 @@ types sp_ct_inspector_types {
 						spacing = 10
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
-						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
 
 						textbox = {
@@ -1159,7 +1198,16 @@ types sp_ct_inspector_types {
 								multiline = yes
 							}
 						}
-						block "stage_scroll_body" {}
+						# Must be a real preferred-height widget — empty block overrides do not
+						# contribute child heights to scroll content extent (Arabia/Iran clip).
+						block "stage_scroll_body" {
+							flowcontainer = {
+								direction = vertical
+								spacing = 10
+								layoutpolicy_vertical = preferred
+								minimumsize = { 480 -1 }
+							}
+						}
 					}
 				}
 			}
@@ -1199,6 +1247,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -1226,6 +1279,7 @@ types sp_ct_inspector_types {
 						multiline = yes
 						}
 					}
+				}
 				}
 			}
 		}
@@ -1264,6 +1318,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -1291,6 +1350,7 @@ types sp_ct_inspector_types {
 						multiline = yes
 						}
 					}
+				}
 				}
 			}
 		}
@@ -1329,6 +1389,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -1356,6 +1421,7 @@ types sp_ct_inspector_types {
 						multiline = yes
 						}
 					}
+				}
 				}
 			}
 		}
@@ -1394,6 +1460,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -1468,6 +1539,7 @@ types sp_ct_inspector_types {
 						}
 					}
 				}
+				}
 			}
 		}
 	}
@@ -1505,6 +1577,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_unlock" }
 					blockoverride "section_body" {
@@ -1564,6 +1641,7 @@ types sp_ct_inspector_types {
 						multiline = yes
 						}
 					}
+				}
 				}
 			}
 		}
@@ -1805,7 +1883,6 @@ types sp_ct_inspector_types {
 						spacing = 10
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
-						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
 
 						textbox = {
@@ -2000,7 +2077,6 @@ types sp_ct_inspector_types {
 						spacing = 10
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
-						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
 
 						textbox = {
@@ -2172,7 +2248,6 @@ types sp_ct_inspector_types {
 						spacing = 10
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
-						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
 
 						textbox = {
@@ -2353,7 +2428,6 @@ types sp_ct_inspector_types {
 						spacing = 10
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
-						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
 
 						textbox = {
@@ -2509,7 +2583,6 @@ types sp_ct_inspector_types {
 						spacing = 10
 						margin_bottom = 16
 						layoutpolicy_vertical = preferred
-						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
 
 						textbox = {
@@ -2548,7 +2621,16 @@ types sp_ct_inspector_types {
 								multiline = yes
 							}
 						}
-						block "stage_scroll_body" {}
+						# Must be a real preferred-height widget — empty block overrides do not
+						# contribute child heights to scroll content extent (Arabia/Iran clip).
+						block "stage_scroll_body" {
+							flowcontainer = {
+								direction = vertical
+								spacing = 10
+								layoutpolicy_vertical = preferred
+								minimumsize = { 480 -1 }
+							}
+						}
 					}
 				}
 			}
@@ -2591,6 +2673,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s1_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
@@ -2668,6 +2755,7 @@ types sp_ct_inspector_types {
 						sp_ct_insp_je_turan_actions = {}
 					}
 				}
+				}
 			}
 		}
 	}
@@ -2708,6 +2796,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s2_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
@@ -2840,6 +2933,7 @@ types sp_ct_inspector_types {
 						sp_ct_insp_je_turan_actions = {}
 					}
 				}
+				}
 			}
 		}
 	}
@@ -2880,6 +2974,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s3_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
@@ -2957,6 +3056,7 @@ types sp_ct_inspector_types {
 						sp_ct_insp_je_turan_actions = {}
 					}
 				}
+				}
 			}
 		}
 	}
@@ -2997,6 +3097,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s4_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
@@ -3124,6 +3229,7 @@ types sp_ct_inspector_types {
 						sp_ct_insp_je_turan_actions = {}
 					}
 				}
+				}
 			}
 		}
 	}
@@ -3164,6 +3270,11 @@ types sp_ct_inspector_types {
 				}
 			}
 			blockoverride "stage_scroll_body" {
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+					layoutpolicy_vertical = preferred
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_unlock" }
 					blockoverride "section_body" {
@@ -3230,6 +3341,7 @@ types sp_ct_inspector_types {
 					blockoverride "section_body" {
 						sp_ct_insp_je_turan_actions = {}
 					}
+				}
 				}
 			}
 		}
