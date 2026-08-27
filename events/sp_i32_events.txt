@@ -1909,8 +1909,112 @@ sp_i32.12 = {
 	}
 
 	option = {
+		name = sp_i32.12.goltz
+		trigger = {
+			OR = {
+				AND = {
+					has_variable = sp_i32_primary_partner_german
+					gold_reserves >= sp_i32_goltz_upfront_pri
+				}
+				AND = {
+					NOT = { has_variable = sp_i32_primary_partner_german }
+					gold_reserves >= sp_i32_goltz_upfront
+				}
+			}
+			custom_tooltip = {
+				text = sp_i32_goltz_date_tt
+				game_date >= 1883.1.1
+			}
+			custom_tooltip = {
+				text = sp_i32_goltz_power_tt
+				OR = {
+					exists = c:GER
+					AND = {
+						exists = c:PRU
+						c:PRU = {
+							country_rank >= rank_value:great_power
+						}
+					}
+				}
+			}
+			custom_tooltip = {
+				text = sp_i32_goltz_once_tt
+				NOT = { has_variable = sp_i32_goltz_ever }
+			}
+			custom_tooltip = {
+				text = sp_i32_partner_german_neutral_tt
+				sp_i32_military_german_host_ok = yes
+			}
+		}
+		show_as_unavailable = {
+			NOT = { sp_i32_goltz_eligible = yes }
+		}
+		if = {
+			limit = {
+				has_variable = sp_i32_primary_partner_german
+			}
+			add_treasury = {
+				value = sp_i32_goltz_pay_pri
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_goltz_act_pri
+					years = 8
+				}
+			}
+		}
+		else = {
+			add_treasury = {
+				value = sp_i32_goltz_pay
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_goltz_act
+					years = 8
+				}
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { sp_i32_military_busy = yes }
+					NOT = { sp_i32_has_incoming_military_assistance = yes }
+					NOT = { has_variable = sp_i32_goltz_ever }
+				}
+				sp_i32_clear_military_flags = yes
+				set_variable = sp_i32_military_partner_german
+				set_variable = sp_i32_goltz_active
+				set_variable = {
+					name = sp_i32_military_duration_months
+					value = 96
+				}
+				set_variable = {
+					name = sp_i32_military_months_left
+					value = 96
+				}
+				if = {
+					limit = {
+						NOT = {
+							any_scope_character = {
+								has_template = sp_i32_colmar_von_der_goltz
+							}
+						}
+					}
+					create_character = {
+						template = sp_i32_colmar_von_der_goltz
+						save_scope_as = sp_i32_goltz
+					}
+				}
+				sp_i32_start_military_shared = yes
+			}
+		}
+		ai_chance = { base = 55 }
+	}
+
+	option = {
 		name = sp_i32.12.ger
 		trigger = {
+			NOT = { sp_i32_goltz_available = yes }
 			OR = {
 				AND = {
 					has_variable = sp_i32_primary_partner_german
@@ -2238,6 +2342,7 @@ sp_i32.43 = {
 	trigger = {
 		c:TUR ?= this
 		has_variable = sp_i32_military_completing
+		NOT = { has_variable = sp_i32_goltz_active }
 	}
 
 	immediate = {
@@ -2306,6 +2411,7 @@ sp_i32.53 = {
 	trigger = {
 		c:TUR ?= this
 		has_variable = sp_i32_military_active
+		NOT = { has_variable = sp_i32_goltz_active }
 	}
 
 	immediate = {
@@ -2364,6 +2470,89 @@ sp_i32.53 = {
 	}
 }
 
+# Goltz completion — AF attraction pulse + relations +15. Once-only via sp_i32_goltz_ever.
+sp_i32.46 = {
+	type = country_event
+	placement = root
+	title = sp_i32.46.t
+	desc = sp_i32.46.d
+	flavor = sp_i32.46.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 21
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_variable = sp_i32_military_completing
+		has_variable = sp_i32_goltz_active
+	}
+
+	immediate = {
+		sp_i32_save_military_partner_scope = yes
+	}
+
+	option = {
+		name = sp_i32.46.a
+		default_option = yes
+		custom_tooltip = sp_i32_goltz_once_tt
+		add_modifier = {
+			name = sp_i32_mil_complete_af
+			years = 2
+		}
+		if = {
+			limit = {
+				NOT = { has_variable = sp_i32_military_chill }
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = 15
+			}
+		}
+		hidden_effect = {
+			sp_i32_complete_military_common = yes
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+# Goltz midpoint — dispute only.
+sp_i32.56 = {
+	type = country_event
+	placement = root
+	title = sp_i32.56.t
+	desc = sp_i32.56.d
+	flavor = sp_i32.56.f
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	duration = 14
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_variable = sp_i32_military_active
+		has_variable = sp_i32_goltz_active
+	}
+
+	immediate = {
+		sp_i32_save_military_partner_scope = yes
+	}
+
+	option = {
+		name = sp_i32.56.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i32_mil_dispute
+			years = 1
+		}
+	}
+}
+
 
 # === Wave D — Industrial partner selection ===
 sp_i32.15 = {
@@ -2403,10 +2592,22 @@ sp_i32.15 = {
 		trigger = {
 			OR = {
 				AND = {
+					sp_i32_expertise_established = yes
+					has_variable = sp_i32_primary_partner_gbr
+					gold_reserves >= sp_i32_industrial_upfront_pri_est
+				}
+				AND = {
+					sp_i32_expertise_established = yes
+					NOT = { has_variable = sp_i32_primary_partner_gbr }
+					gold_reserves >= sp_i32_industrial_upfront_est
+				}
+				AND = {
+					NOT = { sp_i32_expertise_established = yes }
 					has_variable = sp_i32_primary_partner_gbr
 					gold_reserves >= sp_i32_industrial_upfront_pri
 				}
 				AND = {
+					NOT = { sp_i32_expertise_established = yes }
 					NOT = { has_variable = sp_i32_primary_partner_gbr }
 					gold_reserves >= sp_i32_industrial_upfront
 				}
@@ -2420,6 +2621,35 @@ sp_i32.15 = {
 			NOT = { sp_i32_industrial_gbr_eligible = yes }
 		}
 		if = {
+			limit = {
+				sp_i32_expertise_established = yes
+				has_variable = sp_i32_primary_partner_gbr
+			}
+			add_treasury = {
+				value = sp_i32_industrial_pay_pri_est
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act_pri
+					years = 7
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				sp_i32_expertise_established = yes
+			}
+			add_treasury = {
+				value = sp_i32_industrial_pay_est
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act
+					years = 8
+				}
+			}
+		}
+		else_if = {
 			limit = {
 				has_variable = sp_i32_primary_partner_gbr
 			}
@@ -2462,10 +2692,22 @@ sp_i32.15 = {
 		trigger = {
 			OR = {
 				AND = {
+					sp_i32_expertise_established = yes
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_industrial_upfront_pri_est
+				}
+				AND = {
+					sp_i32_expertise_established = yes
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_industrial_upfront_est
+				}
+				AND = {
+					NOT = { sp_i32_expertise_established = yes }
 					has_variable = sp_i32_primary_partner_fra
 					gold_reserves >= sp_i32_industrial_upfront_pri
 				}
 				AND = {
+					NOT = { sp_i32_expertise_established = yes }
 					NOT = { has_variable = sp_i32_primary_partner_fra }
 					gold_reserves >= sp_i32_industrial_upfront
 				}
@@ -2479,6 +2721,35 @@ sp_i32.15 = {
 			NOT = { sp_i32_industrial_fra_eligible = yes }
 		}
 		if = {
+			limit = {
+				sp_i32_expertise_established = yes
+				has_variable = sp_i32_primary_partner_fra
+			}
+			add_treasury = {
+				value = sp_i32_industrial_pay_pri_est
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act_pri
+					years = 7
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				sp_i32_expertise_established = yes
+			}
+			add_treasury = {
+				value = sp_i32_industrial_pay_est
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act
+					years = 8
+				}
+			}
+		}
+		else_if = {
 			limit = {
 				has_variable = sp_i32_primary_partner_fra
 			}
@@ -2521,10 +2792,22 @@ sp_i32.15 = {
 		trigger = {
 			OR = {
 				AND = {
+					sp_i32_expertise_established = yes
+					has_variable = sp_i32_primary_partner_german
+					gold_reserves >= sp_i32_industrial_upfront_pri_est
+				}
+				AND = {
+					sp_i32_expertise_established = yes
+					NOT = { has_variable = sp_i32_primary_partner_german }
+					gold_reserves >= sp_i32_industrial_upfront_est
+				}
+				AND = {
+					NOT = { sp_i32_expertise_established = yes }
 					has_variable = sp_i32_primary_partner_german
 					gold_reserves >= sp_i32_industrial_upfront_pri
 				}
 				AND = {
+					NOT = { sp_i32_expertise_established = yes }
 					NOT = { has_variable = sp_i32_primary_partner_german }
 					gold_reserves >= sp_i32_industrial_upfront
 				}
@@ -2538,6 +2821,35 @@ sp_i32.15 = {
 			NOT = { sp_i32_industrial_german_eligible = yes }
 		}
 		if = {
+			limit = {
+				sp_i32_expertise_established = yes
+				has_variable = sp_i32_primary_partner_german
+			}
+			add_treasury = {
+				value = sp_i32_industrial_pay_pri_est
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act_pri
+					years = 7
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				sp_i32_expertise_established = yes
+			}
+			add_treasury = {
+				value = sp_i32_industrial_pay_est
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_ind_act
+					years = 8
+				}
+			}
+		}
+		else_if = {
 			limit = {
 				has_variable = sp_i32_primary_partner_german
 			}
@@ -2775,10 +3087,22 @@ sp_i32.16 = {
 		trigger = {
 			OR = {
 				AND = {
+					sp_i32_expertise_established = yes
+					has_variable = sp_i32_primary_partner_gbr
+					gold_reserves >= sp_i32_naval_upfront_pri_est
+				}
+				AND = {
+					sp_i32_expertise_established = yes
+					NOT = { has_variable = sp_i32_primary_partner_gbr }
+					gold_reserves >= sp_i32_naval_upfront_est
+				}
+				AND = {
+					NOT = { sp_i32_expertise_established = yes }
 					has_variable = sp_i32_primary_partner_gbr
 					gold_reserves >= sp_i32_naval_upfront_pri
 				}
 				AND = {
+					NOT = { sp_i32_expertise_established = yes }
 					NOT = { has_variable = sp_i32_primary_partner_gbr }
 					gold_reserves >= sp_i32_naval_upfront
 				}
@@ -2792,6 +3116,61 @@ sp_i32.16 = {
 			NOT = { sp_i32_naval_gbr_eligible = yes }
 		}
 		if = {
+			limit = {
+				sp_i32_expertise_established = yes
+				has_variable = sp_i32_primary_partner_gbr
+			}
+			add_treasury = {
+				value = sp_i32_naval_pay_pri_est
+			}
+			if = {
+				limit = {
+					sp_i32_naval_mil_spread_free = yes
+				}
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_spread_pri
+						years = 7
+					}
+				}
+			}
+			else = {
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_qual_pri
+						years = 7
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				sp_i32_expertise_established = yes
+			}
+			add_treasury = {
+				value = sp_i32_naval_pay_est
+			}
+			if = {
+				limit = {
+					sp_i32_naval_mil_spread_free = yes
+				}
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_spread
+						years = 8
+					}
+				}
+			}
+			else = {
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_qual
+						years = 8
+					}
+				}
+			}
+		}
+		else_if = {
 			limit = {
 				has_variable = sp_i32_primary_partner_gbr
 			}
@@ -2866,10 +3245,22 @@ sp_i32.16 = {
 		trigger = {
 			OR = {
 				AND = {
+					sp_i32_expertise_established = yes
+					has_variable = sp_i32_primary_partner_fra
+					gold_reserves >= sp_i32_naval_upfront_pri_est
+				}
+				AND = {
+					sp_i32_expertise_established = yes
+					NOT = { has_variable = sp_i32_primary_partner_fra }
+					gold_reserves >= sp_i32_naval_upfront_est
+				}
+				AND = {
+					NOT = { sp_i32_expertise_established = yes }
 					has_variable = sp_i32_primary_partner_fra
 					gold_reserves >= sp_i32_naval_upfront_pri
 				}
 				AND = {
+					NOT = { sp_i32_expertise_established = yes }
 					NOT = { has_variable = sp_i32_primary_partner_fra }
 					gold_reserves >= sp_i32_naval_upfront
 				}
@@ -2883,6 +3274,61 @@ sp_i32.16 = {
 			NOT = { sp_i32_naval_fra_eligible = yes }
 		}
 		if = {
+			limit = {
+				sp_i32_expertise_established = yes
+				has_variable = sp_i32_primary_partner_fra
+			}
+			add_treasury = {
+				value = sp_i32_naval_pay_pri_est
+			}
+			if = {
+				limit = {
+					sp_i32_naval_mil_spread_free = yes
+				}
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_spread_pri
+						years = 7
+					}
+				}
+			}
+			else = {
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_qual_pri
+						years = 7
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				sp_i32_expertise_established = yes
+			}
+			add_treasury = {
+				value = sp_i32_naval_pay_est
+			}
+			if = {
+				limit = {
+					sp_i32_naval_mil_spread_free = yes
+				}
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_spread
+						years = 8
+					}
+				}
+			}
+			else = {
+				je:sp_je_learning_from_europe = {
+					add_modifier = {
+						name = sp_i32_nav_act_qual
+						years = 8
+					}
+				}
+			}
+		}
+		else_if = {
 			limit = {
 				has_variable = sp_i32_primary_partner_fra
 			}

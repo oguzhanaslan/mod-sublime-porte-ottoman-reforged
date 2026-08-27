@@ -156,6 +156,19 @@ sp_je_learning_from_europe = {
 			}
 			triggered_desc = {
 				trigger = {
+					has_variable = sp_i32_goltz_active
+					exists = c:GER
+				}
+				desc = sp_je_learning_from_europe_status_goltz_ger
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_goltz_active
+				}
+				desc = sp_je_learning_from_europe_status_goltz_pru
+			}
+			triggered_desc = {
+				trigger = {
 					has_variable = sp_i32_military_partner_german
 					exists = c:GER
 				}
@@ -332,6 +345,18 @@ sp_je_learning_from_europe = {
 					has_variable = sp_i32_primary_partner_aus
 				}
 				desc = sp_je_learning_from_europe_status_primary_aus
+			}
+			triggered_desc = {
+				trigger = {
+					sp_i32_expertise_established = yes
+				}
+				desc = sp_je_learning_from_europe_status_expertise_established
+			}
+			triggered_desc = {
+				trigger = {
+					sp_i32_expertise_developing = yes
+				}
+				desc = sp_je_learning_from_europe_status_expertise_developing
 			}
 			triggered_desc = {
 				trigger = {

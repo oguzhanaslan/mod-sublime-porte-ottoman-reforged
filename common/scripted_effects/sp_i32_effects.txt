@@ -221,7 +221,36 @@ sp_i32_sync_moltke_character = {
 		scope:journal_entry = {
 			clear_variable_list = com_journal_characters
 		}
+		# Goltz portrait while his I-32 land mission is active (mutually exclusive with MA/Moltke).
 		if = {
+			limit = {
+				has_variable = sp_i32_goltz_active
+			}
+			random_scope_character = {
+				limit = {
+					has_template = sp_i32_colmar_von_der_goltz
+				}
+				save_scope_as = sp_i32_goltz
+			}
+			if = {
+				limit = {
+					exists = scope:sp_i32_goltz
+				}
+				scope:sp_i32_goltz = {
+					set_variable = {
+						name = com_opinion
+						value = flag:sp_i32_opinion_goltz
+					}
+				}
+				scope:journal_entry = {
+					add_to_variable_list = {
+						name = com_journal_characters
+						target = scope:sp_i32_goltz
+					}
+				}
+			}
+		}
+		else_if = {
 			limit = {
 				sp_i32_has_incoming_military_assistance = yes
 				game_date < 1841.1.1
@@ -1163,6 +1192,14 @@ sp_i32_remove_military_active_modifiers = {
 				limit = { has_modifier = sp_i32_mil_aus_act_pri }
 				remove_modifier = sp_i32_mil_aus_act_pri
 			}
+			if = {
+				limit = { has_modifier = sp_i32_goltz_act }
+				remove_modifier = sp_i32_goltz_act
+			}
+			if = {
+				limit = { has_modifier = sp_i32_goltz_act_pri }
+				remove_modifier = sp_i32_goltz_act_pri
+			}
 		}
 	}
 	if = {
@@ -1196,6 +1233,14 @@ sp_i32_remove_military_active_modifiers = {
 	if = {
 		limit = { has_modifier = sp_i32_mil_aus_act_pri }
 		remove_modifier = sp_i32_mil_aus_act_pri
+	}
+	if = {
+		limit = { has_modifier = sp_i32_goltz_act }
+		remove_modifier = sp_i32_goltz_act
+	}
+	if = {
+		limit = { has_modifier = sp_i32_goltz_act_pri }
+		remove_modifier = sp_i32_goltz_act_pri
 	}
 }
 
@@ -1264,28 +1309,57 @@ sp_i32_cleanup_military = {
 		hide_com_progress_bar = { progress_bar = sp_i32_spb_military }
 	}
 	sp_i32_reset_military_bar = yes
+	# Retire Goltz when the mission ends so he is not a permanent free general.
+	if = {
+		limit = {
+			has_variable = sp_i32_goltz_active
+		}
+		every_scope_character = {
+			limit = {
+				has_template = sp_i32_colmar_von_der_goltz
+			}
+			kill_character = { hidden = yes }
+		}
+	}
 	remove_variable = sp_i32_military_active
 	remove_variable = sp_i32_military_completing
 	remove_variable = sp_i32_military_months_left
 	remove_variable = sp_i32_military_duration_months
 	remove_variable = sp_i32_military_midpoint_fired
+	remove_variable = sp_i32_goltz_active
 	sp_i32_clear_military_flags = yes
 	remove_variable = sp_i32_military_chill
 }
 
 sp_i32_complete_military_common = {
 	set_variable = sp_i32_military_ever_completed
-	set_variable = {
-		name = sp_i32_military_cooldown
-		years = 4
+	if = {
+		limit = {
+			has_variable = sp_i32_goltz_active
+		}
+		set_variable = sp_i32_goltz_ever
+	}
+	else = {
+		set_variable = {
+			name = sp_i32_military_cooldown
+			years = 4
+		}
 	}
 	sp_i32_cleanup_military = yes
 }
 
 sp_i32_cancel_military_cleanup = {
-	set_variable = {
-		name = sp_i32_military_cooldown
-		years = 1
+	if = {
+		limit = {
+			has_variable = sp_i32_goltz_active
+		}
+		set_variable = sp_i32_goltz_ever
+	}
+	else = {
+		set_variable = {
+			name = sp_i32_military_cooldown
+			years = 1
+		}
 	}
 	sp_i32_cleanup_military = yes
 }
@@ -1306,6 +1380,38 @@ sp_i32_try_military_midpoint_complication = {
 		}
 		set_variable = sp_i32_military_midpoint_fired
 		if = {
+			limit = {
+				has_variable = sp_i32_goltz_active
+			}
+			if = {
+				limit = {
+					legitimacy < 40
+				}
+				random_list = {
+					65 = { }
+					35 = {
+						set_variable = {
+							name = sp_i32_complication_lock
+							days = 30
+						}
+						trigger_event = { id = sp_i32.56 popup = yes }
+					}
+				}
+			}
+			else = {
+				random_list = {
+					80 = { }
+					20 = {
+						set_variable = {
+							name = sp_i32_complication_lock
+							days = 30
+						}
+						trigger_event = { id = sp_i32.56 popup = yes }
+					}
+				}
+			}
+		}
+		else_if = {
 			limit = {
 				legitimacy < 40
 			}
@@ -1356,7 +1462,15 @@ sp_i32_tick_military = {
 				var:sp_i32_military_months_left <= 0
 			}
 			set_variable = sp_i32_military_completing
-			trigger_event = { id = sp_i32.43 popup = yes }
+			if = {
+				limit = {
+					has_variable = sp_i32_goltz_active
+				}
+				trigger_event = { id = sp_i32.46 popup = yes }
+			}
+			else = {
+				trigger_event = { id = sp_i32.43 popup = yes }
+			}
 		}
 	}
 }

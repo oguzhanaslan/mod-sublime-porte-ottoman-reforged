@@ -473,3 +473,24 @@ sp_i32_dump_ig_af = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
 	interest_group_ig_armed_forces_approval_add = -1
 }
+
+# === Wave F — Colmar von der Goltz (German land mission) ===
+# Forbidden: offense/defense, training_rate, goods cost, research speed. Once only.
+
+sp_i32_goltz_act = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_military_tech_spread_mult = 0.10
+	state_pop_qualifications_mult = 0.10
+	country_expenses_add = 1800
+	country_bureaucracy_add = -35
+	interest_group_ig_armed_forces_pop_attraction_mult = 0.10
+}
+
+sp_i32_goltz_act_pri = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_military_tech_spread_mult = 0.10
+	state_pop_qualifications_mult = 0.10
+	country_expenses_add = 1530
+	country_bureaucracy_add = -35
+	interest_group_ig_armed_forces_pop_attraction_mult = 0.10
+}

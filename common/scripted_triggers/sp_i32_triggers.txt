@@ -695,6 +695,7 @@ sp_i32_military_gbr_eligible = {
 }
 
 sp_i32_military_german_eligible = {
+	NOT = { sp_i32_goltz_available = yes }
 	OR = {
 		AND = {
 			has_variable = sp_i32_primary_partner_german
@@ -728,6 +729,7 @@ sp_i32_any_military_destination_eligible = {
 		sp_i32_military_gbr_eligible = yes
 		sp_i32_military_german_eligible = yes
 		sp_i32_military_aus_eligible = yes
+		sp_i32_goltz_eligible = yes
 	}
 }
 
@@ -823,10 +825,22 @@ sp_i32_any_industrial_destination_diplomatic = {
 sp_i32_industrial_fra_eligible = {
 	OR = {
 		AND = {
+			sp_i32_expertise_established = yes
+			has_variable = sp_i32_primary_partner_fra
+			gold_reserves >= sp_i32_industrial_upfront_pri_est
+		}
+		AND = {
+			sp_i32_expertise_established = yes
+			NOT = { has_variable = sp_i32_primary_partner_fra }
+			gold_reserves >= sp_i32_industrial_upfront_est
+		}
+		AND = {
+			NOT = { sp_i32_expertise_established = yes }
 			has_variable = sp_i32_primary_partner_fra
 			gold_reserves >= sp_i32_industrial_upfront_pri
 		}
 		AND = {
+			NOT = { sp_i32_expertise_established = yes }
 			NOT = { has_variable = sp_i32_primary_partner_fra }
 			gold_reserves >= sp_i32_industrial_upfront
 		}
@@ -837,10 +851,22 @@ sp_i32_industrial_fra_eligible = {
 sp_i32_industrial_gbr_eligible = {
 	OR = {
 		AND = {
+			sp_i32_expertise_established = yes
+			has_variable = sp_i32_primary_partner_gbr
+			gold_reserves >= sp_i32_industrial_upfront_pri_est
+		}
+		AND = {
+			sp_i32_expertise_established = yes
+			NOT = { has_variable = sp_i32_primary_partner_gbr }
+			gold_reserves >= sp_i32_industrial_upfront_est
+		}
+		AND = {
+			NOT = { sp_i32_expertise_established = yes }
 			has_variable = sp_i32_primary_partner_gbr
 			gold_reserves >= sp_i32_industrial_upfront_pri
 		}
 		AND = {
+			NOT = { sp_i32_expertise_established = yes }
 			NOT = { has_variable = sp_i32_primary_partner_gbr }
 			gold_reserves >= sp_i32_industrial_upfront
 		}
@@ -851,10 +877,22 @@ sp_i32_industrial_gbr_eligible = {
 sp_i32_industrial_german_eligible = {
 	OR = {
 		AND = {
+			sp_i32_expertise_established = yes
+			has_variable = sp_i32_primary_partner_german
+			gold_reserves >= sp_i32_industrial_upfront_pri_est
+		}
+		AND = {
+			sp_i32_expertise_established = yes
+			NOT = { has_variable = sp_i32_primary_partner_german }
+			gold_reserves >= sp_i32_industrial_upfront_est
+		}
+		AND = {
+			NOT = { sp_i32_expertise_established = yes }
 			has_variable = sp_i32_primary_partner_german
 			gold_reserves >= sp_i32_industrial_upfront_pri
 		}
 		AND = {
+			NOT = { sp_i32_expertise_established = yes }
 			NOT = { has_variable = sp_i32_primary_partner_german }
 			gold_reserves >= sp_i32_industrial_upfront
 		}
@@ -959,10 +997,22 @@ sp_i32_any_naval_destination_diplomatic = {
 sp_i32_naval_gbr_eligible = {
 	OR = {
 		AND = {
+			sp_i32_expertise_established = yes
+			has_variable = sp_i32_primary_partner_gbr
+			gold_reserves >= sp_i32_naval_upfront_pri_est
+		}
+		AND = {
+			sp_i32_expertise_established = yes
+			NOT = { has_variable = sp_i32_primary_partner_gbr }
+			gold_reserves >= sp_i32_naval_upfront_est
+		}
+		AND = {
+			NOT = { sp_i32_expertise_established = yes }
 			has_variable = sp_i32_primary_partner_gbr
 			gold_reserves >= sp_i32_naval_upfront_pri
 		}
 		AND = {
+			NOT = { sp_i32_expertise_established = yes }
 			NOT = { has_variable = sp_i32_primary_partner_gbr }
 			gold_reserves >= sp_i32_naval_upfront
 		}
@@ -973,10 +1023,22 @@ sp_i32_naval_gbr_eligible = {
 sp_i32_naval_fra_eligible = {
 	OR = {
 		AND = {
+			sp_i32_expertise_established = yes
+			has_variable = sp_i32_primary_partner_fra
+			gold_reserves >= sp_i32_naval_upfront_pri_est
+		}
+		AND = {
+			sp_i32_expertise_established = yes
+			NOT = { has_variable = sp_i32_primary_partner_fra }
+			gold_reserves >= sp_i32_naval_upfront_est
+		}
+		AND = {
+			NOT = { sp_i32_expertise_established = yes }
 			has_variable = sp_i32_primary_partner_fra
 			gold_reserves >= sp_i32_naval_upfront_pri
 		}
 		AND = {
+			NOT = { sp_i32_expertise_established = yes }
 			NOT = { has_variable = sp_i32_primary_partner_fra }
 			gold_reserves >= sp_i32_naval_upfront
 		}
@@ -1173,6 +1235,41 @@ sp_i32_naval_matches_primary = {
 		AND = {
 			has_variable = sp_i32_naval_partner_gbr
 			has_variable = sp_i32_primary_partner_gbr
+		}
+	}
+}
+
+# === Wave F — von der Goltz (German land mission; replaces generic PRU/GER land) ===
+
+# Availability without gold (blocks generic German land when true).
+sp_i32_goltz_available = {
+	game_date >= 1883.1.1
+	NOT = { has_variable = sp_i32_goltz_ever }
+	NOT = { sp_i32_military_busy = yes }
+	NOT = { sp_i32_has_incoming_military_assistance = yes }
+	NOT = { sp_i32_has_incoming_ma_from_german_sphere = yes }
+	sp_i32_military_german_host_ok = yes
+	OR = {
+		exists = c:GER
+		AND = {
+			exists = c:PRU
+			c:PRU = {
+				country_rank >= rank_value:great_power
+			}
+		}
+	}
+}
+
+sp_i32_goltz_eligible = {
+	sp_i32_goltz_available = yes
+	OR = {
+		AND = {
+			has_variable = sp_i32_primary_partner_german
+			gold_reserves >= sp_i32_goltz_upfront_pri
+		}
+		AND = {
+			NOT = { has_variable = sp_i32_primary_partner_german }
+			gold_reserves >= sp_i32_goltz_upfront
 		}
 	}
 }

@@ -1,0 +1,25 @@
+# I-32 Wave F — Colmar Freiherr von der Goltz.
+# Pattern: vanilla PRU_helmuth_von_moltke (German general) + foreign adviser culture like Walker.
+# Remains north_german; created on TUR only while the Goltz mission runs, then removed.
+
+sp_i32_colmar_von_der_goltz = {
+	first_name = sp_i32_colmar
+	last_name = sp_i32_von_der_goltz
+	historical = yes
+	female = no
+	culture = cu:north_german
+	religion = rel:protestant
+	birth_date = 1843.8.12
+	home_region = STATE_EASTERN_THRACE
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	is_general = yes
+	hq = region_near_east
+	commander_rank = commander_rank_2
+	traits = {
+		meticulous
+		surveyor
+		expert_defensive_strategist
+		reserved
+	}
+}

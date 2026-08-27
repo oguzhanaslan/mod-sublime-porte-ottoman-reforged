@@ -1,4 +1,4 @@
-﻿# I-32 Wave A-E - occupied families, capacity, and primary-partner pay twins. Not mana.
+﻿# I-32 Wave A-F - occupied families, capacity, primary-partner and Established pay twins. Not mana.
 
 sp_i32_occupied_families = {
 	value = 0
@@ -374,6 +374,7 @@ sp_i32_military_pay_austria_pri = {
 }
 
 # Cheapest diplomatic land host including primary -15%.
+# When Goltz is available, generic German land is replaced — use Goltz gold for that path.
 sp_i32_military_gold_required = {
 	if = {
 		limit = {
@@ -387,6 +388,19 @@ sp_i32_military_gold_required = {
 			sp_i32_partner_ok_neutral = { PARTNER = c:AUS }
 		}
 		value = sp_i32_military_upfront_austria
+	}
+	else_if = {
+		limit = {
+			sp_i32_goltz_available = yes
+			has_variable = sp_i32_primary_partner_german
+		}
+		value = sp_i32_goltz_upfront_pri
+	}
+	else_if = {
+		limit = {
+			sp_i32_goltz_available = yes
+		}
+		value = sp_i32_goltz_upfront
 	}
 	else_if = {
 		limit = {
@@ -420,12 +434,21 @@ sp_i32_military_tooltip_pay = {
 }
 
 # --- Wave D: Industrial ---
+# Established −10% stacks with primary −15%: pri_est = round(base × 0.85 × 0.9).
 sp_i32_industrial_upfront = {
 	value = 20000
 }
 
 sp_i32_industrial_upfront_pri = {
 	value = 17000
+}
+
+sp_i32_industrial_upfront_est = {
+	value = 18000
+}
+
+sp_i32_industrial_upfront_pri_est = {
+	value = 15300
 }
 
 sp_i32_industrial_pay = {
@@ -438,8 +461,44 @@ sp_i32_industrial_pay_pri = {
 	multiply = -1
 }
 
+sp_i32_industrial_pay_est = {
+	value = sp_i32_industrial_upfront_est
+	multiply = -1
+}
+
+sp_i32_industrial_pay_pri_est = {
+	value = sp_i32_industrial_upfront_pri_est
+	multiply = -1
+}
+
 sp_i32_industrial_gold_required = {
 	if = {
+		limit = {
+			sp_i32_expertise_established = yes
+			OR = {
+				AND = {
+					sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+					has_variable = sp_i32_primary_partner_fra
+				}
+				AND = {
+					sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
+					has_variable = sp_i32_primary_partner_gbr
+				}
+				AND = {
+					sp_i32_industrial_german_host_ok = yes
+					has_variable = sp_i32_primary_partner_german
+				}
+			}
+		}
+		value = sp_i32_industrial_upfront_pri_est
+	}
+	else_if = {
+		limit = {
+			sp_i32_expertise_established = yes
+		}
+		value = sp_i32_industrial_upfront_est
+	}
+	else_if = {
 		limit = {
 			OR = {
 				AND = {
@@ -477,6 +536,14 @@ sp_i32_naval_upfront_pri = {
 	value = 21250
 }
 
+sp_i32_naval_upfront_est = {
+	value = 22500
+}
+
+sp_i32_naval_upfront_pri_est = {
+	value = 19125
+}
+
 sp_i32_naval_pay = {
 	value = sp_i32_naval_upfront
 	multiply = -1
@@ -487,8 +554,40 @@ sp_i32_naval_pay_pri = {
 	multiply = -1
 }
 
+sp_i32_naval_pay_est = {
+	value = sp_i32_naval_upfront_est
+	multiply = -1
+}
+
+sp_i32_naval_pay_pri_est = {
+	value = sp_i32_naval_upfront_pri_est
+	multiply = -1
+}
+
 sp_i32_naval_gold_required = {
 	if = {
+		limit = {
+			sp_i32_expertise_established = yes
+			OR = {
+				AND = {
+					sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+					has_variable = sp_i32_primary_partner_fra
+				}
+				AND = {
+					sp_i32_naval_gbr_ok = yes
+					has_variable = sp_i32_primary_partner_gbr
+				}
+			}
+		}
+		value = sp_i32_naval_upfront_pri_est
+	}
+	else_if = {
+		limit = {
+			sp_i32_expertise_established = yes
+		}
+		value = sp_i32_naval_upfront_est
+	}
+	else_if = {
 		limit = {
 			OR = {
 				AND = {
@@ -510,5 +609,24 @@ sp_i32_naval_gold_required = {
 
 sp_i32_naval_tooltip_pay = {
 	value = sp_i32_naval_gold_required
+	multiply = -1
+}
+
+# --- Wave F: von der Goltz (German land mission; once) ---
+sp_i32_goltz_upfront = {
+	value = 15000
+}
+
+sp_i32_goltz_upfront_pri = {
+	value = 12750
+}
+
+sp_i32_goltz_pay = {
+	value = sp_i32_goltz_upfront
+	multiply = -1
+}
+
+sp_i32_goltz_pay_pri = {
+	value = sp_i32_goltz_upfront_pri
 	multiply = -1
 }
