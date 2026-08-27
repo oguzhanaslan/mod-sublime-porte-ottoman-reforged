@@ -468,6 +468,22 @@ sp_i32_remove_students_active_modifiers = {
 	}
 }
 
+# Scope: country. GER if it exists, else PRU. Same GER-first order as the old inline chains.
+sp_i32_save_german_sphere_as_partner = {
+	if = {
+		limit = {
+			exists = c:GER
+		}
+		c:GER = { save_scope_as = sp_i32_partner }
+	}
+	else_if = {
+		limit = {
+			exists = c:PRU
+		}
+		c:PRU = { save_scope_as = sp_i32_partner }
+	}
+}
+
 sp_i32_save_students_partner_scope = {
 	if = {
 		limit = {
@@ -493,16 +509,8 @@ sp_i32_save_students_partner_scope = {
 	else_if = {
 		limit = {
 			has_variable = sp_i32_students_partner_german
-			exists = c:GER
 		}
-		c:GER = { save_scope_as = sp_i32_partner }
-	}
-	else_if = {
-		limit = {
-			has_variable = sp_i32_students_partner_german
-			exists = c:PRU
-		}
-		c:PRU = { save_scope_as = sp_i32_partner }
+		sp_i32_save_german_sphere_as_partner = yes
 	}
 }
 
@@ -761,16 +769,8 @@ sp_i32_save_technical_partner_scope = {
 	else_if = {
 		limit = {
 			has_variable = sp_i32_technical_partner_german
-			exists = c:GER
 		}
-		c:GER = { save_scope_as = sp_i32_partner }
-	}
-	else_if = {
-		limit = {
-			has_variable = sp_i32_technical_partner_german
-			exists = c:PRU
-		}
-		c:PRU = { save_scope_as = sp_i32_partner }
+		sp_i32_save_german_sphere_as_partner = yes
 	}
 }
 
@@ -1009,16 +1009,8 @@ sp_i32_save_education_partner_scope = {
 	else_if = {
 		limit = {
 			has_variable = sp_i32_education_partner_german
-			exists = c:GER
 		}
-		c:GER = { save_scope_as = sp_i32_partner }
-	}
-	else_if = {
-		limit = {
-			has_variable = sp_i32_education_partner_german
-			exists = c:PRU
-		}
-		c:PRU = { save_scope_as = sp_i32_partner }
+		sp_i32_save_german_sphere_as_partner = yes
 	}
 }
 
@@ -1269,16 +1261,8 @@ sp_i32_save_military_partner_scope = {
 	else_if = {
 		limit = {
 			has_variable = sp_i32_military_partner_german
-			exists = c:GER
 		}
-		c:GER = { save_scope_as = sp_i32_partner }
-	}
-	else_if = {
-		limit = {
-			has_variable = sp_i32_military_partner_german
-			exists = c:PRU
-		}
-		c:PRU = { save_scope_as = sp_i32_partner }
+		sp_i32_save_german_sphere_as_partner = yes
 	}
 }
 
@@ -1527,16 +1511,8 @@ sp_i32_save_industrial_partner_scope = {
 	else_if = {
 		limit = {
 			has_variable = sp_i32_industrial_partner_german
-			exists = c:GER
 		}
-		c:GER = { save_scope_as = sp_i32_partner }
-	}
-	else_if = {
-		limit = {
-			has_variable = sp_i32_industrial_partner_german
-			exists = c:PRU
-		}
-		c:PRU = { save_scope_as = sp_i32_partner }
+		sp_i32_save_german_sphere_as_partner = yes
 	}
 }
 
