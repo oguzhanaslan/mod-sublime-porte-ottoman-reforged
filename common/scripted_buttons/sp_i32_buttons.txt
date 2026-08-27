@@ -1,0 +1,77 @@
+﻿# I-32 Wave A buttons. Destination choice is an event, not four permanent JE buttons.
+
+sp_i32_btn_send_students = {
+	name = sp_i32_btn_send_students
+	desc = sp_i32_btn_send_students_desc
+
+	visible = {
+		NOT = { sp_i32_students_busy = yes }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sp_i32_students_not_active_tt
+			NOT = { sp_i32_students_busy = yes }
+		}
+		custom_tooltip = {
+			text = sp_i32_students_cooldown_tt
+			NOT = { has_variable = sp_i32_students_cooldown }
+		}
+		custom_tooltip = {
+			text = sp_i32_capacity_allows_tt
+			sp_i32_capacity_allows_new_programme = yes
+		}
+		custom_tooltip = {
+			text = sp_i32_students_destination_tt
+			sp_i32_any_student_destination_eligible = yes
+		}
+	}
+
+	ai_chance = {
+		value = 15
+		if = {
+			limit = {
+				gold_reserves < 12000
+			}
+			add = -20
+		}
+		if = {
+			limit = {
+				is_at_war = yes
+			}
+			add = -10
+		}
+	}
+
+	effect = {
+		custom_tooltip = sp_i32_btn_send_students_effect_tt
+		trigger_event = { id = sp_i32.11 popup = yes }
+	}
+}
+
+sp_i32_btn_cancel_students = {
+	name = sp_i32_btn_cancel_students
+	desc = sp_i32_btn_cancel_students_desc
+
+	visible = {
+		has_variable = sp_i32_students_active
+		NOT = { has_variable = sp_i32_students_completing }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sp_i32_students_cancel_possible_tt
+			has_variable = sp_i32_students_active
+			NOT = { has_variable = sp_i32_students_completing }
+		}
+	}
+
+	ai_chance = {
+		value = 0
+	}
+
+	effect = {
+		custom_tooltip = sp_i32_btn_cancel_students_effect_tt
+		trigger_event = { id = sp_i32.30 popup = yes }
+	}
+}

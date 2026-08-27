@@ -1,0 +1,477 @@
+﻿# I-32 Wave A effects. Shared Students lifecycle; partner differences are branches.
+
+sp_i32_init_capacity_cache = {
+	if = {
+		limit = {
+			NOT = { has_variable = sp_i32_bur_surplus_months }
+		}
+		set_variable = {
+			name = sp_i32_bur_surplus_months
+			value = 0
+		}
+	}
+}
+
+sp_i32_tick_capacity_cache = {
+	sp_i32_init_capacity_cache = yes
+	if = {
+		limit = {
+			bureaucracy > 0
+		}
+		change_variable = {
+			name = sp_i32_bur_surplus_months
+			add = 1
+		}
+	}
+	else = {
+		set_variable = {
+			name = sp_i32_bur_surplus_months
+			value = 0
+		}
+	}
+}
+
+# CMF bar/hide effects require scope:journal_entry. Button/event paths may lack it.
+sp_i32_ensure_journal_entry_scope = {
+	if = {
+		limit = {
+			NOT = { exists = scope:journal_entry }
+			has_journal_entry = sp_je_learning_from_europe
+		}
+		je:sp_je_learning_from_europe = {
+			save_scope_as = journal_entry
+		}
+	}
+}
+
+sp_i32_apply_cmf_hide_flags = {
+	sp_i32_ensure_journal_entry_scope = yes
+	if = {
+		limit = {
+			exists = scope:journal_entry
+		}
+		scope:journal_entry = {
+			set_variable = com_hide_modifiers
+			set_variable = com_hide_scripted_buttons
+			set_variable = com_hide_involved_countries
+			set_variable = com_hide_complete_triggers
+			set_variable = com_hide_fail_triggers
+		}
+	}
+}
+
+sp_i32_create_wave_a_bars = {
+	sp_i32_ensure_journal_entry_scope = yes
+	create_com_progress_bar = {
+		progress_bar = sp_i32_spb_students
+		index = 0
+		color = blue
+	}
+	create_com_progress_bar = {
+		progress_bar = sp_i32_spb_military
+		index = 1
+		color = gold
+	}
+	hide_com_progress_bar = { progress_bar = sp_i32_spb_students }
+	hide_com_progress_bar = { progress_bar = sp_i32_spb_military }
+}
+
+sp_i32_reset_students_bar = {
+	if = {
+		limit = {
+			has_journal_entry = sp_je_learning_from_europe
+		}
+		je:sp_je_learning_from_europe = {
+			add_progress = {
+				name = sp_i32_spb_students
+				value = -100
+			}
+		}
+	}
+}
+
+sp_i32_fill_military_bar = {
+	if = {
+		limit = {
+			has_journal_entry = sp_je_learning_from_europe
+		}
+		je:sp_je_learning_from_europe = {
+			if = {
+				limit = {
+					NOT = {
+						scripted_bar_progress = {
+							name = sp_i32_spb_military
+							value >= 100
+						}
+					}
+				}
+				add_progress = {
+					name = sp_i32_spb_military
+					value = 100
+				}
+			}
+		}
+	}
+}
+
+sp_i32_sync_cmf_presentation = {
+	sp_i32_ensure_journal_entry_scope = yes
+	sp_i32_apply_cmf_hide_flags = yes
+	if = {
+		limit = {
+			has_variable = sp_i32_students_active
+		}
+		unhide_com_progress_bar = { progress_bar = sp_i32_spb_students }
+	}
+	else = {
+		hide_com_progress_bar = { progress_bar = sp_i32_spb_students }
+	}
+	if = {
+		limit = {
+			sp_i32_has_incoming_military_assistance = yes
+		}
+		unhide_com_progress_bar = { progress_bar = sp_i32_spb_military }
+		sp_i32_fill_military_bar = yes
+	}
+	else = {
+		hide_com_progress_bar = { progress_bar = sp_i32_spb_military }
+	}
+}
+
+sp_i32_clear_students_partner_flags = {
+	remove_variable = sp_i32_students_partner_fra
+	remove_variable = sp_i32_students_partner_gbr
+	remove_variable = sp_i32_students_partner_german
+	remove_variable = sp_i32_students_partner_aus
+}
+
+sp_i32_remove_students_active_modifiers = {
+	if = {
+		limit = {
+			has_journal_entry = sp_je_learning_from_europe
+		}
+		je:sp_je_learning_from_europe = {
+			if = {
+				limit = { has_modifier = sp_i32_students_fra_act }
+				remove_modifier = sp_i32_students_fra_act
+			}
+			if = {
+				limit = { has_modifier = sp_i32_students_gbr_act }
+				remove_modifier = sp_i32_students_gbr_act
+			}
+			if = {
+				limit = { has_modifier = sp_i32_students_pru_act_spread }
+				remove_modifier = sp_i32_students_pru_act_spread
+			}
+			if = {
+				limit = { has_modifier = sp_i32_students_pru_act_qual_only }
+				remove_modifier = sp_i32_students_pru_act_qual_only
+			}
+			if = {
+				limit = { has_modifier = sp_i32_students_aus_act }
+				remove_modifier = sp_i32_students_aus_act
+			}
+		}
+	}
+	if = {
+		limit = { has_modifier = sp_i32_students_fra_act }
+		remove_modifier = sp_i32_students_fra_act
+	}
+	if = {
+		limit = { has_modifier = sp_i32_students_gbr_act }
+		remove_modifier = sp_i32_students_gbr_act
+	}
+	if = {
+		limit = { has_modifier = sp_i32_students_pru_act_spread }
+		remove_modifier = sp_i32_students_pru_act_spread
+	}
+	if = {
+		limit = { has_modifier = sp_i32_students_pru_act_qual_only }
+		remove_modifier = sp_i32_students_pru_act_qual_only
+	}
+	if = {
+		limit = { has_modifier = sp_i32_students_aus_act }
+		remove_modifier = sp_i32_students_aus_act
+	}
+}
+
+sp_i32_save_students_partner_scope = {
+	if = {
+		limit = {
+			has_variable = sp_i32_students_partner_fra
+			exists = c:FRA
+		}
+		c:FRA = { save_scope_as = sp_i32_partner }
+	}
+	else_if = {
+		limit = {
+			has_variable = sp_i32_students_partner_gbr
+			exists = c:GBR
+		}
+		c:GBR = { save_scope_as = sp_i32_partner }
+	}
+	else_if = {
+		limit = {
+			has_variable = sp_i32_students_partner_aus
+			exists = c:AUS
+		}
+		c:AUS = { save_scope_as = sp_i32_partner }
+	}
+	else_if = {
+		limit = {
+			has_variable = sp_i32_students_partner_german
+			exists = c:GER
+		}
+		c:GER = { save_scope_as = sp_i32_partner }
+	}
+	else_if = {
+		limit = {
+			has_variable = sp_i32_students_partner_german
+			exists = c:PRU
+		}
+		c:PRU = { save_scope_as = sp_i32_partner }
+	}
+}
+
+sp_i32_add_students_active_modifier = {
+	if = {
+		limit = {
+			has_journal_entry = sp_je_learning_from_europe
+		}
+		je:sp_je_learning_from_europe = {
+			add_modifier = {
+				name = $MODIFIER$
+				years = 6
+			}
+		}
+	}
+}
+
+sp_i32_start_students_shared = {
+	set_variable = sp_i32_students_active
+	set_variable = {
+		name = sp_i32_students_duration_months
+		value = 60
+	}
+	set_variable = {
+		name = sp_i32_students_months_left
+		value = 60
+	}
+	remove_variable = sp_i32_students_completing
+	remove_variable = sp_i32_students_midpoint_fired
+	remove_variable = sp_i32_students_chill
+	remove_variable = sp_i32_students_forced_sink
+	sp_i32_reset_students_bar = yes
+	sp_i32_ensure_journal_entry_scope = yes
+	if = {
+		limit = {
+			exists = scope:journal_entry
+		}
+		unhide_com_progress_bar = { progress_bar = sp_i32_spb_students }
+	}
+}
+
+sp_i32_start_students_france = {
+	if = {
+		limit = {
+			NOT = { sp_i32_students_busy = yes }
+		}
+		add_treasury = -8000
+		sp_i32_clear_students_partner_flags = yes
+		set_variable = sp_i32_students_partner_fra
+		sp_i32_start_students_shared = yes
+		sp_i32_add_students_active_modifier = { MODIFIER = sp_i32_students_fra_act }
+	}
+}
+
+sp_i32_start_students_britain = {
+	if = {
+		limit = {
+			NOT = { sp_i32_students_busy = yes }
+		}
+		add_treasury = -8000
+		sp_i32_clear_students_partner_flags = yes
+		set_variable = sp_i32_students_partner_gbr
+		sp_i32_start_students_shared = yes
+		sp_i32_add_students_active_modifier = { MODIFIER = sp_i32_students_gbr_act }
+	}
+}
+
+sp_i32_start_students_german = {
+	if = {
+		limit = {
+			NOT = { sp_i32_students_busy = yes }
+		}
+		add_treasury = -8000
+		sp_i32_clear_students_partner_flags = yes
+		set_variable = sp_i32_students_partner_german
+		sp_i32_start_students_shared = yes
+		if = {
+			limit = {
+				sp_i32_mil_spread_occupied = yes
+			}
+			sp_i32_add_students_active_modifier = { MODIFIER = sp_i32_students_pru_act_qual_only }
+		}
+		else = {
+			sp_i32_add_students_active_modifier = { MODIFIER = sp_i32_students_pru_act_spread }
+		}
+	}
+}
+
+sp_i32_start_students_austria = {
+	if = {
+		limit = {
+			NOT = { sp_i32_students_busy = yes }
+		}
+		add_treasury = -6000
+		sp_i32_clear_students_partner_flags = yes
+		set_variable = sp_i32_students_partner_aus
+		sp_i32_start_students_shared = yes
+		sp_i32_add_students_active_modifier = { MODIFIER = sp_i32_students_aus_act }
+	}
+}
+
+sp_i32_cleanup_students = {
+	sp_i32_remove_students_active_modifiers = yes
+	sp_i32_ensure_journal_entry_scope = yes
+	if = {
+		limit = {
+			exists = scope:journal_entry
+		}
+		hide_com_progress_bar = { progress_bar = sp_i32_spb_students }
+	}
+	sp_i32_reset_students_bar = yes
+	remove_variable = sp_i32_students_active
+	remove_variable = sp_i32_students_completing
+	remove_variable = sp_i32_students_months_left
+	remove_variable = sp_i32_students_duration_months
+	remove_variable = sp_i32_students_midpoint_fired
+	remove_variable = sp_i32_students_forced_sink
+	sp_i32_clear_students_partner_flags = yes
+	# chill is consumed at completion; cancel also clears it
+	remove_variable = sp_i32_students_chill
+}
+
+sp_i32_complete_students_common = {
+	if = {
+		limit = {
+			NOT = { has_variable = sp_i32_students_chill }
+			sp_i32_students_partner_still_exists = yes
+		}
+		sp_i32_save_students_partner_scope = yes
+		if = {
+			limit = {
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = 10
+			}
+		}
+	}
+	set_variable = sp_i32_students_ever_completed
+	set_variable = {
+		name = sp_i32_students_cooldown
+		years = 2
+	}
+	sp_i32_cleanup_students = yes
+}
+
+sp_i32_cancel_students = {
+	if = {
+		limit = {
+			sp_i32_students_partner_still_exists = yes
+		}
+		sp_i32_save_students_partner_scope = yes
+		if = {
+			limit = {
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = -5
+			}
+		}
+	}
+	set_variable = {
+		name = sp_i32_students_cooldown
+		years = 1
+	}
+	sp_i32_cleanup_students = yes
+}
+
+sp_i32_try_students_midpoint_complication = {
+	if = {
+		limit = {
+			has_variable = sp_i32_students_active
+			NOT = { has_variable = sp_i32_students_completing }
+			NOT = { has_variable = sp_i32_students_midpoint_fired }
+			has_variable = sp_i32_students_months_left
+			has_variable = sp_i32_students_duration_months
+			var:sp_i32_students_months_left <= {
+				value = var:sp_i32_students_duration_months
+				divide = 2
+			}
+		}
+		set_variable = sp_i32_students_midpoint_fired
+		if = {
+			limit = {
+				legitimacy < 40
+			}
+			random_list = {
+				65 = { }
+				35 = {
+					trigger_event = { id = sp_i32.50 popup = yes }
+				}
+			}
+		}
+		else = {
+			random_list = {
+				80 = { }
+				20 = {
+					trigger_event = { id = sp_i32.50 popup = yes }
+				}
+			}
+		}
+	}
+}
+
+sp_i32_tick_students = {
+	if = {
+		limit = {
+			has_variable = sp_i32_students_active
+			NOT = { has_variable = sp_i32_students_completing }
+		}
+		if = {
+			limit = {
+				NOT = { sp_i32_students_partner_still_exists = yes }
+			}
+			set_variable = sp_i32_students_chill
+		}
+		change_variable = {
+			name = sp_i32_students_months_left
+			add = -1
+		}
+		sp_i32_try_students_midpoint_complication = yes
+		if = {
+			limit = {
+				var:sp_i32_students_months_left <= 0
+			}
+			set_variable = sp_i32_students_completing
+			trigger_event = { id = sp_i32.40 popup = yes }
+		}
+	}
+}
+
+sp_i32_monthly_pulse_effect = {
+	sp_i32_tick_capacity_cache = yes
+	sp_i32_tick_students = yes
+	sp_i32_sync_cmf_presentation = yes
+}
+
+sp_i32_je_immediate_effect = {
+	sp_i32_init_capacity_cache = yes
+	sp_i32_apply_cmf_hide_flags = yes
+	sp_i32_create_wave_a_bars = yes
+	sp_i32_sync_cmf_presentation = yes
+}

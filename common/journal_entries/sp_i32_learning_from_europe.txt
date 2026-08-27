@@ -1,0 +1,170 @@
+﻿# I-32 Wave A — persistent hub. Tanzimat is not a prerequisite. Does not complete/fail.
+
+sp_je_learning_from_europe = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	group = je_group_tanzimat
+
+	is_shown_in_lobby = {
+		c:TUR ?= this
+	}
+
+	is_shown_when_inactive = {
+		c:TUR ?= this
+	}
+
+	possible = {
+		c:TUR ?= this
+	}
+
+	scripted_button = sp_i32_btn_send_students
+	scripted_button = sp_i32_btn_cancel_students
+
+	scripted_progress_bar = sp_i32_spb_students
+	scripted_progress_bar = sp_i32_spb_military
+
+	widget = {
+		gui = "gui/com_journal_injects/injects.gui"
+		name = "com_journal_entry_header"
+		container = "custom_widget_container_je_icon"
+	}
+
+	widget = {
+		gui = "gui/com_journal_injects/injects.gui"
+		name = "com_journal_entry_characters"
+		container = "custom_widget_container_1"
+	}
+
+	widget = {
+		gui = "gui/com_journal_injects/com_shared_widgets.gui"
+		name = "com_journal_scripted_buttons"
+		container = "custom_widget_container_3"
+	}
+
+	widget = {
+		gui = "gui/com_journal_injects/injects.gui"
+		name = "com_journal_entry_progress_bars"
+		container = "com_custom_widget_container_scripted_progress_bars"
+	}
+
+	immediate = {
+		sp_i32_je_immediate_effect = yes
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			sp_i32_monthly_pulse_effect = yes
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_students_partner_fra
+					sp_i32_has_incoming_military_assistance = yes
+				}
+				desc = sp_je_learning_from_europe_status_students_fra_ma
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_students_partner_gbr
+					sp_i32_has_incoming_military_assistance = yes
+				}
+				desc = sp_je_learning_from_europe_status_students_gbr_ma
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_students_partner_german
+					exists = c:GER
+					sp_i32_has_incoming_military_assistance = yes
+				}
+				desc = sp_je_learning_from_europe_status_students_ger_ma
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_students_partner_german
+					sp_i32_has_incoming_military_assistance = yes
+				}
+				desc = sp_je_learning_from_europe_status_students_pru_ma
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_students_partner_aus
+					sp_i32_has_incoming_military_assistance = yes
+				}
+				desc = sp_je_learning_from_europe_status_students_aus_ma
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_students_partner_fra
+				}
+				desc = sp_je_learning_from_europe_status_students_fra
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_students_partner_gbr
+				}
+				desc = sp_je_learning_from_europe_status_students_gbr
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_students_partner_german
+					exists = c:GER
+				}
+				desc = sp_je_learning_from_europe_status_students_ger
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_students_partner_german
+				}
+				desc = sp_je_learning_from_europe_status_students_pru
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_students_partner_aus
+				}
+				desc = sp_je_learning_from_europe_status_students_aus
+			}
+			triggered_desc = {
+				trigger = {
+					sp_i32_has_incoming_military_assistance = yes
+					game_date < 1841.1.1
+				}
+				desc = sp_je_learning_from_europe_status_ma_moltke
+			}
+			triggered_desc = {
+				trigger = {
+					sp_i32_has_incoming_military_assistance = yes
+				}
+				desc = sp_je_learning_from_europe_status_ma_post_moltke
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_students_cooldown
+				}
+				desc = sp_je_learning_from_europe_status_students_cooldown
+			}
+			triggered_desc = {
+				trigger = {
+					sp_i32_capacity_is_4 = yes
+				}
+				desc = sp_je_learning_from_europe_status_cap4
+			}
+			triggered_desc = {
+				trigger = {
+					sp_i32_capacity_is_3 = yes
+				}
+				desc = sp_je_learning_from_europe_status_cap3
+			}
+			desc = sp_je_learning_from_europe_status_cap2
+		}
+	}
+
+	invalid = {
+		NOT = { c:TUR ?= this }
+	}
+
+	transferable = no
+	weight = 9300
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

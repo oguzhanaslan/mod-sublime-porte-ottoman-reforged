@@ -1,0 +1,49 @@
+﻿# I-32 Wave A — occupied families and capacity ceilings. Not mana.
+
+sp_i32_occupied_families = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = sp_i32_students_active
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			sp_i32_has_incoming_military_assistance = yes
+		}
+		add = 1
+	}
+}
+
+# 2 default; 3 if 12-month bureaucracy surplus or staffed university; 4 if Established.
+sp_i32_capacity_max = {
+	value = 2
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					has_variable = sp_i32_bur_surplus_months
+					var:sp_i32_bur_surplus_months >= 12
+				}
+				sp_i32_has_staffed_university = yes
+				sp_i32_expertise_established = yes
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			sp_i32_expertise_established = yes
+		}
+		add = 1
+	}
+}
+
+sp_i32_students_upfront_standard = {
+	value = 8000
+}
+
+sp_i32_students_upfront_austria = {
+	value = 6000
+}

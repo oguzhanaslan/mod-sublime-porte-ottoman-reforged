@@ -1,0 +1,239 @@
+﻿# I-32 Wave A — Learning from Europe. TUR-only. No Tanzimat gate.
+
+sp_i32_is_tur = {
+	c:TUR ?= this
+}
+
+sp_i32_has_staffed_university = {
+	any_scope_building = {
+		is_building_type = building_university
+		occupancy >= 0.50
+		level >= 1
+	}
+}
+
+# Live incoming military_assistance. Not a year gate. Source is never TUR.
+sp_i32_has_incoming_military_assistance = {
+	any_scope_treaty = {
+		any_scope_article = {
+			has_type = military_assistance
+			target_country = root
+			NOT = { source_country = root }
+		}
+	}
+}
+
+sp_i32_has_incoming_ma_from_german_sphere = {
+	OR = {
+		AND = {
+			exists = c:PRU
+			any_scope_treaty = {
+				binds = c:PRU
+				any_scope_article = {
+					has_type = military_assistance
+					source_country = c:PRU
+					target_country = root
+				}
+			}
+		}
+		AND = {
+			exists = c:GER
+			any_scope_treaty = {
+				binds = c:GER
+				any_scope_article = {
+					has_type = military_assistance
+					source_country = c:GER
+					target_country = root
+				}
+			}
+		}
+	}
+}
+
+# MIL_SPREAD occupied: incoming MA (Wave A). Later waves add Goltz / land invite.
+sp_i32_mil_spread_occupied = {
+	sp_i32_has_incoming_military_assistance = yes
+}
+
+sp_i32_military_family_occupied = {
+	sp_i32_has_incoming_military_assistance = yes
+}
+
+sp_i32_students_active = {
+	has_variable = sp_i32_students_active
+}
+
+sp_i32_students_busy = {
+	OR = {
+		has_variable = sp_i32_students_active
+		has_variable = sp_i32_students_completing
+	}
+}
+
+# Hostile partner: war, Cold or worse, or antagonistic/belligerent/domineering attitude toward TUR.
+sp_i32_students_can_use_country = {
+	exists = $PARTNER$
+	NOT = { has_war_with = $PARTNER$ }
+	$PARTNER$ = {
+		relations:root > -20
+		NOR = {
+			has_attitude = {
+				who = root
+				attitude = antagonistic
+			}
+			has_attitude = {
+				who = root
+				attitude = belligerent
+			}
+			has_attitude = {
+				who = root
+				attitude = domineering
+			}
+		}
+	}
+}
+
+sp_i32_students_fra_eligible = {
+	gold_reserves >= 8000
+	sp_i32_students_can_use_country = { PARTNER = c:FRA }
+}
+
+sp_i32_students_gbr_eligible = {
+	gold_reserves >= 8000
+	sp_i32_students_can_use_country = { PARTNER = c:GBR }
+}
+
+sp_i32_students_aus_eligible = {
+	gold_reserves >= 6000
+	sp_i32_students_can_use_country = { PARTNER = c:AUS }
+}
+
+# GER if it exists, else PRU. Unification must not break the destination.
+sp_i32_students_german_eligible = {
+	gold_reserves >= 8000
+	OR = {
+		AND = {
+			exists = c:GER
+			sp_i32_students_can_use_country = { PARTNER = c:GER }
+		}
+		AND = {
+			NOT = { exists = c:GER }
+			exists = c:PRU
+			sp_i32_students_can_use_country = { PARTNER = c:PRU }
+		}
+	}
+}
+
+sp_i32_any_student_destination_eligible = {
+	OR = {
+		sp_i32_students_fra_eligible = yes
+		sp_i32_students_gbr_eligible = yes
+		sp_i32_students_german_eligible = yes
+		sp_i32_students_aus_eligible = yes
+	}
+}
+
+sp_i32_students_partner_still_exists = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_students_partner_fra
+			exists = c:FRA
+		}
+		AND = {
+			has_variable = sp_i32_students_partner_gbr
+			exists = c:GBR
+		}
+		AND = {
+			has_variable = sp_i32_students_partner_aus
+			exists = c:AUS
+		}
+		AND = {
+			has_variable = sp_i32_students_partner_german
+			OR = {
+				exists = c:GER
+				exists = c:PRU
+			}
+		}
+	}
+}
+
+# Developing: any two signals. Wave A stores no expertise mana.
+sp_i32_expertise_developing = {
+	calc_true_if = {
+		amount >= 2
+		institution_investment_level = {
+			institution = institution_schools
+			value >= 2
+		}
+		sp_i32_has_staffed_university = yes
+		literacy_rate >= 0.22
+		has_technology_researched = napoleonic_warfare
+		has_technology_researched = mechanical_tools
+	}
+}
+
+sp_i32_has_two_families_completed = {
+	calc_true_if = {
+		amount >= 2
+		has_variable = sp_i32_students_ever_completed
+		has_variable = sp_i32_military_ever_completed
+		has_variable = sp_i32_technical_ever_completed
+		has_variable = sp_i32_education_ever_completed
+		has_variable = sp_i32_industrial_ever_completed
+		has_variable = sp_i32_naval_ever_completed
+	}
+}
+
+sp_i32_expertise_established = {
+	sp_i32_expertise_developing = yes
+	calc_true_if = {
+		amount >= 2
+		any_scope_building = {
+			is_building_type = building_university
+			occupancy >= 0.80
+			level >= 2
+		}
+		literacy_rate >= 0.30
+		AND = {
+			has_variable = sp_i32_bur_surplus_months
+			var:sp_i32_bur_surplus_months >= 24
+		}
+		has_technology_researched = general_staff
+		sp_i32_has_two_families_completed = yes
+	}
+}
+
+sp_i32_capacity_is_4 = {
+	sp_i32_expertise_established = yes
+}
+
+sp_i32_capacity_is_3 = {
+	NOT = { sp_i32_capacity_is_4 = yes }
+	OR = {
+		AND = {
+			has_variable = sp_i32_bur_surplus_months
+			var:sp_i32_bur_surplus_months >= 12
+		}
+		sp_i32_has_staffed_university = yes
+	}
+}
+
+sp_i32_capacity_is_2 = {
+	NOR = {
+		sp_i32_capacity_is_3 = yes
+		sp_i32_capacity_is_4 = yes
+	}
+}
+
+# Starting Students: occupied is MA only (students not yet active). Default cap 2 allows Students + inherited MA.
+sp_i32_capacity_allows_new_programme = {
+	sp_i32_occupied_families < sp_i32_capacity_max
+}
+
+sp_i32_can_start_students = {
+	sp_i32_is_tur = yes
+	NOT = { sp_i32_students_busy = yes }
+	NOT = { has_variable = sp_i32_students_cooldown }
+	sp_i32_capacity_allows_new_programme = yes
+	sp_i32_any_student_destination_eligible = yes
+}

@@ -1,0 +1,44 @@
+﻿# I-32 Wave A — Students (index 0) and inherited military assistance lamp (index 1).
+# Bars 2–5 are added when later families ship. Do not declare empty unused bars.
+
+sp_i32_spb_students = {
+	name = "sp_i32_spb_students"
+	desc = "sp_i32_spb_students_desc"
+	second_desc = "sp_i32_spb_students_second"
+
+	default = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	# Presentation only. Authoritative timer is sp_i32_students_months_left.
+	monthly_progress = {
+		if = {
+			limit = {
+				has_variable = sp_i32_students_active
+				NOT = { has_variable = sp_i32_students_completing }
+			}
+			add = {
+				desc = "sp_i32_spb_students_tick"
+				value = {
+					value = 100
+					divide = var:sp_i32_students_duration_months
+				}
+			}
+		}
+	}
+}
+
+# Full bar while vanilla incoming military_assistance exists. Does not tick.
+sp_i32_spb_military = {
+	name = "sp_i32_spb_military"
+	desc = "sp_i32_spb_military_desc"
+	second_desc = "sp_i32_spb_military_second"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+}
