@@ -282,4 +282,248 @@ types sp_ct_shared_types {
 			block "progress_card_content" {}
 		}
 	}
+
+	# Native JE status lines — expects JournalEntry datacontext (vanilla journal_entry.gui).
+	type sp_ct_insp_je_status_lines = flowcontainer {
+		direction = vertical
+		spacing = 6
+		textbox = {
+			visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
+			text = "[JournalEntry.GetStatusDesc]"
+			autoresize = yes
+			align = left|nobaseline
+			using = fontsize_small
+			minimumsize = { 460 -1 }
+			maximumsize = { 460 -1 }
+			multiline = yes
+		}
+		textbox = {
+			visible = "[JournalEntry.CanComplete]"
+			text = "[JournalEntry.GetCompletionTooltip]"
+			autoresize = yes
+			align = left|nobaseline
+			using = fontsize_small
+			minimumsize = { 460 -1 }
+			maximumsize = { 460 -1 }
+			multiline = yes
+		}
+		textbox = {
+			visible = "[Not(StringIsEmpty(JournalEntry.GetOnCompleteTooltip))]"
+			text = "[JournalEntry.GetOnCompleteTooltip]"
+			autoresize = yes
+			align = left|nobaseline
+			using = fontsize_small
+			minimumsize = { 460 -1 }
+			maximumsize = { 460 -1 }
+			multiline = yes
+		}
+	}
+
+	# Open / Pin / Unpin — expects JournalEntry datacontext.
+	type sp_ct_insp_je_action_buttons = flowcontainer {
+		direction = horizontal
+		spacing = 8
+		button = {
+			size = { 184 32 }
+			using = default_button_action
+			using = confirm_button_sound
+			visible = "[JournalEntry.IsValid]"
+			enabled = "[JournalEntry.IsValid]"
+			onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+			onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+			onclick = "[GetVariableSystem.Clear('com_open_window')]"
+			tooltip = "sp_ct_btn_open_je_tt"
+			textbox = {
+				parentanchor = center
+				text = "sp_ct_btn_open_je"
+				autoresize = yes
+				align = hcenter|nobaseline
+				using = fontsize_small
+			}
+		}
+		button = {
+			size = { 132 32 }
+			using = default_button_action
+			using = check_button_sound
+			visible = "[And(JournalEntry.IsValid, Not(JournalEntry.IsPinnedInOutliner))]"
+			enabled = "[JournalEntry.IsValid]"
+			onclick = "[JournalEntry.TogglePinInOutliner]"
+			tooltip = "PIN_JOURNAL_ENTRY"
+			textbox = {
+				parentanchor = center
+				text = "sp_ct_btn_pin_je"
+				autoresize = yes
+				align = hcenter|nobaseline
+				using = fontsize_small
+			}
+		}
+		button = {
+			size = { 132 32 }
+			using = default_button_action
+			using = check_button_sound
+			visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+			enabled = "[JournalEntry.IsValid]"
+			onclick = "[JournalEntry.TogglePinInOutliner]"
+			tooltip = "UNPIN_JOURNAL_ENTRY"
+			textbox = {
+				parentanchor = center
+				text = "sp_ct_btn_unpin_je"
+				autoresize = yes
+				align = hcenter|nobaseline
+				using = fontsize_small
+			}
+		}
+	}
+
+	# Find active JE by type name — override je_type_visible with EqualTo_string(…Localize('je_key')…).
+	type sp_ct_insp_je_typed_status = flowcontainer {
+		direction = vertical
+		datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+		item = {
+			flowcontainer = {
+				direction = vertical
+				datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+				item = {
+					flowcontainer = {
+						direction = vertical
+						spacing = 6
+						block "je_type_visible" { visible = no }
+						datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+						sp_ct_insp_je_status_lines = {}
+					}
+				}
+			}
+		}
+	}
+
+	type sp_ct_insp_je_typed_actions = flowcontainer {
+		direction = vertical
+		datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+		item = {
+			flowcontainer = {
+				direction = vertical
+				datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+				item = {
+					flowcontainer = {
+						direction = vertical
+						block "je_type_visible" { visible = no }
+						datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+						sp_ct_insp_je_action_buttons = {}
+					}
+				}
+			}
+		}
+	}
+
+	# Thin JE bindings — only override the type-name visibility filter.
+	type sp_ct_insp_je_turan_status = sp_ct_insp_je_typed_status {
+		blockoverride "je_type_visible" {
+			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
+		}
+	}
+	type sp_ct_insp_je_turan_actions = sp_ct_insp_je_typed_actions {
+		blockoverride "je_type_visible" {
+			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
+		}
+	}
+	type sp_ct_insp_je_post_tanzimat_status = sp_ct_insp_je_typed_status {
+		blockoverride "je_type_visible" {
+			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_post_tanzimat_era'))]"
+		}
+	}
+	type sp_ct_insp_je_post_tanzimat_actions = sp_ct_insp_je_typed_actions {
+		blockoverride "je_type_visible" {
+			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_post_tanzimat_era'))]"
+		}
+	}
+	type sp_ct_insp_je_ottomanism_status = sp_ct_insp_je_typed_status {
+		blockoverride "je_type_visible" {
+			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_ottomanism'))]"
+		}
+	}
+	type sp_ct_insp_je_ottomanism_actions = sp_ct_insp_je_typed_actions {
+		blockoverride "je_type_visible" {
+			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_ottomanism'))]"
+		}
+	}
+	type sp_ct_insp_je_islamism_status = sp_ct_insp_je_typed_status {
+		blockoverride "je_type_visible" {
+			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_pan_islamic_unity'))]"
+		}
+	}
+	type sp_ct_insp_je_islamism_actions = sp_ct_insp_je_typed_actions {
+		blockoverride "je_type_visible" {
+			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_pan_islamic_unity'))]"
+		}
+	}
+
+	# Sick Man uses objective JE list (not JournalEntryGroup).
+	type sp_ct_insp_je_sick_man_actions = flowcontainer {
+		direction = vertical
+		datamodel = "[AccessPlayer.AccessActivePlayerObjectiveJournalEntries]"
+		item = {
+			flowcontainer = {
+				direction = vertical
+				visible = "[EqualTo_string(JournalEntry.GetName, Localize('je_sick_man_main'))]"
+				sp_ct_insp_je_action_buttons = {}
+			}
+		}
+	}
+
+	type sp_ct_insp_je_sick_man_status = flowcontainer {
+		direction = vertical
+		datamodel = "[AccessPlayer.AccessActivePlayerObjectiveJournalEntries]"
+		item = {
+			flowcontainer = {
+				direction = vertical
+				spacing = 6
+				visible = "[EqualTo_string(JournalEntry.GetName, Localize('je_sick_man_main'))]"
+				sp_ct_insp_je_status_lines = {}
+			}
+		}
+	}
+
+	# Objective sub-JEs: title + completion/on-complete only (no GetStatusDesc — matches prior inspector).
+	type sp_ct_insp_je_sick_man_objectives_status = flowcontainer {
+		direction = vertical
+		datamodel = "[AccessPlayer.AccessActivePlayerObjectiveJournalEntries]"
+		item = {
+			flowcontainer = {
+				direction = vertical
+				spacing = 4
+				margin_bottom = 8
+				visible = "[Not(EqualTo_string(JournalEntry.GetName, Localize('je_sick_man_main')))]"
+				textbox = {
+					text = "[JournalEntry.GetName]"
+					autoresize = yes
+					align = left|nobaseline
+					default_format = "#title"
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+				textbox = {
+					visible = "[JournalEntry.CanComplete]"
+					text = "[JournalEntry.GetCompletionTooltip]"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+				textbox = {
+					visible = "[Not(StringIsEmpty(JournalEntry.GetOnCompleteTooltip))]"
+					text = "[JournalEntry.GetOnCompleteTooltip]"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+		}
+	}
 }

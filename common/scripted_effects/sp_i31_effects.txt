@@ -219,6 +219,24 @@ sp_i31_grant_stage_3_claims = {
 	}
 }
 
+# Unconditional claim lists for event option show_as_tooltip only (not for immediate grants).
+sp_i31_show_arabia_claims_tt = {
+	s:STATE_HEDJAZ = { add_claim = ROOT }
+	s:STATE_NEJD = { add_claim = ROOT }
+	s:STATE_HAIL = { add_claim = ROOT }
+	s:STATE_YEMEN = { add_claim = ROOT }
+}
+
+sp_i31_show_stage_3_claims_tt = {
+	s:STATE_DARFUR = { add_claim = ROOT }
+	s:STATE_LOWER_EGYPT = { add_claim = ROOT }
+	s:STATE_UPPER_EGYPT = { add_claim = ROOT }
+	s:STATE_SINAI = { add_claim = ROOT }
+	s:STATE_DONGOLA = { add_claim = ROOT }
+	s:STATE_KORDOFAN = { add_claim = ROOT }
+	s:STATE_BLUE_NILE = { add_claim = ROOT }
+}
+
 sp_i31_islamism_recount_progress = {
 	set_variable = {
 		name = sp_islamism_stage_progress

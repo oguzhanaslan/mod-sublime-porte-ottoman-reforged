@@ -3,6 +3,7 @@
  sp_i23.1.d:0 "1835'te Bâb-ı Âli, Karamanlı hanedanının uzun fiilî idaresine son verip [SCOPE.sCountry('sp_i23_tri_scope').GetName] şehrine bir Osmanlı valisi göndermiştir. Kıyıda doğrudan imparatorluk otoritesi yeniden kurulmuştur. Çöl hinterlandı başka meseledir: Fizan henüz yatışmamıştır ve Kirenaika içleri kıyı idaresine bir vilayet gibi boyun eğmez. Sahili tutmak, Sahra'yı hükmetmek değildir."
  sp_i23.1.f:0 "Padişahın valisi Trablus'ta oturur. Çöl yerinde durmaz."
  sp_i23.1.a:0 "Kabul et"
+ sp_i23_coastal_authority:0 "Trablusgarp'ta Kıyı Otoritesi"
  sp_i23.2.t:0 "Bey ve Bâbıâli"
  sp_i23.2.d:0 "[SCOPE.sCountry('sp_i23_tun_scope').GetName] Hüseyni Beyi cuma hutbesinde hâlâ padişahın adını okutur; buna rağmen hanedan, eyaleti kendi eviymiş gibi yönetir. Trablusgarp'ta doğrudan otoritenin iadesinden sonra vekiller, Tunus'un daha sıkı itaate — haraç, istişare ve Bâb-ı Âli'nin daha açık tanınmasına — mı zorlanacağını, yoksa uzun süredir süren pratik özerkliğinde mi bırakılacağını sorar."
  sp_i23.2.f:0 "Tâbiyet hukuki bir vakıadır. Bey'in hanedanı siyasi bir vakıadır."

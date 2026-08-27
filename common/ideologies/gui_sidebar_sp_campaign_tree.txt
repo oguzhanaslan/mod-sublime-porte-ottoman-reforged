@@ -1,8 +1,8 @@
 ﻿# CMF sidebar button ideology — never a real ideology.
-# Temporary Phase 1/2 icon; custom sidebar DDS deferred.
+# Phase 5: custom sidebar icon.
 
 gui_sidebar_sp_campaign_tree = {
-	icon = "gfx/interface/main_hud/journal_btn.dds"
+	icon = "gfx/interface/icons/sp_campaign_tree/sp_ct_sidebar_icon.dds"
 	show_in_list = no
 	character_ideology = yes
 	country_trigger = {

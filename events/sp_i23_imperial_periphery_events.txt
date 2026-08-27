@@ -2,10 +2,10 @@
 
 # I-23 Imperial Periphery. Four one-shot TUR events. No JE, no subject rewrite.
 
-# 1 — Authority Restored in Tripoli, 1836–1840. Informational only.
+# 1 — Authority Restored in Tripoli, 1836–1840. Acknowledgement plus 365-day IG flavor.
 sp_i23.1 = {
 	type = country_event
-	placement = root
+	placement = scope:sp_i23_tri_capital_scope
 	title = sp_i23.1.t
 	desc = sp_i23.1.d
 	flavor = sp_i23.1.f
@@ -28,12 +28,19 @@ sp_i23.1 = {
 		set_variable = sp_i23_tripoli_fired
 		c:TRI ?= {
 			save_scope_as = sp_i23_tri_scope
+			capital = {
+				save_scope_as = sp_i23_tri_capital_scope
+			}
 		}
 	}
 
 	option = {
 		name = sp_i23.1.a
 		default_option = yes
+		add_modifier = {
+			name = sp_i23_coastal_authority
+			days = very_short_modifier_time
+		}
 		ai_chance = {
 			base = 1
 		}

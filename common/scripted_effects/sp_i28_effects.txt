@@ -276,6 +276,44 @@ sp_i28_grant_stage_4b_claims = {
 	}
 }
 
+# Unconditional claim lists for event option show_as_tooltip only.
+# Do not call from immediate — grant_* already applied claims before the option tooltip.
+sp_i28_show_stage_1_claims_tt = {
+	s:STATE_AZERBAIJAN = { add_claim = ROOT }
+	s:STATE_ELIZAVETPOL = { add_claim = ROOT }
+	s:STATE_TABRIZ = { add_claim = ROOT }
+	s:STATE_URMIA = { add_claim = ROOT }
+}
+
+sp_i28_show_stage_2_claims_tt = {
+	s:STATE_IRAKAJEMI = { add_claim = ROOT }
+	s:STATE_ISFAHAN = { add_claim = ROOT }
+	s:STATE_FARS = { add_claim = ROOT }
+	s:STATE_KERMAN = { add_claim = ROOT }
+	s:STATE_KHORASAN = { add_claim = ROOT }
+	s:STATE_MAZANDARAN = { add_claim = ROOT }
+	s:STATE_SEMNAN = { add_claim = ROOT }
+	s:STATE_LARISTAN = { add_claim = ROOT }
+	s:STATE_LURISTAN = { add_claim = ROOT }
+	s:STATE_PERSIAN_KURDISTAN = { add_claim = ROOT }
+	s:STATE_KHUZESTAN = { add_claim = ROOT }
+}
+
+sp_i28_show_stage_3_claims_tt = {
+	s:STATE_TURKMENIA = { add_claim = ROOT }
+	s:STATE_MERZ = { add_claim = ROOT }
+	s:STATE_KHIVA = { add_claim = ROOT }
+	s:STATE_UZBEKIA = { add_claim = ROOT }
+}
+
+sp_i28_show_stage_4a_claims_tt = {
+	s:STATE_FERGANA = { add_claim = ROOT }
+	s:STATE_KIRGHIZIA = { add_claim = ROOT }
+	s:STATE_SYRDARYA = { add_claim = ROOT }
+	s:STATE_AKTOBE = { add_claim = ROOT }
+	s:STATE_AKMOLINSK = { add_claim = ROOT }
+}
+
 sp_i28_recount_stage_progress = {
 	set_variable = {
 		name = sp_turan_stage_progress

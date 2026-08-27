@@ -24,7 +24,7 @@
  sp_i28.1.b: "Islamism will guide the Empire"
  sp_i28.1.b_tt: "Selects Islamism. No Turan conquest content."
  sp_i28.1.c: "Turkism will guide the Empire"
- sp_i28.1.c_tt: "Selects Turkism. Unlocks the Turanian Ideal once Pan-Nationalism is researched."
+ sp_i28.1.c_tt: "Selects Turkism."
 
  sp_i28.2.t: "The Turanian Ideal"
  sp_i28.2.d: "Turkist circles open a long campaign: first Azerbaijan, then dominion over the Iranian plateau, then beyond the Caspian, and finally Turkestan."
@@ -53,4 +53,4 @@
  sp_i28.20.a: "Remain the Ottoman Empire"
  sp_i28.20.a_tt: "Keep the Ottoman Empire name. Gain Unifier of Turan."
  sp_i28.20.b: "Proclaim the Great Ottoman Empire"
- sp_i28.20.b_tt: "Rename to Great Ottoman Empire (tag TUR). Optional map color. Same Unifier of Turan reward. No Turan country name; custom flag deferred."
+ sp_i28.20.b_tt: "Rename to Great Ottoman Empire (tag TUR). Optional map color. No Turan country name; custom flag deferred."

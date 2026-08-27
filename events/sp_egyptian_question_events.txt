@@ -66,7 +66,6 @@ sp_egyptian_question.2 = {
 		name = sp_egyptian_question.2.a
 		default_option = yes
 		c:TUR = { sp_apply_historical_egyptian_settlement = yes }
-		custom_tooltip = sp_egyptian_question_historical_terms_tt
 		ai_chance = {
 			base = 70
 			modifier = { add = 40 c:TUR = { sp_egyptian_question_coalition_leverage = yes } }

@@ -68,6 +68,9 @@ sp_i31i.10 = {
 			name = sp_i31_stage_complete_prestige
 			months = 60
 		}
+		show_as_tooltip = {
+			sp_i31_show_arabia_claims_tt = yes
+		}
 	}
 }
 
@@ -114,7 +117,9 @@ sp_i31i.11 = {
 			name = sp_i31_stage_complete_prestige
 			months = 60
 		}
-		custom_tooltip = sp_i31i.11.a_tt
+		show_as_tooltip = {
+			sp_i31_show_stage_3_claims_tt = yes
+		}
 	}
 }
 
@@ -259,7 +264,6 @@ sp_i31i.31 = {
 				months = 24
 			}
 		}
-		custom_tooltip = sp_i31i.31.a_tt
 		ai_chance = {
 			base = 40
 			modifier = {
@@ -302,7 +306,6 @@ sp_i31i.31 = {
 			country = c:TUR
 			value = -10
 		}
-		custom_tooltip = sp_i31i.31.c_tt
 		ai_chance = {
 			base = 20
 			modifier = {

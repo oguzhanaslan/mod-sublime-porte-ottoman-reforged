@@ -1,4 +1,6 @@
 ﻿l_english:
+ sp_je_imperial_identity: "Ottoman Reborn"
+ sp_je_imperial_identity_reason: "After the Tanzimat struggle, the Porte must choose one imperial course: Ottomanism (equal citizenship and constitutional government), Islamism (Caliphate and Muslim geopolitics), or Turkism (unlocking the Turanian Ideal). Only one path can be taken."
  sp_je_hunkar_iskelesi: "Treaty of Hünkâr İskelesi"
  sp_je_hunkar_iskelesi_reason: "Russia presently guarantees Ottoman independence under the Treaty of Hünkâr İskelesi. The arrangement is diplomatic, temporary, and tied to the balance of power on the Bosporus — not a permanent alliance."
  sp_je_hunkar_iskelesi_status_active: "The Russian guarantee remains in force. Historically, its binding term pointed toward a lapse in 1841."
@@ -14,7 +16,7 @@
  sp_je_eastern_provinces_status_bedirhan_enforced: "The Porte has pressed direct authority against Bedirhan Bey's local power."
  sp_je_eastern_provinces_status_direct_admin: "Direct provincial administration is being asserted in the eastern core."
 
- sp_je_post_tanzimat_era: "The Post-Tanzimat Era"
+ sp_je_post_tanzimat_era: "Post-Tanzimat"
  sp_je_post_tanzimat_era_reason: "After the domestic reforms of the Tanzimat, political debate turns toward representation, constitutional order, and the limits of royal prerogative. This entry follows that discussion; it does not enact laws or create new political institutions."
  sp_je_post_tanzimat_era_status_opening: "The empire enters a post-Tanzimat phase in which political modernization is openly debated."
  sp_je_post_tanzimat_era_status_debate: "Reformers and the palace are contesting the shape of post-Tanzimat politics."

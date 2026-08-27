@@ -1,0 +1,505 @@
+﻿# I-30 native tooltip pass — ExecuteTooltip sguis (effect is NOT run; renders as tooltip only).
+# Pattern: vanilla je_india_railway_*_sgui + SCOPE.sStateRegion GetName.
+# Visibility icons stay on sp_ct_vis_ctrl_*; these sguis are hover-only.
+#
+# Maintainability note: each territory needs its own STATE_* key in script — Clausewitz
+# cannot parameterize state region keys inside one shared sgui. Keep one thin copy per
+# state; do not invent a “generic” territory sgui without a verified vanilla pattern.
+#
+# Sections below:
+#   1) Territory control (sp_ct_tt_ctrl_*) — shared loc sp_ct_terr_ctrl_held/_missing
+#   2) Requirement rows (sp_ct_tt_req_*) — shared loc sp_ct_req_ctrl_held/_missing + label keys
+
+### Shared entry lines (loc): sp_ct_terr_ctrl_held / sp_ct_terr_ctrl_missing
+
+sp_ct_tt_ctrl_azerbaijan = {
+	scope = country
+	effect = {
+		s:STATE_AZERBAIJAN = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_AZERBAIJAN }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_elizavetpol = {
+	scope = country
+	effect = {
+		s:STATE_ELIZAVETPOL = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_ELIZAVETPOL }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_tabriz = {
+	scope = country
+	effect = {
+		s:STATE_TABRIZ = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_TABRIZ }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_urmia = {
+	scope = country
+	effect = {
+		s:STATE_URMIA = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_URMIA }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_irakajemi = {
+	scope = country
+	effect = {
+		s:STATE_IRAKAJEMI = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_IRAKAJEMI }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_isfahan = {
+	scope = country
+	effect = {
+		s:STATE_ISFAHAN = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_ISFAHAN }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_fars = {
+	scope = country
+	effect = {
+		s:STATE_FARS = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_FARS }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_kerman = {
+	scope = country
+	effect = {
+		s:STATE_KERMAN = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_KERMAN }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_khorasan = {
+	scope = country
+	effect = {
+		s:STATE_KHORASAN = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_KHORASAN }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_mazandaran = {
+	scope = country
+	effect = {
+		s:STATE_MAZANDARAN = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_MAZANDARAN }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_semnan = {
+	scope = country
+	effect = {
+		s:STATE_SEMNAN = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_SEMNAN }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_laristan = {
+	scope = country
+	effect = {
+		s:STATE_LARISTAN = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_LARISTAN }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_luristan = {
+	scope = country
+	effect = {
+		s:STATE_LURISTAN = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_LURISTAN }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_persian_kurdistan = {
+	scope = country
+	effect = {
+		s:STATE_PERSIAN_KURDISTAN = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_PERSIAN_KURDISTAN }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_khuzestan = {
+	scope = country
+	effect = {
+		s:STATE_KHUZESTAN = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_KHUZESTAN }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_turkmenia = {
+	scope = country
+	effect = {
+		s:STATE_TURKMENIA = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_TURKMENIA }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_merz = {
+	scope = country
+	effect = {
+		s:STATE_MERZ = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_MERZ }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_khiva = {
+	scope = country
+	effect = {
+		s:STATE_KHIVA = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_KHIVA }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_uzbekia = {
+	scope = country
+	effect = {
+		s:STATE_UZBEKIA = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_UZBEKIA }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_fergana = {
+	scope = country
+	effect = {
+		s:STATE_FERGANA = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_FERGANA }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_kirghizia = {
+	scope = country
+	effect = {
+		s:STATE_KIRGHIZIA = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_KIRGHIZIA }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_syrdarya = {
+	scope = country
+	effect = {
+		s:STATE_SYRDARYA = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_SYRDARYA }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_aktobe = {
+	scope = country
+	effect = {
+		s:STATE_AKTOBE = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_AKTOBE }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_akmolinsk = {
+	scope = country
+	effect = {
+		s:STATE_AKMOLINSK = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_AKMOLINSK }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_uralsk = {
+	scope = country
+	effect = {
+		s:STATE_URALSK = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_URALSK }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_semireche = {
+	scope = country
+	effect = {
+		s:STATE_SEMIRECHE = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_SEMIRECHE }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_jetisy = {
+	scope = country
+	effect = {
+		s:STATE_JETISY = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_JETISY }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_dzungaria = {
+	scope = country
+	effect = {
+		s:STATE_DZUNGARIA = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_DZUNGARIA }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+sp_ct_tt_ctrl_tianshan = {
+	scope = country
+	effect = {
+		s:STATE_TIANSHAN = { save_temporary_scope_as = sp_ct_state_region }
+		if = {
+			limit = { country_or_subject_owns_entire_state_region = STATE_TIANSHAN }
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_terr_ctrl_missing"
+		}
+	}
+}
+
+### Requirement ExecuteTooltip sguis (if/limit + loc lines; nested triggers invalid in sgui effect)
+
+sp_ct_tt_req_pan_nationalism = {
+	scope = country
+	effect = {
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_missing"
+		}
+		custom_tooltip_no_bullet = "sp_ct_req_pan_nationalism"
+	}
+}
+
+sp_ct_tt_req_path_turkism = {
+	scope = country
+	effect = {
+		if = {
+			limit = { has_variable = sp_turkism_selected }
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_missing"
+		}
+		custom_tooltip_no_bullet = "sp_ct_req_path_turkism"
+	}
+}
+
+sp_ct_tt_req_path_ottomanism = {
+	scope = country
+	effect = {
+		if = {
+			limit = { has_variable = sp_ottomanism_selected }
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_missing"
+		}
+		custom_tooltip_no_bullet = "sp_ct_req_path_ottomanism"
+	}
+}
+
+sp_ct_tt_req_path_islamism = {
+	scope = country
+	effect = {
+		if = {
+			limit = { has_variable = sp_islamism_selected }
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_missing"
+		}
+		custom_tooltip_no_bullet = "sp_ct_req_path_islamism"
+	}
+}
+
+sp_ct_tt_req_identity_chosen = {
+	scope = country
+	effect = {
+		if = {
+			limit = { has_variable = sp_imperial_identity_chosen }
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_missing"
+		}
+		custom_tooltip_no_bullet = "sp_ct_req_identity_chosen"
+	}
+}
+
+sp_ct_tt_req_post_tanzimat_gate = {
+	scope = country
+	effect = {
+		if = {
+			limit = { sp_i28_post_tanzimat = yes }
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_missing"
+		}
+		custom_tooltip_no_bullet = "sp_ct_req_post_tanzimat_gate"
+	}
+}

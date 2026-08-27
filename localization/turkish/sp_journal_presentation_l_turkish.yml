@@ -1,4 +1,6 @@
 ﻿l_turkish:
+ sp_je_imperial_identity: "Yeniden Osmanlı"
+ sp_je_imperial_identity_reason: "Tanzimat mücadelesinden sonra Bâbıâli tek bir imparatorluk yolu seçmelidir: Osmanlıcılık (eşit vatandaşlık ve anayasal hükûmet), İslamcılık (Hilafet ve Müslüman jeopolitikası) veya Türkçülük (Turan Ülküsü'nü açar). Yalnızca bir yol izlenebilir."
  sp_je_hunkar_iskelesi: "Hünkâr İskelesi Antlaşması"
  sp_je_hunkar_iskelesi_reason: "Rusya, Hünkâr İskelesi Antlaşması uyarınca şu anda Osmanlı bağımsızlığını garanti etmektedir. Bu düzen diplomatik, geçici ve Boğazlar dengesine bağlıdır — kalıcı bir ittifak değildir."
  sp_je_hunkar_iskelesi_status_active: "Rus garantisi yürürlüktedir. Tarihsel olarak bağlayıcı süresi 1841'de sona ermeye işaret ediyordu."
@@ -14,7 +16,7 @@
  sp_je_eastern_provinces_status_bedirhan_enforced: "Bâb-ı Âli, Bedirhan Bey'in yerel gücüne karşı doğrudan otorite uygulamıştır."
  sp_je_eastern_provinces_status_direct_admin: "Doğu vilayetlerinin özünde doğrudan vilayet idaresi tesis edilmektedir."
 
- sp_je_post_tanzimat_era: "Tanzimat Sonrası Dönem"
+ sp_je_post_tanzimat_era: "Tanzimat sonrası"
  sp_je_post_tanzimat_era_reason: "Tanzimat'ın iç reformlarından sonra siyasi tartışma temsil, anayasal düzen ve hükümdarlık yetkisinin sınırlarına döner. Bu kayıt o tartışmayı izler; kanun çıkarmaz ve yeni siyasi kurum yaratmaz."
  sp_je_post_tanzimat_era_status_opening: "Devlet, siyasi modernleşmenin açıkça tartışıldığı Tanzimat sonrası bir evreye girer."
  sp_je_post_tanzimat_era_status_debate: "Islahatçılar ile saray, Tanzimat sonrası siyasetin biçimini tartışmaktadır."

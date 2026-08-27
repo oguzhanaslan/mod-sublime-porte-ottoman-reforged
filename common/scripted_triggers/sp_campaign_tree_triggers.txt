@@ -119,20 +119,23 @@ sp_ct_identity_locked = {
 	}
 }
 
-### Ottomanism
+### Ottomanism (I-31 hub)
 
 sp_ct_ottomanism_completed = {
 	sp_ct_is_tur = yes
-	has_variable = sp_ottomanism_selected
+	has_variable = sp_ottomanism_ideal_complete
 }
 
 sp_ct_ottomanism_active = {
-	always = no
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_selected
+	NOT = { has_variable = sp_ottomanism_ideal_complete }
 }
 
 sp_ct_ottomanism_available = {
 	sp_ct_is_tur = yes
 	sp_i28_identity_eligible = yes
+	NOT = { has_variable = sp_imperial_identity_chosen }
 }
 
 sp_ct_ottomanism_locked = {
@@ -140,25 +143,29 @@ sp_ct_ottomanism_locked = {
 		NOT = { sp_ct_is_tur = yes }
 		AND = {
 			NOT = { sp_ct_ottomanism_completed = yes }
+			NOT = { sp_ct_ottomanism_active = yes }
 			NOT = { sp_ct_ottomanism_available = yes }
 		}
 	}
 }
 
-### Islamism
+### Islamism (I-31 hub)
 
 sp_ct_islamism_completed = {
 	sp_ct_is_tur = yes
-	has_variable = sp_islamism_selected
+	has_variable = sp_great_caliphate_complete
 }
 
 sp_ct_islamism_active = {
-	always = no
+	sp_ct_is_tur = yes
+	has_variable = sp_islamism_selected
+	NOT = { has_variable = sp_great_caliphate_complete }
 }
 
 sp_ct_islamism_available = {
 	sp_ct_is_tur = yes
 	sp_i28_identity_eligible = yes
+	NOT = { has_variable = sp_imperial_identity_chosen }
 }
 
 sp_ct_islamism_locked = {
@@ -166,6 +173,7 @@ sp_ct_islamism_locked = {
 		NOT = { sp_ct_is_tur = yes }
 		AND = {
 			NOT = { sp_ct_islamism_completed = yes }
+			NOT = { sp_ct_islamism_active = yes }
 			NOT = { sp_ct_islamism_available = yes }
 		}
 	}
@@ -176,15 +184,19 @@ sp_ct_islamism_locked = {
 sp_ct_turkism_completed = {
 	sp_ct_is_tur = yes
 	has_variable = sp_turkism_selected
+	has_variable = sp_turan_ideal_complete
 }
 
 sp_ct_turkism_active = {
-	always = no
+	sp_ct_is_tur = yes
+	has_variable = sp_turkism_selected
+	NOT = { has_variable = sp_turan_ideal_complete }
 }
 
 sp_ct_turkism_available = {
 	sp_ct_is_tur = yes
 	sp_i28_identity_eligible = yes
+	NOT = { has_variable = sp_imperial_identity_chosen }
 }
 
 sp_ct_turkism_locked = {
@@ -192,7 +204,239 @@ sp_ct_turkism_locked = {
 		NOT = { sp_ct_is_tur = yes }
 		AND = {
 			NOT = { sp_ct_turkism_completed = yes }
+			NOT = { sp_ct_turkism_active = yes }
 			NOT = { sp_ct_turkism_available = yes }
+		}
+	}
+}
+
+
+### Ottomanism stages (I-31)
+
+sp_ct_ottomanism_s1_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_stage_1_done
+}
+sp_ct_ottomanism_s1_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_stage
+	var:sp_ottomanism_stage = 1
+	NOT = { has_variable = sp_ottomanism_stage_1_done }
+}
+sp_ct_ottomanism_s1_available = { always = no }
+sp_ct_ottomanism_s1_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_ottomanism_s1_completed = yes }
+			NOT = { sp_ct_ottomanism_s1_active = yes }
+		}
+	}
+}
+
+sp_ct_ottomanism_s2_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_stage_2_done
+}
+sp_ct_ottomanism_s2_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_stage
+	var:sp_ottomanism_stage = 2
+	NOT = { has_variable = sp_ottomanism_stage_2_done }
+}
+sp_ct_ottomanism_s2_available = { always = no }
+sp_ct_ottomanism_s2_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_ottomanism_s2_completed = yes }
+			NOT = { sp_ct_ottomanism_s2_active = yes }
+		}
+	}
+}
+
+sp_ct_ottomanism_s3_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_stage_3_done
+}
+sp_ct_ottomanism_s3_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_stage
+	var:sp_ottomanism_stage = 3
+	NOT = { has_variable = sp_ottomanism_stage_3_done }
+}
+sp_ct_ottomanism_s3_available = { always = no }
+sp_ct_ottomanism_s3_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_ottomanism_s3_completed = yes }
+			NOT = { sp_ct_ottomanism_s3_active = yes }
+		}
+	}
+}
+
+sp_ct_ottomanism_s4_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_stage_4_done
+}
+sp_ct_ottomanism_s4_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_stage
+	var:sp_ottomanism_stage = 4
+	NOT = { has_variable = sp_ottomanism_stage_4_done }
+}
+sp_ct_ottomanism_s4_available = { always = no }
+sp_ct_ottomanism_s4_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_ottomanism_s4_completed = yes }
+			NOT = { sp_ct_ottomanism_s4_active = yes }
+		}
+	}
+}
+
+### Constitutional Ottoman (I-31 capstone)
+
+sp_ct_constitutional_ottoman_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_ideal_complete
+}
+
+sp_ct_constitutional_ottoman_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_ottomanism_stage
+	var:sp_ottomanism_stage = 4
+	sp_i31_ottomanism_stage_4_complete = yes
+	NOT = { has_variable = sp_ottomanism_ideal_complete }
+}
+
+sp_ct_constitutional_ottoman_available = {
+	always = no
+}
+
+sp_ct_constitutional_ottoman_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_constitutional_ottoman_completed = yes }
+			NOT = { sp_ct_constitutional_ottoman_active = yes }
+		}
+	}
+}
+
+### Islamism stages (I-31)
+
+sp_ct_islamism_s1_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_islamism_stage_1_done
+}
+sp_ct_islamism_s1_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_islamism_stage
+	var:sp_islamism_stage = 1
+	NOT = { has_variable = sp_islamism_stage_1_done }
+}
+sp_ct_islamism_s1_available = { always = no }
+sp_ct_islamism_s1_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_islamism_s1_completed = yes }
+			NOT = { sp_ct_islamism_s1_active = yes }
+		}
+	}
+}
+
+sp_ct_islamism_s2_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_islamism_stage_2_done
+}
+sp_ct_islamism_s2_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_islamism_stage
+	var:sp_islamism_stage = 2
+	NOT = { has_variable = sp_islamism_stage_2_done }
+}
+sp_ct_islamism_s2_available = { always = no }
+sp_ct_islamism_s2_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_islamism_s2_completed = yes }
+			NOT = { sp_ct_islamism_s2_active = yes }
+		}
+	}
+}
+
+sp_ct_islamism_s3_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_islamism_stage_3_done
+}
+sp_ct_islamism_s3_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_islamism_stage
+	var:sp_islamism_stage = 3
+	NOT = { has_variable = sp_islamism_stage_3_done }
+}
+sp_ct_islamism_s3_available = { always = no }
+sp_ct_islamism_s3_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_islamism_s3_completed = yes }
+			NOT = { sp_ct_islamism_s3_active = yes }
+		}
+	}
+}
+
+sp_ct_islamism_s4_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_islamism_stage_4_done
+}
+sp_ct_islamism_s4_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_islamism_stage
+	var:sp_islamism_stage = 4
+	NOT = { has_variable = sp_islamism_stage_4_done }
+}
+sp_ct_islamism_s4_available = { always = no }
+sp_ct_islamism_s4_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_islamism_s4_completed = yes }
+			NOT = { sp_ct_islamism_s4_active = yes }
+		}
+	}
+}
+
+### Great Caliphate (I-31 capstone)
+
+sp_ct_great_caliphate_completed = {
+	sp_ct_is_tur = yes
+	has_variable = sp_great_caliphate_complete
+}
+
+sp_ct_great_caliphate_active = {
+	sp_ct_is_tur = yes
+	has_variable = sp_islamism_stage
+	var:sp_islamism_stage = 4
+	sp_i31_islamism_stage_4_complete = yes
+	NOT = { has_variable = sp_great_caliphate_complete }
+}
+
+sp_ct_great_caliphate_available = {
+	always = no
+}
+
+sp_ct_great_caliphate_locked = {
+	OR = {
+		NOT = { sp_ct_is_tur = yes }
+		AND = {
+			NOT = { sp_ct_great_caliphate_completed = yes }
+			NOT = { sp_ct_great_caliphate_active = yes }
 		}
 	}
 }
@@ -380,6 +624,14 @@ sp_ct_req_je_turan_active = {
 	has_journal_entry = sp_je_turanian_ideal
 }
 
+sp_ct_req_je_ottomanism_active = {
+	has_journal_entry = sp_je_ottomanism
+}
+
+sp_ct_req_je_islamism_active = {
+	has_journal_entry = sp_je_pan_islamic_unity
+}
+
 sp_ct_req_pan_nationalism = {
 	has_technology_researched = pan-nationalism
 }
@@ -484,4 +736,20 @@ sp_ct_req_turan_s4_done = {
 
 sp_ct_req_great_ottoman_proclaimed = {
 	has_variable = sp_great_ottoman_empire_proclaimed
+}
+
+sp_ct_req_ottomanism_s4_done = {
+	has_variable = sp_ottomanism_stage_4_done
+}
+
+sp_ct_req_ottomanism_ideal_complete = {
+	has_variable = sp_ottomanism_ideal_complete
+}
+
+sp_ct_req_islamism_s4_done = {
+	has_variable = sp_islamism_stage_4_done
+}
+
+sp_ct_req_great_caliphate_complete = {
+	has_variable = sp_great_caliphate_complete
 }

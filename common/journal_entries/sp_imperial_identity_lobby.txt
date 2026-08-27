@@ -1,0 +1,28 @@
+﻿# Lobby teaser for Imperial Identity grand paths (I-28 / I-31).
+# Does not activate in-game: identity choice remains sp_i28.1 after Tanzimat.
+# Path JEs (Ottomanism / Islamism / Turanian Ideal) stay mutex and gated.
+
+sp_je_imperial_identity = {
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	group = je_group_historical_content
+
+	is_shown_in_lobby = {
+		c:TUR ?= this
+	}
+
+	is_shown_when_inactive = {
+		always = no
+	}
+
+	possible = {
+		always = no
+	}
+
+	invalid = {
+		NOT = { c:TUR ?= this }
+	}
+
+	transferable = no
+	weight = 4600
+	should_be_pinned_by_default_uninvolved_or_context = no
+}

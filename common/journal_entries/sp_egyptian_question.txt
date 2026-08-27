@@ -2,6 +2,10 @@
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
 	group = je_group_tanzimat
 
+	is_shown_in_lobby = {
+		c:TUR ?= this
+	}
+
 	status_desc = {
 		first_valid = {
 			triggered_desc = {

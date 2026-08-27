@@ -3,6 +3,7 @@
  sp_i23.1.d:0 "In 1835 the Porte ended the long Karamanlı household's de facto rule and sent an Ottoman governor to [SCOPE.sCountry('sp_i23_tri_scope').GetName]. Direct imperial authority has been restored along the coast. The desert hinterland is another matter: Fezzan remains unsettled, and the Cyrenaican interior does not obey the coastal administration as a province would. Holding the shore is not the same as ruling the Sahara."
  sp_i23.1.f:0 "The sultan's governor sits in Tripoli. The desert does not sit still."
  sp_i23.1.a:0 "Acknowledge"
+ sp_i23_coastal_authority:0 "Coastal Authority in Tripoli"
  sp_i23.2.t:0 "The Bey and the Porte"
  sp_i23.2.d:0 "The Husaynid Bey of [SCOPE.sCountry('sp_i23_tun_scope').GetName] still recites the sultan's name in the Friday prayer, yet the household rules the regency as if it were its own. After the restoration of direct authority in Tripoli, ministers ask whether Tunis should be pressed toward tighter obedience — tribute, consultation, and a firmer recognition of the Porte — or left in the practical autonomy it has long enjoyed."
  sp_i23.2.f:0 "Suzerainty is a legal fact. The Bey's household is a political one."
