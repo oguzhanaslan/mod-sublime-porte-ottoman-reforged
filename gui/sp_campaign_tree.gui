@@ -923,6 +923,8 @@ types sp_campaign_tree_types {
 						layoutpolicy_vertical = expanding
 						margin = { 16 12 }
 						spacing = 4
+						# Only the selected inspector must contribute height (vanilla exclusive-list pattern).
+						ignoreinvisible = yes
 
 						sp_ct_insp_empty = {
 							visible = "[Not(GetScriptedGui('sp_ct_vis_has_selection').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
