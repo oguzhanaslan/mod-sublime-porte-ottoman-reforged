@@ -233,20 +233,8 @@ sp_i32_save_students_partner_scope = {
 	}
 }
 
-sp_i32_add_students_active_modifier = {
-	if = {
-		limit = {
-			has_journal_entry = sp_je_learning_from_europe
-		}
-		je:sp_je_learning_from_europe = {
-			add_modifier = {
-				name = $MODIFIER$
-				years = 6
-			}
-		}
-	}
-}
-
+# Applies the active Students modifier to the JE. Wave A destination options
+# inline add_modifier instead, so the native tooltip is not collapsed.
 sp_i32_start_students_shared = {
 	set_variable = sp_i32_students_active
 	set_variable = {
@@ -271,16 +259,16 @@ sp_i32_start_students_shared = {
 	}
 }
 
+# Bookkeeping only. Player-facing add_treasury / add_modifier live on sp_i32.11
+# options so native effect tooltips are not collapsed inside this effect.
 sp_i32_start_students_france = {
 	if = {
 		limit = {
 			NOT = { sp_i32_students_busy = yes }
 		}
-		add_treasury = -8000
 		sp_i32_clear_students_partner_flags = yes
 		set_variable = sp_i32_students_partner_fra
 		sp_i32_start_students_shared = yes
-		sp_i32_add_students_active_modifier = { MODIFIER = sp_i32_students_fra_act }
 	}
 }
 
@@ -289,11 +277,9 @@ sp_i32_start_students_britain = {
 		limit = {
 			NOT = { sp_i32_students_busy = yes }
 		}
-		add_treasury = -8000
 		sp_i32_clear_students_partner_flags = yes
 		set_variable = sp_i32_students_partner_gbr
 		sp_i32_start_students_shared = yes
-		sp_i32_add_students_active_modifier = { MODIFIER = sp_i32_students_gbr_act }
 	}
 }
 
@@ -302,19 +288,9 @@ sp_i32_start_students_german = {
 		limit = {
 			NOT = { sp_i32_students_busy = yes }
 		}
-		add_treasury = -8000
 		sp_i32_clear_students_partner_flags = yes
 		set_variable = sp_i32_students_partner_german
 		sp_i32_start_students_shared = yes
-		if = {
-			limit = {
-				sp_i32_mil_spread_occupied = yes
-			}
-			sp_i32_add_students_active_modifier = { MODIFIER = sp_i32_students_pru_act_qual_only }
-		}
-		else = {
-			sp_i32_add_students_active_modifier = { MODIFIER = sp_i32_students_pru_act_spread }
-		}
 	}
 }
 
@@ -323,11 +299,9 @@ sp_i32_start_students_austria = {
 		limit = {
 			NOT = { sp_i32_students_busy = yes }
 		}
-		add_treasury = -6000
 		sp_i32_clear_students_partner_flags = yes
 		set_variable = sp_i32_students_partner_aus
 		sp_i32_start_students_shared = yes
-		sp_i32_add_students_active_modifier = { MODIFIER = sp_i32_students_aus_act }
 	}
 }
 
@@ -352,23 +326,9 @@ sp_i32_cleanup_students = {
 	remove_variable = sp_i32_students_chill
 }
 
+# Bookkeeping only. Player-facing change_relations / add_modifier live on
+# sp_i32.40 options so native effect tooltips are not collapsed here.
 sp_i32_complete_students_common = {
-	if = {
-		limit = {
-			NOT = { has_variable = sp_i32_students_chill }
-			sp_i32_students_partner_still_exists = yes
-		}
-		sp_i32_save_students_partner_scope = yes
-		if = {
-			limit = {
-				exists = scope:sp_i32_partner
-			}
-			change_relations = {
-				country = scope:sp_i32_partner
-				value = 10
-			}
-		}
-	}
 	set_variable = sp_i32_students_ever_completed
 	set_variable = {
 		name = sp_i32_students_cooldown
@@ -377,22 +337,8 @@ sp_i32_complete_students_common = {
 	sp_i32_cleanup_students = yes
 }
 
-sp_i32_cancel_students = {
-	if = {
-		limit = {
-			sp_i32_students_partner_still_exists = yes
-		}
-		sp_i32_save_students_partner_scope = yes
-		if = {
-			limit = {
-				exists = scope:sp_i32_partner
-			}
-			change_relations = {
-				country = scope:sp_i32_partner
-				value = -5
-			}
-		}
-	}
+# Relations are applied by the sp_i32.30 confirm option so they appear natively.
+sp_i32_cancel_students_cleanup = {
 	set_variable = {
 		name = sp_i32_students_cooldown
 		years = 1

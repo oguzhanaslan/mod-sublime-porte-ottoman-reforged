@@ -24,6 +24,7 @@ Desktop.ini
 logs/
 tiger-output/
 validation-output/
+.tiger-bin/
 
 # Local environment files
 .env

@@ -37,60 +37,121 @@ sp_i32.11 = {
 	option = {
 		name = sp_i32.11.fra
 		trigger = {
+			gold_reserves >= sp_i32_students_upfront_standard
 			custom_tooltip = {
-				text = sp_i32_students_fra_eligible_tt
-				sp_i32_students_fra_eligible = yes
+				text = sp_i32_students_fra_diplo_tt
+				sp_i32_students_can_use_country = { PARTNER = c:FRA }
 			}
 		}
 		show_as_unavailable = {
 			NOT = { sp_i32_students_fra_eligible = yes }
 		}
-		sp_i32_start_students_france = yes
+		add_treasury = {
+			value = sp_i32_students_pay_standard
+		}
+		je:sp_je_learning_from_europe = {
+			add_modifier = {
+				name = sp_i32_students_fra_act
+				years = 6
+			}
+		}
+		hidden_effect = {
+			sp_i32_start_students_france = yes
+		}
 		ai_chance = { base = 40 }
 	}
 
 	option = {
 		name = sp_i32.11.gbr
 		trigger = {
+			gold_reserves >= sp_i32_students_upfront_standard
 			custom_tooltip = {
-				text = sp_i32_students_gbr_eligible_tt
-				sp_i32_students_gbr_eligible = yes
+				text = sp_i32_students_gbr_diplo_tt
+				sp_i32_students_can_use_country = { PARTNER = c:GBR }
 			}
 		}
 		show_as_unavailable = {
 			NOT = { sp_i32_students_gbr_eligible = yes }
 		}
-		sp_i32_start_students_britain = yes
+		add_treasury = {
+			value = sp_i32_students_pay_standard
+		}
+		je:sp_je_learning_from_europe = {
+			add_modifier = {
+				name = sp_i32_students_gbr_act
+				years = 6
+			}
+		}
+		hidden_effect = {
+			sp_i32_start_students_britain = yes
+		}
 		ai_chance = { base = 25 }
 	}
 
 	option = {
 		name = sp_i32.11.ger
 		trigger = {
+			gold_reserves >= sp_i32_students_upfront_standard
 			custom_tooltip = {
-				text = sp_i32_students_german_eligible_tt
-				sp_i32_students_german_eligible = yes
+				text = sp_i32_students_german_diplo_tt
+				sp_i32_students_german_host_ok = yes
 			}
 		}
 		show_as_unavailable = {
 			NOT = { sp_i32_students_german_eligible = yes }
 		}
-		sp_i32_start_students_german = yes
+		add_treasury = {
+			value = sp_i32_students_pay_standard
+		}
+		if = {
+			limit = {
+				sp_i32_mil_spread_occupied = yes
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_students_pru_act_qual_only
+					years = 6
+				}
+			}
+		}
+		else = {
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_students_pru_act_spread
+					years = 6
+				}
+			}
+		}
+		hidden_effect = {
+			sp_i32_start_students_german = yes
+		}
 		ai_chance = { base = 15 }
 	}
 
 	option = {
 		name = sp_i32.11.aus
 		trigger = {
+			gold_reserves >= sp_i32_students_upfront_austria
 			custom_tooltip = {
-				text = sp_i32_students_aus_eligible_tt
-				sp_i32_students_aus_eligible = yes
+				text = sp_i32_students_aus_diplo_tt
+				sp_i32_students_can_use_country = { PARTNER = c:AUS }
 			}
 		}
 		show_as_unavailable = {
 			NOT = { sp_i32_students_aus_eligible = yes }
 		}
-		sp_i32_start_students_austria = yes
+		add_treasury = {
+			value = sp_i32_students_pay_austria
+		}
+		je:sp_je_learning_from_europe = {
+			add_modifier = {
+				name = sp_i32_students_aus_act
+				years = 6
+			}
+		}
+		hidden_effect = {
+			sp_i32_start_students_austria = yes
+		}
 		ai_chance = { base = 20 }
 	}
 
@@ -128,7 +189,20 @@ sp_i32.30 = {
 	option = {
 		name = sp_i32.30.a
 		default_option = yes
-		sp_i32_cancel_students = yes
+		custom_tooltip = sp_i32_students_cancel_cooldown_tt
+		custom_tooltip = sp_i32_students_no_refund_tt
+		if = {
+			limit = {
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = -5
+			}
+		}
+		hidden_effect = {
+			sp_i32_cancel_students_cleanup = yes
+		}
 		ai_chance = { base = 0 }
 	}
 
@@ -164,11 +238,24 @@ sp_i32.40 = {
 	option = {
 		name = sp_i32.40.state
 		default_option = yes
+		custom_tooltip = sp_i32_students_complete_cooldown_tt
 		add_modifier = {
 			name = sp_i32_students_complete_state
 			years = 2
 		}
-		sp_i32_complete_students_common = yes
+		if = {
+			limit = {
+				NOT = { has_variable = sp_i32_students_chill }
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = 10
+			}
+		}
+		hidden_effect = {
+			sp_i32_complete_students_common = yes
+		}
 		ai_chance = { base = 40 }
 	}
 
@@ -180,11 +267,24 @@ sp_i32.40 = {
 				has_variable = sp_i32_students_partner_aus
 			}
 		}
+		custom_tooltip = sp_i32_students_complete_cooldown_tt
 		add_modifier = {
 			name = sp_i32_students_complete_schools
 			years = 2
 		}
-		sp_i32_complete_students_common = yes
+		if = {
+			limit = {
+				NOT = { has_variable = sp_i32_students_chill }
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = 10
+			}
+		}
+		hidden_effect = {
+			sp_i32_complete_students_common = yes
+		}
 		ai_chance = { base = 30 }
 	}
 
@@ -196,11 +296,24 @@ sp_i32.40 = {
 				has_variable = sp_i32_students_partner_gbr
 			}
 		}
+		custom_tooltip = sp_i32_students_complete_cooldown_tt
 		add_modifier = {
 			name = sp_i32_students_complete_technical
 			years = 2
 		}
-		sp_i32_complete_students_common = yes
+		if = {
+			limit = {
+				NOT = { has_variable = sp_i32_students_chill }
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = 10
+			}
+		}
+		hidden_effect = {
+			sp_i32_complete_students_common = yes
+		}
 		ai_chance = { base = 25 }
 	}
 
@@ -209,11 +322,24 @@ sp_i32.40 = {
 		trigger = {
 			has_variable = sp_i32_students_partner_german
 		}
+		custom_tooltip = sp_i32_students_complete_cooldown_tt
 		add_modifier = {
 			name = sp_i32_students_complete_military
 			years = 2
 		}
-		sp_i32_complete_students_common = yes
+		if = {
+			limit = {
+				NOT = { has_variable = sp_i32_students_chill }
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = 10
+			}
+		}
+		hidden_effect = {
+			sp_i32_complete_students_common = yes
+		}
 		ai_chance = { base = 35 }
 	}
 }
@@ -292,16 +418,22 @@ sp_i32.50 = {
 		}
 		if = {
 			limit = { has_variable = sp_i32_comp_delay }
-			change_variable = {
-				name = sp_i32_students_months_left
-				add = 12
+			custom_tooltip = sp_i32_students_extend_year_tt
+			hidden_effect = {
+				change_variable = {
+					name = sp_i32_students_months_left
+					add = 12
+				}
 			}
 		}
 		if = {
 			limit = { has_variable = sp_i32_comp_remain }
-			change_variable = {
-				name = sp_i32_students_months_left
-				add = 12
+			custom_tooltip = sp_i32_students_extend_year_tt
+			hidden_effect = {
+				change_variable = {
+					name = sp_i32_students_months_left
+					add = 12
+				}
 			}
 			if = {
 				limit = { exists = scope:sp_i32_partner }
@@ -318,9 +450,11 @@ sp_i32.50 = {
 				years = 2
 			}
 		}
-		remove_variable = sp_i32_comp_overrun
-		remove_variable = sp_i32_comp_delay
-		remove_variable = sp_i32_comp_remain
-		remove_variable = sp_i32_comp_radicals
+		hidden_effect = {
+			remove_variable = sp_i32_comp_overrun
+			remove_variable = sp_i32_comp_delay
+			remove_variable = sp_i32_comp_remain
+			remove_variable = sp_i32_comp_radicals
+		}
 	}
 }

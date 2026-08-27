@@ -94,23 +94,22 @@ sp_i32_students_can_use_country = {
 }
 
 sp_i32_students_fra_eligible = {
-	gold_reserves >= 8000
+	gold_reserves >= sp_i32_students_upfront_standard
 	sp_i32_students_can_use_country = { PARTNER = c:FRA }
 }
 
 sp_i32_students_gbr_eligible = {
-	gold_reserves >= 8000
+	gold_reserves >= sp_i32_students_upfront_standard
 	sp_i32_students_can_use_country = { PARTNER = c:GBR }
 }
 
 sp_i32_students_aus_eligible = {
-	gold_reserves >= 6000
+	gold_reserves >= sp_i32_students_upfront_austria
 	sp_i32_students_can_use_country = { PARTNER = c:AUS }
 }
 
 # GER if it exists, else PRU. Unification must not break the destination.
-sp_i32_students_german_eligible = {
-	gold_reserves >= 8000
+sp_i32_students_german_host_ok = {
 	OR = {
 		AND = {
 			exists = c:GER
@@ -121,6 +120,20 @@ sp_i32_students_german_eligible = {
 			exists = c:PRU
 			sp_i32_students_can_use_country = { PARTNER = c:PRU }
 		}
+	}
+}
+
+sp_i32_students_german_eligible = {
+	gold_reserves >= sp_i32_students_upfront_standard
+	sp_i32_students_german_host_ok = yes
+}
+
+sp_i32_any_student_destination_diplomatic = {
+	OR = {
+		sp_i32_students_can_use_country = { PARTNER = c:FRA }
+		sp_i32_students_can_use_country = { PARTNER = c:GBR }
+		sp_i32_students_german_host_ok = yes
+		sp_i32_students_can_use_country = { PARTNER = c:AUS }
 	}
 }
 

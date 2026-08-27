@@ -23,8 +23,9 @@ sp_i32_btn_send_students = {
 		}
 		custom_tooltip = {
 			text = sp_i32_students_destination_tt
-			sp_i32_any_student_destination_eligible = yes
+			sp_i32_any_student_destination_diplomatic = yes
 		}
+		gold_reserves >= sp_i32_students_gold_required
 	}
 
 	ai_chance = {
@@ -45,6 +46,11 @@ sp_i32_btn_send_students = {
 
 	effect = {
 		custom_tooltip = sp_i32_btn_send_students_effect_tt
+		show_as_tooltip = {
+			add_treasury = {
+				value = sp_i32_students_tooltip_pay
+			}
+		}
 		trigger_event = { id = sp_i32.11 popup = yes }
 	}
 }
@@ -72,6 +78,60 @@ sp_i32_btn_cancel_students = {
 
 	effect = {
 		custom_tooltip = sp_i32_btn_cancel_students_effect_tt
+		custom_tooltip = sp_i32_students_cancel_cooldown_tt
+		custom_tooltip = sp_i32_students_no_refund_tt
+		show_as_tooltip = {
+			if = {
+				limit = {
+					has_variable = sp_i32_students_partner_fra
+					exists = c:FRA
+				}
+				change_relations = {
+					country = c:FRA
+					value = -5
+				}
+			}
+			else_if = {
+				limit = {
+					has_variable = sp_i32_students_partner_gbr
+					exists = c:GBR
+				}
+				change_relations = {
+					country = c:GBR
+					value = -5
+				}
+			}
+			else_if = {
+				limit = {
+					has_variable = sp_i32_students_partner_aus
+					exists = c:AUS
+				}
+				change_relations = {
+					country = c:AUS
+					value = -5
+				}
+			}
+			else_if = {
+				limit = {
+					has_variable = sp_i32_students_partner_german
+					exists = c:GER
+				}
+				change_relations = {
+					country = c:GER
+					value = -5
+				}
+			}
+			else_if = {
+				limit = {
+					has_variable = sp_i32_students_partner_german
+					exists = c:PRU
+				}
+				change_relations = {
+					country = c:PRU
+					value = -5
+				}
+			}
+		}
 		trigger_event = { id = sp_i32.30 popup = yes }
 	}
 }

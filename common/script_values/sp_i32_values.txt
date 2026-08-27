@@ -40,10 +40,57 @@ sp_i32_capacity_max = {
 	}
 }
 
+# Single source of truth for Students upfront gold. Tooltips must use these
+# via gold_reserves / add_treasury — never hardcode the figure in loc.
 sp_i32_students_upfront_standard = {
 	value = 8000
 }
 
 sp_i32_students_upfront_austria = {
 	value = 6000
+}
+
+# Signed treasury deltas for native add_treasury tooltips.
+sp_i32_students_pay_standard = {
+	value = sp_i32_students_upfront_standard
+	multiply = -1
+}
+
+sp_i32_students_pay_austria = {
+	value = sp_i32_students_upfront_austria
+	multiply = -1
+}
+
+# Naked possible gold: cheapest diplomatic host the player can actually pick.
+# If Austria is a valid host, 6000 is enough to open the picker; otherwise 8000.
+sp_i32_students_gold_required = {
+	if = {
+		limit = {
+			sp_i32_students_can_use_country = { PARTNER = c:AUS }
+		}
+		value = sp_i32_students_upfront_austria
+	}
+	else = {
+		value = sp_i32_students_upfront_standard
+	}
+}
+
+# JE-button preview: Austria-only eligibility uses the cheaper cost; otherwise the standard cost.
+# Does not charge. Authoritative add_treasury lives on sp_i32.11 options.
+sp_i32_students_tooltip_pay = {
+	if = {
+		limit = {
+			NOR = {
+				sp_i32_students_fra_eligible = yes
+				sp_i32_students_gbr_eligible = yes
+				sp_i32_students_german_eligible = yes
+			}
+			sp_i32_students_aus_eligible = yes
+		}
+		value = sp_i32_students_upfront_austria
+	}
+	else = {
+		value = sp_i32_students_upfront_standard
+	}
+	multiply = -1
 }
