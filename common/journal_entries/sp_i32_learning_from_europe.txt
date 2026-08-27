@@ -1,8 +1,10 @@
-﻿# I-32 Wave A — persistent hub. Tanzimat is not a prerequisite. Does not complete/fail.
+﻿# I-32 Wave A+B+C — persistent hub. Tanzimat is not a prerequisite. Does not complete/fail.
 
 sp_je_learning_from_europe = {
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
-	group = je_group_tanzimat
+	# Not Tanzimat: JOURNAL_ENTRY_HEADING is "[Group] [concept_journal_entry]".
+	# je_group_tanzimat produced the false "Tanzimat Journal Entry" classification.
+	group = je_group_foreign_affairs
 
 	is_shown_in_lobby = {
 		c:TUR ?= this
@@ -18,9 +20,17 @@ sp_je_learning_from_europe = {
 
 	scripted_button = sp_i32_btn_send_students
 	scripted_button = sp_i32_btn_cancel_students
+	scripted_button = sp_i32_btn_send_military
+	scripted_button = sp_i32_btn_cancel_military
+	scripted_button = sp_i32_btn_send_technical
+	scripted_button = sp_i32_btn_cancel_technical
+	scripted_button = sp_i32_btn_send_education
+	scripted_button = sp_i32_btn_cancel_education
 
 	scripted_progress_bar = sp_i32_spb_students
 	scripted_progress_bar = sp_i32_spb_military
+	scripted_progress_bar = sp_i32_spb_technical
+	scripted_progress_bar = sp_i32_spb_education
 
 	widget = {
 		gui = "gui/com_journal_injects/injects.gui"
@@ -127,6 +137,80 @@ sp_je_learning_from_europe = {
 			}
 			triggered_desc = {
 				trigger = {
+					has_variable = sp_i32_military_partner_fra
+				}
+				desc = sp_je_learning_from_europe_status_military_fra
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_military_partner_gbr
+				}
+				desc = sp_je_learning_from_europe_status_military_gbr
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_military_partner_german
+					exists = c:GER
+				}
+				desc = sp_je_learning_from_europe_status_military_ger
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_military_partner_german
+				}
+				desc = sp_je_learning_from_europe_status_military_pru
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_military_partner_aus
+				}
+				desc = sp_je_learning_from_europe_status_military_aus
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_technical_partner_fra
+				}
+				desc = sp_je_learning_from_europe_status_technical_fra
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_technical_partner_gbr
+				}
+				desc = sp_je_learning_from_europe_status_technical_gbr
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_technical_partner_german
+					exists = c:GER
+				}
+				desc = sp_je_learning_from_europe_status_technical_ger
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_technical_partner_german
+				}
+				desc = sp_je_learning_from_europe_status_technical_pru
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_education_focus_expand
+				}
+				desc = sp_je_learning_from_europe_status_education_expand
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_education_focus_limit
+				}
+				desc = sp_je_learning_from_europe_status_education_limit
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_education_focus_integrate
+				}
+				desc = sp_je_learning_from_europe_status_education_integrate
+			}
+			triggered_desc = {
+				trigger = {
 					sp_i32_has_incoming_military_assistance = yes
 					game_date < 1841.1.1
 				}
@@ -143,6 +227,24 @@ sp_je_learning_from_europe = {
 					has_variable = sp_i32_students_cooldown
 				}
 				desc = sp_je_learning_from_europe_status_students_cooldown
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_military_cooldown
+				}
+				desc = sp_je_learning_from_europe_status_military_cooldown
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_technical_cooldown
+				}
+				desc = sp_je_learning_from_europe_status_technical_cooldown
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_education_cooldown
+				}
+				desc = sp_je_learning_from_europe_status_education_cooldown
 			}
 			triggered_desc = {
 				trigger = {

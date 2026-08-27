@@ -1,4 +1,4 @@
-﻿# I-32 Wave A — Learning from Europe. TUR-only. No Tanzimat gate.
+﻿# I-32 Wave A+B+C — Learning from Europe. TUR-only. No Tanzimat gate.
 
 sp_i32_is_tur = {
 	c:TUR ?= this
@@ -8,6 +8,14 @@ sp_i32_has_staffed_university = {
 	any_scope_building = {
 		is_building_type = building_university
 		occupancy >= 0.50
+		level >= 1
+	}
+}
+
+# Technical unlock: any university building at level ≥ 1 (occupancy not required).
+sp_i32_has_university_building = {
+	any_scope_building = {
+		is_building_type = building_university
 		level >= 1
 	}
 }
@@ -50,13 +58,35 @@ sp_i32_has_incoming_ma_from_german_sphere = {
 	}
 }
 
-# MIL_SPREAD occupied: incoming MA (Wave A). Later waves add Goltz / land invite.
+# MIL_SPREAD occupied: incoming MA, or I-32 land mission with mil spread (not GBR QUAL-only).
 sp_i32_mil_spread_occupied = {
-	sp_i32_has_incoming_military_assistance = yes
+	OR = {
+		sp_i32_has_incoming_military_assistance = yes
+		AND = {
+			has_variable = sp_i32_military_active
+			NOT = { has_variable = sp_i32_military_partner_gbr }
+		}
+	}
 }
 
+# Military family: MA OR I-32 land invite — OR so they never double-count.
 sp_i32_military_family_occupied = {
-	sp_i32_has_incoming_military_assistance = yes
+	OR = {
+		sp_i32_has_incoming_military_assistance = yes
+		has_variable = sp_i32_military_active
+	}
+}
+
+# I-07 Egypt / Eastern Question window (TUR country). Blocks French land invite only.
+# Matches proposal + I-16B crisis signals (egyptian_crisis / Syria / Egypt JEs).
+sp_i32_egypt_crisis_window = {
+	NOT = { has_variable = sp_egyptian_question_resolved }
+	OR = {
+		has_variable = egyptian_crisis
+		has_journal_entry = je_sick_man_syria
+		has_journal_entry = je_sick_man_egypt
+		has_journal_entry = sp_egyptian_question
+	}
 }
 
 sp_i32_students_active = {
@@ -76,6 +106,29 @@ sp_i32_students_can_use_country = {
 	NOT = { has_war_with = $PARTNER$ }
 	$PARTNER$ = {
 		relations:root > -20
+		NOR = {
+			has_attitude = {
+				who = root
+				attitude = antagonistic
+			}
+			has_attitude = {
+				who = root
+				attitude = belligerent
+			}
+			has_attitude = {
+				who = root
+				attitude = domineering
+			}
+		}
+	}
+}
+
+# Wave B partner gate: relations ≥ 0 (stricter than Students > −20).
+sp_i32_partner_ok_neutral = {
+	exists = $PARTNER$
+	NOT = { has_war_with = $PARTNER$ }
+	$PARTNER$ = {
+		relations:root >= 0
 		NOR = {
 			has_attitude = {
 				who = root
@@ -249,4 +302,343 @@ sp_i32_can_start_students = {
 	NOT = { has_variable = sp_i32_students_cooldown }
 	sp_i32_capacity_allows_new_programme = yes
 	sp_i32_any_student_destination_eligible = yes
+}
+
+# === Wave B — Technical ===
+
+sp_i32_technical_busy = {
+	OR = {
+		has_variable = sp_i32_technical_active
+		has_variable = sp_i32_technical_completing
+	}
+}
+
+sp_i32_technical_unlocked = {
+	OR = {
+		has_technology_researched = mechanical_tools
+		has_technology_researched = atmospheric_engine
+		sp_i32_has_university_building = yes
+	}
+}
+
+sp_i32_technical_german_host_ok = {
+	OR = {
+		AND = {
+			exists = c:GER
+			sp_i32_partner_ok_neutral = { PARTNER = c:GER }
+		}
+		AND = {
+			NOT = { exists = c:GER }
+			exists = c:PRU
+			sp_i32_partner_ok_neutral = { PARTNER = c:PRU }
+		}
+	}
+}
+
+sp_i32_any_technical_destination_diplomatic = {
+	OR = {
+		sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+		sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
+		sp_i32_technical_german_host_ok = yes
+	}
+}
+
+sp_i32_technical_fra_eligible = {
+	gold_reserves >= sp_i32_technical_upfront
+	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+}
+
+sp_i32_technical_gbr_eligible = {
+	gold_reserves >= sp_i32_technical_upfront
+	sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
+}
+
+sp_i32_technical_german_eligible = {
+	gold_reserves >= sp_i32_technical_upfront
+	sp_i32_technical_german_host_ok = yes
+}
+
+sp_i32_any_technical_destination_eligible = {
+	OR = {
+		sp_i32_technical_fra_eligible = yes
+		sp_i32_technical_gbr_eligible = yes
+		sp_i32_technical_german_eligible = yes
+	}
+}
+
+sp_i32_technical_partner_still_exists = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_technical_partner_fra
+			exists = c:FRA
+		}
+		AND = {
+			has_variable = sp_i32_technical_partner_gbr
+			exists = c:GBR
+		}
+		AND = {
+			has_variable = sp_i32_technical_partner_german
+			OR = {
+				exists = c:GER
+				exists = c:PRU
+			}
+		}
+	}
+}
+
+sp_i32_can_start_technical = {
+	sp_i32_is_tur = yes
+	NOT = { sp_i32_technical_busy = yes }
+	NOT = { has_variable = sp_i32_technical_cooldown }
+	sp_i32_capacity_allows_new_programme = yes
+	sp_i32_technical_unlocked = yes
+	sp_i32_any_technical_destination_eligible = yes
+}
+
+# === Wave B — Education ===
+
+sp_i32_education_busy = {
+	OR = {
+		has_variable = sp_i32_education_active
+		has_variable = sp_i32_education_completing
+	}
+}
+
+sp_i32_education_unlocked = {
+	institution_investment_level = {
+		institution = institution_schools
+		value >= 1
+	}
+	OR = {
+		sp_i32_has_staffed_university = yes
+		literacy_rate >= 0.18
+	}
+}
+
+sp_i32_education_german_host_ok = {
+	OR = {
+		AND = {
+			exists = c:GER
+			sp_i32_partner_ok_neutral = { PARTNER = c:GER }
+		}
+		AND = {
+			NOT = { exists = c:GER }
+			exists = c:PRU
+			sp_i32_partner_ok_neutral = { PARTNER = c:PRU }
+		}
+	}
+}
+
+# Diplomatic pathways (no gold) — used by gold_required / tooltip_pay / destination gates.
+sp_i32_education_expand_diplomatic = {
+	NOT = { has_modifier = sp_i24_education_reorganized_mod }
+	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+}
+
+sp_i32_education_limit_diplomatic = {
+	OR = {
+		sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+		sp_i32_education_german_host_ok = yes
+	}
+}
+
+sp_i32_education_integrate_diplomatic = {
+	OR = {
+		sp_i32_partner_ok_neutral = { PARTNER = c:AUS }
+		sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+	}
+}
+
+sp_i32_any_education_destination_diplomatic = {
+	OR = {
+		sp_i32_education_expand_diplomatic = yes
+		sp_i32_education_limit_diplomatic = yes
+		sp_i32_education_integrate_diplomatic = yes
+	}
+}
+
+sp_i32_education_expand_eligible = {
+	gold_reserves >= sp_i32_education_upfront_standard
+	sp_i32_education_expand_diplomatic = yes
+}
+
+sp_i32_education_limit_fra_eligible = {
+	gold_reserves >= sp_i32_education_upfront_standard
+	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+}
+
+sp_i32_education_limit_german_eligible = {
+	gold_reserves >= sp_i32_education_upfront_standard
+	sp_i32_education_german_host_ok = yes
+}
+
+sp_i32_education_limit_eligible = {
+	OR = {
+		sp_i32_education_limit_fra_eligible = yes
+		sp_i32_education_limit_german_eligible = yes
+	}
+}
+
+sp_i32_education_integrate_fra_eligible = {
+	gold_reserves >= sp_i32_education_upfront_integrate
+	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+}
+
+sp_i32_education_integrate_aus_eligible = {
+	gold_reserves >= sp_i32_education_upfront_integrate
+	sp_i32_partner_ok_neutral = { PARTNER = c:AUS }
+}
+
+sp_i32_education_integrate_eligible = {
+	OR = {
+		sp_i32_education_integrate_fra_eligible = yes
+		sp_i32_education_integrate_aus_eligible = yes
+	}
+}
+
+sp_i32_any_education_destination_eligible = {
+	OR = {
+		sp_i32_education_expand_eligible = yes
+		sp_i32_education_limit_eligible = yes
+		sp_i32_education_integrate_eligible = yes
+	}
+}
+
+sp_i32_education_partner_still_exists = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_education_partner_fra
+			exists = c:FRA
+		}
+		AND = {
+			has_variable = sp_i32_education_partner_aus
+			exists = c:AUS
+		}
+		AND = {
+			has_variable = sp_i32_education_partner_german
+			OR = {
+				exists = c:GER
+				exists = c:PRU
+			}
+		}
+	}
+}
+
+sp_i32_can_start_education = {
+	sp_i32_is_tur = yes
+	NOT = { sp_i32_education_busy = yes }
+	NOT = { has_variable = sp_i32_education_cooldown }
+	sp_i32_capacity_allows_new_programme = yes
+	sp_i32_education_unlocked = yes
+	sp_i32_any_education_destination_eligible = yes
+}
+
+# === Wave C — Land Military Missions ===
+
+sp_i32_military_busy = {
+	OR = {
+		has_variable = sp_i32_military_active
+		has_variable = sp_i32_military_completing
+	}
+}
+
+sp_i32_military_german_host_ok = {
+	OR = {
+		AND = {
+			exists = c:GER
+			sp_i32_partner_ok_neutral = { PARTNER = c:GER }
+		}
+		AND = {
+			NOT = { exists = c:GER }
+			exists = c:PRU
+			sp_i32_partner_ok_neutral = { PARTNER = c:PRU }
+		}
+	}
+}
+
+# Wave E sets sp_i32_primary_partner_gbr. Until then GBR land stays unavailable.
+# Wave D sets sp_i32_naval_active; until then naval-empty is always true.
+sp_i32_military_gbr_gates = {
+	has_variable = sp_i32_primary_partner_gbr
+	NOT = { has_variable = sp_i32_naval_active }
+}
+
+sp_i32_any_military_destination_diplomatic = {
+	OR = {
+		AND = {
+			NOT = { sp_i32_egypt_crisis_window = yes }
+			sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+		}
+		AND = {
+			sp_i32_military_gbr_gates = yes
+			sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
+		}
+		sp_i32_military_german_host_ok = yes
+		sp_i32_partner_ok_neutral = { PARTNER = c:AUS }
+	}
+}
+
+sp_i32_military_fra_eligible = {
+	gold_reserves >= sp_i32_military_upfront_standard
+	NOT = { sp_i32_egypt_crisis_window = yes }
+	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+}
+
+sp_i32_military_gbr_eligible = {
+	gold_reserves >= sp_i32_military_upfront_standard
+	sp_i32_military_gbr_gates = yes
+	sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
+}
+
+sp_i32_military_german_eligible = {
+	gold_reserves >= sp_i32_military_upfront_standard
+	sp_i32_military_german_host_ok = yes
+}
+
+sp_i32_military_aus_eligible = {
+	gold_reserves >= sp_i32_military_upfront_austria
+	sp_i32_partner_ok_neutral = { PARTNER = c:AUS }
+}
+
+sp_i32_any_military_destination_eligible = {
+	OR = {
+		sp_i32_military_fra_eligible = yes
+		sp_i32_military_gbr_eligible = yes
+		sp_i32_military_german_eligible = yes
+		sp_i32_military_aus_eligible = yes
+	}
+}
+
+sp_i32_military_partner_still_exists = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_military_partner_fra
+			exists = c:FRA
+		}
+		AND = {
+			has_variable = sp_i32_military_partner_gbr
+			exists = c:GBR
+		}
+		AND = {
+			has_variable = sp_i32_military_partner_aus
+			exists = c:AUS
+		}
+		AND = {
+			has_variable = sp_i32_military_partner_german
+			OR = {
+				exists = c:GER
+				exists = c:PRU
+			}
+		}
+	}
+}
+
+# No new I-32 land mission while any incoming military_assistance occupies the family.
+sp_i32_can_start_military = {
+	sp_i32_is_tur = yes
+	NOT = { sp_i32_military_busy = yes }
+	NOT = { has_variable = sp_i32_military_cooldown }
+	NOT = { sp_i32_has_incoming_military_assistance = yes }
+	sp_i32_capacity_allows_new_programme = yes
+	sp_i32_any_military_destination_eligible = yes
 }

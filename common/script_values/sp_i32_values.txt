@@ -1,4 +1,4 @@
-﻿# I-32 Wave A — occupied families and capacity ceilings. Not mana.
+﻿# I-32 Wave A+B+C — occupied families and capacity ceilings. Not mana.
 
 sp_i32_occupied_families = {
 	value = 0
@@ -8,9 +8,25 @@ sp_i32_occupied_families = {
 		}
 		add = 1
 	}
+	# Military family: MA OR I-32 land invite (never both — OR, not sum).
 	if = {
 		limit = {
-			sp_i32_has_incoming_military_assistance = yes
+			OR = {
+				has_variable = sp_i32_military_active
+				sp_i32_has_incoming_military_assistance = yes
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_variable = sp_i32_technical_active
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_variable = sp_i32_education_active
 		}
 		add = 1
 	}
@@ -91,6 +107,126 @@ sp_i32_students_tooltip_pay = {
 	}
 	else = {
 		value = sp_i32_students_upfront_standard
+	}
+	multiply = -1
+}
+
+# --- Wave B: Technical ---
+sp_i32_technical_upfront = {
+	value = 15000
+}
+
+sp_i32_technical_pay = {
+	value = sp_i32_technical_upfront
+	multiply = -1
+}
+
+sp_i32_technical_gold_required = {
+	value = sp_i32_technical_upfront
+}
+
+sp_i32_technical_tooltip_pay = {
+	value = sp_i32_technical_upfront
+	multiply = -1
+}
+
+# --- Wave B: Education ---
+sp_i32_education_upfront_standard = {
+	value = 10000
+}
+
+sp_i32_education_upfront_integrate = {
+	value = 8000
+}
+
+sp_i32_education_pay_standard = {
+	value = sp_i32_education_upfront_standard
+	multiply = -1
+}
+
+sp_i32_education_pay_integrate = {
+	value = sp_i32_education_upfront_integrate
+	multiply = -1
+}
+
+# Cheapest diplomatic pathway the player can actually pick (Integrate if partners ok).
+sp_i32_education_gold_required = {
+	if = {
+		limit = {
+			sp_i32_education_integrate_diplomatic = yes
+		}
+		value = sp_i32_education_upfront_integrate
+	}
+	else = {
+		value = sp_i32_education_upfront_standard
+	}
+}
+
+# JE preview: only Integrate available → −8000; otherwise −10000.
+sp_i32_education_tooltip_pay = {
+	if = {
+		limit = {
+			NOR = {
+				sp_i32_education_expand_diplomatic = yes
+				sp_i32_education_limit_diplomatic = yes
+			}
+			sp_i32_education_integrate_diplomatic = yes
+		}
+		value = sp_i32_education_upfront_integrate
+	}
+	else = {
+		value = sp_i32_education_upfront_standard
+	}
+	multiply = -1
+}
+
+# --- Wave C: Land Military Missions ---
+sp_i32_military_upfront_standard = {
+	value = 12000
+}
+
+sp_i32_military_upfront_austria = {
+	value = 10000
+}
+
+sp_i32_military_pay_standard = {
+	value = sp_i32_military_upfront_standard
+	multiply = -1
+}
+
+sp_i32_military_pay_austria = {
+	value = sp_i32_military_upfront_austria
+	multiply = -1
+}
+
+# Cheapest diplomatic land host the player can actually pick (AUS if eligible).
+sp_i32_military_gold_required = {
+	if = {
+		limit = {
+			sp_i32_partner_ok_neutral = { PARTNER = c:AUS }
+		}
+		value = sp_i32_military_upfront_austria
+	}
+	else = {
+		value = sp_i32_military_upfront_standard
+	}
+}
+
+# JE preview: Austria-only eligibility uses the cheaper cost; otherwise standard.
+sp_i32_military_tooltip_pay = {
+	if = {
+		limit = {
+			NOR = {
+				sp_i32_military_fra_eligible = yes
+				sp_i32_military_gbr_eligible = yes
+				sp_i32_military_german_eligible = yes
+			}
+			sp_i32_military_aus_eligible = yes
+		}
+		value = sp_i32_military_upfront_austria
+	}
+	else = {
+		value = sp_i32_military_upfront_standard
 	}
 	multiply = -1
 }

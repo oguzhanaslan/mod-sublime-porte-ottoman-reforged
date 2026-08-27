@@ -1,5 +1,5 @@
-﻿# I-32 Wave A — Students (index 0) and inherited military assistance lamp (index 1).
-# Bars 2–5 are added when later families ship. Do not declare empty unused bars.
+﻿# I-32 Wave A+B+C — Students (0), Military MA lamp / I-32 mission (1), Technical (2), Education (3).
+# Loc: keep desc / second_desc short — CMF paints both on the bar face (~504px).
 
 sp_i32_spb_students = {
 	name = "sp_i32_spb_students"
@@ -30,7 +30,7 @@ sp_i32_spb_students = {
 	}
 }
 
-# Full bar while vanilla incoming military_assistance exists. Does not tick.
+# Dual mode: MA lamp (fill 100, no tick) OR I-32 land mission (monthly tick like students).
 sp_i32_spb_military = {
 	name = "sp_i32_spb_military"
 	desc = "sp_i32_spb_military_desc"
@@ -41,4 +41,80 @@ sp_i32_spb_military = {
 	start_value = 0
 	min_value = 0
 	max_value = 100
+
+	# Presentation only. Authoritative timer is sp_i32_military_months_left when I-32 active.
+	# MA path: sync fills to 100; this branch does not tick.
+	monthly_progress = {
+		if = {
+			limit = {
+				has_variable = sp_i32_military_active
+				NOT = { has_variable = sp_i32_military_completing }
+			}
+			add = {
+				desc = "sp_i32_spb_military_tick"
+				value = {
+					value = 100
+					divide = var:sp_i32_military_duration_months
+				}
+			}
+		}
+	}
+}
+
+sp_i32_spb_technical = {
+	name = "sp_i32_spb_technical"
+	desc = "sp_i32_spb_technical_desc"
+	second_desc = "sp_i32_spb_technical_second"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	# Presentation only. Authoritative timer is sp_i32_technical_months_left.
+	monthly_progress = {
+		if = {
+			limit = {
+				has_variable = sp_i32_technical_active
+				NOT = { has_variable = sp_i32_technical_completing }
+			}
+			add = {
+				desc = "sp_i32_spb_technical_tick"
+				value = {
+					value = 100
+					divide = var:sp_i32_technical_duration_months
+				}
+			}
+		}
+	}
+}
+
+sp_i32_spb_education = {
+	name = "sp_i32_spb_education"
+	desc = "sp_i32_spb_education_desc"
+	second_desc = "sp_i32_spb_education_second"
+
+	default = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	# Presentation only. Authoritative timer is sp_i32_education_months_left.
+	monthly_progress = {
+		if = {
+			limit = {
+				has_variable = sp_i32_education_active
+				NOT = { has_variable = sp_i32_education_completing }
+			}
+			add = {
+				desc = "sp_i32_spb_education_tick"
+				value = {
+					value = 100
+					divide = var:sp_i32_education_duration_months
+				}
+			}
+		}
+	}
 }
