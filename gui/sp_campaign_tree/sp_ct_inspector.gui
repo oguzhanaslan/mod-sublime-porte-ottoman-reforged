@@ -78,45 +78,44 @@ types sp_ct_inspector_types {
 		}
 	}
 
-	type sp_ct_insp_section_panel = widget {
+	type sp_ct_insp_section_panel = flowcontainer {
+		direction = vertical
+		spacing = 0
 		layoutpolicy_horizontal = expanding
-		margin_bottom = 4
+		layoutpolicy_vertical = preferred
+		margin_bottom = 8
+		minimumsize = { 480 -1 }
 
 		background = {
 			using = entry_bg_simple
 		}
-		background = {
-			using = simple_frame
+
+		widget = {
+			size = { 100% 26 }
+			layoutpolicy_horizontal = expanding
+
+			background = {
+				using = default_header_bg_faded
+			}
+			textbox = {
+				block "section_title" { text = "sp_ct_node_placeholder" }
+				parentanchor = left|vcenter
+				margin_left = 12
+				autoresize = yes
+				align = left|vcenter|nobaseline
+				default_format = "#title"
+				using = fontsize_small
+			}
 		}
 
 		flowcontainer = {
 			direction = vertical
-			spacing = 0
-			minimumsize = { 480 -1 }
-
-			widget = {
-				size = { 100% 26 }
-				background = {
-					using = default_header_bg_faded
-				}
-				textbox = {
-					block "section_title" { text = "sp_ct_node_placeholder" }
-					parentanchor = left|vcenter
-					margin_left = 10
-					autoresize = yes
-					align = left|vcenter|nobaseline
-					default_format = "#title"
-					using = fontsize_small
-				}
-			}
-
-			flowcontainer = {
-				direction = vertical
-				spacing = 1
-				margin = { 8 10 }
-				margin_bottom = 10
-				block "section_body" {}
-			}
+			spacing = 4
+			margin = { 12 10 }
+			margin_bottom = 10
+			layoutpolicy_vertical = preferred
+			layoutpolicy_horizontal = expanding
+			block "section_body" {}
 		}
 	}
 
@@ -135,7 +134,10 @@ types sp_ct_inspector_types {
 			block "scroll_content" {
 				flowcontainer = {
 					direction = vertical
-					spacing = 12
+					spacing = 10
+					margin_bottom = 16
+					layoutpolicy_vertical = preferred
+					layoutpolicy_horizontal = expanding
 					minimumsize = { 480 -1 }
 				}
 			}
@@ -149,8 +151,7 @@ types sp_ct_inspector_types {
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 500 -1 }
 
-		flowcontainer = {
-			direction = vertical
+		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
@@ -188,7 +189,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 					textbox = {
@@ -204,7 +206,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 				}
@@ -213,8 +216,11 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 8
-						minimumsize = { 500 -1 }
+						spacing = 10
+						margin_bottom = 16
+						layoutpolicy_vertical = preferred
+						layoutpolicy_horizontal = expanding
+						minimumsize = { 480 -1 }
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -272,9 +278,10 @@ types sp_ct_inspector_types {
 									tooltip = "sp_ct_insp_identity_rewards_tt"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -286,17 +293,19 @@ types sp_ct_inspector_types {
 									text = "sp_ct_nav_prev_post_tanzimat"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 								textbox = {
 									text = "sp_ct_nav_next_identity_paths"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -313,8 +322,7 @@ types sp_ct_inspector_types {
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 500 -1 }
 
-		flowcontainer = {
-			direction = vertical
+		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
@@ -352,7 +360,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 					textbox = {
@@ -368,7 +377,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 				}
@@ -377,8 +387,11 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 8
-						minimumsize = { 500 -1 }
+						spacing = 10
+						margin_bottom = 16
+						layoutpolicy_vertical = preferred
+						layoutpolicy_horizontal = expanding
+						minimumsize = { 480 -1 }
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -411,9 +424,10 @@ types sp_ct_inspector_types {
 									text = "sp_ct_insp_ottomanism_path"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -426,9 +440,10 @@ types sp_ct_inspector_types {
 									tooltip = "sp_ct_insp_ottomanism_rewards_tt"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -440,17 +455,19 @@ types sp_ct_inspector_types {
 									text = "sp_ct_nav_prev_identity"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 								textbox = {
 									text = "sp_ct_nav_next_ottomanism_stages"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -467,8 +484,7 @@ types sp_ct_inspector_types {
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 500 -1 }
 
-		flowcontainer = {
-			direction = vertical
+		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
@@ -506,7 +522,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 					textbox = {
@@ -522,7 +539,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 				}
@@ -531,8 +549,11 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 8
-						minimumsize = { 500 -1 }
+						spacing = 10
+						margin_bottom = 16
+						layoutpolicy_vertical = preferred
+						layoutpolicy_horizontal = expanding
+						minimumsize = { 480 -1 }
 						block "stage_scroll_body" {}
 					}
 				}
@@ -560,9 +581,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_next_ottomanism_stages"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -573,9 +595,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_insp_ottomanism_s1_rewards"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -603,9 +626,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_next_ottomanism_stages"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -616,9 +640,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_insp_ottomanism_s2_rewards"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -646,9 +671,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_next_ottomanism_stages"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -659,9 +685,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_insp_ottomanism_s3_rewards"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -689,9 +716,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_next_ottomanism_stages"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -702,9 +730,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_insp_ottomanism_s4_rewards"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -715,17 +744,19 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_prev_ottomanism_s3"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 						textbox = {
 							text = "sp_ct_nav_next_constitutional_ottoman"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -776,9 +807,10 @@ types sp_ct_inspector_types {
 							tooltip = "sp_ct_insp_constitutional_ottoman_rewards_tt"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -789,17 +821,19 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_prev_ottomanism_s4"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 						textbox = {
 							text = "sp_ct_nav_next_none"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -814,8 +848,7 @@ types sp_ct_inspector_types {
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 500 -1 }
 
-		flowcontainer = {
-			direction = vertical
+		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
@@ -853,7 +886,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 					textbox = {
@@ -869,7 +903,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 				}
@@ -878,8 +913,11 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 8
-						minimumsize = { 500 -1 }
+						spacing = 10
+						margin_bottom = 16
+						layoutpolicy_vertical = preferred
+						layoutpolicy_horizontal = expanding
+						minimumsize = { 480 -1 }
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -912,9 +950,10 @@ types sp_ct_inspector_types {
 									text = "sp_ct_insp_islamism_path"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -927,9 +966,10 @@ types sp_ct_inspector_types {
 									tooltip = "sp_ct_insp_islamism_rewards_tt"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -941,17 +981,19 @@ types sp_ct_inspector_types {
 									text = "sp_ct_nav_prev_identity"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 								textbox = {
 									text = "sp_ct_nav_next_islamism_stages"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -968,8 +1010,7 @@ types sp_ct_inspector_types {
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 500 -1 }
 
-		flowcontainer = {
-			direction = vertical
+		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
@@ -1007,7 +1048,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 					textbox = {
@@ -1023,7 +1065,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 				}
@@ -1032,8 +1075,11 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 8
-						minimumsize = { 500 -1 }
+						spacing = 10
+						margin_bottom = 16
+						layoutpolicy_vertical = preferred
+						layoutpolicy_horizontal = expanding
+						minimumsize = { 480 -1 }
 						block "stage_scroll_body" {}
 					}
 				}
@@ -1061,9 +1107,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_next_islamism_stages"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -1074,9 +1121,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_insp_islamism_s1_rewards"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -1104,9 +1152,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_next_islamism_stages"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -1117,9 +1166,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_insp_islamism_s2_rewards"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -1147,9 +1197,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_next_islamism_stages"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -1160,9 +1211,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_insp_islamism_s3_rewards"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -1190,9 +1242,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_next_islamism_stages"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -1226,9 +1279,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_insp_islamism_s4_rewards"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -1239,17 +1293,19 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_prev_islamism_s3"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 						textbox = {
 							text = "sp_ct_nav_next_great_caliphate"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -1300,9 +1356,10 @@ types sp_ct_inspector_types {
 							tooltip = "sp_ct_insp_great_caliphate_rewards_tt"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -1313,17 +1370,19 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_prev_islamism_s4"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 						textbox = {
 							text = "sp_ct_nav_next_none"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -1539,8 +1598,7 @@ types sp_ct_inspector_types {
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 500 -1 }
 
-		flowcontainer = {
-			direction = vertical
+		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
@@ -1578,7 +1636,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 					textbox = {
@@ -1594,7 +1653,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 				}
@@ -1603,8 +1663,11 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 8
-						minimumsize = { 500 -1 }
+						spacing = 10
+						margin_bottom = 16
+						layoutpolicy_vertical = preferred
+						layoutpolicy_horizontal = expanding
+						minimumsize = { 480 -1 }
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -1674,9 +1737,10 @@ types sp_ct_inspector_types {
 									tooltip = "sp_ct_insp_turan_rewards_tt"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 									margin_bottom = 4
 								}
 								sp_ct_insp_stat_row = {
@@ -1699,17 +1763,19 @@ types sp_ct_inspector_types {
 									text = "sp_ct_nav_prev_turkism"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 								textbox = {
 									text = "sp_ct_nav_next_turan_s1"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -1733,8 +1799,7 @@ types sp_ct_inspector_types {
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 500 -1 }
 
-		flowcontainer = {
-			direction = vertical
+		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
@@ -1772,7 +1837,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 					textbox = {
@@ -1788,7 +1854,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 				}
@@ -1797,8 +1864,11 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 8
-						minimumsize = { 500 -1 }
+						spacing = 10
+						margin_bottom = 16
+						layoutpolicy_vertical = preferred
+						layoutpolicy_horizontal = expanding
+						minimumsize = { 480 -1 }
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_completion" }
@@ -1856,9 +1926,10 @@ types sp_ct_inspector_types {
 									tooltip = "sp_ct_insp_tanzimat_rewards_tt"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -1870,17 +1941,19 @@ types sp_ct_inspector_types {
 									text = "sp_ct_nav_prev_none"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 								textbox = {
 									text = "sp_ct_nav_next_post_tanzimat"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -1905,8 +1978,7 @@ types sp_ct_inspector_types {
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 500 -1 }
 
-		flowcontainer = {
-			direction = vertical
+		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
@@ -1944,7 +2016,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 					textbox = {
@@ -1960,7 +2033,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 				}
@@ -1969,8 +2043,11 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 8
-						minimumsize = { 500 -1 }
+						spacing = 10
+						margin_bottom = 16
+						layoutpolicy_vertical = preferred
+						layoutpolicy_horizontal = expanding
+						minimumsize = { 480 -1 }
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -2021,9 +2098,10 @@ types sp_ct_inspector_types {
 									text = "sp_ct_insp_post_tanzimat_complete_note"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -2036,9 +2114,10 @@ types sp_ct_inspector_types {
 									tooltip = "sp_ct_insp_post_tanzimat_rewards_tt"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -2050,17 +2129,19 @@ types sp_ct_inspector_types {
 									text = "sp_ct_nav_prev_tanzimat"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 								textbox = {
 									text = "sp_ct_nav_next_identity"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -2085,8 +2166,7 @@ types sp_ct_inspector_types {
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 500 -1 }
 
-		flowcontainer = {
-			direction = vertical
+		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
@@ -2124,7 +2204,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 					textbox = {
@@ -2140,7 +2221,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 				}
@@ -2149,8 +2231,11 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 8
-						minimumsize = { 500 -1 }
+						spacing = 10
+						margin_bottom = 16
+						layoutpolicy_vertical = preferred
+						layoutpolicy_horizontal = expanding
+						minimumsize = { 480 -1 }
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -2183,9 +2268,10 @@ types sp_ct_inspector_types {
 									text = "sp_ct_insp_turkism_path"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -2198,9 +2284,10 @@ types sp_ct_inspector_types {
 									tooltip = "sp_ct_insp_turkism_rewards_tt"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -2212,17 +2299,19 @@ types sp_ct_inspector_types {
 									text = "sp_ct_nav_prev_identity"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 								textbox = {
 									text = "sp_ct_nav_next_turan"
 									autoresize = yes
 									align = left|nobaseline
-									using = fontsize_small
-									max_width = 480
-									multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 								}
 							}
 						}
@@ -2239,8 +2328,7 @@ types sp_ct_inspector_types {
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 500 -1 }
 
-		flowcontainer = {
-			direction = vertical
+		vbox = {
 			size = { 100% 100% }
 			layoutpolicy_vertical = expanding
 			layoutpolicy_horizontal = expanding
@@ -2278,7 +2366,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 					textbox = {
@@ -2294,7 +2383,8 @@ types sp_ct_inspector_types {
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
-						max_width = 500
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
 						multiline = yes
 					}
 				}
@@ -2303,8 +2393,11 @@ types sp_ct_inspector_types {
 				blockoverride "scroll_content" {
 					flowcontainer = {
 						direction = vertical
-						spacing = 8
-						minimumsize = { 500 -1 }
+						spacing = 10
+						margin_bottom = 16
+						layoutpolicy_vertical = preferred
+						layoutpolicy_horizontal = expanding
+						minimumsize = { 480 -1 }
 						block "stage_scroll_body" {}
 					}
 				}
@@ -2368,9 +2461,10 @@ types sp_ct_inspector_types {
 							tooltip = "sp_ct_insp_turan_s1_rewards_tt"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -2381,17 +2475,19 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_prev_turan"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 						textbox = {
 							text = "sp_ct_nav_next_turan_s2"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -2502,9 +2598,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_insp_turan_s2_alt_note"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -2516,9 +2613,10 @@ types sp_ct_inspector_types {
 							tooltip = "sp_ct_insp_turan_s2_rewards_tt"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -2529,17 +2627,19 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_prev_turan_s1"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 						textbox = {
 							text = "sp_ct_nav_next_turan_s3"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -2610,9 +2710,10 @@ types sp_ct_inspector_types {
 							tooltip = "sp_ct_insp_turan_s3_rewards_tt"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -2623,17 +2724,19 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_prev_turan_s2"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 						textbox = {
 							text = "sp_ct_nav_next_turan_s4"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -2739,9 +2842,10 @@ types sp_ct_inspector_types {
 							text = "sp_ct_insp_turan_s4_claims_note"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -2753,9 +2857,10 @@ types sp_ct_inspector_types {
 							tooltip = "sp_ct_insp_turan_s4_rewards_tt"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -2766,17 +2871,19 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_prev_turan_s3"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 						textbox = {
 							text = "sp_ct_nav_next_great_ottoman"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -2837,9 +2944,10 @@ types sp_ct_inspector_types {
 							tooltip = "sp_ct_insp_great_ottoman_rewards_tt"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
@@ -2850,17 +2958,19 @@ types sp_ct_inspector_types {
 							text = "sp_ct_nav_prev_turan_s4"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 						textbox = {
 							text = "sp_ct_nav_next_none"
 							autoresize = yes
 							align = left|nobaseline
-							using = fontsize_small
-							max_width = 480
-							multiline = yes
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
 						}
 					}
 				}
