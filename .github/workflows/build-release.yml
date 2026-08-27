@@ -1,0 +1,397 @@
+name: Build Release
+
+# Automated GitHub + optional Steam Workshop release for Sublime Porte: Ottoman Reforged.
+# Validation ALWAYS runs before version bump / GitHub Release / Steam publish.
+# See docs/STEAM_RELEASE.md.
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-type:
+        description: "Semantic version bump (ignored on first release when no tags exist)"
+        required: true
+        default: patch
+        type: choice
+        options:
+          - major
+          - feature
+          - patch
+      publish:
+        description: "Upload to Steam Workshop after GitHub Release"
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
+      workshop-id:
+        description: "Existing Steam Workshop publishedfileid (required when publish=true)"
+        required: false
+        default: ""
+        type: string
+
+env:
+  TIGER_VERSION: "1.19.0"
+  CMF_REPO: "Victoria-3-Modding-Co-op/Community-Mod-Framework"
+  CMF_REF: "main"
+
+jobs:
+  release:
+    name: Validate, version, package, release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch --tags --force
+
+      - name: Static release validation
+        run: |
+          chmod +x script/*.sh
+          ./script/validate-release.sh
+
+      - name: Require Tiger validation secrets
+        env:
+          TIGER_VALIDATION_REPO: ${{ secrets.TIGER_VALIDATION_REPO }}
+          TIGER_VALIDATION_TOKEN: ${{ secrets.TIGER_VALIDATION_TOKEN }}
+        run: |
+          if [[ -z "${TIGER_VALIDATION_REPO:-}" || -z "${TIGER_VALIDATION_TOKEN:-}" ]]; then
+            echo "::error::Tiger CI requires secrets TIGER_VALIDATION_REPO and TIGER_VALIDATION_TOKEN."
+            echo "See docs/STEAM_RELEASE.md — private game-files validation repository setup."
+            echo "STOPPING before version bump / GitHub Release / Steam publish."
+            exit 1
+          fi
+
+      - name: Checkout Tiger game files (private)
+        uses: actions/checkout@v4.2.2
+        with:
+          repository: ${{ secrets.TIGER_VALIDATION_REPO }}
+          token: ${{ secrets.TIGER_VALIDATION_TOKEN }}
+          path: .tiger-game
+          ref: main
+
+      - name: Checkout Community Mod Framework
+        uses: actions/checkout@v4.2.2
+        with:
+          repository: ${{ env.CMF_REPO }}
+          ref: ${{ env.CMF_REF }}
+          path: .deps/cmf
+
+      - name: Install pinned vic3-tiger
+        run: |
+          set -euo pipefail
+          mkdir -p .tiger-ci
+          curl -fsSL \
+            "https://github.com/amtep/tiger/releases/download/v${TIGER_VERSION}/vic3-tiger-linux-v${TIGER_VERSION}.tar.gz" \
+            -o /tmp/vic3-tiger.tgz
+          tar -xzf /tmp/vic3-tiger.tgz -C .tiger-ci
+          # Archive layout may nest; locate binary
+          BIN="$(find .tiger-ci -type f -name vic3-tiger | head -n1)"
+          if [[ -z "$BIN" ]]; then
+            echo "vic3-tiger binary missing from release archive" >&2
+            exit 1
+          fi
+          chmod +x "$BIN"
+          ln -sfn "$(cd "$(dirname "$BIN")" && pwd)/$(basename "$BIN")" .tiger-ci/vic3-tiger
+          .tiger-ci/vic3-tiger --version || true
+
+      - name: Resolve Victoria 3 game directory
+        id: gamedir
+        run: |
+          set -euo pipefail
+          # tiger-action layout uses .tiger-game/vic3 ; also accept game/ or root.
+          for candidate in \
+            "${GITHUB_WORKSPACE}/.tiger-game/vic3" \
+            "${GITHUB_WORKSPACE}/.tiger-game/game" \
+            "${GITHUB_WORKSPACE}/.tiger-game"
+          do
+            if [[ -d "$candidate" ]] && { [[ -f "$candidate/victoria3.exe" ]] || [[ -d "$candidate/common" ]]; }; then
+              echo "path=$candidate" >> "$GITHUB_OUTPUT"
+              echo "Using game dir: $candidate"
+              exit 0
+            fi
+          done
+          echo "::error::Could not locate Victoria 3 game files under .tiger-game (expected vic3/ or game/)."
+          exit 1
+
+      - name: Tiger release gate
+        env:
+          TIGER_BIN: ${{ github.workspace }}/.tiger-ci/vic3-tiger
+        run: |
+          ./script/run-tiger-release.sh \
+            "${{ steps.gamedir.outputs.path }}" \
+            "${{ github.workspace }}" \
+            "${{ github.workspace }}/.deps/cmf" \
+            tiger-release-report.txt
+
+      - name: Upload Tiger report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tiger-release-report
+          path: tiger-release-report.txt
+          if-no-files-found: ignore
+
+      - name: Resolve semantic version
+        id: version
+        run: |
+          set -euo pipefail
+          META_VERSION="$(python3 -c 'import json; print(json.load(open(".metadata/metadata.json", encoding="utf-8"))["version"])')"
+          normalize() {
+            local v="$1"
+            v="${v#v}"
+            printf '%s' "$v"
+          }
+
+          LAST_TAG_RAW="$(git describe --tags --abbrev=0 2>/dev/null || true)"
+          if [[ -z "$LAST_TAG_RAW" ]]; then
+            # First release: do not invent a bump; ship metadata version (e.g. 1.0.0).
+            NEXT="$META_VERSION"
+            LAST=""
+            FIRST="true"
+            echo "No tags found — first release will use metadata version ${NEXT}"
+          else
+            FIRST="false"
+            LAST="$(normalize "$LAST_TAG_RAW")"
+            echo "Last tag: ${LAST_TAG_RAW} (normalized ${LAST})"
+            FRAGMENT="${{ inputs.release-type }}"
+            case "$FRAGMENT" in
+              major|feature|patch) ;;
+              *) echo "Invalid release-type: $FRAGMENT" >&2; exit 1 ;;
+            esac
+          fi
+
+          {
+            echo "meta-version=$META_VERSION"
+            echo "last-version=$LAST"
+            echo "last-tag-raw=$LAST_TAG_RAW"
+            echo "first-release=$FIRST"
+          } >> "$GITHUB_OUTPUT"
+
+          if [[ "$FIRST" == "true" ]]; then
+            echo "next-version=$NEXT" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Increment version (existing tags only)
+        id: increment-version
+        if: steps.version.outputs.first-release != 'true'
+        uses: christian-draeger/increment-semantic-version@1.2.1
+        with:
+          current-version: ${{ steps.version.outputs.last-version }}
+          version-fragment: ${{ inputs.release-type }}
+
+      - name: Finalize next version
+        id: next
+        run: |
+          set -euo pipefail
+          if [[ "${{ steps.version.outputs.first-release }}" == "true" ]]; then
+            NEXT="${{ steps.version.outputs.next-version }}"
+          else
+            NEXT="${{ steps.increment-version.outputs.next-version }}"
+          fi
+          NEXT="${NEXT#v}"
+          echo "version=$NEXT" >> "$GITHUB_OUTPUT"
+          echo "Release version: $NEXT"
+          echo "# Version" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Metadata was: **${{ steps.version.outputs.meta-version }}**" >> "$GITHUB_STEP_SUMMARY"
+          if [[ -n "${{ steps.version.outputs.last-tag-raw }}" ]]; then
+            echo "- Last tag: **${{ steps.version.outputs.last-tag-raw }}**" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- Last tag: **(none — first release)**" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "- Next version: **${NEXT}**" >> "$GITHUB_STEP_SUMMARY"
+          echo "- First release: **${{ steps.version.outputs.first-release }}**" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Collect commits since previous tag
+        id: commits
+        run: |
+          set -euo pipefail
+          LAST_TAG_RAW="${{ steps.version.outputs.last-tag-raw }}"
+          if [[ -n "$LAST_TAG_RAW" ]]; then
+            RANGE="${LAST_TAG_RAW}..HEAD"
+          else
+            RANGE=""
+          fi
+          # Full list for GitHub Release
+          {
+            echo 'markdown<<EOF'
+            if [[ -z "$RANGE" ]]; then
+              git log --no-merges --pretty=format:' - %s' -n 50
+              printf '\n'
+            else
+              git log "$RANGE" --no-merges --pretty=format:' - %s'
+              printf '\n'
+            fi
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+
+          # Short changenote for Steam (title + capped commit list)
+          {
+            echo "Sublime Porte: Ottoman Reforged ${{ steps.next.outputs.version }}"
+            echo ""
+            if [[ -z "$RANGE" ]]; then
+              git log --no-merges --pretty=format:'- %s' -n 15
+              printf '\n'
+            else
+              git log "$RANGE" --no-merges --pretty=format:'- %s' -n 15
+              printf '\n'
+            fi
+          } > /tmp/steam-changenote.txt
+          # Soft length cap for Steam changenote
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("/tmp/steam-changenote.txt")
+          text = p.read_text(encoding="utf-8")
+          if len(text) > 1800:
+              text = text[:1800].rstrip() + "\n…\n(See GitHub Release notes for the full list.)\n"
+          p.write_text(text, encoding="utf-8")
+          PY
+          echo "# Commits" >> "$GITHUB_STEP_SUMMARY"
+          cat /tmp/steam-changenote.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Update version files
+        run: |
+          set -euo pipefail
+          NEXT="${{ steps.next.outputs.version }}"
+          python3 - <<PY
+          import json
+          from pathlib import Path
+          path = Path(".metadata/metadata.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          data["version"] = "${NEXT}"
+          path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+          PY
+          # descriptor.mod uses version="X.Y.Z"
+          sed -i -E "s/^version=\".*\"/version=\"${NEXT}\"/" descriptor.mod
+          echo "Updated metadata + descriptor to ${NEXT}"
+
+      - name: Commit and push version bump
+        run: |
+          set -euo pipefail
+          NEXT="${{ steps.next.outputs.version }}"
+          git add .metadata/metadata.json descriptor.mod
+          if git diff --cached --quiet; then
+            echo "Version files already at ${NEXT}; no bump commit needed"
+          else
+            git commit -m "chore(release): bump version to ${NEXT}"
+            git push origin HEAD
+          fi
+
+      - name: Build clean Steam staging package
+        id: package
+        run: |
+          set -euo pipefail
+          STAGING="${RUNNER_TEMP}/sp-steam-staging"
+          ./script/package-steam-release.sh "$STAGING"
+          echo "staging=$STAGING" >> "$GITHUB_OUTPUT"
+          # Keep description + helper outside the staging tree (not published to Steam content)
+          cp STEAM_PAGE.bbcode "${RUNNER_TEMP}/STEAM_PAGE.bbcode"
+          cp script/create-release-vdf.sh "${RUNNER_TEMP}/create-release-vdf.sh"
+          chmod +x "${RUNNER_TEMP}/create-release-vdf.sh"
+
+      - name: Create ZIP artifact
+        id: zip
+        run: |
+          set -euo pipefail
+          NEXT="${{ steps.next.outputs.version }}"
+          ZIP="${GITHUB_WORKSPACE}/release-${NEXT}.zip"
+          (cd "${{ steps.package.outputs.staging }}" && zip -r "$ZIP" .)
+          ls -lh "$ZIP"
+
+      - name: Upload GitHub Actions artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ steps.next.outputs.version }}
+          path: release-${{ steps.next.outputs.version }}.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2.2.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.next.outputs.version }}
+          name: Sublime Porte: Ottoman Reforged ${{ steps.next.outputs.version }}
+          draft: false
+          prerelease: false
+          files: release-${{ steps.next.outputs.version }}.zip
+          body: |
+            Release **${{ steps.next.outputs.version }}** of Sublime Porte: Ottoman Reforged.
+
+            Requires **Community Mod Framework** and **Community State Framework**.
+            Supported Victoria 3: see `.metadata/metadata.json` (`supported_game_version`).
+
+            ### Commits
+            ${{ steps.commits.outputs.markdown }}
+
+      - name: Guard Steam publish inputs
+        if: ${{ inputs.publish == 'true' }}
+        env:
+          WORKSHOP_ID: ${{ inputs.workshop-id }}
+          WORKSHOP_USERNAME: ${{ secrets.WORKSHOP_USERNAME }}
+          WORKSHOP_PASSWORD: ${{ secrets.WORKSHOP_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${WORKSHOP_ID}" || "${WORKSHOP_ID}" == "0" ]]; then
+            echo "::error::publish=true requires a non-empty, non-zero workshop-id (existing publishedfileid)."
+            echo "This workflow will not create a new Workshop item with ID 0."
+            exit 1
+          fi
+          if [[ -z "${WORKSHOP_USERNAME:-}" || -z "${WORKSHOP_PASSWORD:-}" ]]; then
+            echo "::error::publish=true requires secrets WORKSHOP_USERNAME and WORKSHOP_PASSWORD."
+            exit 1
+          fi
+          echo "Steam publish inputs OK (workshop-id=${WORKSHOP_ID})"
+
+      - name: Create Workshop VDF
+        if: ${{ inputs.publish == 'true' }}
+        id: metadata
+        run: |
+          set -euo pipefail
+          VDF="${RUNNER_TEMP}/workshop.vdf"
+          "${RUNNER_TEMP}/create-release-vdf.sh" \
+            "${{ steps.package.outputs.staging }}" \
+            "${RUNNER_TEMP}/STEAM_PAGE.bbcode" \
+            "${{ inputs.workshop-id }}" \
+            /tmp/steam-changenote.txt \
+            "$VDF"
+          # Redact nothing sensitive; VDF must not contain credentials.
+          echo "vdf=$VDF" >> "$GITHUB_OUTPUT"
+          echo "# Workshop VDF" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          # Show structure without dumping the full escaped description body length explosion
+          python3 - <<PY
+          from pathlib import Path
+          text = Path("${VDF}").read_text(encoding="utf-8")
+          for line in text.splitlines():
+              if line.strip().startswith('"description"'):
+                  print('\t"description" "<from STEAM_PAGE.bbcode>"')
+              elif line.strip().startswith('"changenote"'):
+                  print('\t"changenote" "<from release commits>"')
+              else:
+                  print(line)
+          PY
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Setup SteamCMD
+        if: ${{ inputs.publish == 'true' }}
+        uses: CyberAndrii/setup-steamcmd@v1
+
+      - name: Publish to Steam Workshop
+        if: ${{ inputs.publish == 'true' }}
+        env:
+          STEAM_USERNAME: ${{ secrets.WORKSHOP_USERNAME }}
+          STEAM_PASSWORD: ${{ secrets.WORKSHOP_PASSWORD }}
+        run: |
+          set -euo pipefail
+          # Do not echo credentials. GitHub masks secret values in logs.
+          steamcmd +login "$STEAM_USERNAME" "$STEAM_PASSWORD" +workshop_build_item "${{ steps.metadata.outputs.vdf }}" +quit

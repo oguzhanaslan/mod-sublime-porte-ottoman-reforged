@@ -25,6 +25,17 @@ logs/
 tiger-output/
 validation-output/
 .tiger-bin/
+.tiger-ci/
+.tiger-game/
+.deps/
+tiger-release-report.txt
+release-infra-tmp/
+
+# Release packaging (local dry runs)
+workshop.vdf
+steam-staging/
+sp-steam-staging/
+release-*.zip
 
 # Local environment files
 .env
