@@ -1,4 +1,4 @@
-﻿# I-32 Wave A+B+C modifiers. Verified 1.13.11 types only. No combat, construction, or research-speed.
+﻿# I-32 Wave A+B+C+D modifiers. Verified 1.13.11 types only. No combat, construction, minting, tax, or research-speed.
 
 # Active Students — France (society + qualifications).
 sp_i32_students_fra_act = {
@@ -245,4 +245,61 @@ sp_i32_mil_overrun = {
 sp_i32_mil_overrun_aus = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
 	country_expenses_add = 600
+}
+
+# === Wave D — Industrial Missions ===
+# Forbidden: factory throughput, construction, minting, tax.
+
+sp_i32_ind_act = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_production_tech_spread_mult = 0.10
+	state_pop_qualifications_mult = 0.05
+	country_expenses_add = 2200
+	country_bureaucracy_add = -40
+	interest_group_ig_industrialists_pop_attraction_mult = 0.10
+	interest_group_ig_landowners_approval_add = -1
+}
+
+sp_i32_ind_complete_qual = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_pop_qualifications_mult = 0.05
+}
+
+# +50% of industrial stipend (2200) for 1 year.
+sp_i32_ind_overrun = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 1100
+}
+
+# === Wave D — Naval Modernization ===
+# Forbidden: ship offense, battle offense/defense. MIL_SPREAD only if free at start.
+
+sp_i32_nav_act_spread = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_military_tech_spread_mult = 0.05
+	state_pop_qualifications_mult = 0.05
+	country_expenses_add = 3000
+	country_bureaucracy_add = -50
+	interest_group_ig_armed_forces_approval_add = 1
+	interest_group_ig_industrialists_approval_add = 1
+}
+
+sp_i32_nav_act_qual = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	state_pop_qualifications_mult = 0.10
+	country_expenses_add = 3000
+	country_bureaucracy_add = -50
+	interest_group_ig_armed_forces_approval_add = 1
+	interest_group_ig_industrialists_approval_add = 1
+}
+
+sp_i32_nav_complete_qual = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_pop_qualifications_mult = 0.05
+}
+
+# +50% of naval stipend (3000) for 1 year.
+sp_i32_nav_overrun = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 1500
 }

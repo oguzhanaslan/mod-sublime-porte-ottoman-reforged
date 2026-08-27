@@ -1,4 +1,4 @@
-﻿# I-32 Wave A+B+C — persistent hub. Tanzimat is not a prerequisite. Does not complete/fail.
+﻿# I-32 Wave A+B+C+D — persistent hub. Tanzimat is not a prerequisite. Does not complete/fail.
 
 sp_je_learning_from_europe = {
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
@@ -26,11 +26,17 @@ sp_je_learning_from_europe = {
 	scripted_button = sp_i32_btn_cancel_technical
 	scripted_button = sp_i32_btn_send_education
 	scripted_button = sp_i32_btn_cancel_education
+	scripted_button = sp_i32_btn_send_industrial
+	scripted_button = sp_i32_btn_cancel_industrial
+	scripted_button = sp_i32_btn_send_naval
+	scripted_button = sp_i32_btn_cancel_naval
 
 	scripted_progress_bar = sp_i32_spb_students
 	scripted_progress_bar = sp_i32_spb_military
 	scripted_progress_bar = sp_i32_spb_technical
 	scripted_progress_bar = sp_i32_spb_education
+	scripted_progress_bar = sp_i32_spb_industrial
+	scripted_progress_bar = sp_i32_spb_naval
 
 	widget = {
 		gui = "gui/com_journal_injects/injects.gui"
@@ -211,6 +217,43 @@ sp_je_learning_from_europe = {
 			}
 			triggered_desc = {
 				trigger = {
+					has_variable = sp_i32_industrial_partner_fra
+				}
+				desc = sp_je_learning_from_europe_status_industrial_fra
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_industrial_partner_gbr
+				}
+				desc = sp_je_learning_from_europe_status_industrial_gbr
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_industrial_partner_german
+					exists = c:GER
+				}
+				desc = sp_je_learning_from_europe_status_industrial_ger
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_industrial_partner_german
+				}
+				desc = sp_je_learning_from_europe_status_industrial_pru
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_naval_partner_gbr
+				}
+				desc = sp_je_learning_from_europe_status_naval_gbr
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_naval_partner_fra
+				}
+				desc = sp_je_learning_from_europe_status_naval_fra
+			}
+			triggered_desc = {
+				trigger = {
 					sp_i32_has_incoming_military_assistance = yes
 					game_date < 1841.1.1
 				}
@@ -245,6 +288,18 @@ sp_je_learning_from_europe = {
 					has_variable = sp_i32_education_cooldown
 				}
 				desc = sp_je_learning_from_europe_status_education_cooldown
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_industrial_cooldown
+				}
+				desc = sp_je_learning_from_europe_status_industrial_cooldown
+			}
+			triggered_desc = {
+				trigger = {
+					has_variable = sp_i32_naval_cooldown
+				}
+				desc = sp_je_learning_from_europe_status_naval_cooldown
 			}
 			triggered_desc = {
 				trigger = {

@@ -1,4 +1,4 @@
-﻿# I-32 Wave A+B+C — occupied families and capacity ceilings. Not mana.
+﻿# I-32 Wave A+B+C+D — occupied families and capacity ceilings. Not mana.
 
 sp_i32_occupied_families = {
 	value = 0
@@ -27,6 +27,18 @@ sp_i32_occupied_families = {
 	if = {
 		limit = {
 			has_variable = sp_i32_education_active
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_variable = sp_i32_industrial_active
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_variable = sp_i32_naval_active
 		}
 		add = 1
 	}
@@ -228,5 +240,43 @@ sp_i32_military_tooltip_pay = {
 	else = {
 		value = sp_i32_military_upfront_standard
 	}
+	multiply = -1
+}
+
+# --- Wave D: Industrial ---
+sp_i32_industrial_upfront = {
+	value = 20000
+}
+
+sp_i32_industrial_pay = {
+	value = sp_i32_industrial_upfront
+	multiply = -1
+}
+
+sp_i32_industrial_gold_required = {
+	value = sp_i32_industrial_upfront
+}
+
+sp_i32_industrial_tooltip_pay = {
+	value = sp_i32_industrial_upfront
+	multiply = -1
+}
+
+# --- Wave D: Naval ---
+sp_i32_naval_upfront = {
+	value = 25000
+}
+
+sp_i32_naval_pay = {
+	value = sp_i32_naval_upfront
+	multiply = -1
+}
+
+sp_i32_naval_gold_required = {
+	value = sp_i32_naval_upfront
+}
+
+sp_i32_naval_tooltip_pay = {
+	value = sp_i32_naval_upfront
 	multiply = -1
 }

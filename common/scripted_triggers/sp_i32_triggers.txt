@@ -1,4 +1,4 @@
-﻿# I-32 Wave A+B+C — Learning from Europe. TUR-only. No Tanzimat gate.
+﻿# I-32 Wave A+B+C+D — Learning from Europe. TUR-only. No Tanzimat gate.
 
 sp_i32_is_tur = {
 	c:TUR ?= this
@@ -58,13 +58,18 @@ sp_i32_has_incoming_ma_from_german_sphere = {
 	}
 }
 
-# MIL_SPREAD occupied: incoming MA, or I-32 land mission with mil spread (not GBR QUAL-only).
+# MIL_SPREAD occupied: incoming MA, I-32 land with mil spread (not GBR QUAL-only),
+# or naval mission using the spread variant (not QUAL-only).
 sp_i32_mil_spread_occupied = {
 	OR = {
 		sp_i32_has_incoming_military_assistance = yes
 		AND = {
 			has_variable = sp_i32_military_active
 			NOT = { has_variable = sp_i32_military_partner_gbr }
+		}
+		AND = {
+			has_variable = sp_i32_naval_active
+			NOT = { has_variable = sp_i32_naval_qual_only }
 		}
 	}
 }
@@ -641,4 +646,207 @@ sp_i32_can_start_military = {
 	NOT = { sp_i32_has_incoming_military_assistance = yes }
 	sp_i32_capacity_allows_new_programme = yes
 	sp_i32_any_military_destination_eligible = yes
+}
+
+# === Wave D — Industrial Missions ===
+
+sp_i32_industrial_busy = {
+	OR = {
+		has_variable = sp_i32_industrial_active
+		has_variable = sp_i32_industrial_completing
+	}
+}
+
+# Verified 1.13.11 industry types (primary keys; aliases also exist for tooling/steel).
+sp_i32_has_incorporated_manufacturing = {
+	any_scope_building = {
+		OR = {
+			is_building_type = building_food_industry
+			is_building_type = building_textile_mill
+			is_building_type = building_furniture_manufactory
+			is_building_type = building_tooling_workshop
+			is_building_type = building_steel_mill
+		}
+		state = {
+			is_incorporated = yes
+		}
+	}
+}
+
+sp_i32_industrial_unlocked = {
+	has_technology_researched = mechanical_tools
+	OR = {
+		sp_i32_has_staffed_university = yes
+		sp_i32_has_incorporated_manufacturing = yes
+	}
+}
+
+sp_i32_industrial_german_host_ok = {
+	OR = {
+		AND = {
+			exists = c:GER
+			sp_i32_partner_ok_neutral = { PARTNER = c:GER }
+		}
+		AND = {
+			NOT = { exists = c:GER }
+			exists = c:PRU
+			sp_i32_partner_ok_neutral = { PARTNER = c:PRU }
+		}
+	}
+}
+
+sp_i32_any_industrial_destination_diplomatic = {
+	OR = {
+		sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+		sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
+		sp_i32_industrial_german_host_ok = yes
+	}
+}
+
+sp_i32_industrial_fra_eligible = {
+	gold_reserves >= sp_i32_industrial_upfront
+	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+}
+
+sp_i32_industrial_gbr_eligible = {
+	gold_reserves >= sp_i32_industrial_upfront
+	sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
+}
+
+sp_i32_industrial_german_eligible = {
+	gold_reserves >= sp_i32_industrial_upfront
+	sp_i32_industrial_german_host_ok = yes
+}
+
+sp_i32_any_industrial_destination_eligible = {
+	OR = {
+		sp_i32_industrial_fra_eligible = yes
+		sp_i32_industrial_gbr_eligible = yes
+		sp_i32_industrial_german_eligible = yes
+	}
+}
+
+sp_i32_industrial_partner_still_exists = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_industrial_partner_fra
+			exists = c:FRA
+		}
+		AND = {
+			has_variable = sp_i32_industrial_partner_gbr
+			exists = c:GBR
+		}
+		AND = {
+			has_variable = sp_i32_industrial_partner_german
+			OR = {
+				exists = c:GER
+				exists = c:PRU
+			}
+		}
+	}
+}
+
+sp_i32_can_start_industrial = {
+	sp_i32_is_tur = yes
+	NOT = { sp_i32_industrial_busy = yes }
+	NOT = { has_variable = sp_i32_industrial_cooldown }
+	sp_i32_capacity_allows_new_programme = yes
+	sp_i32_industrial_unlocked = yes
+	sp_i32_any_industrial_destination_eligible = yes
+}
+
+# === Wave D — Naval Modernization ===
+
+sp_i32_naval_busy = {
+	OR = {
+		has_variable = sp_i32_naval_active
+		has_variable = sp_i32_naval_completing
+	}
+}
+
+sp_i32_naval_unlocked = {
+	OR = {
+		has_technology_researched = paddle_steamer
+		has_technology_researched = screw_frigate
+	}
+}
+
+# Naval GBR: Cordial (≥20) or primary partner (Wave E). Attitudes still apply.
+sp_i32_naval_gbr_ok = {
+	exists = c:GBR
+	NOT = { has_war_with = c:GBR }
+	c:GBR = {
+		NOR = {
+			has_attitude = {
+				who = root
+				attitude = antagonistic
+			}
+			has_attitude = {
+				who = root
+				attitude = belligerent
+			}
+			has_attitude = {
+				who = root
+				attitude = domineering
+			}
+		}
+	}
+	OR = {
+		has_variable = sp_i32_primary_partner_gbr
+		c:GBR = {
+			relations:root >= 20
+		}
+	}
+}
+
+# Naval free for MIL_SPREAD: no MA and no I-32 land mission (any partner).
+sp_i32_naval_mil_spread_free = {
+	NOT = { sp_i32_has_incoming_military_assistance = yes }
+	NOT = { has_variable = sp_i32_military_active }
+}
+
+sp_i32_any_naval_destination_diplomatic = {
+	OR = {
+		sp_i32_naval_gbr_ok = yes
+		sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+	}
+}
+
+sp_i32_naval_gbr_eligible = {
+	gold_reserves >= sp_i32_naval_upfront
+	sp_i32_naval_gbr_ok = yes
+}
+
+sp_i32_naval_fra_eligible = {
+	gold_reserves >= sp_i32_naval_upfront
+	sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+}
+
+sp_i32_any_naval_destination_eligible = {
+	OR = {
+		sp_i32_naval_gbr_eligible = yes
+		sp_i32_naval_fra_eligible = yes
+	}
+}
+
+sp_i32_naval_partner_still_exists = {
+	OR = {
+		AND = {
+			has_variable = sp_i32_naval_partner_fra
+			exists = c:FRA
+		}
+		AND = {
+			has_variable = sp_i32_naval_partner_gbr
+			exists = c:GBR
+		}
+	}
+}
+
+sp_i32_can_start_naval = {
+	sp_i32_is_tur = yes
+	NOT = { sp_i32_naval_busy = yes }
+	NOT = { has_variable = sp_i32_naval_cooldown }
+	sp_i32_capacity_allows_new_programme = yes
+	sp_i32_naval_unlocked = yes
+	sp_i32_any_naval_destination_eligible = yes
 }

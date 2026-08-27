@@ -1,4 +1,4 @@
-﻿# I-32 Wave A+B+C — Students (0), Military MA lamp / I-32 mission (1), Technical (2), Education (3).
+﻿# I-32 Wave A+B+C+D — Students (0), Military (1), Technical (2), Education (3), Industrial (4), Naval (5).
 # Loc: keep desc / second_desc short — CMF paints both on the bar face (~504px).
 
 sp_i32_spb_students = {
@@ -113,6 +113,64 @@ sp_i32_spb_education = {
 				value = {
 					value = 100
 					divide = var:sp_i32_education_duration_months
+				}
+			}
+		}
+	}
+}
+
+sp_i32_spb_industrial = {
+	name = "sp_i32_spb_industrial"
+	desc = "sp_i32_spb_industrial_desc"
+	second_desc = "sp_i32_spb_industrial_second"
+
+	default = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	# Presentation only. Authoritative timer is sp_i32_industrial_months_left.
+	monthly_progress = {
+		if = {
+			limit = {
+				has_variable = sp_i32_industrial_active
+				NOT = { has_variable = sp_i32_industrial_completing }
+			}
+			add = {
+				desc = "sp_i32_spb_industrial_tick"
+				value = {
+					value = 100
+					divide = var:sp_i32_industrial_duration_months
+				}
+			}
+		}
+	}
+}
+
+sp_i32_spb_naval = {
+	name = "sp_i32_spb_naval"
+	desc = "sp_i32_spb_naval_desc"
+	second_desc = "sp_i32_spb_naval_second"
+
+	default = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	# Presentation only. Authoritative timer is sp_i32_naval_months_left.
+	monthly_progress = {
+		if = {
+			limit = {
+				has_variable = sp_i32_naval_active
+				NOT = { has_variable = sp_i32_naval_completing }
+			}
+			add = {
+				desc = "sp_i32_spb_naval_tick"
+				value = {
+					value = 100
+					divide = var:sp_i32_naval_duration_months
 				}
 			}
 		}

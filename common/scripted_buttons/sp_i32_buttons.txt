@@ -1,4 +1,4 @@
-﻿# I-32 Wave A+B+C buttons. Destination / focus choice is an event, not permanent JE buttons.
+﻿# I-32 Wave A+B+C+D buttons. Destination / focus choice is an event, not permanent JE buttons.
 
 sp_i32_btn_send_students = {
 	name = sp_i32_btn_send_students
@@ -535,5 +535,245 @@ sp_i32_btn_cancel_military = {
 			}
 		}
 		trigger_event = { id = sp_i32.33 popup = yes }
+	}
+}
+
+sp_i32_btn_send_industrial = {
+	name = sp_i32_btn_send_industrial
+	desc = sp_i32_btn_send_industrial_desc
+
+	visible = {
+		NOT = { sp_i32_industrial_busy = yes }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sp_i32_industrial_not_active_tt
+			NOT = { sp_i32_industrial_busy = yes }
+		}
+		custom_tooltip = {
+			text = sp_i32_industrial_cooldown_tt
+			NOT = { has_variable = sp_i32_industrial_cooldown }
+		}
+		custom_tooltip = {
+			text = sp_i32_capacity_allows_tt
+			sp_i32_capacity_allows_new_programme = yes
+		}
+		custom_tooltip = {
+			text = sp_i32_industrial_unlock_tt
+			sp_i32_industrial_unlocked = yes
+		}
+		custom_tooltip = {
+			text = sp_i32_industrial_destination_tt
+			sp_i32_any_industrial_destination_diplomatic = yes
+		}
+		gold_reserves >= sp_i32_industrial_gold_required
+	}
+
+	ai_chance = {
+		value = 8
+		if = {
+			limit = {
+				gold_reserves < 28000
+			}
+			add = -20
+		}
+		if = {
+			limit = {
+				is_at_war = yes
+			}
+			add = -10
+		}
+	}
+
+	effect = {
+		custom_tooltip = sp_i32_btn_send_industrial_effect_tt
+		show_as_tooltip = {
+			add_treasury = {
+				value = sp_i32_industrial_tooltip_pay
+			}
+		}
+		trigger_event = { id = sp_i32.15 popup = yes }
+	}
+}
+
+sp_i32_btn_cancel_industrial = {
+	name = sp_i32_btn_cancel_industrial
+	desc = sp_i32_btn_cancel_industrial_desc
+
+	visible = {
+		has_variable = sp_i32_industrial_active
+		NOT = { has_variable = sp_i32_industrial_completing }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sp_i32_industrial_cancel_possible_tt
+			has_variable = sp_i32_industrial_active
+			NOT = { has_variable = sp_i32_industrial_completing }
+		}
+	}
+
+	ai_chance = {
+		value = 0
+	}
+
+	effect = {
+		custom_tooltip = sp_i32_btn_cancel_industrial_effect_tt
+		custom_tooltip = sp_i32_industrial_cancel_cooldown_tt
+		custom_tooltip = sp_i32_students_no_refund_tt
+		show_as_tooltip = {
+			if = {
+				limit = {
+					has_variable = sp_i32_industrial_partner_fra
+					exists = c:FRA
+				}
+				change_relations = {
+					country = c:FRA
+					value = -5
+				}
+			}
+			else_if = {
+				limit = {
+					has_variable = sp_i32_industrial_partner_gbr
+					exists = c:GBR
+				}
+				change_relations = {
+					country = c:GBR
+					value = -5
+				}
+			}
+			else_if = {
+				limit = {
+					has_variable = sp_i32_industrial_partner_german
+					exists = c:GER
+				}
+				change_relations = {
+					country = c:GER
+					value = -5
+				}
+			}
+			else_if = {
+				limit = {
+					has_variable = sp_i32_industrial_partner_german
+					exists = c:PRU
+				}
+				change_relations = {
+					country = c:PRU
+					value = -5
+				}
+			}
+		}
+		trigger_event = { id = sp_i32.34 popup = yes }
+	}
+}
+
+sp_i32_btn_send_naval = {
+	name = sp_i32_btn_send_naval
+	desc = sp_i32_btn_send_naval_desc
+
+	visible = {
+		NOT = { sp_i32_naval_busy = yes }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sp_i32_naval_not_active_tt
+			NOT = { sp_i32_naval_busy = yes }
+		}
+		custom_tooltip = {
+			text = sp_i32_naval_cooldown_tt
+			NOT = { has_variable = sp_i32_naval_cooldown }
+		}
+		custom_tooltip = {
+			text = sp_i32_capacity_allows_tt
+			sp_i32_capacity_allows_new_programme = yes
+		}
+		custom_tooltip = {
+			text = sp_i32_naval_unlock_tt
+			sp_i32_naval_unlocked = yes
+		}
+		custom_tooltip = {
+			text = sp_i32_naval_destination_tt
+			sp_i32_any_naval_destination_diplomatic = yes
+		}
+		gold_reserves >= sp_i32_naval_gold_required
+	}
+
+	ai_chance = {
+		value = 6
+		if = {
+			limit = {
+				gold_reserves < 35000
+			}
+			add = -20
+		}
+		if = {
+			limit = {
+				is_at_war = yes
+			}
+			add = -15
+		}
+	}
+
+	effect = {
+		custom_tooltip = sp_i32_btn_send_naval_effect_tt
+		show_as_tooltip = {
+			add_treasury = {
+				value = sp_i32_naval_tooltip_pay
+			}
+		}
+		trigger_event = { id = sp_i32.16 popup = yes }
+	}
+}
+
+sp_i32_btn_cancel_naval = {
+	name = sp_i32_btn_cancel_naval
+	desc = sp_i32_btn_cancel_naval_desc
+
+	visible = {
+		has_variable = sp_i32_naval_active
+		NOT = { has_variable = sp_i32_naval_completing }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sp_i32_naval_cancel_possible_tt
+			has_variable = sp_i32_naval_active
+			NOT = { has_variable = sp_i32_naval_completing }
+		}
+	}
+
+	ai_chance = {
+		value = 0
+	}
+
+	effect = {
+		custom_tooltip = sp_i32_btn_cancel_naval_effect_tt
+		custom_tooltip = sp_i32_naval_cancel_cooldown_tt
+		custom_tooltip = sp_i32_students_no_refund_tt
+		show_as_tooltip = {
+			if = {
+				limit = {
+					has_variable = sp_i32_naval_partner_fra
+					exists = c:FRA
+				}
+				change_relations = {
+					country = c:FRA
+					value = -5
+				}
+			}
+			else_if = {
+				limit = {
+					has_variable = sp_i32_naval_partner_gbr
+					exists = c:GBR
+				}
+				change_relations = {
+					country = c:GBR
+					value = -5
+				}
+			}
+		}
+		trigger_event = { id = sp_i32.35 popup = yes }
 	}
 }

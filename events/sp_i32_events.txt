@@ -1889,3 +1889,612 @@ sp_i32.53 = {
 	}
 }
 
+
+# === Wave D — Industrial partner selection ===
+sp_i32.15 = {
+	type = country_event
+	placement = root
+	title = sp_i32.15.t
+	desc = sp_i32.15.d
+	flavor = sp_i32.15.f
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	duration = 14
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = sp_je_learning_from_europe
+		NOT = { sp_i32_industrial_busy = yes }
+	}
+
+	immediate = {
+		c:FRA ?= { save_scope_as = sp_i32_fra }
+		c:GBR ?= { save_scope_as = sp_i32_gbr }
+		if = {
+			limit = { exists = c:GER }
+			c:GER = { save_scope_as = sp_i32_german }
+		}
+		else_if = {
+			limit = { exists = c:PRU }
+			c:PRU = { save_scope_as = sp_i32_german }
+		}
+	}
+
+	option = {
+		name = sp_i32.15.gbr
+		trigger = {
+			gold_reserves >= sp_i32_industrial_upfront
+			custom_tooltip = {
+				text = sp_i32_partner_gbr_neutral_tt
+				sp_i32_partner_ok_neutral = { PARTNER = c:GBR }
+			}
+		}
+		show_as_unavailable = {
+			NOT = { sp_i32_industrial_gbr_eligible = yes }
+		}
+		add_treasury = {
+			value = sp_i32_industrial_pay
+		}
+		je:sp_je_learning_from_europe = {
+			add_modifier = {
+				name = sp_i32_ind_act
+				years = 8
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { sp_i32_industrial_busy = yes }
+				}
+				sp_i32_clear_industrial_flags = yes
+				set_variable = sp_i32_industrial_partner_gbr
+				sp_i32_start_industrial_shared = yes
+			}
+		}
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = sp_i32.15.fra
+		trigger = {
+			gold_reserves >= sp_i32_industrial_upfront
+			custom_tooltip = {
+				text = sp_i32_partner_fra_neutral_tt
+				sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+			}
+		}
+		show_as_unavailable = {
+			NOT = { sp_i32_industrial_fra_eligible = yes }
+		}
+		add_treasury = {
+			value = sp_i32_industrial_pay
+		}
+		je:sp_je_learning_from_europe = {
+			add_modifier = {
+				name = sp_i32_ind_act
+				years = 8
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { sp_i32_industrial_busy = yes }
+				}
+				sp_i32_clear_industrial_flags = yes
+				set_variable = sp_i32_industrial_partner_fra
+				sp_i32_start_industrial_shared = yes
+			}
+		}
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = sp_i32.15.german
+		trigger = {
+			gold_reserves >= sp_i32_industrial_upfront
+			custom_tooltip = {
+				text = sp_i32_partner_german_neutral_tt
+				sp_i32_industrial_german_host_ok = yes
+			}
+		}
+		show_as_unavailable = {
+			NOT = { sp_i32_industrial_german_eligible = yes }
+		}
+		add_treasury = {
+			value = sp_i32_industrial_pay
+		}
+		je:sp_je_learning_from_europe = {
+			add_modifier = {
+				name = sp_i32_ind_act
+				years = 8
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { sp_i32_industrial_busy = yes }
+				}
+				sp_i32_clear_industrial_flags = yes
+				set_variable = sp_i32_industrial_partner_german
+				sp_i32_start_industrial_shared = yes
+			}
+		}
+		ai_chance = { base = 25 }
+	}
+
+	option = {
+		name = sp_i32.15.none
+		default_option = yes
+		ai_chance = { base = 0 }
+	}
+}
+
+# Cancel industrial confirmation.
+sp_i32.34 = {
+	type = country_event
+	placement = root
+	title = sp_i32.34.t
+	desc = sp_i32.34.d
+	flavor = sp_i32.34.f
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 7
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_variable = sp_i32_industrial_active
+		NOT = { has_variable = sp_i32_industrial_completing }
+	}
+
+	immediate = {
+		sp_i32_save_industrial_partner_scope = yes
+	}
+
+	option = {
+		name = sp_i32.34.a
+		default_option = yes
+		custom_tooltip = sp_i32_industrial_cancel_cooldown_tt
+		custom_tooltip = sp_i32_students_no_refund_tt
+		if = {
+			limit = {
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = -5
+			}
+		}
+		hidden_effect = {
+			sp_i32_cancel_industrial_cleanup = yes
+		}
+		ai_chance = { base = 0 }
+	}
+
+	option = {
+		name = sp_i32.34.b
+		ai_chance = { base = 100 }
+	}
+}
+
+# Industrial completion — QUAL pulse + relations.
+sp_i32.44 = {
+	type = country_event
+	placement = root
+	title = sp_i32.44.t
+	desc = sp_i32.44.d
+	flavor = sp_i32.44.f
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	duration = 21
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_variable = sp_i32_industrial_completing
+	}
+
+	immediate = {
+		sp_i32_save_industrial_partner_scope = yes
+	}
+
+	option = {
+		name = sp_i32.44.a
+		default_option = yes
+		custom_tooltip = sp_i32_industrial_complete_cooldown_tt
+		add_modifier = {
+			name = sp_i32_ind_complete_qual
+			years = 2
+		}
+		if = {
+			limit = {
+				NOT = { has_variable = sp_i32_industrial_chill }
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = 10
+			}
+		}
+		hidden_effect = {
+			sp_i32_complete_industrial_common = yes
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+# Industrial midpoint — overrun / diplomatic chill.
+sp_i32.54 = {
+	type = country_event
+	placement = root
+	title = sp_i32.54.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { has_variable = sp_i32_comp_overrun }
+				desc = sp_i32.54.d_overrun
+			}
+			triggered_desc = {
+				trigger = { has_variable = sp_i32_comp_chill }
+				desc = sp_i32.54.d_chill
+			}
+			desc = sp_i32.54.d
+		}
+	}
+	flavor = sp_i32.54.f
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	duration = 14
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_variable = sp_i32_industrial_active
+	}
+
+	immediate = {
+		remove_variable = sp_i32_comp_overrun
+		remove_variable = sp_i32_comp_chill
+		random_list = {
+			50 = { set_variable = sp_i32_comp_overrun }
+			50 = { set_variable = sp_i32_comp_chill }
+		}
+		sp_i32_save_industrial_partner_scope = yes
+	}
+
+	option = {
+		name = sp_i32.54.a
+		default_option = yes
+		if = {
+			limit = { has_variable = sp_i32_comp_overrun }
+			add_modifier = {
+				name = sp_i32_ind_overrun
+				years = 1
+			}
+		}
+		if = {
+			limit = { has_variable = sp_i32_comp_chill }
+			custom_tooltip = sp_i32_industrial_chill_tt
+			hidden_effect = {
+				set_variable = sp_i32_industrial_chill
+			}
+		}
+		hidden_effect = {
+			remove_variable = sp_i32_comp_overrun
+			remove_variable = sp_i32_comp_chill
+		}
+	}
+}
+
+# === Wave D — Naval partner selection ===
+sp_i32.16 = {
+	type = country_event
+	placement = root
+	title = sp_i32.16.t
+	desc = sp_i32.16.d
+	flavor = sp_i32.16.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 14
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = sp_je_learning_from_europe
+		NOT = { sp_i32_naval_busy = yes }
+	}
+
+	immediate = {
+		c:FRA ?= { save_scope_as = sp_i32_fra }
+		c:GBR ?= { save_scope_as = sp_i32_gbr }
+	}
+
+	option = {
+		name = sp_i32.16.gbr
+		trigger = {
+			gold_reserves >= sp_i32_naval_upfront
+			custom_tooltip = {
+				text = sp_i32_naval_gbr_cordial_tt
+				sp_i32_naval_gbr_ok = yes
+			}
+		}
+		show_as_unavailable = {
+			NOT = { sp_i32_naval_gbr_eligible = yes }
+		}
+		add_treasury = {
+			value = sp_i32_naval_pay
+		}
+		if = {
+			limit = {
+				sp_i32_naval_mil_spread_free = yes
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_nav_act_spread
+					years = 8
+				}
+			}
+		}
+		else = {
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_nav_act_qual
+					years = 8
+				}
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { sp_i32_naval_busy = yes }
+				}
+				sp_i32_clear_naval_flags = yes
+				set_variable = sp_i32_naval_partner_gbr
+				if = {
+					limit = {
+						NOT = { sp_i32_naval_mil_spread_free = yes }
+					}
+					set_variable = sp_i32_naval_qual_only
+				}
+				sp_i32_start_naval_shared = yes
+			}
+		}
+		ai_chance = { base = 55 }
+	}
+
+	option = {
+		name = sp_i32.16.fra
+		trigger = {
+			gold_reserves >= sp_i32_naval_upfront
+			custom_tooltip = {
+				text = sp_i32_partner_fra_neutral_tt
+				sp_i32_partner_ok_neutral = { PARTNER = c:FRA }
+			}
+		}
+		show_as_unavailable = {
+			NOT = { sp_i32_naval_fra_eligible = yes }
+		}
+		add_treasury = {
+			value = sp_i32_naval_pay
+		}
+		if = {
+			limit = {
+				sp_i32_naval_mil_spread_free = yes
+			}
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_nav_act_spread
+					years = 8
+				}
+			}
+		}
+		else = {
+			je:sp_je_learning_from_europe = {
+				add_modifier = {
+					name = sp_i32_nav_act_qual
+					years = 8
+				}
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { sp_i32_naval_busy = yes }
+				}
+				sp_i32_clear_naval_flags = yes
+				set_variable = sp_i32_naval_partner_fra
+				if = {
+					limit = {
+						NOT = { sp_i32_naval_mil_spread_free = yes }
+					}
+					set_variable = sp_i32_naval_qual_only
+				}
+				sp_i32_start_naval_shared = yes
+			}
+		}
+		ai_chance = { base = 35 }
+	}
+
+	option = {
+		name = sp_i32.16.none
+		default_option = yes
+		ai_chance = { base = 0 }
+	}
+}
+
+# Cancel naval confirmation.
+sp_i32.35 = {
+	type = country_event
+	placement = root
+	title = sp_i32.35.t
+	desc = sp_i32.35.d
+	flavor = sp_i32.35.f
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 7
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_variable = sp_i32_naval_active
+		NOT = { has_variable = sp_i32_naval_completing }
+	}
+
+	immediate = {
+		sp_i32_save_naval_partner_scope = yes
+	}
+
+	option = {
+		name = sp_i32.35.a
+		default_option = yes
+		custom_tooltip = sp_i32_naval_cancel_cooldown_tt
+		custom_tooltip = sp_i32_students_no_refund_tt
+		if = {
+			limit = {
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = -5
+			}
+		}
+		hidden_effect = {
+			sp_i32_cancel_naval_cleanup = yes
+		}
+		ai_chance = { base = 0 }
+	}
+
+	option = {
+		name = sp_i32.35.b
+		ai_chance = { base = 100 }
+	}
+}
+
+# Naval completion — QUAL pulse + relations.
+sp_i32.45 = {
+	type = country_event
+	placement = root
+	title = sp_i32.45.t
+	desc = sp_i32.45.d
+	flavor = sp_i32.45.f
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 21
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_variable = sp_i32_naval_completing
+	}
+
+	immediate = {
+		sp_i32_save_naval_partner_scope = yes
+	}
+
+	option = {
+		name = sp_i32.45.a
+		default_option = yes
+		custom_tooltip = sp_i32_naval_complete_cooldown_tt
+		add_modifier = {
+			name = sp_i32_nav_complete_qual
+			years = 2
+		}
+		if = {
+			limit = {
+				NOT = { has_variable = sp_i32_naval_chill }
+				exists = scope:sp_i32_partner
+			}
+			change_relations = {
+				country = scope:sp_i32_partner
+				value = 10
+			}
+		}
+		hidden_effect = {
+			sp_i32_complete_naval_common = yes
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+# Naval midpoint — overrun / delay.
+sp_i32.55 = {
+	type = country_event
+	placement = root
+	title = sp_i32.55.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { has_variable = sp_i32_comp_overrun }
+				desc = sp_i32.55.d_overrun
+			}
+			triggered_desc = {
+				trigger = { has_variable = sp_i32_comp_delay }
+				desc = sp_i32.55.d_delay
+			}
+			desc = sp_i32.55.d
+		}
+	}
+	flavor = sp_i32.55.f
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	duration = 14
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_variable = sp_i32_naval_active
+	}
+
+	immediate = {
+		remove_variable = sp_i32_comp_overrun
+		remove_variable = sp_i32_comp_delay
+		random_list = {
+			50 = { set_variable = sp_i32_comp_overrun }
+			50 = { set_variable = sp_i32_comp_delay }
+		}
+		sp_i32_save_naval_partner_scope = yes
+	}
+
+	option = {
+		name = sp_i32.55.a
+		default_option = yes
+		if = {
+			limit = { has_variable = sp_i32_comp_overrun }
+			add_modifier = {
+				name = sp_i32_nav_overrun
+				years = 1
+			}
+		}
+		if = {
+			limit = { has_variable = sp_i32_comp_delay }
+			custom_tooltip = sp_i32_naval_extend_year_tt
+			hidden_effect = {
+				change_variable = {
+					name = sp_i32_naval_months_left
+					add = 12
+				}
+			}
+		}
+		hidden_effect = {
+			remove_variable = sp_i32_comp_overrun
+			remove_variable = sp_i32_comp_delay
+		}
+	}
+}

@@ -1,4 +1,4 @@
-﻿# I-32 Wave A+B+C effects. Students / Technical / Education / Military lifecycles.
+﻿# I-32 Wave A+B+C+D effects. Students / Technical / Education / Military / Industrial / Naval.
 
 sp_i32_init_capacity_cache = {
 	if = {
@@ -60,7 +60,7 @@ sp_i32_apply_cmf_hide_flags = {
 	}
 }
 
-# Wave A bars (0–1) + Wave B bars (2–3). Hide all; sync unhides active.
+# Wave A–D bars (0–5). Hide all; sync unhides active.
 sp_i32_create_wave_bars = {
 	sp_i32_ensure_journal_entry_scope = yes
 	create_com_progress_bar = {
@@ -83,10 +83,22 @@ sp_i32_create_wave_bars = {
 		index = 3
 		color = white
 	}
+	create_com_progress_bar = {
+		progress_bar = sp_i32_spb_industrial
+		index = 4
+		color = gold
+	}
+	create_com_progress_bar = {
+		progress_bar = sp_i32_spb_naval
+		index = 5
+		color = blue
+	}
 	hide_com_progress_bar = { progress_bar = sp_i32_spb_students }
 	hide_com_progress_bar = { progress_bar = sp_i32_spb_military }
 	hide_com_progress_bar = { progress_bar = sp_i32_spb_technical }
 	hide_com_progress_bar = { progress_bar = sp_i32_spb_education }
+	hide_com_progress_bar = { progress_bar = sp_i32_spb_industrial }
+	hide_com_progress_bar = { progress_bar = sp_i32_spb_naval }
 }
 
 sp_i32_reset_students_bar = {
@@ -139,6 +151,34 @@ sp_i32_reset_military_bar = {
 		je:sp_je_learning_from_europe = {
 			add_progress = {
 				name = sp_i32_spb_military
+				value = -100
+			}
+		}
+	}
+}
+
+sp_i32_reset_industrial_bar = {
+	if = {
+		limit = {
+			has_journal_entry = sp_je_learning_from_europe
+		}
+		je:sp_je_learning_from_europe = {
+			add_progress = {
+				name = sp_i32_spb_industrial
+				value = -100
+			}
+		}
+	}
+}
+
+sp_i32_reset_naval_bar = {
+	if = {
+		limit = {
+			has_journal_entry = sp_je_learning_from_europe
+		}
+		je:sp_je_learning_from_europe = {
+			add_progress = {
+				name = sp_i32_spb_naval
 				value = -100
 			}
 		}
@@ -280,6 +320,24 @@ sp_i32_sync_cmf_presentation = {
 	}
 	else = {
 		hide_com_progress_bar = { progress_bar = sp_i32_spb_education }
+	}
+	if = {
+		limit = {
+			has_variable = sp_i32_industrial_active
+		}
+		unhide_com_progress_bar = { progress_bar = sp_i32_spb_industrial }
+	}
+	else = {
+		hide_com_progress_bar = { progress_bar = sp_i32_spb_industrial }
+	}
+	if = {
+		limit = {
+			has_variable = sp_i32_naval_active
+		}
+		unhide_com_progress_bar = { progress_bar = sp_i32_spb_naval }
+	}
+	else = {
+		hide_com_progress_bar = { progress_bar = sp_i32_spb_naval }
 	}
 	sp_i32_sync_moltke_character = yes
 }
@@ -1137,12 +1195,366 @@ sp_i32_tick_military = {
 	}
 }
 
+# === Wave D — Industrial ===
+
+sp_i32_clear_industrial_flags = {
+	remove_variable = sp_i32_industrial_partner_fra
+	remove_variable = sp_i32_industrial_partner_gbr
+	remove_variable = sp_i32_industrial_partner_german
+}
+
+sp_i32_remove_industrial_active_modifiers = {
+	if = {
+		limit = {
+			has_journal_entry = sp_je_learning_from_europe
+		}
+		je:sp_je_learning_from_europe = {
+			if = {
+				limit = { has_modifier = sp_i32_ind_act }
+				remove_modifier = sp_i32_ind_act
+			}
+		}
+	}
+	if = {
+		limit = { has_modifier = sp_i32_ind_act }
+		remove_modifier = sp_i32_ind_act
+	}
+}
+
+sp_i32_save_industrial_partner_scope = {
+	if = {
+		limit = {
+			has_variable = sp_i32_industrial_partner_fra
+			exists = c:FRA
+		}
+		c:FRA = { save_scope_as = sp_i32_partner }
+	}
+	else_if = {
+		limit = {
+			has_variable = sp_i32_industrial_partner_gbr
+			exists = c:GBR
+		}
+		c:GBR = { save_scope_as = sp_i32_partner }
+	}
+	else_if = {
+		limit = {
+			has_variable = sp_i32_industrial_partner_german
+			exists = c:GER
+		}
+		c:GER = { save_scope_as = sp_i32_partner }
+	}
+	else_if = {
+		limit = {
+			has_variable = sp_i32_industrial_partner_german
+			exists = c:PRU
+		}
+		c:PRU = { save_scope_as = sp_i32_partner }
+	}
+}
+
+sp_i32_start_industrial_shared = {
+	set_variable = sp_i32_industrial_active
+	set_variable = {
+		name = sp_i32_industrial_duration_months
+		value = 96
+	}
+	set_variable = {
+		name = sp_i32_industrial_months_left
+		value = 96
+	}
+	remove_variable = sp_i32_industrial_completing
+	remove_variable = sp_i32_industrial_midpoint_fired
+	remove_variable = sp_i32_industrial_chill
+	sp_i32_reset_industrial_bar = yes
+	sp_i32_ensure_journal_entry_scope = yes
+	if = {
+		limit = {
+			exists = scope:journal_entry
+		}
+		unhide_com_progress_bar = { progress_bar = sp_i32_spb_industrial }
+	}
+}
+
+sp_i32_cleanup_industrial = {
+	sp_i32_remove_industrial_active_modifiers = yes
+	sp_i32_ensure_journal_entry_scope = yes
+	if = {
+		limit = {
+			exists = scope:journal_entry
+		}
+		hide_com_progress_bar = { progress_bar = sp_i32_spb_industrial }
+	}
+	sp_i32_reset_industrial_bar = yes
+	remove_variable = sp_i32_industrial_active
+	remove_variable = sp_i32_industrial_completing
+	remove_variable = sp_i32_industrial_months_left
+	remove_variable = sp_i32_industrial_duration_months
+	remove_variable = sp_i32_industrial_midpoint_fired
+	sp_i32_clear_industrial_flags = yes
+	remove_variable = sp_i32_industrial_chill
+}
+
+sp_i32_complete_industrial_common = {
+	set_variable = sp_i32_industrial_ever_completed
+	set_variable = {
+		name = sp_i32_industrial_cooldown
+		years = 4
+	}
+	sp_i32_cleanup_industrial = yes
+}
+
+sp_i32_cancel_industrial_cleanup = {
+	set_variable = {
+		name = sp_i32_industrial_cooldown
+		years = 1
+	}
+	sp_i32_cleanup_industrial = yes
+}
+
+sp_i32_try_industrial_midpoint_complication = {
+	if = {
+		limit = {
+			has_variable = sp_i32_industrial_active
+			NOT = { has_variable = sp_i32_industrial_completing }
+			NOT = { has_variable = sp_i32_industrial_midpoint_fired }
+			has_variable = sp_i32_industrial_months_left
+			has_variable = sp_i32_industrial_duration_months
+			var:sp_i32_industrial_months_left <= {
+				value = var:sp_i32_industrial_duration_months
+				divide = 2
+			}
+		}
+		set_variable = sp_i32_industrial_midpoint_fired
+		if = {
+			limit = {
+				legitimacy < 40
+			}
+			random_list = {
+				65 = { }
+				35 = {
+					trigger_event = { id = sp_i32.54 popup = yes }
+				}
+			}
+		}
+		else = {
+			random_list = {
+				80 = { }
+				20 = {
+					trigger_event = { id = sp_i32.54 popup = yes }
+				}
+			}
+		}
+	}
+}
+
+sp_i32_tick_industrial = {
+	if = {
+		limit = {
+			has_variable = sp_i32_industrial_active
+			NOT = { has_variable = sp_i32_industrial_completing }
+		}
+		if = {
+			limit = {
+				NOT = { sp_i32_industrial_partner_still_exists = yes }
+			}
+			set_variable = sp_i32_industrial_chill
+		}
+		change_variable = {
+			name = sp_i32_industrial_months_left
+			add = -1
+		}
+		sp_i32_try_industrial_midpoint_complication = yes
+		if = {
+			limit = {
+				var:sp_i32_industrial_months_left <= 0
+			}
+			set_variable = sp_i32_industrial_completing
+			trigger_event = { id = sp_i32.44 popup = yes }
+		}
+	}
+}
+
+# === Wave D — Naval ===
+
+sp_i32_clear_naval_flags = {
+	remove_variable = sp_i32_naval_partner_fra
+	remove_variable = sp_i32_naval_partner_gbr
+	remove_variable = sp_i32_naval_qual_only
+}
+
+sp_i32_remove_naval_active_modifiers = {
+	if = {
+		limit = {
+			has_journal_entry = sp_je_learning_from_europe
+		}
+		je:sp_je_learning_from_europe = {
+			if = {
+				limit = { has_modifier = sp_i32_nav_act_spread }
+				remove_modifier = sp_i32_nav_act_spread
+			}
+			if = {
+				limit = { has_modifier = sp_i32_nav_act_qual }
+				remove_modifier = sp_i32_nav_act_qual
+			}
+		}
+	}
+	if = {
+		limit = { has_modifier = sp_i32_nav_act_spread }
+		remove_modifier = sp_i32_nav_act_spread
+	}
+	if = {
+		limit = { has_modifier = sp_i32_nav_act_qual }
+		remove_modifier = sp_i32_nav_act_qual
+	}
+}
+
+sp_i32_save_naval_partner_scope = {
+	if = {
+		limit = {
+			has_variable = sp_i32_naval_partner_fra
+			exists = c:FRA
+		}
+		c:FRA = { save_scope_as = sp_i32_partner }
+	}
+	else_if = {
+		limit = {
+			has_variable = sp_i32_naval_partner_gbr
+			exists = c:GBR
+		}
+		c:GBR = { save_scope_as = sp_i32_partner }
+	}
+}
+
+sp_i32_start_naval_shared = {
+	set_variable = sp_i32_naval_active
+	set_variable = {
+		name = sp_i32_naval_duration_months
+		value = 96
+	}
+	set_variable = {
+		name = sp_i32_naval_months_left
+		value = 96
+	}
+	remove_variable = sp_i32_naval_completing
+	remove_variable = sp_i32_naval_midpoint_fired
+	remove_variable = sp_i32_naval_chill
+	sp_i32_reset_naval_bar = yes
+	sp_i32_ensure_journal_entry_scope = yes
+	if = {
+		limit = {
+			exists = scope:journal_entry
+		}
+		unhide_com_progress_bar = { progress_bar = sp_i32_spb_naval }
+	}
+}
+
+sp_i32_cleanup_naval = {
+	sp_i32_remove_naval_active_modifiers = yes
+	sp_i32_ensure_journal_entry_scope = yes
+	if = {
+		limit = {
+			exists = scope:journal_entry
+		}
+		hide_com_progress_bar = { progress_bar = sp_i32_spb_naval }
+	}
+	sp_i32_reset_naval_bar = yes
+	remove_variable = sp_i32_naval_active
+	remove_variable = sp_i32_naval_completing
+	remove_variable = sp_i32_naval_months_left
+	remove_variable = sp_i32_naval_duration_months
+	remove_variable = sp_i32_naval_midpoint_fired
+	sp_i32_clear_naval_flags = yes
+	remove_variable = sp_i32_naval_chill
+}
+
+sp_i32_complete_naval_common = {
+	set_variable = sp_i32_naval_ever_completed
+	set_variable = {
+		name = sp_i32_naval_cooldown
+		years = 5
+	}
+	sp_i32_cleanup_naval = yes
+}
+
+sp_i32_cancel_naval_cleanup = {
+	set_variable = {
+		name = sp_i32_naval_cooldown
+		years = 1
+	}
+	sp_i32_cleanup_naval = yes
+}
+
+sp_i32_try_naval_midpoint_complication = {
+	if = {
+		limit = {
+			has_variable = sp_i32_naval_active
+			NOT = { has_variable = sp_i32_naval_completing }
+			NOT = { has_variable = sp_i32_naval_midpoint_fired }
+			has_variable = sp_i32_naval_months_left
+			has_variable = sp_i32_naval_duration_months
+			var:sp_i32_naval_months_left <= {
+				value = var:sp_i32_naval_duration_months
+				divide = 2
+			}
+		}
+		set_variable = sp_i32_naval_midpoint_fired
+		if = {
+			limit = {
+				legitimacy < 40
+			}
+			random_list = {
+				65 = { }
+				35 = {
+					trigger_event = { id = sp_i32.55 popup = yes }
+				}
+			}
+		}
+		else = {
+			random_list = {
+				80 = { }
+				20 = {
+					trigger_event = { id = sp_i32.55 popup = yes }
+				}
+			}
+		}
+	}
+}
+
+sp_i32_tick_naval = {
+	if = {
+		limit = {
+			has_variable = sp_i32_naval_active
+			NOT = { has_variable = sp_i32_naval_completing }
+		}
+		if = {
+			limit = {
+				NOT = { sp_i32_naval_partner_still_exists = yes }
+			}
+			set_variable = sp_i32_naval_chill
+		}
+		change_variable = {
+			name = sp_i32_naval_months_left
+			add = -1
+		}
+		sp_i32_try_naval_midpoint_complication = yes
+		if = {
+			limit = {
+				var:sp_i32_naval_months_left <= 0
+			}
+			set_variable = sp_i32_naval_completing
+			trigger_event = { id = sp_i32.45 popup = yes }
+		}
+	}
+}
+
 sp_i32_monthly_pulse_effect = {
 	sp_i32_tick_capacity_cache = yes
 	sp_i32_tick_students = yes
 	sp_i32_tick_military = yes
 	sp_i32_tick_technical = yes
 	sp_i32_tick_education = yes
+	sp_i32_tick_industrial = yes
+	sp_i32_tick_naval = yes
 	sp_i32_sync_cmf_presentation = yes
 }
 
