@@ -5,8 +5,6 @@
 # Vanilla expanding scroll: building_browser_panel.gui scrollarea (L459–474).
 # Outliner preferscrollwidgetsize is for preferred-sized scrollareas only — do not reuse here.
 # stage_scroll_body must override a COMPLETE preferred flowcontainer (never empty block).
-# Nested stage body: preferred + ignoreinvisible (vanilla military_formation_panel.gui) so
-# hidden/conditional sections contribute zero height — prevents false scroll overflow.
 # Reuses sp_ct_insp_req_row, sp_ct_insp_stat_row, sp_ct_insp_progress_card from 00_sp_ct_shared.gui.
 
 types sp_ct_inspector_types {
@@ -552,8 +550,7 @@ types sp_ct_inspector_types {
 								direction = vertical
 								spacing = 10
 								layoutpolicy_vertical = preferred
-								layoutpolicy_horizontal = expanding
-								ignoreinvisible = yes
+								minimumsize = { 480 -1 }
 							}
 						}
 					}
@@ -599,8 +596,7 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -671,8 +667,7 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -743,8 +738,7 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -815,8 +809,7 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -910,8 +903,7 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_unlock" }
 					blockoverride "section_body" {
@@ -1212,8 +1204,7 @@ types sp_ct_inspector_types {
 								direction = vertical
 								spacing = 10
 								layoutpolicy_vertical = preferred
-								layoutpolicy_horizontal = expanding
-								ignoreinvisible = yes
+								minimumsize = { 480 -1 }
 							}
 						}
 					}
@@ -1259,8 +1250,7 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -1331,8 +1321,7 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -1403,8 +1392,7 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -1475,8 +1463,7 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
 					blockoverride "section_body" {
@@ -1492,7 +1479,6 @@ types sp_ct_inspector_types {
 					}
 				}
 				sp_ct_insp_section_panel = {
-					visible = "[Or(GetPlayer.MakeScope.Var('sp_islamism_stage').IsSet, And(GetPlayer.MakeScope.Var('sp_islamism_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_islamism_stage_goal').IsSet))]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
 					blockoverride "section_body" {
 						flowcontainer = {
@@ -1594,8 +1580,7 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_unlock" }
 					blockoverride "section_body" {
@@ -1664,14 +1649,11 @@ types sp_ct_inspector_types {
 	# Reusable JE action strips (legacy inspector migration).
 	type sp_ct_insp_je_sick_man_actions = flowcontainer {
 		direction = vertical
-		layoutpolicy_vertical = preferred
-		ignoreinvisible = yes
 		datamodel = "[AccessPlayer.AccessActivePlayerObjectiveJournalEntries]"
 		item = {
 			flowcontainer = {
 				direction = horizontal
 				spacing = 8
-				layoutpolicy_vertical = preferred
 				visible = "[EqualTo_string(JournalEntry.GetName, Localize('je_sick_man_main'))]"
 				button = {
 					size = { 184 32 }
@@ -1729,20 +1711,15 @@ types sp_ct_inspector_types {
 
 	type sp_ct_insp_je_post_tanzimat_actions = flowcontainer {
 		direction = vertical
-		layoutpolicy_vertical = preferred
-		ignoreinvisible = yes
 		datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
 		item = {
 			flowcontainer = {
 				direction = vertical
-				layoutpolicy_vertical = preferred
-				ignoreinvisible = yes
 				datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
 				item = {
 					flowcontainer = {
 						direction = horizontal
 						spacing = 8
-						layoutpolicy_vertical = preferred
 						visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_post_tanzimat_era'))]"
 						datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
 						button = {
@@ -1803,20 +1780,15 @@ types sp_ct_inspector_types {
 
 	type sp_ct_insp_je_turan_actions = flowcontainer {
 		direction = vertical
-		layoutpolicy_vertical = preferred
-		ignoreinvisible = yes
 		datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
 		item = {
 			flowcontainer = {
 				direction = vertical
-				layoutpolicy_vertical = preferred
-				ignoreinvisible = yes
 				datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
 				item = {
 					flowcontainer = {
 						direction = horizontal
 						spacing = 8
-						layoutpolicy_vertical = preferred
 						visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
 						datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
 						button = {
@@ -2655,8 +2627,7 @@ types sp_ct_inspector_types {
 								direction = vertical
 								spacing = 10
 								layoutpolicy_vertical = preferred
-								layoutpolicy_horizontal = expanding
-								ignoreinvisible = yes
+								minimumsize = { 480 -1 }
 							}
 						}
 					}
@@ -2705,10 +2676,9 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
-					visible = "[And(GetScriptedGui('sp_ct_vis_turan_s1_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet))]"
+					visible = "[GetScriptedGui('sp_ct_vis_turan_s1_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
 					blockoverride "section_body" {
 						sp_ct_insp_progress_turan_live = {}
@@ -2829,10 +2799,9 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
-					visible = "[And(GetScriptedGui('sp_ct_vis_turan_s2_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet))]"
+					visible = "[GetScriptedGui('sp_ct_vis_turan_s2_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
 					blockoverride "section_body" {
 						sp_ct_insp_progress_turan_live = {}
@@ -3008,10 +2977,9 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
-					visible = "[And(GetScriptedGui('sp_ct_vis_turan_s3_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet))]"
+					visible = "[GetScriptedGui('sp_ct_vis_turan_s3_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
 					blockoverride "section_body" {
 						sp_ct_insp_progress_turan_live = {}
@@ -3132,10 +3100,9 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
-					visible = "[And(GetScriptedGui('sp_ct_vis_turan_s4_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet))]"
+					visible = "[GetScriptedGui('sp_ct_vis_turan_s4_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					blockoverride "section_title" { text = "sp_ct_sec_progress" }
 					blockoverride "section_body" {
 						sp_ct_insp_progress_turan_live = {}
@@ -3306,8 +3273,7 @@ types sp_ct_inspector_types {
 					direction = vertical
 					spacing = 10
 					layoutpolicy_vertical = preferred
-					layoutpolicy_horizontal = expanding
-					ignoreinvisible = yes
+					minimumsize = { 480 -1 }
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_unlock" }
 					blockoverride "section_body" {
