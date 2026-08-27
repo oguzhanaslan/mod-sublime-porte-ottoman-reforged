@@ -7,10 +7,13 @@
 types sp_ct_node_types {
 
 	# Stage / progression card — mini artwork sibling of sp_ct_node_artwork.
-	# Fixed geometry: 200×85 = 200×52 art (2:1) + 1px divider + 32px footer.
+	# Fixed geometry: 200×94 = 200×62 art + 1px divider + 31px footer.
+	# Art band uses same fixed WxH icon fill as artwork node (no independent X/Y stretch).
+	# Source DDS is 1024×512 (2:1); exact 2:1 at width 200 would be H=100 (over budget),
+	# so viewport is 200×62 (~66% of card) with texture mapped into that rect.
 	# Card size is NEVER text-driven; long titles ellipsize in the footer.
 	type sp_ct_node_compact = widget {
-		size = { 200 85 }
+		size = { 200 94 }
 		parentanchor = hcenter
 
 		background = {
@@ -52,28 +55,28 @@ types sp_ct_node_types {
 				parentanchor = top|hcenter
 				spacing = 0
 
-				# 2:1 landscape band — same icon presentation as artwork node (fixed WxH).
+				# Landscape band — same presentation as sp_ct_node_artwork icon { W H }.
 				widget = {
-					size = { 200 52 }
+					size = { 200 62 }
 					parentanchor = hcenter
 					background = {
 						using = dark_area
-						alpha = 0.28
+						alpha = 0.22
 					}
 					icon = {
-						size = { 200 52 }
+						size = { 200 62 }
 						parentanchor = center
 						block "node_icon" {
 							texture = "gfx/interface/icons/event_icons/event_default.dds"
 						}
 					}
-					# Locked dim only on artwork — modest so stage art stays recognizable.
+					# Locked dim only on artwork — light so stage art stays recognizable.
 					widget = {
 						size = { 100% 100% }
 						block "state_locked_dim" { visible = no }
 						background = {
 							using = dark_area
-							alpha = 0.28
+							alpha = 0.18
 						}
 					}
 				}
@@ -89,7 +92,7 @@ types sp_ct_node_types {
 				}
 
 				widget = {
-					size = { 200 32 }
+					size = { 200 31 }
 					flowcontainer = {
 						direction = horizontal
 						parentanchor = center

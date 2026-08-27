@@ -15,9 +15,9 @@ types sp_ct_shared_types {
 		}
 	}
 
-	# Ideology / stage vertical connector — muted brass, readable at 1080p.
+	# Ideology / stage vertical connector — shorter gaps for taller mini cards.
 	type sp_ct_connector_v = widget {
-		size = { 3 6 }
+		size = { 3 4 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
