@@ -5,82 +5,83 @@ types sp_ct_shared_types {
 
 	# Common trunk vertical connector — strongest lane language.
 	type sp_ct_connector_trunk_v = widget {
-		size = { 3 12 }
+		size = { 4 12 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.84
+			alpha = 0.92
 		}
 	}
 
-	# Ideology / stage vertical connector — shorter for taller mini cards.
+	# Ideology / stage vertical connector — muted brass, readable at 1080p.
 	type sp_ct_connector_v = widget {
-		size = { 2 6 }
+		size = { 3 6 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.60
+			alpha = 0.78
 		}
 	}
 
 	type sp_ct_connector_h = widget {
-		size = { 6 2 }
+		size = { 6 3 }
 		parentanchor = vcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.60
+			alpha = 0.78
 		}
 	}
 
 	# Identity fork bar — width matches tree content (992).
 	# Tick X = lane centers: 160 / 496 / 832 for 320+16+320+16+320.
+	# Center drop is slightly stronger so trunk→fork reads continuous.
 	type sp_ct_branch_fork = widget {
 		size = { 992 12 }
 		parentanchor = hcenter
 		widget = {
-			size = { 992 3 }
+			size = { 992 4 }
 			parentanchor = top|hcenter
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.84
+				alpha = 0.92
 			}
 		}
 		widget = {
-			size = { 2 10 }
+			size = { 3 10 }
 			position = { 160 2 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.62
+				alpha = 0.78
 			}
 		}
 		widget = {
-			size = { 2 10 }
+			size = { 4 10 }
 			position = { 496 2 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.62
+				alpha = 0.90
 			}
 		}
 		widget = {
-			size = { 2 10 }
+			size = { 3 10 }
 			position = { 832 2 }
 			background = {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.62
+				alpha = 0.78
 			}
 		}
 	}

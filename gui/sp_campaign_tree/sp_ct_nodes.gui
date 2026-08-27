@@ -230,15 +230,29 @@ types sp_ct_node_types {
 
 				widget = {
 					size = { 240 39 }
+					# Capstone-only restrained brass rails (footer top+bottom). Hubs leave this hidden.
 					widget = {
-						size = { 100% 2 }
-						parentanchor = bottom
+						size = { 100% 100% }
 						block "node_capstone_accent" { visible = no }
-						background = {
-							texture = "gfx/interface/backgrounds/divider_gold.dds"
-							spriteType = Corneredstretched
-							spriteborder = { 0 0 }
-							alpha = 0.62
+						widget = {
+							size = { 100% 3 }
+							parentanchor = top
+							background = {
+								texture = "gfx/interface/backgrounds/divider_gold.dds"
+								spriteType = Corneredstretched
+								spriteborder = { 0 0 }
+								alpha = 0.86
+							}
+						}
+						widget = {
+							size = { 100% 3 }
+							parentanchor = bottom
+							background = {
+								texture = "gfx/interface/backgrounds/divider_gold.dds"
+								spriteType = Corneredstretched
+								spriteborder = { 0 0 }
+								alpha = 0.90
+							}
 						}
 					}
 					flowcontainer = {
