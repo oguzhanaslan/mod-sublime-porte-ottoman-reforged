@@ -510,32 +510,19 @@ types sp_ct_inspector_types {
 				layoutpolicy_vertical = preferred
 				layoutpolicy_horizontal = expanding
 				minimumsize = { 480 -1 }
+
 				textbox = {
 					text = "sp_ct_sec_description"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-					}
+					autoresize = yes
+					align = left|nobaseline
+					default_format = "#title"
+					using = fontsize_small
+				}
+				# Block wraps a real multiline textbox so blockoverride contributes preferred height
+				# (textbox { block "stage_desc" { text } } does not — Turan stage overlap root cause).
+				block "stage_desc" {
 					textbox = {
-						block "stage_desc" { text = "sp_ct_node_placeholder" }
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-					textbox = {
-						text = "sp_ct_sec_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-						margin_top = 4
-					}
-					textbox = {
-						block "stage_flavor" { text = "sp_ct_node_placeholder" }
+						text = "sp_ct_node_placeholder"
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
@@ -544,6 +531,26 @@ types sp_ct_inspector_types {
 						multiline = yes
 					}
 				}
+				textbox = {
+					text = "sp_ct_sec_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					default_format = "#title"
+					using = fontsize_small
+					margin_top = 4
+				}
+				block "stage_flavor" {
+					textbox = {
+						text = "sp_ct_node_placeholder"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
+					}
+				}
+			}
 
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
@@ -571,8 +578,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s1_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s1_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_ottomanism_s1_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_ottomanism_s1_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_ottomanism_s1_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_ottomanism_s1_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
@@ -616,8 +643,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s2_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s2_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_ottomanism_s2_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_ottomanism_s2_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_ottomanism_s2_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_ottomanism_s2_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
@@ -661,8 +708,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s3_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s3_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_ottomanism_s3_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_ottomanism_s3_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_ottomanism_s3_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_ottomanism_s3_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
@@ -706,8 +773,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s4_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s4_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_ottomanism_s4_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_ottomanism_s4_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_ottomanism_s4_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_ottomanism_s4_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
@@ -774,8 +861,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_constitutional_ottoman_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_constitutional_ottoman_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_constitutional_ottoman_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_constitutional_ottoman_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -1036,32 +1143,19 @@ types sp_ct_inspector_types {
 				layoutpolicy_vertical = preferred
 				layoutpolicy_horizontal = expanding
 				minimumsize = { 480 -1 }
+
 				textbox = {
 					text = "sp_ct_sec_description"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-					}
+					autoresize = yes
+					align = left|nobaseline
+					default_format = "#title"
+					using = fontsize_small
+				}
+				# Block wraps a real multiline textbox so blockoverride contributes preferred height
+				# (textbox { block "stage_desc" { text } } does not — Turan stage overlap root cause).
+				block "stage_desc" {
 					textbox = {
-						block "stage_desc" { text = "sp_ct_node_placeholder" }
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-					textbox = {
-						text = "sp_ct_sec_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-						margin_top = 4
-					}
-					textbox = {
-						block "stage_flavor" { text = "sp_ct_node_placeholder" }
+						text = "sp_ct_node_placeholder"
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
@@ -1070,6 +1164,26 @@ types sp_ct_inspector_types {
 						multiline = yes
 					}
 				}
+				textbox = {
+					text = "sp_ct_sec_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					default_format = "#title"
+					using = fontsize_small
+					margin_top = 4
+				}
+				block "stage_flavor" {
+					textbox = {
+						text = "sp_ct_node_placeholder"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
+					}
+				}
+			}
 
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
@@ -1097,8 +1211,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_islamism_s1_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_islamism_s1_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_islamism_s1_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_islamism_s1_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_islamism_s1_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_islamism_s1_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
@@ -1142,8 +1276,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_islamism_s2_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_islamism_s2_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_islamism_s2_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_islamism_s2_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_islamism_s2_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_islamism_s2_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
@@ -1187,8 +1341,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_islamism_s3_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_islamism_s3_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_islamism_s3_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_islamism_s3_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_islamism_s3_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_islamism_s3_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
@@ -1232,8 +1406,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_islamism_s4_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_islamism_s4_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_islamism_s4_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_islamism_s4_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_islamism_s4_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_islamism_s4_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_path" }
@@ -1323,8 +1517,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_great_caliphate_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_great_caliphate_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_great_caliphate_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_great_caliphate_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -1694,6 +1908,7 @@ types sp_ct_inspector_types {
 						}
 
 						sp_ct_insp_section_panel = {
+							visible = "[Or(GetPlayer.MakeScope.Var('sp_turan_stage').IsSet, And(GetPlayer.MakeScope.Var('sp_turan_stage_progress').IsSet, GetPlayer.MakeScope.Var('sp_turan_stage_goal').IsSet))]"
 							blockoverride "section_title" { text = "sp_ct_sec_progress" }
 							blockoverride "section_body" {
 								flowcontainer = {
@@ -2354,32 +2569,19 @@ types sp_ct_inspector_types {
 				layoutpolicy_vertical = preferred
 				layoutpolicy_horizontal = expanding
 				minimumsize = { 480 -1 }
+
 				textbox = {
 					text = "sp_ct_sec_description"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-					}
+					autoresize = yes
+					align = left|nobaseline
+					default_format = "#title"
+					using = fontsize_small
+				}
+				# Block wraps a real multiline textbox so blockoverride contributes preferred height
+				# (textbox { block "stage_desc" { text } } does not — Turan stage overlap root cause).
+				block "stage_desc" {
 					textbox = {
-						block "stage_desc" { text = "sp_ct_node_placeholder" }
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-					textbox = {
-						text = "sp_ct_sec_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-						margin_top = 4
-					}
-					textbox = {
-						block "stage_flavor" { text = "sp_ct_node_placeholder" }
+						text = "sp_ct_node_placeholder"
 						autoresize = yes
 						align = left|nobaseline
 						using = fontsize_small
@@ -2388,6 +2590,26 @@ types sp_ct_inspector_types {
 						multiline = yes
 					}
 				}
+				textbox = {
+					text = "sp_ct_sec_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					default_format = "#title"
+					using = fontsize_small
+					margin_top = 4
+				}
+				block "stage_flavor" {
+					textbox = {
+						text = "sp_ct_node_placeholder"
+						autoresize = yes
+						align = left|nobaseline
+						using = fontsize_small
+						minimumsize = { 460 -1 }
+						maximumsize = { 460 -1 }
+						multiline = yes
+					}
+				}
+			}
 
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
@@ -2418,8 +2640,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_turan_s1_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_turan_s1_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_turan_s1_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_turan_s1_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_turan_s1_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_turan_s1_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s1_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -2515,8 +2757,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_turan_s2_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_turan_s2_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_turan_s2_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_turan_s2_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_turan_s2_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_turan_s2_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s2_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -2667,8 +2929,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_turan_s3_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_turan_s3_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_turan_s3_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_turan_s3_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_turan_s3_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_turan_s3_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s3_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -2764,8 +3046,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_turan_s4_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_turan_s4_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_turan_s4_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_turan_s4_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_turan_s4_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_turan_s4_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					visible = "[GetScriptedGui('sp_ct_vis_turan_s4_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -2911,8 +3213,28 @@ types sp_ct_inspector_types {
 			blockoverride "insp_status_active" { visible = "[GetScriptedGui('sp_ct_vis_great_ottoman_active').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			blockoverride "insp_status_available" { visible = no }
 			blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_great_ottoman_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-			blockoverride "stage_desc" { text = "sp_ct_insp_great_ottoman_desc" }
-			blockoverride "stage_flavor" { text = "sp_ct_insp_great_ottoman_flavor" }
+			blockoverride "stage_desc" {
+				textbox = {
+					text = "sp_ct_insp_great_ottoman_desc"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
+			blockoverride "stage_flavor" {
+				textbox = {
+					text = "sp_ct_insp_great_ottoman_flavor"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					minimumsize = { 460 -1 }
+					maximumsize = { 460 -1 }
+					multiline = yes
+				}
+			}
 			blockoverride "stage_scroll_body" {
 				sp_ct_insp_section_panel = {
 					blockoverride "section_title" { text = "sp_ct_sec_unlock" }
