@@ -143,7 +143,7 @@ types sp_campaign_tree_types {
 						flowcontainer = {
 							direction = vertical
 							parentanchor = top|hcenter
-							spacing = 8
+							spacing = 6
 							margin_top = 8
 							margin_bottom = 16
 							minimumsize = { 992 -1 }
@@ -260,7 +260,7 @@ types sp_campaign_tree_types {
 								# Ottomanism lane — LEFT_CENTER @ 160
 								flowcontainer = {
 									direction = vertical
-									spacing = 8
+									spacing = 5
 									size = { 320 -1 }
 									minimumsize = { 320 -1 }
 									maximumsize = { 320 -1 }
@@ -462,7 +462,7 @@ types sp_campaign_tree_types {
 								# Islamism lane — CENTER_CENTER @ 496 (shares trunk X)
 								flowcontainer = {
 									direction = vertical
-									spacing = 8
+									spacing = 5
 									size = { 320 -1 }
 									minimumsize = { 320 -1 }
 									maximumsize = { 320 -1 }
@@ -664,7 +664,7 @@ types sp_campaign_tree_types {
 								# Turkism/Turan lane — RIGHT_CENTER @ 832 (naturally longer; no fake spacers)
 								flowcontainer = {
 									direction = vertical
-									spacing = 8
+									spacing = 5
 									size = { 320 -1 }
 									minimumsize = { 320 -1 }
 									maximumsize = { 320 -1 }

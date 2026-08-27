@@ -3,27 +3,27 @@
 
 types sp_ct_shared_types {
 
-	# Common trunk vertical connector — stronger than ideology-lane connectors.
+	# Common trunk vertical connector — strongest lane language.
 	type sp_ct_connector_trunk_v = widget {
-		size = { 3 16 }
+		size = { 3 12 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.82
+			alpha = 0.84
 		}
 	}
 
-	# Ideology-lane vertical connector.
+	# Ideology / stage vertical connector — shorter for taller mini cards.
 	type sp_ct_connector_v = widget {
-		size = { 2 10 }
+		size = { 2 6 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.58
+			alpha = 0.60
 		}
 	}
 
@@ -34,7 +34,7 @@ types sp_ct_shared_types {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.58
+			alpha = 0.60
 		}
 	}
 
