@@ -295,6 +295,7 @@ types sp_campaign_tree_types {
 								blockoverride "node_icon" {
 									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
 								}
+								blockoverride "node_hub_accent" { visible = yes }
 							}
 									sp_ct_connector_v = {}
 																sp_ct_node_compact = {
@@ -497,6 +498,7 @@ types sp_campaign_tree_types {
 								blockoverride "node_icon" {
 									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
 								}
+								blockoverride "node_hub_accent" { visible = yes }
 							}
 									sp_ct_connector_v = {}
 																sp_ct_node_compact = {
@@ -699,6 +701,7 @@ types sp_campaign_tree_types {
 								blockoverride "node_icon" {
 									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_turkism.dds"
 								}
+								blockoverride "node_hub_accent" { visible = yes }
 							}
 									sp_ct_connector_v = {}
 							sp_ct_node_artwork = {

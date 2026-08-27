@@ -11,11 +11,11 @@ types sp_ct_shared_types {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.92
+			alpha = 0.94
 		}
 	}
 
-	# Ideology / stage vertical connector — shorter gaps for taller mini cards.
+	# Ideology / stage vertical connector — muted brass, path-followable at 1080p.
 	type sp_ct_connector_v = widget {
 		size = { 3 4 }
 		parentanchor = hcenter
@@ -23,7 +23,7 @@ types sp_ct_shared_types {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.78
+			alpha = 0.88
 		}
 	}
 
@@ -34,7 +34,7 @@ types sp_ct_shared_types {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
-			alpha = 0.78
+			alpha = 0.88
 		}
 	}
 
@@ -51,7 +51,7 @@ types sp_ct_shared_types {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.92
+				alpha = 0.94
 			}
 		}
 		widget = {
@@ -61,7 +61,7 @@ types sp_ct_shared_types {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.78
+				alpha = 0.86
 			}
 		}
 		widget = {
@@ -71,7 +71,7 @@ types sp_ct_shared_types {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.90
+				alpha = 0.94
 			}
 		}
 		widget = {
@@ -81,7 +81,7 @@ types sp_ct_shared_types {
 				texture = "gfx/interface/backgrounds/divider_gold.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.78
+				alpha = 0.86
 			}
 		}
 	}
@@ -99,7 +99,7 @@ types sp_ct_shared_types {
 			margin_left = 10
 			autoresize = yes
 			align = left|vcenter|nobaseline
-			default_format = "#title"
+			default_format = "#header"
 			using = fontsize_small
 		}
 	}

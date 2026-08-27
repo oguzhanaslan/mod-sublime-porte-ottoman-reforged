@@ -42,7 +42,7 @@ types sp_ct_node_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.26
+					alpha = 0.36
 				}
 			}
 			icon = {
@@ -76,7 +76,7 @@ types sp_ct_node_types {
 						block "state_locked_dim" { visible = no }
 						background = {
 							using = dark_area
-							alpha = 0.18
+							alpha = 0.16
 						}
 					}
 				}
@@ -144,7 +144,6 @@ types sp_ct_node_types {
 							autoresize = yes
 							align = right|vcenter|nobaseline
 							using = fontsize_small
-							default_format = "#I"
 						}
 					}
 				}
@@ -184,7 +183,7 @@ types sp_ct_node_types {
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.30
+					alpha = 0.38
 				}
 			}
 			icon = {
@@ -216,7 +215,7 @@ types sp_ct_node_types {
 						block "state_locked_dim" { visible = no }
 						background = {
 							using = dark_area
-							alpha = 0.50
+							alpha = 0.30
 						}
 					}
 				}
@@ -227,12 +226,27 @@ types sp_ct_node_types {
 						texture = "gfx/interface/backgrounds/divider_gold.dds"
 						spriteType = Corneredstretched
 						spriteborder = { 0 0 }
-						alpha = 0.68
+						alpha = 0.78
 					}
 				}
 
 				widget = {
 					size = { 240 39 }
+					# Ideology-hub accent (milder than capstone). Enable via blockoverride.
+					widget = {
+						size = { 100% 100% }
+						block "node_hub_accent" { visible = no }
+						widget = {
+							size = { 100% 2 }
+							parentanchor = bottom
+							background = {
+								texture = "gfx/interface/backgrounds/divider_gold.dds"
+								spriteType = Corneredstretched
+								spriteborder = { 0 0 }
+								alpha = 0.74
+							}
+						}
+					}
 					# Capstone-only restrained brass rails (footer top+bottom). Hubs leave this hidden.
 					widget = {
 						size = { 100% 100% }
@@ -244,7 +258,7 @@ types sp_ct_node_types {
 								texture = "gfx/interface/backgrounds/divider_gold.dds"
 								spriteType = Corneredstretched
 								spriteborder = { 0 0 }
-								alpha = 0.86
+								alpha = 0.90
 							}
 						}
 						widget = {
@@ -254,7 +268,7 @@ types sp_ct_node_types {
 								texture = "gfx/interface/backgrounds/divider_gold.dds"
 								spriteType = Corneredstretched
 								spriteborder = { 0 0 }
-								alpha = 0.90
+								alpha = 0.94
 							}
 						}
 					}
@@ -309,7 +323,6 @@ types sp_ct_node_types {
 							autoresize = yes
 							align = right|vcenter|nobaseline
 							using = fontsize_small
-							default_format = "#I"
 						}
 					}
 				}

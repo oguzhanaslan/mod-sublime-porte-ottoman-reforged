@@ -78,7 +78,6 @@ types sp_ct_inspector_types {
 			autoresize = yes
 			align = right|vcenter|nobaseline
 			using = fontsize_small
-			default_format = "#I"
 		}
 	}
 
@@ -107,7 +106,7 @@ types sp_ct_inspector_types {
 				margin_left = 14
 				autoresize = yes
 				align = left|vcenter|nobaseline
-				default_format = "#title"
+				default_format = "#header"
 				using = fontsize_small
 			}
 		}
