@@ -1,16 +1,9 @@
 ﻿# I-31 Ottomanism & Islamism — scripted triggers.
 # Reads I-28 identity vars and I-18 constitutional helper. Does not edit I-28.
 
+# Same gate as I-28. I-31 reads I-28; it does not own a second copy of the rule.
 sp_i31_post_tanzimat = {
-	OR = {
-		has_variable = sick_man_complete
-		sp_i18_has_domestic_tanzimat_reform = yes
-		has_variable = completed_sick_man_bureaucracy_je
-		has_variable = completed_sick_man_education_je
-		has_variable = completed_sick_man_army_je
-		has_variable = completed_sick_man_economy_je
-		has_variable = completed_separatism_sick_man_je
-	}
+	sp_i28_post_tanzimat = yes
 }
 
 sp_i31_ottomanism_eligible = {
