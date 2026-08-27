@@ -3,8 +3,9 @@
 
 types sp_ct_shared_types {
 
+	# Common trunk vertical connector — stronger than ideology-lane connectors.
 	type sp_ct_connector_trunk_v = widget {
-		size = { 3 10 }
+		size = { 3 12 }
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/backgrounds/divider_gold.dds"
@@ -14,6 +15,7 @@ types sp_ct_shared_types {
 		}
 	}
 
+	# Ideology-lane vertical connector.
 	type sp_ct_connector_v = widget {
 		size = { 2 6 }
 		parentanchor = hcenter
@@ -36,6 +38,8 @@ types sp_ct_shared_types {
 		}
 	}
 
+	# Identity fork bar — width matches tree content (992).
+	# Tick X = lane centers: 160 / 496 / 832 for 320+16+320+16+320.
 	type sp_ct_branch_fork = widget {
 		size = { 992 10 }
 		parentanchor = hcenter

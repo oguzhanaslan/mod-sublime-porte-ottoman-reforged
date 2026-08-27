@@ -137,12 +137,17 @@ types sp_campaign_tree_types {
 
 					scrollwidget = {
 
+						# Canonical tree geometry (I-30 TREE CONTRACT):
+						# content width 992 = 3×320 lanes + 2×16 gutters.
+						# Trunk + Islamism share X center; Ottomanism/Turkism ±336 from center.
 						flowcontainer = {
 							direction = vertical
 							parentanchor = top|hcenter
-							spacing = 8
-							margin_bottom = 12
+							spacing = 10
+							margin_top = 8
+							margin_bottom = 16
 							minimumsize = { 992 -1 }
+							maximumsize = { 992 -1 }
 
 							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
@@ -242,16 +247,23 @@ types sp_campaign_tree_types {
 							sp_ct_connector_trunk_v = {}
 							sp_ct_branch_fork = {}
 
-							# flowcontainer cannot nest hbox/vbox (engine: pdx_gui_container.cpp ? stack overflow)
+							# flowcontainer cannot nest hbox/vbox (engine: pdx_gui_container.cpp — stack overflow)
+							# Identity fork: three fixed 320px vertical lanes, equal gutters (16).
 							flowcontainer = {
 								direction = horizontal
 								parentanchor = top|hcenter
 								spacing = 16
+								size = { 992 -1 }
+								minimumsize = { 992 -1 }
+								maximumsize = { 992 -1 }
 
+								# Ottomanism lane — LEFT_CENTER @ 160
 								flowcontainer = {
 									direction = vertical
 									spacing = 8
+									size = { 320 -1 }
 									minimumsize = { 320 -1 }
+									maximumsize = { 320 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
@@ -447,10 +459,13 @@ types sp_campaign_tree_types {
 							}
 								}
 
+								# Islamism lane — CENTER_CENTER @ 496 (shares trunk X)
 								flowcontainer = {
 									direction = vertical
 									spacing = 8
+									size = { 320 -1 }
 									minimumsize = { 320 -1 }
+									maximumsize = { 320 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
@@ -646,10 +661,13 @@ types sp_campaign_tree_types {
 							}
 								}
 
+								# Turkism/Turan lane — RIGHT_CENTER @ 832 (naturally longer; no fake spacers)
 								flowcontainer = {
 									direction = vertical
 									spacing = 8
+									size = { 320 -1 }
 									minimumsize = { 320 -1 }
+									maximumsize = { 320 -1 }
 									sp_ct_connector_v = {}
 							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
@@ -715,10 +733,6 @@ types sp_campaign_tree_types {
 								}
 							}
 									sp_ct_connector_v = {}
-									flowcontainer = {
-										direction = vertical
-										parentanchor = hcenter
-										spacing = 8
 							sp_ct_node_compact = {
 								blockoverride "node_onclick" {
 									onclick = "[GetScriptedGui('sp_ct_select_turan_s1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -846,7 +860,6 @@ types sp_campaign_tree_types {
 									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_turan_s4.dds"
 								}
 							}
-									}
 									sp_ct_connector_v = {}
 							sp_ct_node_artwork = {
 								blockoverride "node_onclick" {
