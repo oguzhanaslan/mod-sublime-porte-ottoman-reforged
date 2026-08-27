@@ -1,13 +1,18 @@
 # I-30 Campaign Tree — node component types (Phase B/C + visual pass).
-# Compact node: icon + title + status (objective/stage family).
-# Artwork node: 2:1 illustration band + title/status footer (milestone family).
+# Compact = mini artwork card (stage family). Artwork = major/hub/capstone card.
+# Same frame/divider/footer vocabulary; compact is the smaller sibling.
+# Pattern: sp_ct_node_artwork vertical stack (2:1 band + divider + fixed footer).
 # Frame: entry_bg_simple + simple_frame (vanilla backgrounds.gui).
 
 types sp_ct_node_types {
 
+	# Stage / progression card — mini artwork sibling of sp_ct_node_artwork.
+	# Fixed geometry: 200×85 = 200×52 art (2:1) + 1px divider + 32px footer.
+	# Card size is NEVER text-driven; long titles ellipsize in the footer.
 	type sp_ct_node_compact = widget {
-		size = { 200 52 }
+		size = { 200 85 }
 		parentanchor = hcenter
+
 		background = {
 			using = entry_bg_simple
 		}
@@ -28,21 +33,13 @@ types sp_ct_node_types {
 			}
 			widget = {
 				size = { 100% 100% }
-				block "state_locked_dim" { visible = no }
-				background = {
-					using = dark_area
-					alpha = 0.52
-				}
-			}
-			widget = {
-				size = { 100% 100% }
 				block "state_active_glow" { visible = no }
 				background = {
 					texture = "gfx/interface/buttons/default_button_mouseover.dds"
 					spriteType = Corneredstretched
 					spriteborder = { 0 0 }
 					blend_mode = colordodge
-					alpha = 0.28
+					alpha = 0.26
 				}
 			}
 			icon = {
@@ -50,72 +47,105 @@ types sp_ct_node_types {
 				using = highlighted_square_selection
 			}
 
-			widget = {
-				size = { 100% 100% }
-				alwaystransparent = yes
-				flowcontainer = {
-					direction = horizontal
-					parentanchor = center
-					spacing = 8
-					margin_left = 10
-					margin_right = 10
+			flowcontainer = {
+				direction = vertical
+				parentanchor = top|hcenter
+				spacing = 0
+
+				# 2:1 landscape band — same icon presentation as artwork node (fixed WxH).
+				widget = {
+					size = { 200 52 }
+					parentanchor = hcenter
+					background = {
+						using = dark_area
+						alpha = 0.28
+					}
 					icon = {
-						size = { 40 20 }
-						parentanchor = vcenter
+						size = { 200 52 }
+						parentanchor = center
 						block "node_icon" {
 							texture = "gfx/interface/icons/event_icons/event_default.dds"
 						}
 					}
+					# Locked dim only on artwork — modest so stage art stays recognizable.
+					widget = {
+						size = { 100% 100% }
+						block "state_locked_dim" { visible = no }
+						background = {
+							using = dark_area
+							alpha = 0.28
+						}
+					}
+				}
+
+				widget = {
+					size = { 200 1 }
+					background = {
+						texture = "gfx/interface/backgrounds/divider_gold.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						alpha = 0.64
+					}
+				}
+
+				widget = {
+					size = { 200 32 }
 					flowcontainer = {
-						direction = vertical
-						parentanchor = vcenter
-						layoutpolicy_horizontal = expanding
-						spacing = 1
+						direction = horizontal
+						parentanchor = center
+						margin_left = 8
+						margin_right = 8
+						spacing = 6
 
 						textbox = {
 							block "node_title" { text = "sp_ct_node_placeholder" }
+							layoutpolicy_horizontal = expanding
 							autoresize = yes
-							align = left|nobaseline
-							default_format = "#header"
+							align = left|vcenter|nobaseline
+							default_format = "#title"
 							using = fontsize_small
-							max_width = 132
+							max_width = 128
 							elide = right
 						}
+
 						textbox = {
 							block "state_completed" { visible = no }
 							text = "sp_ct_state_completed"
+							parentanchor = vcenter
 							autoresize = yes
-							align = left|nobaseline
+							align = right|vcenter|nobaseline
 							using = fontsize_small
 							default_format = "#G"
 						}
 						textbox = {
 							block "state_active" { visible = no }
 							text = "sp_ct_state_active"
+							parentanchor = vcenter
 							autoresize = yes
-							align = left|nobaseline
+							align = right|vcenter|nobaseline
 							using = fontsize_small
 							default_format = "#Y"
 						}
 						textbox = {
 							block "state_available" { visible = no }
 							text = "sp_ct_state_available"
+							parentanchor = vcenter
 							autoresize = yes
-							align = left|nobaseline
+							align = right|vcenter|nobaseline
 							using = fontsize_small
 						}
 						textbox = {
 							block "state_locked" { visible = no }
 							text = "sp_ct_state_locked"
+							parentanchor = vcenter
 							autoresize = yes
-							align = left|nobaseline
+							align = right|vcenter|nobaseline
 							using = fontsize_small
 							default_format = "#I"
 						}
 					}
 				}
 			}
-
 		}
 	}
 
