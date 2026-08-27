@@ -1,10 +1,9 @@
 # I-30 Campaign Tree — inspector components (Phase D1 + D2A + D2B + D2C).
 # Canonical vertical geometry (ALL families):
 #   artwork (fixed 260) → status header (fixed 34) → ONE expanding scrollarea
-#   scrollwidget content is content-driven preferred height (preferscrollwidgetsize).
-# Vanilla scroll extent: outliner_framework.gui (preferscrollwidgetsize = yes)
-#   + building_browser_panel.gui expanding scrollarea → scrollwidget → vertical flowcontainer.
-# Also: journal_entry.gui / block_windows.gui scrollarea_content patterns.
+#   scrollwidget content is content-driven preferred height (no preferscrollwidgetsize).
+# Vanilla expanding scroll: building_browser_panel.gui scrollarea (L459–474).
+# Outliner preferscrollwidgetsize is for preferred-sized scrollareas only — do not reuse here.
 # stage_scroll_body must override a COMPLETE preferred flowcontainer (never empty block).
 # Reuses sp_ct_insp_req_row, sp_ct_insp_stat_row, sp_ct_insp_progress_card from 00_sp_ct_shared.gui.
 
@@ -124,14 +123,15 @@ types sp_ct_inspector_types {
 		}
 	}
 
-	# Scroll viewport expands; content extent comes from scrollwidget preferred size.
-	# Vanilla: outliner_framework.gui outliner scrollarea (preferscrollwidgetsize = yes)
-	# + building_browser_panel.gui expanding scrollarea → scrollwidget → vertical flowcontainer.
+	# Expanding viewport scroll (NOT outliner preferscrollwidgetsize).
+	# Vanilla: building_browser_panel.gui L459–474 — expanding scrollarea, no preferscrollwidgetsize,
+	# scrollwidget → vertical flowcontainer (content-driven height → real scroll range).
+	# preferscrollwidgetsize belongs to preferred-sized scrollareas (outliner_framework.gui);
+	# on an expanding inspector it makes viewport grow with content → range 0 + parent clip.
 	type sp_ct_insp_scroll_panel = scrollarea {
 		layoutpolicy_vertical = expanding
 		layoutpolicy_horizontal = expanding
 		minimumsize = { 480 120 }
-		preferscrollwidgetsize = yes
 		scrollbarpolicy_horizontal = always_off
 		scrollbarpolicy_vertical = as_needed
 
