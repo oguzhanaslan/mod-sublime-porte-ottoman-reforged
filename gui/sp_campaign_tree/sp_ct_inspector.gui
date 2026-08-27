@@ -1,6 +1,10 @@
 # I-30 Campaign Tree — inspector components (Phase D1 + D2A + D2B + D2C).
-# Scroll pattern: block_windows.gui default_block_window scrollarea (L525–569)
-# + fullscreen_scrollarea expanding policies (L927–953).
+# Canonical vertical geometry (ALL families):
+#   artwork (fixed 260) → status header (fixed 34) → ONE expanding scrollarea
+#   scrollwidget flow is content-driven (preferred): desc + flavor + sections + actions.
+# Vanilla pattern: journal_entry.gui journal_entry_panel blockoverride "scrollarea_content"
+#   (fixed window header + sequential content-driven children inside scroll).
+# Also: block_windows.gui default_block_window entire_scrollarea / scrollarea_content (L525–569).
 # Reuses sp_ct_insp_req_row, sp_ct_insp_stat_row, sp_ct_insp_progress_card from 00_sp_ct_shared.gui.
 
 types sp_ct_inspector_types {
@@ -171,47 +175,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_identity_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			flowcontainer = {
-				direction = vertical
-				spacing = 4
-				layoutpolicy_vertical = preferred
-				layoutpolicy_horizontal = expanding
-				minimumsize = { 480 -1 }
-				textbox = {
-					text = "sp_ct_sec_description"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-					}
-					textbox = {
-						text = "sp_ct_insp_identity_desc"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-					textbox = {
-						text = "sp_ct_sec_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-						margin_top = 4
-					}
-					textbox = {
-						text = "sp_ct_insp_identity_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-
+			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -221,6 +185,39 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
+
+						textbox = {
+							text = "sp_ct_sec_description"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_identity_desc"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
+						textbox = {
+							text = "sp_ct_sec_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_identity_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -342,47 +339,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			flowcontainer = {
-				direction = vertical
-				spacing = 4
-				layoutpolicy_vertical = preferred
-				layoutpolicy_horizontal = expanding
-				minimumsize = { 480 -1 }
-				textbox = {
-					text = "sp_ct_sec_description"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-					}
-					textbox = {
-						text = "sp_ct_insp_ottomanism_desc"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-					textbox = {
-						text = "sp_ct_sec_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-						margin_top = 4
-					}
-					textbox = {
-						text = "sp_ct_insp_ottomanism_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-
+			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -392,6 +349,39 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
+
+						textbox = {
+							text = "sp_ct_sec_description"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_ottomanism_desc"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
+						textbox = {
+							text = "sp_ct_sec_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_ottomanism_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -504,54 +494,8 @@ types sp_ct_inspector_types {
 				block "insp_status_locked" { visible = no }
 			}
 
-			flowcontainer = {
-				direction = vertical
-				spacing = 4
-				layoutpolicy_vertical = preferred
-				layoutpolicy_horizontal = expanding
-				minimumsize = { 480 -1 }
-
-				textbox = {
-					text = "sp_ct_sec_description"
-					autoresize = yes
-					align = left|nobaseline
-					default_format = "#title"
-					using = fontsize_small
-				}
-				# Block wraps a real multiline textbox so blockoverride contributes preferred height
-				# (textbox { block "stage_desc" { text } } does not — Turan stage overlap root cause).
-				block "stage_desc" {
-					textbox = {
-						text = "sp_ct_node_placeholder"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-				textbox = {
-					text = "sp_ct_sec_flavor"
-					autoresize = yes
-					align = left|nobaseline
-					default_format = "#title"
-					using = fontsize_small
-					margin_top = 4
-				}
-				block "stage_flavor" {
-					textbox = {
-						text = "sp_ct_node_placeholder"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-			}
-
+			# Canonical geometry (journal_entry.gui scrollarea_content pattern):
+			# ONLY scroll expands. Description + flavor + sections share one content-driven flow.
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -561,6 +505,43 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
+
+						textbox = {
+							text = "sp_ct_sec_description"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						block "stage_desc" {
+							textbox = {
+								text = "sp_ct_node_placeholder"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								minimumsize = { 460 -1 }
+								maximumsize = { 460 -1 }
+								multiline = yes
+							}
+						}
+						textbox = {
+							text = "sp_ct_sec_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						block "stage_flavor" {
+							textbox = {
+								text = "sp_ct_node_placeholder"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								minimumsize = { 460 -1 }
+								maximumsize = { 460 -1 }
+								multiline = yes
+							}
+						}
 						block "stage_scroll_body" {}
 					}
 				}
@@ -975,47 +956,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_islamism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			flowcontainer = {
-				direction = vertical
-				spacing = 4
-				layoutpolicy_vertical = preferred
-				layoutpolicy_horizontal = expanding
-				minimumsize = { 480 -1 }
-				textbox = {
-					text = "sp_ct_sec_description"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-					}
-					textbox = {
-						text = "sp_ct_insp_islamism_desc"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-					textbox = {
-						text = "sp_ct_sec_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-						margin_top = 4
-					}
-					textbox = {
-						text = "sp_ct_insp_islamism_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-
+			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -1025,6 +966,39 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
+
+						textbox = {
+							text = "sp_ct_sec_description"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_islamism_desc"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
+						textbox = {
+							text = "sp_ct_sec_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_islamism_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -1137,54 +1111,8 @@ types sp_ct_inspector_types {
 				block "insp_status_locked" { visible = no }
 			}
 
-			flowcontainer = {
-				direction = vertical
-				spacing = 4
-				layoutpolicy_vertical = preferred
-				layoutpolicy_horizontal = expanding
-				minimumsize = { 480 -1 }
-
-				textbox = {
-					text = "sp_ct_sec_description"
-					autoresize = yes
-					align = left|nobaseline
-					default_format = "#title"
-					using = fontsize_small
-				}
-				# Block wraps a real multiline textbox so blockoverride contributes preferred height
-				# (textbox { block "stage_desc" { text } } does not — Turan stage overlap root cause).
-				block "stage_desc" {
-					textbox = {
-						text = "sp_ct_node_placeholder"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-				textbox = {
-					text = "sp_ct_sec_flavor"
-					autoresize = yes
-					align = left|nobaseline
-					default_format = "#title"
-					using = fontsize_small
-					margin_top = 4
-				}
-				block "stage_flavor" {
-					textbox = {
-						text = "sp_ct_node_placeholder"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-			}
-
+			# Canonical geometry (journal_entry.gui scrollarea_content pattern):
+			# ONLY scroll expands. Description + flavor + sections share one content-driven flow.
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -1194,6 +1122,43 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
+
+						textbox = {
+							text = "sp_ct_sec_description"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						block "stage_desc" {
+							textbox = {
+								text = "sp_ct_node_placeholder"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								minimumsize = { 460 -1 }
+								maximumsize = { 460 -1 }
+								multiline = yes
+							}
+						}
+						textbox = {
+							text = "sp_ct_sec_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						block "stage_flavor" {
+							textbox = {
+								text = "sp_ct_node_placeholder"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								minimumsize = { 460 -1 }
+								maximumsize = { 460 -1 }
+								multiline = yes
+							}
+						}
 						block "stage_scroll_body" {}
 					}
 				}
@@ -1832,47 +1797,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_turan_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			flowcontainer = {
-				direction = vertical
-				spacing = 4
-				layoutpolicy_vertical = preferred
-				layoutpolicy_horizontal = expanding
-				minimumsize = { 480 -1 }
-				textbox = {
-					text = "sp_ct_sec_description"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-					}
-					textbox = {
-						text = "sp_ct_insp_turan_desc"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-					textbox = {
-						text = "sp_ct_sec_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-						margin_top = 4
-					}
-					textbox = {
-						text = "sp_ct_insp_turan_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-
+			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -1882,6 +1807,39 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
+
+						textbox = {
+							text = "sp_ct_sec_description"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_turan_desc"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
+						textbox = {
+							text = "sp_ct_sec_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_turan_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -2034,47 +1992,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_tanzimat_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			flowcontainer = {
-				direction = vertical
-				spacing = 4
-				layoutpolicy_vertical = preferred
-				layoutpolicy_horizontal = expanding
-				minimumsize = { 480 -1 }
-				textbox = {
-					text = "sp_ct_sec_description"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-					}
-					textbox = {
-						text = "sp_ct_insp_tanzimat_desc"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-					textbox = {
-						text = "sp_ct_sec_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-						margin_top = 4
-					}
-					textbox = {
-						text = "sp_ct_insp_tanzimat_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-
+			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -2084,6 +2002,39 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
+
+						textbox = {
+							text = "sp_ct_sec_description"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_tanzimat_desc"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
+						textbox = {
+							text = "sp_ct_sec_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_tanzimat_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_completion" }
@@ -2213,47 +2164,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_post_tanzimat_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			flowcontainer = {
-				direction = vertical
-				spacing = 4
-				layoutpolicy_vertical = preferred
-				layoutpolicy_horizontal = expanding
-				minimumsize = { 480 -1 }
-				textbox = {
-					text = "sp_ct_sec_description"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-					}
-					textbox = {
-						text = "sp_ct_insp_post_tanzimat_desc"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-					textbox = {
-						text = "sp_ct_sec_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-						margin_top = 4
-					}
-					textbox = {
-						text = "sp_ct_insp_post_tanzimat_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-
+			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -2263,6 +2174,39 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
+
+						textbox = {
+							text = "sp_ct_sec_description"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_post_tanzimat_desc"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
+						textbox = {
+							text = "sp_ct_sec_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_post_tanzimat_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -2401,47 +2345,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_turkism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			flowcontainer = {
-				direction = vertical
-				spacing = 4
-				layoutpolicy_vertical = preferred
-				layoutpolicy_horizontal = expanding
-				minimumsize = { 480 -1 }
-				textbox = {
-					text = "sp_ct_sec_description"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-					}
-					textbox = {
-						text = "sp_ct_insp_turkism_desc"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-					textbox = {
-						text = "sp_ct_sec_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						default_format = "#title"
-						using = fontsize_small
-						margin_top = 4
-					}
-					textbox = {
-						text = "sp_ct_insp_turkism_flavor"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-
+			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -2451,6 +2355,39 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
+
+						textbox = {
+							text = "sp_ct_sec_description"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_turkism_desc"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
+						textbox = {
+							text = "sp_ct_sec_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						textbox = {
+							text = "sp_ct_insp_turkism_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							using = fontsize_small
+							minimumsize = { 460 -1 }
+							maximumsize = { 460 -1 }
+							multiline = yes
+						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
@@ -2563,54 +2500,8 @@ types sp_ct_inspector_types {
 				block "insp_status_locked" { visible = no }
 			}
 
-			flowcontainer = {
-				direction = vertical
-				spacing = 4
-				layoutpolicy_vertical = preferred
-				layoutpolicy_horizontal = expanding
-				minimumsize = { 480 -1 }
-
-				textbox = {
-					text = "sp_ct_sec_description"
-					autoresize = yes
-					align = left|nobaseline
-					default_format = "#title"
-					using = fontsize_small
-				}
-				# Block wraps a real multiline textbox so blockoverride contributes preferred height
-				# (textbox { block "stage_desc" { text } } does not — Turan stage overlap root cause).
-				block "stage_desc" {
-					textbox = {
-						text = "sp_ct_node_placeholder"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-				textbox = {
-					text = "sp_ct_sec_flavor"
-					autoresize = yes
-					align = left|nobaseline
-					default_format = "#title"
-					using = fontsize_small
-					margin_top = 4
-				}
-				block "stage_flavor" {
-					textbox = {
-						text = "sp_ct_node_placeholder"
-						autoresize = yes
-						align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-					}
-				}
-			}
-
+			# Canonical geometry (journal_entry.gui scrollarea_content pattern):
+			# ONLY scroll expands. Description + flavor + sections share one content-driven flow.
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -2620,6 +2511,43 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						layoutpolicy_horizontal = expanding
 						minimumsize = { 480 -1 }
+
+						textbox = {
+							text = "sp_ct_sec_description"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						block "stage_desc" {
+							textbox = {
+								text = "sp_ct_node_placeholder"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								minimumsize = { 460 -1 }
+								maximumsize = { 460 -1 }
+								multiline = yes
+							}
+						}
+						textbox = {
+							text = "sp_ct_sec_flavor"
+							autoresize = yes
+							align = left|nobaseline
+							default_format = "#title"
+							using = fontsize_small
+						}
+						block "stage_flavor" {
+							textbox = {
+								text = "sp_ct_node_placeholder"
+								autoresize = yes
+								align = left|nobaseline
+								using = fontsize_small
+								minimumsize = { 460 -1 }
+								maximumsize = { 460 -1 }
+								multiline = yes
+							}
+						}
 						block "stage_scroll_body" {}
 					}
 				}
