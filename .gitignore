@@ -12,6 +12,11 @@ Desktop.ini
 *~
 *.swp
 
+# Local editor rules and internal design docs (kept on disk, not published)
+.cursor/
+AGENTS.md
+docs/
+
 # Temporary files and caches
 *.tmp
 *.temp
