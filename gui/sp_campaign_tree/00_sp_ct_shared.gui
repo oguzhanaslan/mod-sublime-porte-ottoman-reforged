@@ -104,45 +104,35 @@ types sp_ct_shared_types {
 		}
 	}
 
-	# Requirement / territory row — icon communicates met/fail; no separate status text.
-	# Callers override req_met_icon / req_fail_icon visibility only (block contract preserved).
+	# Requirement / territory row — journal complete-line chrome (entry_bg).
+	# Prefer ExecuteTooltip loc as req_label (native $checkbox_ticked$ + live names).
+	# Icon blocks kept so older callers' blockoverrides stay valid; they occupy no space.
 	type sp_ct_insp_req_row = widget {
-		size = { 100% 28 }
 		layoutpolicy_horizontal = expanding
+		layoutpolicy_vertical = preferred
+		minimumsize = { 460 -1 }
 
-		# Shared icon slot (met and fail occupy the same bounds; never both visible).
 		widget = {
-			size = { 20 28 }
-			parentanchor = left|vcenter
-			position = { 8 0 }
+			size = { 0 0 }
 			block "req_met_icon" { visible = no }
-			icon = {
-				size = { 16 16 }
-				parentanchor = center
-				texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
-			}
 		}
 		widget = {
-			size = { 20 28 }
-			parentanchor = left|vcenter
-			position = { 8 0 }
+			size = { 0 0 }
 			block "req_fail_icon" { visible = no }
-			icon = {
-				size = { 16 16 }
-				parentanchor = center
-				texture = "gfx/interface/icons/generic_icons/red_cross.dds"
-			}
 		}
 		textbox = {
 			block "req_label" { text = "sp_ct_node_placeholder" }
 			block "req_tooltip" {}
-			parentanchor = left|vcenter
-			position = { 36 0 }
 			autoresize = yes
-			align = left|vcenter|nobaseline
-			using = fontsize_small
-			maximumsize = { 420 -1 }
-			elide = right
+			multiline = yes
+			min_width = 460
+			max_width = 460
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 8 }
+			background = {
+				using = entry_bg
+			}
 		}
 	}
 
@@ -283,39 +273,144 @@ types sp_ct_shared_types {
 		}
 	}
 
-	# Native JE status lines — expects JournalEntry datacontext (vanilla journal_entry.gui).
+	# Native JE reason chrome — copied from journal_entry.gui GetReason textbox
+	# (entry_bg + default_list_position + 15px margin). Inspector width is 460, not
+	# vanilla @panel_width_minus_30 (510). Override reason_text with the JE loc key
+	# (same string JournalEntry.GetReason shows for static reasons).
+	type sp_ct_insp_reason_box = textbox {
+		block "reason_text" { text = "sp_ct_node_placeholder" }
+		autoresize = yes
+		min_width = 460
+		max_width = 460
+		multiline = yes
+		using = default_list_position
+		align = nobaseline
+		margin = { 15 15 }
+		background = {
+			using = entry_bg
+		}
+	}
+
+	# Native JE body — journal_entry.gui GetStatusDesc / progress / complete_text / fail_text.
 	type sp_ct_insp_je_status_lines = flowcontainer {
 		direction = vertical
-		spacing = 6
+		spacing = 5
 		textbox = {
 			visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
 			text = "[JournalEntry.GetStatusDesc]"
 			autoresize = yes
-			align = left|nobaseline
-			using = fontsize_small
+			multiline = yes
 			minimumsize = { 460 -1 }
 			maximumsize = { 460 -1 }
+			using = default_list_position
+			align = hcenter|nobaseline
+			using = fontsize_large
+			margin = { 20 20 }
+			background = {
+				alpha = 0.5
+				using = entry_bg_fancy_dark
+			}
+		}
+		textbox = {
+			visible = "[Not(StringIsEmpty(JournalEntry.GetProgressDesc))]"
+			text = "[JournalEntry.GetProgressDesc]"
+			autoresize = yes
 			multiline = yes
+			minimumsize = { 460 -1 }
+			maximumsize = { 460 -1 }
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 0 }
+			background = {
+				using = entry_bg
+			}
+		}
+		flowcontainer = {
+			visible = "[And(JournalEntry.HasProgressBar, JournalEntry.IsActive)]"
+			direction = vertical
+			margin = { 0 8 }
+			default_progressbar_horizontal = {
+				size = { 460 26 }
+				blockoverride "values" {
+					value = "[FixedPointToFloat(JournalEntry.GetGoalProgressPercent)]"
+					min = 0
+					max = 1
+				}
+			}
 		}
 		textbox = {
 			visible = "[JournalEntry.CanComplete]"
 			text = "[JournalEntry.GetCompletionTooltip]"
 			autoresize = yes
-			align = left|nobaseline
-			using = fontsize_small
+			multiline = yes
 			minimumsize = { 460 -1 }
 			maximumsize = { 460 -1 }
-			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 5 }
+			background = {
+				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+				using = color_gold_positive
+				alpha = 0.4
+				modify_texture = {
+					using = texture_velvet
+				}
+			}
 		}
 		textbox = {
 			visible = "[Not(StringIsEmpty(JournalEntry.GetOnCompleteTooltip))]"
 			text = "[JournalEntry.GetOnCompleteTooltip]"
 			autoresize = yes
-			align = left|nobaseline
-			using = fontsize_small
+			multiline = yes
 			minimumsize = { 460 -1 }
 			maximumsize = { 460 -1 }
+			using = default_list_position
+			align = nobaseline
+			margin_left = 35
+			margin_right = 15
+		}
+		textbox = {
+			visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]"
+			text = "[JournalEntry.GetFailureTooltip]"
+			autoresize = yes
 			multiline = yes
+			minimumsize = { 460 -1 }
+			maximumsize = { 460 -1 }
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 5 }
+			background = {
+				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+				using = color_blue_negative
+				alpha = 0.5
+				modify_texture = {
+					using = texture_velvet
+				}
+			}
+		}
+		textbox = {
+			visible = "[Not(StringIsEmpty(JournalEntry.GetOnFailTooltip))]"
+			text = "[JournalEntry.GetOnFailTooltip]"
+			autoresize = yes
+			multiline = yes
+			minimumsize = { 460 -1 }
+			maximumsize = { 460 -1 }
+			using = default_list_position
+			align = nobaseline
+			margin_left = 35
+			margin_right = 15
+		}
+		textbox = {
+			visible = "[Not(StringIsEmpty(JournalEntry.GetOnTimeoutTooltip))]"
+			text = "[JournalEntry.GetOnTimeoutTooltip]"
+			autoresize = yes
+			multiline = yes
+			minimumsize = { 460 -1 }
+			maximumsize = { 460 -1 }
+			using = default_list_position
+			align = nobaseline
+			margin_left = 35
+			margin_right = 15
 		}
 	}
 
@@ -375,21 +470,43 @@ types sp_ct_shared_types {
 		}
 	}
 
-	# Find active JE by type name — override je_type_visible with EqualTo_string(…Localize('je_key')…).
+	# Find JE by type name in active, then inactive groups (vanilla journal.gui both tabs).
 	type sp_ct_insp_je_typed_status = flowcontainer {
 		direction = vertical
-		datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
-		item = {
-			flowcontainer = {
-				direction = vertical
-				datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
-				item = {
-					flowcontainer = {
-						direction = vertical
-						spacing = 6
-						block "je_type_visible" { visible = no }
-						datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
-						sp_ct_insp_je_status_lines = {}
+		flowcontainer = {
+			direction = vertical
+			datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+			item = {
+				flowcontainer = {
+					direction = vertical
+					datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+					item = {
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							block "je_type_visible" { visible = no }
+							datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+							sp_ct_insp_je_status_lines = {}
+						}
+					}
+				}
+			}
+		}
+		flowcontainer = {
+			direction = vertical
+			datamodel = "[AccessPlayer.GetGroupsForInActiveJournalEntries]"
+			item = {
+				flowcontainer = {
+					direction = vertical
+					datamodel = "[JournalEntryGroup.GetInactiveJournalEntryTypes(GetPlayer.Self)]"
+					item = {
+						flowcontainer = {
+							direction = vertical
+							spacing = 6
+							block "je_type_visible" { visible = no }
+							datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+							sp_ct_insp_je_status_lines = {}
+						}
 					}
 				}
 			}
@@ -483,45 +600,60 @@ types sp_ct_shared_types {
 		}
 	}
 
-	# Objective sub-JEs: title + completion/on-complete only (no GetStatusDesc — matches prior inspector).
+	# Objective sub-JEs — journal complete_text chrome (GetName / GetCompletionTooltip / GetOnCompleteTooltip).
 	type sp_ct_insp_je_sick_man_objectives_status = flowcontainer {
 		direction = vertical
 		datamodel = "[AccessPlayer.AccessActivePlayerObjectiveJournalEntries]"
 		item = {
 			flowcontainer = {
 				direction = vertical
-				spacing = 4
+				spacing = 5
 				margin_bottom = 8
 				visible = "[Not(EqualTo_string(JournalEntry.GetName, Localize('je_sick_man_main')))]"
 				textbox = {
 					text = "[JournalEntry.GetName]"
 					autoresize = yes
 					align = left|nobaseline
-					default_format = "#title"
-					using = fontsize_small
+					default_format = "#header"
+					using = default_list_position
 					minimumsize = { 460 -1 }
 					maximumsize = { 460 -1 }
 					multiline = yes
+					margin = { 15 8 }
+					background = {
+						using = entry_bg
+					}
 				}
 				textbox = {
-					visible = "[JournalEntry.CanComplete]"
+					visible = "[Not(StringIsEmpty(JournalEntry.GetCompletionTooltip))]"
 					text = "[JournalEntry.GetCompletionTooltip]"
 					autoresize = yes
-					align = left|nobaseline
-					using = fontsize_small
+					multiline = yes
 					minimumsize = { 460 -1 }
 					maximumsize = { 460 -1 }
-					multiline = yes
+					using = default_list_position
+					align = nobaseline
+					margin = { 15 5 }
+					background = {
+						texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+						using = color_gold_positive
+						alpha = 0.4
+						modify_texture = {
+							using = texture_velvet
+						}
+					}
 				}
 				textbox = {
 					visible = "[Not(StringIsEmpty(JournalEntry.GetOnCompleteTooltip))]"
 					text = "[JournalEntry.GetOnCompleteTooltip]"
 					autoresize = yes
-					align = left|nobaseline
-					using = fontsize_small
+					multiline = yes
 					minimumsize = { 460 -1 }
 					maximumsize = { 460 -1 }
-					multiline = yes
+					using = default_list_position
+					align = nobaseline
+					margin_left = 35
+					margin_right = 15
 				}
 			}
 		}

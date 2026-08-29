@@ -480,7 +480,7 @@ sp_ct_tt_req_identity_chosen = {
 	scope = country
 	effect = {
 		if = {
-			limit = { has_variable = sp_imperial_identity_chosen }
+			limit = { sp_i28_identity_path_chosen = yes }
 			custom_tooltip_no_bullet = "sp_ct_req_ctrl_held"
 		}
 		else = {
@@ -501,5 +501,19 @@ sp_ct_tt_req_post_tanzimat_gate = {
 			custom_tooltip_no_bullet = "sp_ct_req_ctrl_missing"
 		}
 		custom_tooltip_no_bullet = "sp_ct_req_post_tanzimat_gate"
+	}
+}
+
+sp_ct_tt_req_i18_arc_complete = {
+	scope = country
+	effect = {
+		if = {
+			limit = { sp_i18_arc_complete = yes }
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_held"
+		}
+		else = {
+			custom_tooltip_no_bullet = "sp_ct_req_ctrl_missing"
+		}
+		custom_tooltip_no_bullet = "sp_ct_req_i18_arc_complete"
 	}
 }

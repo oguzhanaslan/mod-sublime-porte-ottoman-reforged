@@ -326,7 +326,7 @@ types sp_campaign_tree_types {
 									visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s1_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_icon" {
-									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism_s1.dds"
 								}
 							}
 								sp_ct_connector_v = {}
@@ -358,7 +358,7 @@ types sp_campaign_tree_types {
 									visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s2_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_icon" {
-									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism_s2.dds"
 								}
 							}
 								sp_ct_connector_v = {}
@@ -390,7 +390,7 @@ types sp_campaign_tree_types {
 									visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s3_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_icon" {
-									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism_s3.dds"
 								}
 							}
 								sp_ct_connector_v = {}
@@ -422,7 +422,7 @@ types sp_campaign_tree_types {
 									visible = "[GetScriptedGui('sp_ct_vis_ottomanism_s4_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_icon" {
-									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism_s4.dds"
 								}
 							}
 								sp_ct_connector_v = {}
@@ -455,7 +455,7 @@ types sp_campaign_tree_types {
 									visible = "[GetScriptedGui('sp_ct_vis_constitutional_ottoman_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_icon" {
-									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_constitutional_ottoman.dds"
 								}
 							}
 								}
@@ -529,7 +529,7 @@ types sp_campaign_tree_types {
 									visible = "[GetScriptedGui('sp_ct_vis_islamism_s1_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_icon" {
-									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism_s1.dds"
 								}
 							}
 								sp_ct_connector_v = {}
@@ -561,7 +561,7 @@ types sp_campaign_tree_types {
 									visible = "[GetScriptedGui('sp_ct_vis_islamism_s2_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_icon" {
-									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism_s2.dds"
 								}
 							}
 								sp_ct_connector_v = {}
@@ -593,7 +593,7 @@ types sp_campaign_tree_types {
 									visible = "[GetScriptedGui('sp_ct_vis_islamism_s3_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_icon" {
-									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism_s3.dds"
 								}
 							}
 								sp_ct_connector_v = {}
@@ -625,7 +625,7 @@ types sp_campaign_tree_types {
 									visible = "[GetScriptedGui('sp_ct_vis_islamism_s4_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_icon" {
-									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism_s4.dds"
 								}
 							}
 								sp_ct_connector_v = {}
@@ -658,7 +658,7 @@ types sp_campaign_tree_types {
 									visible = "[GetScriptedGui('sp_ct_vis_great_caliphate_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								blockoverride "node_icon" {
-									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+									texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_great_caliphate.dds"
 								}
 							}
 								}

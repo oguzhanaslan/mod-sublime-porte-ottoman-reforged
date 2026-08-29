@@ -469,10 +469,11 @@ sp_ct_vis_req_je_post_tanzimat = { scope = country is_shown = { sp_ct_req_je_pos
 sp_ct_vis_req_je_turan = { scope = country is_shown = { sp_ct_req_je_turan_active = yes } }
 sp_ct_vis_req_pan_nationalism = { scope = country is_shown = { sp_ct_req_pan_nationalism = yes } }
 sp_ct_vis_req_post_tanzimat_gate = { scope = country is_shown = { sp_ct_post_tanzimat_gate = yes } }
+sp_ct_vis_req_i18_arc_complete = { scope = country is_shown = { sp_ct_req_i18_arc_complete = yes } }
 sp_ct_vis_req_turkism = { scope = country is_shown = { has_variable = sp_turkism_selected } }
 sp_ct_vis_req_ottomanism = { scope = country is_shown = { has_variable = sp_ottomanism_selected } }
 sp_ct_vis_req_islamism = { scope = country is_shown = { has_variable = sp_islamism_selected } }
-sp_ct_vis_req_identity_chosen = { scope = country is_shown = { has_variable = sp_imperial_identity_chosen } }
+sp_ct_vis_req_identity_chosen = { scope = country is_shown = { sp_i28_identity_path_chosen = yes } }
 
 sp_ct_vis_req_obj_bureaucracy = { scope = country is_shown = { sp_ct_req_obj_bureaucracy = yes } }
 sp_ct_vis_req_obj_education = { scope = country is_shown = { sp_ct_req_obj_education = yes } }

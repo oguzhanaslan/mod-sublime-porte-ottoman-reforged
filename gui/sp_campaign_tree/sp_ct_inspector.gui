@@ -1,9 +1,9 @@
-# I-30 Campaign Tree — inspector components (Phase D1 + D2A + D2B + D2C).
+﻿# I-30 Campaign Tree -- inspector components (Phase D1 + D2A + D2B + D2C).
 # Canonical vertical geometry (ALL families):
-#   artwork (fixed 260) → status header (fixed 34) → ONE expanding scrollarea
+#   artwork (fixed 260) -> status header (fixed 34) -> ONE expanding scrollarea
 #   scrollwidget content is content-driven preferred height (no preferscrollwidgetsize).
-# Vanilla expanding scroll: building_browser_panel.gui scrollarea (L459–474).
-# Outliner preferscrollwidgetsize is for preferred-sized scrollareas only — do not reuse here.
+# Vanilla expanding scroll: building_browser_panel.gui scrollarea (L459-474).
+# Outliner preferscrollwidgetsize is for preferred-sized scrollareas only -- do not reuse here.
 # Stage/capstone inspectors use the same hub pattern as path hubs: direct scroll_content
 # blockoverride on sp_ct_insp_scroll_panel (never nested *_stage shells).
 # Reuses shared primitives from 00_sp_ct_shared.gui (req/stat/progress + sp_ct_insp_je_*).
@@ -124,10 +124,10 @@ types sp_ct_inspector_types {
 	}
 
 	# Expanding viewport scroll (NOT outliner preferscrollwidgetsize).
-	# Vanilla: building_browser_panel.gui L459–474 — expanding scrollarea, no preferscrollwidgetsize,
-	# scrollwidget → vertical flowcontainer (content-driven height → real scroll range).
+	# Vanilla: building_browser_panel.gui L459-474 -- expanding scrollarea, no preferscrollwidgetsize,
+	# scrollwidget -> vertical flowcontainer (content-driven height -> real scroll range).
 	# preferscrollwidgetsize belongs to preferred-sized scrollareas (outliner_framework.gui);
-	# on an expanding inspector it makes viewport grow with content → range 0 + parent clip.
+	# on an expanding inspector it makes viewport grow with content -> range 0 + parent clip.
 	type sp_ct_insp_scroll_panel = scrollarea {
 		layoutpolicy_vertical = expanding
 		layoutpolicy_horizontal = expanding
@@ -141,7 +141,7 @@ types sp_ct_inspector_types {
 
 		scrollwidget = {
 			block "scroll_content" {
-				# Content-driven total height only — never expanding / never viewport-sized.
+				# Content-driven total height only -- never expanding / never viewport-sized.
 				flowcontainer = {
 					direction = vertical
 					spacing = 12
@@ -153,7 +153,7 @@ types sp_ct_inspector_types {
 		}
 	}
 
-	# Phase D2A — Imperial Identity.
+	# Phase D2A -- Imperial Identity.
 	type sp_ct_inspector_identity = widget {
 		size = { 100% -1 }
 		layoutpolicy_vertical = expanding
@@ -180,7 +180,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_identity_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
+			# Canonical geometry: native reason box inside ONLY expanding scroll (journal_entry.gui GetReason).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -190,47 +190,18 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_identity_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_identity_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_imperial_identity_reason" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
 							blockoverride "section_body" {
 								sp_ct_insp_req_row = {
-									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
-									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete_tt" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_i18_arc_complete_tt" }
 								}
 							}
 						}
@@ -241,7 +212,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_identity_chosen').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_identity_chosen').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_identity_chosen" }
+									blockoverride "req_label" { text = "sp_ct_req_identity_chosen_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_identity_chosen_tt" }
 								}
 							}
@@ -253,19 +224,19 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_ottomanism" }
+									blockoverride "req_label" { text = "sp_ct_req_path_ottomanism_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_ottomanism_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_islamism" }
+									blockoverride "req_label" { text = "sp_ct_req_path_islamism_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_islamism_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_turkism" }
+									blockoverride "req_label" { text = "sp_ct_req_path_turkism_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_turkism_tt" }
 								}
 							}
@@ -274,40 +245,15 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_identity_rewards"
-									tooltip = "sp_ct_insp_identity_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_identity_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_post_tanzimat"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_identity_paths"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_post_tanzimat" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_identity_paths" } }
 							}
 						}
 					}
@@ -316,7 +262,7 @@ types sp_ct_inspector_types {
 		}
 	}
 
-	# Phase D2A — Ottomanism path hub.
+	# Phase D2A -- Ottomanism path hub.
 	type sp_ct_inspector_ottomanism = widget {
 		size = { 100% -1 }
 		layoutpolicy_vertical = expanding
@@ -343,7 +289,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_ottomanism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
+			# Canonical geometry: native reason box inside ONLY expanding scroll (journal_entry.gui GetReason).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -353,47 +299,18 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_ottomanism_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_ottomanism_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_ottomanism_reason" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
 							blockoverride "section_body" {
 								sp_ct_insp_req_row = {
-									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
-									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete_tt" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_i18_arc_complete_tt" }
 								}
 							}
 						}
@@ -404,7 +321,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_ottomanism" }
+									blockoverride "req_label" { text = "sp_ct_req_path_ottomanism_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_ottomanism_tt" }
 								}
 							}
@@ -413,55 +330,22 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_path" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_ottomanism_path"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_ottomanism_path" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_ottomanism_rewards"
-									tooltip = "sp_ct_insp_ottomanism_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_ottomanism_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_identity"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_ottomanism_stages"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_identity" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_ottomanism_stages" } }
 							}
 						}
 
@@ -499,7 +383,7 @@ types sp_ct_inspector_types {
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
-					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism_s1.dds"
 				}
 			}
 
@@ -520,67 +404,21 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_ottomanism_s1_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_ottomanism_s1_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_ottomanism_status_stage_1" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_path" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_next_ottomanism_stages"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_ottomanism_stages" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_ottomanism_s1_rewards"
-									tooltip = "sp_ct_insp_ottomanism_s1_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_ottomanism_s1_rewards" } }
 							}
 						}
 					}
@@ -603,7 +441,7 @@ types sp_ct_inspector_types {
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
-					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism_s2.dds"
 				}
 			}
 
@@ -624,67 +462,21 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_ottomanism_s2_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_ottomanism_s2_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_ottomanism_status_stage_2" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_path" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_next_ottomanism_stages"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_ottomanism_stages" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_ottomanism_s2_rewards"
-									tooltip = "sp_ct_insp_ottomanism_s2_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_ottomanism_s2_rewards" } }
 							}
 						}
 					}
@@ -707,7 +499,7 @@ types sp_ct_inspector_types {
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
-					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism_s3.dds"
 				}
 			}
 
@@ -728,67 +520,21 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_ottomanism_s3_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_ottomanism_s3_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_ottomanism_status_stage_3" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_path" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_next_ottomanism_stages"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_ottomanism_stages" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_ottomanism_s3_rewards"
-									tooltip = "sp_ct_insp_ottomanism_s3_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_ottomanism_s3_rewards" } }
 							}
 						}
 					}
@@ -811,7 +557,7 @@ types sp_ct_inspector_types {
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
-					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism_s4.dds"
 				}
 			}
 
@@ -832,91 +578,29 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_ottomanism_s4_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_ottomanism_s4_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_ottomanism_status_stage_4" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_path" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_next_ottomanism_stages"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_ottomanism_stages" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_ottomanism_s4_rewards"
-									tooltip = "sp_ct_insp_ottomanism_s4_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_ottomanism_s4_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_ottomanism_s3"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_constitutional_ottoman"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_ottomanism_s3" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_constitutional_ottoman" } }
 							}
 						}
 					}
@@ -939,7 +623,7 @@ types sp_ct_inspector_types {
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
-					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_ottomanism.dds"
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_constitutional_ottoman.dds"
 				}
 			}
 
@@ -960,37 +644,8 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_constitutional_ottoman_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_constitutional_ottoman_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_ottomanism_status_final" }
 						}
 
 						sp_ct_insp_section_panel = {
@@ -1020,40 +675,15 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_constitutional_ottoman_rewards"
-									tooltip = "sp_ct_insp_constitutional_ottoman_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_constitutional_ottoman_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_ottomanism_s4"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_none"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_ottomanism_s4" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_none" } }
 							}
 						}
 					}
@@ -1062,7 +692,7 @@ types sp_ct_inspector_types {
 		}
 	}
 
-	# Phase D2A — Islamism path hub.
+	# Phase D2A -- Islamism path hub.
 	type sp_ct_inspector_islamism = widget {
 		size = { 100% -1 }
 		layoutpolicy_vertical = expanding
@@ -1089,7 +719,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_islamism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
+			# Canonical geometry: native reason box inside ONLY expanding scroll (journal_entry.gui GetReason).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -1099,47 +729,18 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_islamism_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_islamism_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_pan_islamic_unity_reason" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
 							blockoverride "section_body" {
 								sp_ct_insp_req_row = {
-									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
-									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete_tt" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_i18_arc_complete_tt" }
 								}
 							}
 						}
@@ -1150,7 +751,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_islamism" }
+									blockoverride "req_label" { text = "sp_ct_req_path_islamism_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_islamism_tt" }
 								}
 							}
@@ -1159,55 +760,22 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_path" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_islamism_path"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_islamism_path" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_islamism_rewards"
-									tooltip = "sp_ct_insp_islamism_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_islamism_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_identity"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_islamism_stages"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_identity" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_islamism_stages" } }
 							}
 						}
 
@@ -1245,7 +813,7 @@ types sp_ct_inspector_types {
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
-					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism_s1.dds"
 				}
 			}
 
@@ -1266,67 +834,21 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_islamism_s1_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_islamism_s1_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_pan_islamic_unity_status_stage_1" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_path" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_next_islamism_stages"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_islamism_stages" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_islamism_s1_rewards"
-									tooltip = "sp_ct_insp_islamism_s1_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_islamism_s1_rewards" } }
 							}
 						}
 					}
@@ -1349,7 +871,7 @@ types sp_ct_inspector_types {
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
-					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism_s2.dds"
 				}
 			}
 
@@ -1370,67 +892,21 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_islamism_s2_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_islamism_s2_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_pan_islamic_unity_status_stage_2" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_path" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_next_islamism_stages"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_islamism_stages" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_islamism_s2_rewards"
-									tooltip = "sp_ct_insp_islamism_s2_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_islamism_s2_rewards" } }
 							}
 						}
 					}
@@ -1453,7 +929,7 @@ types sp_ct_inspector_types {
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
-					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism_s3.dds"
 				}
 			}
 
@@ -1474,67 +950,21 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_islamism_s3_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_islamism_s3_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_pan_islamic_unity_status_stage_3" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_path" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_next_islamism_stages"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_islamism_stages" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_islamism_s3_rewards"
-									tooltip = "sp_ct_insp_islamism_s3_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_islamism_s3_rewards" } }
 							}
 						}
 					}
@@ -1557,7 +987,7 @@ types sp_ct_inspector_types {
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
-					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism_s4.dds"
 				}
 			}
 
@@ -1578,51 +1008,14 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_islamism_s4_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_islamism_s4_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_pan_islamic_unity_status_stage_4" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_path" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_next_islamism_stages"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_islamism_stages" } }
 							}
 						}
 
@@ -1653,40 +1046,15 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_islamism_s4_rewards"
-									tooltip = "sp_ct_insp_islamism_s4_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_islamism_s4_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_islamism_s3"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_great_caliphate"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_islamism_s3" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_great_caliphate" } }
 							}
 						}
 					}
@@ -1709,7 +1077,7 @@ types sp_ct_inspector_types {
 
 			sp_ct_insp_artwork_band = {
 				blockoverride "artwork_texture" {
-					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_islamism.dds"
+					texture = "gfx/interface/illustrations/sp_campaign_tree/sp_ct_insp_great_caliphate.dds"
 				}
 			}
 
@@ -1730,37 +1098,8 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_great_caliphate_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_great_caliphate_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_pan_islamic_unity_status_final" }
 						}
 
 						sp_ct_insp_section_panel = {
@@ -1790,40 +1129,15 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_great_caliphate_rewards"
-									tooltip = "sp_ct_insp_great_caliphate_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_great_caliphate_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_islamism_s4"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_none"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_islamism_s4" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_none" } }
 							}
 						}
 					}
@@ -1834,7 +1148,7 @@ types sp_ct_inspector_types {
 
 	# JE status/action strips live in 00_sp_ct_shared.gui (sp_ct_insp_je_*).
 
-	# Phase D1 pilot — Turanian Ideal only.
+	# Phase D1 pilot -- Turanian Ideal only.
 	type sp_ct_inspector_pilot_turan = widget {
 		size = { 100% -1 }
 		layoutpolicy_vertical = expanding
@@ -1861,7 +1175,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_turan_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
+			# Canonical geometry: native reason box inside ONLY expanding scroll (journal_entry.gui GetReason).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -1871,37 +1185,8 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turan_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turan_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_turanian_ideal_reason" }
 						}
 
 						sp_ct_insp_section_panel = {
@@ -1910,19 +1195,19 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_turkism" }
+									blockoverride "req_label" { text = "sp_ct_req_path_turkism_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_turkism_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_pan_nationalism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_pan_nationalism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_pan_nationalism" }
+									blockoverride "req_label" { text = "sp_ct_req_pan_nationalism_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_pan_nationalism_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
+									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
 								}
 							}
@@ -1968,17 +1253,7 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_turan_rewards"
-									tooltip = "sp_ct_insp_turan_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-									margin_bottom = 4
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_turan_rewards" } }
 								sp_ct_insp_stat_row = {
 									blockoverride "stat_icon" { texture = "gfx/interface/icons/generic_icons/prestige.dds" }
 									blockoverride "stat_label" { text = "sp_ct_reward_prestige" }
@@ -1995,24 +1270,8 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_turkism"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_turan_s1"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_turkism" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_turan_s1" } }
 							}
 						}
 
@@ -2035,7 +1294,7 @@ types sp_ct_inspector_types {
 			}
 		}
 	}
-	# Phase D2D — Tanzimat reforms hub.
+	# Phase D2D -- Tanzimat reforms hub.
 	type sp_ct_inspector_tanzimat = widget {
 		size = { 100% -1 }
 		layoutpolicy_vertical = expanding
@@ -2062,7 +1321,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_tanzimat_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
+			# Canonical geometry: native reason box inside ONLY expanding scroll (journal_entry.gui GetReason).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -2072,125 +1331,8 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_tanzimat_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_tanzimat_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-
-						sp_ct_insp_section_panel = {
-							blockoverride "section_title" { text = "sp_ct_sec_completion" }
-							blockoverride "section_body" {
-								sp_ct_insp_req_row = {
-									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_obj_bureaucracy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_bureaucracy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_obj_bureaucracy" }
-									blockoverride "req_tooltip" { tooltip = "sp_ct_req_obj_bureaucracy_tt" }
-								}
-								sp_ct_insp_req_row = {
-									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_obj_education').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_education').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_obj_education" }
-									blockoverride "req_tooltip" { tooltip = "sp_ct_req_obj_education_tt" }
-								}
-								sp_ct_insp_req_row = {
-									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_obj_army').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_army').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_obj_army" }
-									blockoverride "req_tooltip" { tooltip = "sp_ct_req_obj_army_tt" }
-								}
-								sp_ct_insp_req_row = {
-									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_obj_economy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_economy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_obj_economy" }
-									blockoverride "req_tooltip" { tooltip = "sp_ct_req_obj_economy_tt" }
-								}
-								sp_ct_insp_req_row = {
-									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_obj_separatism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_separatism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_obj_separatism" }
-									blockoverride "req_tooltip" { tooltip = "sp_ct_req_obj_separatism_tt" }
-								}
-							}
-						}
-
-						sp_ct_insp_section_panel = {
-							blockoverride "section_title" { text = "sp_ct_sec_optional" }
-							blockoverride "section_body" {
-								sp_ct_insp_req_row = {
-									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_obj_syria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_obj_syria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_obj_syria" }
-									blockoverride "req_tooltip" { tooltip = "sp_ct_req_obj_syria_tt" }
-								}
-							}
-						}
-
-						sp_ct_insp_section_panel = {
-							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
-							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_tanzimat_rewards"
-									tooltip = "sp_ct_insp_tanzimat_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-							}
-						}
-
-						sp_ct_insp_section_panel = {
-							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
-							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_none"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_post_tanzimat"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-							}
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "je_sick_man_main_reason" }
 						}
 
 						sp_ct_insp_section_panel = {
@@ -2220,7 +1362,7 @@ types sp_ct_inspector_types {
 		}
 	}
 
-	# Phase D2D — Post-Tanzimat era hub.
+	# Phase D2D -- Post-Tanzimat era hub.
 	type sp_ct_inspector_post_tanzimat = widget {
 		size = { 100% -1 }
 		layoutpolicy_vertical = expanding
@@ -2247,7 +1389,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_post_tanzimat_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
+			# Canonical geometry: native reason box inside ONLY expanding scroll (journal_entry.gui GetReason).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -2257,37 +1399,8 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_post_tanzimat_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_post_tanzimat_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_post_tanzimat_era_reason" }
 						}
 
 						sp_ct_insp_section_panel = {
@@ -2296,7 +1409,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
+									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
 								}
 							}
@@ -2335,55 +1448,22 @@ types sp_ct_inspector_types {
 									blockoverride "req_label" { text = "sp_ct_req_i18_hamidian" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_i18_hamidian_tt" }
 								}
-								textbox = {
-									text = "sp_ct_insp_post_tanzimat_complete_note"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_post_tanzimat_complete_note" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_post_tanzimat_rewards"
-									tooltip = "sp_ct_insp_post_tanzimat_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_post_tanzimat_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_tanzimat"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_identity"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_tanzimat" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_identity" } }
 							}
 						}
 
@@ -2407,7 +1487,7 @@ types sp_ct_inspector_types {
 		}
 	}
 
-	# Phase D2D — Turkism path hub.
+	# Phase D2D -- Turkism path hub.
 	type sp_ct_inspector_turkism = widget {
 		size = { 100% -1 }
 		layoutpolicy_vertical = expanding
@@ -2434,7 +1514,7 @@ types sp_ct_inspector_types {
 				blockoverride "insp_status_locked" { visible = "[GetScriptedGui('sp_ct_vis_turkism_locked').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 			}
 
-			# Canonical geometry: desc+flavor inside ONLY expanding scroll (journal_entry.gui scrollarea_content).
+			# Canonical geometry: native reason box inside ONLY expanding scroll (journal_entry.gui GetReason).
 			sp_ct_insp_scroll_panel = {
 				blockoverride "scroll_content" {
 					flowcontainer = {
@@ -2444,47 +1524,18 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turkism_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turkism_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_ct_insp_turkism_desc" }
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_unlock" }
 							blockoverride "section_body" {
 								sp_ct_insp_req_row = {
-									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
-									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
-									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
+									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
+									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete_tt" }
+									blockoverride "req_tooltip" { tooltip = "sp_ct_req_i18_arc_complete_tt" }
 								}
 							}
 						}
@@ -2495,7 +1546,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_turkism" }
+									blockoverride "req_label" { text = "sp_ct_req_path_turkism_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_turkism_tt" }
 								}
 							}
@@ -2504,55 +1555,22 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_path" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_turkism_path"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_turkism_path" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_turkism_rewards"
-									tooltip = "sp_ct_insp_turkism_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_turkism_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_identity"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_turan"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_identity" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_turan" } }
 							}
 						}
 					}
@@ -2596,37 +1614,8 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turan_s1_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turan_s1_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_turanian_ideal_status_stage_1" }
 						}
 
 						sp_ct_insp_section_panel = {
@@ -2643,25 +1632,25 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_azerbaijan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_azerbaijan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_azerbaijan" }
+									blockoverride "req_label" { text = "sp_ct_terr_azerbaijan_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_azerbaijan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_elizavetpol').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_elizavetpol').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_elizavetpol" }
+									blockoverride "req_label" { text = "sp_ct_terr_elizavetpol_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_elizavetpol_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_tabriz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_tabriz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_tabriz" }
+									blockoverride "req_label" { text = "sp_ct_terr_tabriz_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_tabriz_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_urmia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_urmia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_urmia" }
+									blockoverride "req_label" { text = "sp_ct_terr_urmia_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_urmia_tt" }
 								}
 							}
@@ -2670,40 +1659,15 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_turan_s1_rewards"
-									tooltip = "sp_ct_insp_turan_s1_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_turan_s1_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_turan"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_turan_s2"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_turan" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_turan_s2" } }
 							}
 						}
 
@@ -2762,37 +1726,8 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turan_s2_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turan_s2_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_turanian_ideal_status_stage_2" }
 						}
 
 						sp_ct_insp_section_panel = {
@@ -2809,67 +1744,67 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_irakajemi').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_irakajemi').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_irakajemi" }
+									blockoverride "req_label" { text = "sp_ct_terr_irakajemi_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_irakajemi_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_isfahan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_isfahan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_isfahan" }
+									blockoverride "req_label" { text = "sp_ct_terr_isfahan_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_isfahan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_fars').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_fars').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_fars" }
+									blockoverride "req_label" { text = "sp_ct_terr_fars_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_fars_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_kerman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_kerman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_kerman" }
+									blockoverride "req_label" { text = "sp_ct_terr_kerman_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_kerman_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_khorasan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_khorasan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_khorasan" }
+									blockoverride "req_label" { text = "sp_ct_terr_khorasan_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_khorasan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_mazandaran').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_mazandaran').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_mazandaran" }
+									blockoverride "req_label" { text = "sp_ct_terr_mazandaran_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_mazandaran_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_semnan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_semnan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_semnan" }
+									blockoverride "req_label" { text = "sp_ct_terr_semnan_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_semnan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_laristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_laristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_laristan" }
+									blockoverride "req_label" { text = "sp_ct_terr_laristan_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_laristan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_luristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_luristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_luristan" }
+									blockoverride "req_label" { text = "sp_ct_terr_luristan_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_luristan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_persian_kurdistan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_persian_kurdistan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_persian_kurdistan" }
+									blockoverride "req_label" { text = "sp_ct_terr_persian_kurdistan_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_persian_kurdistan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_khuzestan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_khuzestan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_khuzestan" }
+									blockoverride "req_label" { text = "sp_ct_terr_khuzestan_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_khuzestan_tt" }
 								}
 							}
@@ -2884,55 +1819,22 @@ types sp_ct_inspector_types {
 									blockoverride "req_label" { text = "sp_ct_req_persia_subject" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_persia_subject_tt" }
 								}
-								textbox = {
-									text = "sp_ct_insp_turan_s2_alt_note"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_turan_s2_alt_note" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_turan_s2_rewards"
-									tooltip = "sp_ct_insp_turan_s2_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_turan_s2_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_turan_s1"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_turan_s3"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_turan_s1" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_turan_s3" } }
 							}
 						}
 
@@ -2991,37 +1893,8 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turan_s3_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turan_s3_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_turanian_ideal_status_stage_3" }
 						}
 
 						sp_ct_insp_section_panel = {
@@ -3038,25 +1911,25 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_turkmenia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_turkmenia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_turkmenia" }
+									blockoverride "req_label" { text = "sp_ct_terr_turkmenia_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_turkmenia_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_merz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_merz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_merz" }
+									blockoverride "req_label" { text = "sp_ct_terr_merz_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_merz_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_khiva').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_khiva').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_khiva" }
+									blockoverride "req_label" { text = "sp_ct_terr_khiva_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_khiva_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_uzbekia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_uzbekia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_uzbekia" }
+									blockoverride "req_label" { text = "sp_ct_terr_uzbekia_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_uzbekia_tt" }
 								}
 							}
@@ -3065,40 +1938,15 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_turan_s3_rewards"
-									tooltip = "sp_ct_insp_turan_s3_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_turan_s3_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_turan_s2"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_turan_s4"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_turan_s2" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_turan_s4" } }
 							}
 						}
 
@@ -3157,37 +2005,8 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turan_s4_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_turan_s4_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_turanian_ideal_status_stage_4" }
 						}
 
 						sp_ct_insp_section_panel = {
@@ -3204,61 +2023,61 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_fergana').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_fergana').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_fergana" }
+									blockoverride "req_label" { text = "sp_ct_terr_fergana_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_fergana_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_kirghizia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_kirghizia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_kirghizia" }
+									blockoverride "req_label" { text = "sp_ct_terr_kirghizia_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_kirghizia_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_syrdarya').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_syrdarya').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_syrdarya" }
+									blockoverride "req_label" { text = "sp_ct_terr_syrdarya_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_syrdarya_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_aktobe').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_aktobe').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_aktobe" }
+									blockoverride "req_label" { text = "sp_ct_terr_aktobe_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_aktobe_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_akmolinsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_akmolinsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_akmolinsk" }
+									blockoverride "req_label" { text = "sp_ct_terr_akmolinsk_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_akmolinsk_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_uralsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_uralsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_uralsk" }
+									blockoverride "req_label" { text = "sp_ct_terr_uralsk_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_uralsk_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_semireche').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_semireche').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_semireche" }
+									blockoverride "req_label" { text = "sp_ct_terr_semireche_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_semireche_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_jetisy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_jetisy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_jetisy" }
+									blockoverride "req_label" { text = "sp_ct_terr_jetisy_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_jetisy_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_dzungaria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_dzungaria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_dzungaria" }
+									blockoverride "req_label" { text = "sp_ct_terr_dzungaria_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_dzungaria_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_tianshan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_tianshan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_tianshan" }
+									blockoverride "req_label" { text = "sp_ct_terr_tianshan_tt" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_tianshan_tt" }
 								}
 							}
@@ -3273,55 +2092,22 @@ types sp_ct_inspector_types {
 									blockoverride "req_label" { text = "sp_ct_req_claims_4b" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_claims_4b_tt" }
 								}
-								textbox = {
-									text = "sp_ct_insp_turan_s4_claims_note"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_turan_s4_claims_note" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_turan_s4_rewards"
-									tooltip = "sp_ct_insp_turan_s4_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_turan_s4_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_turan_s3"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_great_ottoman"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_turan_s3" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_great_ottoman" } }
 							}
 						}
 
@@ -3380,37 +2166,8 @@ types sp_ct_inspector_types {
 						layoutpolicy_vertical = preferred
 						minimumsize = { 480 -1 }
 
-						textbox = {
-							text = "sp_ct_sec_description"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_great_ottoman_desc"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
-						}
-						textbox = {
-							text = "sp_ct_sec_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							default_format = "#title"
-							using = fontsize_small
-						}
-						textbox = {
-							text = "sp_ct_insp_great_ottoman_flavor"
-							autoresize = yes
-							align = left|nobaseline
-							using = fontsize_small
-							minimumsize = { 460 -1 }
-							maximumsize = { 460 -1 }
-							multiline = yes
+						sp_ct_insp_reason_box = {
+							blockoverride "reason_text" { text = "sp_je_turanian_ideal_status_final" }
 						}
 
 						sp_ct_insp_section_panel = {
@@ -3440,40 +2197,15 @@ types sp_ct_inspector_types {
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_rewards" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_insp_great_ottoman_rewards"
-									tooltip = "sp_ct_insp_great_ottoman_rewards_tt"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_insp_great_ottoman_rewards" } }
 							}
 						}
 
 						sp_ct_insp_section_panel = {
 							blockoverride "section_title" { text = "sp_ct_sec_navigation" }
 							blockoverride "section_body" {
-								textbox = {
-									text = "sp_ct_nav_prev_turan_s4"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
-								textbox = {
-									text = "sp_ct_nav_next_none"
-									autoresize = yes
-									align = left|nobaseline
-						using = fontsize_small
-						minimumsize = { 460 -1 }
-						maximumsize = { 460 -1 }
-						multiline = yes
-								}
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_prev_turan_s4" } }
+								sp_ct_insp_reason_box = { blockoverride "reason_text" { text = "sp_ct_nav_next_none" } }
 							}
 						}
 

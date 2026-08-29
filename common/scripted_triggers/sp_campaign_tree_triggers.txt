@@ -12,13 +12,7 @@ sp_ct_post_tanzimat_gate = {
 }
 
 sp_ct_post_tanzimat_arc_complete = {
-	OR = {
-		has_variable = sp_i18_hamidian_fired
-		AND = {
-			has_variable = sp_i18_kanun_i_esasi_fired
-			game_date >= 1886.1.1
-		}
-	}
+	sp_i18_arc_complete = yes
 }
 
 sp_ct_post_tanzimat_arc_active = {
@@ -37,19 +31,25 @@ sp_ct_post_tanzimat_arc_active = {
 
 sp_ct_tanzimat_completed = {
 	sp_ct_is_tur = yes
-	has_variable = sick_man_complete
+	OR = {
+		has_variable = sick_man_complete
+		# Visual chain: a later ideology must not sit under a non-completed Tanzimat.
+		sp_i28_identity_path_chosen = yes
+	}
 }
 
 sp_ct_tanzimat_active = {
 	sp_ct_is_tur = yes
 	has_journal_entry = je_sick_man_main
 	NOT = { has_variable = sick_man_complete }
+	NOT = { sp_i28_identity_path_chosen = yes }
 }
 
 sp_ct_tanzimat_available = {
 	sp_ct_is_tur = yes
 	NOT = { has_variable = sick_man_complete }
 	NOT = { has_journal_entry = je_sick_man_main }
+	NOT = { sp_i28_identity_path_chosen = yes }
 }
 
 sp_ct_tanzimat_locked = {
@@ -67,12 +67,17 @@ sp_ct_tanzimat_locked = {
 
 sp_ct_post_tanzimat_completed = {
 	sp_ct_is_tur = yes
-	sp_ct_post_tanzimat_arc_complete = yes
+	OR = {
+		sp_ct_post_tanzimat_arc_complete = yes
+		# Visual chain: ideology Active must not sit under an unresolved parent.
+		sp_i28_identity_path_chosen = yes
+	}
 }
 
 sp_ct_post_tanzimat_active = {
 	sp_ct_is_tur = yes
 	sp_ct_post_tanzimat_arc_active = yes
+	NOT = { sp_i28_identity_path_chosen = yes }
 }
 
 sp_ct_post_tanzimat_available = {
@@ -93,11 +98,11 @@ sp_ct_post_tanzimat_locked = {
 	}
 }
 
-### Imperial Identity hub
+### Three Policies hub
 
 sp_ct_identity_completed = {
 	sp_ct_is_tur = yes
-	has_variable = sp_imperial_identity_chosen
+	sp_i28_identity_path_chosen = yes
 }
 
 sp_ct_identity_active = {
@@ -106,7 +111,9 @@ sp_ct_identity_active = {
 
 sp_ct_identity_available = {
 	sp_ct_is_tur = yes
-	sp_i28_identity_eligible = yes
+	sp_ct_post_tanzimat_gate = yes
+	sp_i18_arc_complete = yes
+	NOT = { sp_i28_identity_path_chosen = yes }
 }
 
 sp_ct_identity_locked = {
@@ -134,8 +141,9 @@ sp_ct_ottomanism_active = {
 
 sp_ct_ottomanism_available = {
 	sp_ct_is_tur = yes
-	sp_i28_identity_eligible = yes
-	NOT = { has_variable = sp_imperial_identity_chosen }
+	sp_ct_post_tanzimat_gate = yes
+	sp_i18_arc_complete = yes
+	NOT = { sp_i28_identity_path_chosen = yes }
 }
 
 sp_ct_ottomanism_locked = {
@@ -164,8 +172,9 @@ sp_ct_islamism_active = {
 
 sp_ct_islamism_available = {
 	sp_ct_is_tur = yes
-	sp_i28_identity_eligible = yes
-	NOT = { has_variable = sp_imperial_identity_chosen }
+	sp_ct_post_tanzimat_gate = yes
+	sp_i18_arc_complete = yes
+	NOT = { sp_i28_identity_path_chosen = yes }
 }
 
 sp_ct_islamism_locked = {
@@ -195,8 +204,9 @@ sp_ct_turkism_active = {
 
 sp_ct_turkism_available = {
 	sp_ct_is_tur = yes
-	sp_i28_identity_eligible = yes
-	NOT = { has_variable = sp_imperial_identity_chosen }
+	sp_ct_post_tanzimat_gate = yes
+	sp_i18_arc_complete = yes
+	NOT = { sp_i28_identity_path_chosen = yes }
 }
 
 sp_ct_turkism_locked = {
@@ -669,6 +679,10 @@ sp_ct_req_i18_kanun = {
 }
 sp_ct_req_i18_hamidian = {
 	has_variable = sp_i18_hamidian_fired
+}
+
+sp_ct_req_i18_arc_complete = {
+	sp_i18_arc_complete = yes
 }
 
 # Stage 1 territories
