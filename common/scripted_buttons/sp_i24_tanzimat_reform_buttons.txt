@@ -10,13 +10,9 @@ sp_i24_abolish_cizye_button = {
 	}
 
 	possible = {
-		custom_tooltip = {
-			text = sp_i24_legitimacy_60_tt
-			sp_i24_reform_legitimacy = yes
-		}
-		custom_tooltip = {
-			text = sp_i24_devout_out_of_government_tt
-			sp_i24_devout_resistance_weak = yes
+		government_legitimacy >= 60
+		ig:ig_devout ?= {
+			is_in_government = no
 		}
 		hidden_trigger = {
 			NOT = { sp_i24_cizye_done = yes }
@@ -53,13 +49,14 @@ sp_i24_reform_ciftlik_button = {
 	}
 
 	possible = {
-		custom_tooltip = {
-			text = sp_i24_legitimacy_60_tt
-			sp_i24_reform_legitimacy = yes
-		}
-		custom_tooltip = {
-			text = sp_i24_landowners_resistance_weak_tt
-			sp_i24_landowners_resistance_weak = yes
+		government_legitimacy >= 60
+		OR = {
+			ig:ig_landowners ?= {
+				is_in_government = no
+			}
+			ig:ig_landowners ?= {
+				is_powerful = no
+			}
 		}
 		hidden_trigger = {
 			NOT = { sp_i24_ciftlik_done = yes }
@@ -96,18 +93,11 @@ sp_i24_reorganize_education_button = {
 	}
 
 	possible = {
-		custom_tooltip = {
-			text = sp_i24_legitimacy_60_tt
-			sp_i24_reform_legitimacy = yes
+		government_legitimacy >= 60
+		ig:ig_devout ?= {
+			is_in_government = no
 		}
-		custom_tooltip = {
-			text = sp_i24_devout_out_of_government_tt
-			sp_i24_devout_resistance_weak = yes
-		}
-		custom_tooltip = {
-			text = sp_i24_has_education_law_tt
-			sp_i24_has_education_law = yes
-		}
+		NOT = { has_law_or_variant = law_type:law_no_schools }
 		hidden_trigger = {
 			NOT = { sp_i24_education_done = yes }
 		}
@@ -143,15 +133,9 @@ sp_i24_suppress_slave_markets_button = {
 	}
 
 	possible = {
-		custom_tooltip = {
-			text = sp_i24_legitimacy_60_tt
-			sp_i24_reform_legitimacy = yes
-		}
-		custom_tooltip = {
-			text = sp_i24_landowners_out_of_government_tt
-			ig:ig_landowners ?= {
-				is_in_government = no
-			}
+		government_legitimacy >= 60
+		ig:ig_landowners ?= {
+			is_in_government = no
 		}
 		hidden_trigger = {
 			sp_i24_slavery_still_legal = yes

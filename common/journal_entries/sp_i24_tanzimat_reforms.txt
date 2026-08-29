@@ -44,7 +44,58 @@ sp_je_tanzimat_reforms = {
 		}
 	}
 
+	# Native gates match remaining button `possible` (vanilla je_ig_suppression / 03_korea).
+	# Decree flags still require the click; meeting a gate alone does not finish a row.
 	complete = {
+		trigger_if = {
+			limit = {
+				OR = {
+					NOT = { sp_i24_cizye_done = yes }
+					NOT = { sp_i24_ciftlik_done = yes }
+					NOT = { sp_i24_education_done = yes }
+					NOT = { sp_i24_slave_reform_resolved = yes }
+				}
+			}
+			government_legitimacy >= 60
+		}
+		trigger_if = {
+			limit = {
+				OR = {
+					NOT = { sp_i24_cizye_done = yes }
+					NOT = { sp_i24_education_done = yes }
+				}
+			}
+			ig:ig_devout ?= {
+				is_in_government = no
+			}
+		}
+		trigger_if = {
+			limit = {
+				NOT = { sp_i24_ciftlik_done = yes }
+			}
+			OR = {
+				ig:ig_landowners ?= {
+					is_in_government = no
+				}
+				ig:ig_landowners ?= {
+					is_powerful = no
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				NOT = { sp_i24_education_done = yes }
+			}
+			NOT = { has_law_or_variant = law_type:law_no_schools }
+		}
+		trigger_if = {
+			limit = {
+				NOT = { sp_i24_slave_reform_resolved = yes }
+			}
+			ig:ig_landowners ?= {
+				is_in_government = no
+			}
+		}
 		custom_tooltip = {
 			text = sp_i24_cizye_complete_tt
 			sp_i24_cizye_done = yes
