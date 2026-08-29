@@ -22,9 +22,20 @@ sp_i28_identity_unset = {
 	}
 }
 
+# True once a Three Policies option is taken. sp_imperial_identity_chosen is set
+# when sp_i28.1 appears, before the player picks a path.
+sp_i28_identity_path_chosen = {
+	OR = {
+		has_variable = sp_ottomanism_selected
+		has_variable = sp_islamism_selected
+		has_variable = sp_turkism_selected
+	}
+}
+
 sp_i28_identity_eligible = {
 	c:TUR ?= this
 	sp_i28_post_tanzimat = yes
+	sp_i18_arc_complete = yes
 	sp_i28_identity_unset = yes
 }
 

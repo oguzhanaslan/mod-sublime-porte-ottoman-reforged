@@ -1,8 +1,9 @@
 ﻿namespace = sp_i18
 
-# I-18 post-Tanzimat political flavor. Five one-shot TUR events. No JE, no laws, no movements.
+# I-18 post-Tanzimat political flavor. Six one-shot TUR events.
+# Relative sequence after Tanzimat closes — no calendar year gates.
 
-# 1 — Post-Tanzimat debate, 1852–1864.
+# 1 — Post-Tanzimat debate. After Tanzimat JE closes.
 sp_i18.1 = {
 	type = country_event
 	placement = root
@@ -22,6 +23,10 @@ sp_i18.1 = {
 
 	immediate = {
 		set_variable = sp_i18_debate_fired
+		set_variable = {
+			name = sp_i18_yo_wait
+			days = 365
+		}
 	}
 
 	option = {
@@ -64,7 +69,7 @@ sp_i18.1 = {
 	}
 }
 
-# 2 — Young Ottomans circle/press, 1865+. Does not create Nâmık or Midhat.
+# 2 — Young Ottomans circle/press. ~1 year after debate. Does not create Nâmık or Midhat.
 sp_i18.2 = {
 	type = country_event
 	placement = root
@@ -81,31 +86,17 @@ sp_i18.2 = {
 	trigger = {
 		c:TUR ?= this
 		has_law = law_type:law_monarchy
-		game_date >= 1865.1.1
+		has_variable = sp_i18_debate_fired
+		NOT = { has_variable = sp_i18_yo_wait }
 		NOT = { has_variable = sp_i18_young_ottomans_fired }
-		OR = {
-			has_variable = sp_i18_debate_fired
-			sp_i18_has_domestic_tanzimat_reform = yes
-			has_variable = sick_man_complete
-			has_variable = failed_sick_man_main
-			has_variable = failed_sick_man_separatism
-		}
-		OR = {
-			ig:ig_intelligentsia ?= {
-				ig_counts_as_marginal = no
-			}
-			any_political_movement = {
-				is_political_movement_type = movement_liberal
-			}
-			any_political_movement = {
-				is_political_movement_type = movement_radical
-			}
-			has_law_or_variant = law_type:law_censorship
-		}
 	}
 
 	immediate = {
 		set_variable = sp_i18_young_ottomans_fired
+		set_variable = {
+			name = sp_i18_palace_wait
+			days = 365
+		}
 	}
 
 	option = {
@@ -152,7 +143,7 @@ sp_i18.2 = {
 	}
 }
 
-# 3 — Early constitutional acknowledgement, 1852–1875. Not Kanun-i Esasi. NO EFFECT.
+# 3 — Early constitutional acknowledgement on franchise law-pass. Not Kanun-i Esasi. NO EFFECT.
 sp_i18.3 = {
 	type = country_event
 	placement = root
@@ -169,8 +160,6 @@ sp_i18.3 = {
 	trigger = {
 		c:TUR ?= this
 		has_law = law_type:law_monarchy
-		game_date >= 1852.1.1
-		game_date < 1876.1.1
 		NOT = { has_variable = sp_i18_early_constitution_fired }
 		OR = {
 			is_enacting_law = law_type:law_landed_voting
@@ -194,7 +183,8 @@ sp_i18.3 = {
 	}
 }
 
-# 4 — Kanun-i Esasi names an existing franchise. 1876+. NO EFFECT. GEC does not block.
+# 4 — Kanun-i Esasi names an existing franchise. After Young Ottomans. NO EFFECT.
+# Monthly list fires one event per pulse, so this cannot share the YO pulse.
 sp_i18.4 = {
 	type = country_event
 	placement = root
@@ -211,9 +201,10 @@ sp_i18.4 = {
 	trigger = {
 		c:TUR ?= this
 		has_law = law_type:law_monarchy
+		has_variable = sp_i18_young_ottomans_fired
 		sp_i18_has_constitutional_government = yes
-		game_date >= 1876.1.1
 		NOT = { has_variable = sp_i18_kanun_i_esasi_fired }
+		NOT = { has_variable = sp_i18_palace_path_fired }
 	}
 
 	immediate = {
@@ -230,7 +221,7 @@ sp_i18.4 = {
 	}
 }
 
-# 5 — Hamidian restoration flavor after a prior franchise, 1878+. Does not enact autocracy.
+# 5 — Hamidian restoration flavor after a prior franchise. Optional. Does not enact autocracy.
 sp_i18.5 = {
 	type = country_event
 	placement = root
@@ -246,7 +237,6 @@ sp_i18.5 = {
 
 	trigger = {
 		c:TUR ?= this
-		game_date >= 1878.1.1
 		is_enacting_law = law_type:law_autocracy
 		has_variable = sp_i18_constitution_seen
 		NOT = { has_variable = sp_i18_hamidian_fired }
@@ -261,6 +251,47 @@ sp_i18.5 = {
 		default_option = yes
 		add_modifier = {
 			name = sp_i18_hamidian_restoration
+			days = very_short_modifier_time
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# 6 — Palace path. ~1 year after Young Ottomans if still no franchise. Closes the arc.
+sp_i18.6 = {
+	type = country_event
+	placement = root
+	title = sp_i18.6.t
+	desc = sp_i18.6.d
+	flavor = sp_i18.6.f
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c:TUR ?= this
+		has_law = law_type:law_monarchy
+		has_variable = sp_i18_young_ottomans_fired
+		NOT = { has_variable = sp_i18_palace_wait }
+		NOT = { sp_i18_has_constitutional_government = yes }
+		NOT = { has_variable = sp_i18_palace_path_fired }
+		NOT = { has_variable = sp_i18_kanun_i_esasi_fired }
+	}
+
+	immediate = {
+		set_variable = sp_i18_palace_path_fired
+	}
+
+	option = {
+		name = sp_i18.6.a
+		default_option = yes
+		add_modifier = {
+			name = sp_i18_palace_continuity
 			days = very_short_modifier_time
 		}
 		ai_chance = {

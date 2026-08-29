@@ -1,12 +1,12 @@
 ﻿l_english:
  sp_je_learning_from_europe: "Learning from Europe"
- sp_je_learning_from_europe_reason: "The Porte already sends students and hosts European advisers. This journal tracks that practice: costly, limited, and independent of Tanzimat. It does not complete or fail on its own.\n\nProgramme capacity is 2 by default, 3 after a staffed university or twelve consecutive months of bureaucracy surplus, and 4 only with established domestic expertise. Inherited military assistance occupies the military programme until that treaty ends; afterward a land military mission may be invited. Technical, education, industrial, and naval programmes also occupy a programme each while active. This journal never grants a second Moltke or treaty bonus."
+ sp_je_learning_from_europe_reason: "The Sublime Porte sends students abroad and invites European expertise to strengthen the empire. These costly programmes remain separate from the Tanzimat.\n\nCapacity begins at 2, rises to 3 with a staffed university or twelve consecutive months of surplus bureaucracy, and reaches 4 once domestic expertise is established. Every active programme uses one place. Existing military assistance reserves the military place until its treaty expires."
 
- sp_je_learning_from_europe_status_students_fra_ma: "Students are abroad in France. Prussian military assistance is already in force and occupies the military programme. This journal adds no second military bonus."
- sp_je_learning_from_europe_status_students_gbr_ma: "Students are abroad in Britain. Prussian military assistance is already in force and occupies the military programme. This journal adds no second military bonus."
- sp_je_learning_from_europe_status_students_ger_ma: "Students are abroad in Germany. Military assistance is already in force and occupies the military programme. This journal adds no second military bonus."
- sp_je_learning_from_europe_status_students_pru_ma: "Students are abroad in Prussia. Prussian military assistance is already in force and occupies the military programme. This journal adds no second military bonus."
- sp_je_learning_from_europe_status_students_aus_ma: "Students are abroad in Austria. Prussian military assistance is already in force and occupies the military programme. This journal adds no second military bonus."
+ sp_je_learning_from_europe_status_students_fra_ma: "Students are studying in France. Prussian military assistance remains active and reserves the military programme."
+ sp_je_learning_from_europe_status_students_gbr_ma: "Students are studying in Britain. Prussian military assistance remains active and reserves the military programme."
+ sp_je_learning_from_europe_status_students_ger_ma: "Students are studying in Germany. Existing military assistance reserves the military programme."
+ sp_je_learning_from_europe_status_students_pru_ma: "Students are studying in Prussia. Prussian military assistance remains active and reserves the military programme."
+ sp_je_learning_from_europe_status_students_aus_ma: "Students are studying in Austria. Prussian military assistance remains active and reserves the military programme."
  sp_je_learning_from_europe_status_students_fra: "Students abroad: France. The programme is underway. Returning cadres will be assigned when it ends."
  sp_je_learning_from_europe_status_students_gbr: "Students abroad: Britain. The programme is underway. Returning cadres will be assigned when it ends."
  sp_je_learning_from_europe_status_students_ger: "Students abroad: Germany. The programme is underway. Returning cadres will be assigned when it ends."
@@ -19,8 +19,8 @@
  sp_je_learning_from_europe_status_education_expand: "Education cooperation is expanding European-style schooling. Society learning improves; the Devout and Landowners resent the cost."
  sp_je_learning_from_europe_status_education_limit: "Education cooperation is limited to technical and military schools. Society learning and qualifications improve with a lighter political cost."
  sp_je_learning_from_europe_status_education_integrate: "Education cooperation is integrating with existing institutions. Society learning and administration improve."
- sp_je_learning_from_europe_status_ma_moltke: "Prussian military assistance is already in force. Helmuth von Moltke serves with that treaty mission. This journal presents it; it grants no extra Moltke modifier."
- sp_je_learning_from_europe_status_ma_post_moltke: "Prussian instructors remain under the existing military-assistance treaty (post-Moltke). The military programme stays occupied until that treaty ends. This journal adds no second military bonus."
+ sp_je_learning_from_europe_status_ma_moltke: "Prussian military assistance is in force under Helmuth von Moltke. It reserves the military programme until the treaty expires."
+ sp_je_learning_from_europe_status_ma_post_moltke: "Prussian instructors remain under the existing military-assistance treaty. The military programme stays reserved until the treaty expires."
  sp_je_learning_from_europe_status_students_cooldown: "The students-abroad programme is on cooldown after the last cohort. A new group cannot be sent until that interval expires."
  sp_je_learning_from_europe_status_technical_cooldown: "The technical-mission programme is on cooldown after the last engagement. A new mission cannot begin until that interval expires."
  sp_je_learning_from_europe_status_education_cooldown: "Education cooperation is on cooldown after the last programme. A new focus cannot begin until that interval expires."
@@ -29,7 +29,7 @@
  sp_je_learning_from_europe_status_cap2: "No students are abroad. Programme capacity: 2. Inherited military assistance already uses one programme; students abroad can still be started as the second."
 
  sp_i32_btn_send_students: "Send Students Abroad"
- sp_i32_btn_send_students_desc: "Dispatch a student mission to France, Britain, Prussia or Germany, or Austria. The destination choice sets the treasury cost. While they remain abroad, a stipend and bureaucracy burden apply as part of the programme modifier.\n\n#bold Capacity:#! 2 programmes by default; 3 after a staffed university or twelve consecutive months of bureaucracy surplus; 4 only with established domestic expertise.\nThis does not grant combat power, construction, or raw research speed."
+ sp_i32_btn_send_students_desc: "Send a cohort to France, Britain, Prussia or Germany, or Austria. The destination determines the initial cost; stipends and administration remain due while the students are abroad.\n\n#bold Capacity:#! 2 programmes by default; 3 with a staffed university or twelve consecutive months of surplus bureaucracy; 4 with established domestic expertise."
  sp_i32_btn_send_students_effect_tt: "Opens destination selection. The chosen host applies the treasury cost shown below."
 
  sp_i32_btn_cancel_students: "Halt Students Programme"
@@ -37,7 +37,7 @@
  sp_i32_btn_cancel_students_effect_tt: "Confirm cancelling the students-abroad programme"
 
  sp_i32_btn_send_technical: "Launch Technical Mission"
- sp_i32_btn_send_technical_desc: "Invite European engineers for railways, mining, shipyards, or machinery. Requires mechanical tools, the atmospheric engine, or a university. Partners must be at least Neutral. The treasury pays on departure; a stipend and bureaucracy follow.\n\nDoes not grant construction efficiency or factory throughput."
+ sp_i32_btn_send_technical_desc: "Invite European engineers to advise on railways, mining, shipyards, or machinery. Requires mechanical tools, the atmospheric engine, or a university, and a partner with at least Neutral relations. The initial payment is followed by continuing stipends and administrative costs."
  sp_i32_btn_send_technical_effect_tt: "Opens specialization and partner selection. The treasury cost is shown below."
 
  sp_i32_btn_cancel_technical: "Halt Technical Mission"
@@ -214,7 +214,7 @@
  sp_i32.32.b: "Let cooperation continue"
 
  sp_i32.40.t: "The Students Return"
- sp_i32.40.d: "The cohort is home. Their notebooks will gather dust unless the Porte puts them to work. State service, schools, technical offices, or military institutions — each path is a short pulse of capacity, not a permanent privilege."
+ sp_i32.40.d: "The students are home. Their notebooks will gather dust unless the Porte puts them to work. State service, schools, technical offices, or military institutions — each path is a short pulse of capacity, not a permanent privilege."
  sp_i32.40.f: "They have seen another country's order. The question is where that order will sit in ours."
  sp_i32.40.state: "Place them in state service"
  sp_i32.40.schools: "Place them in schools and universities"
@@ -303,7 +303,7 @@ sp_je_learning_from_europe_status_military_fra: "A French land military mission 
  sp_i32_mil_overrun_aus: "Military Mission Overrun"
  sp_i32_mil_overrun_aus_desc: "The Austrian land military mission is costing more than intended."
 
- sp_i32_opinion_moltke: "Prussian Military Assistance — Chief Adviser (Helmuth von Moltke). Presentation only; this journal grants no extra Moltke modifier."
+ sp_i32_opinion_moltke: "Prussian Military Assistance — Chief Adviser Helmuth von Moltke"
 
  sp_i32.12.t: "Which Land Mission?"
  sp_i32.12.d: "With the military programme free of treaty assistance, the Porte may invite a European staff mission. Prussia or Germany offers the deepest staff package; France academies and artillery when the Egyptian crisis does not bar them; Britain a limited observation path only with Britain as primary partner and no naval programme; Austria a secondary organization path. The treasury pays on departure."
@@ -343,7 +343,7 @@ sp_je_learning_from_europe_status_military_fra: "A French land military mission 
  sp_je_learning_from_europe_status_naval_cooldown: "The naval-modernization programme is on cooldown after the last engagement. A new mission cannot begin until that interval expires."
 
  sp_i32_btn_send_industrial: "Launch Industrial Mission"
- sp_i32_btn_send_industrial_desc: "Invite European industrial advisers once mechanical tools are researched and a staffed university or incorporated manufacturing plant exists. Partners must be Neutral or better. The treasury pays on departure; a stipend and bureaucracy follow.\n\nDoes not grant factory throughput, construction, minting, or tax power."
+ sp_i32_btn_send_industrial_desc: "Invite European industrial advisers after researching mechanical tools and establishing either a staffed university or an incorporated manufacturing plant. A partner with at least Neutral relations is required. The initial payment is followed by continuing stipends and administrative costs."
  sp_i32_btn_send_industrial_effect_tt: "Opens partner selection. The treasury cost is shown below."
 
  sp_i32_btn_cancel_industrial: "Halt Industrial Mission"
@@ -351,7 +351,7 @@ sp_je_learning_from_europe_status_military_fra: "A French land military mission 
  sp_i32_btn_cancel_industrial_effect_tt: "Confirm cancelling the industrial mission"
 
  sp_i32_btn_send_naval: "Begin Naval Modernization"
- sp_i32_btn_send_naval_desc: "Invite a European naval mission once paddle steamers or screw frigates are researched. Britain requires Cordial relations or Britain as primary partner; France requires Neutral. The treasury pays on departure; a stipend and bureaucracy follow.\n\nDoes not grant ship offense or battle power. Military technology spread applies only when no land mission or assistance already owns that channel."
+ sp_i32_btn_send_naval_desc: "Invite a European naval mission after researching paddle steamers or screw frigates. Britain requires Cordial relations or designation as the primary partner; France requires Neutral relations. The initial payment is followed by continuing stipends and administrative costs. Military knowledge spreads only if no land mission or military-assistance treaty is already doing so."
  sp_i32_btn_send_naval_effect_tt: "Opens partner selection. The treasury cost is shown below."
 
  sp_i32_btn_cancel_naval: "Halt Naval Modernization"

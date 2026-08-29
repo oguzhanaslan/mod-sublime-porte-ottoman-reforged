@@ -1,12 +1,12 @@
 ﻿l_turkish:
  sp_je_learning_from_europe: "Avrupa'dan Öğrenmek"
- sp_je_learning_from_europe_reason: "Bab-ı Ali zaten talebe göndermekte ve Avrupalı müşavirler barındırmaktadır. Bu günlük o âdeti izler: masraflı, sınırlı ve Tanzimat'tan bağımsızdır. Kendi başına tamamlanmaz veya başarısız olmaz.\n\nProgram kapasitesi varsayılan 2, kadrolu üniversite veya on iki ay üst üste bürokrasi fazlasından sonra 3, yerleşik yerli ihtisasla 4'tür. Devralınan askerî yardım, antlaşma bitene kadar askerî programı doldurur; sonrasında kara askerî heyeti davet edilebilir. Teknik, eğitim, sanayi ve bahriye programları da aktifken birer program yerini tutar. Bu günlük ikinci bir Moltke veya antlaşma bonusu vermez."
+ sp_je_learning_from_europe_reason: "Bâbıâli, imparatorluğu güçlendirmek için Avrupa'ya talebe gönderiyor ve yabancı uzmanları ülkeye davet ediyor. Maliyetli olan bu programlar Tanzimat'tan bağımsız yürütülür.\n\nBaşlangıçta 2 olan kapasite, kadrolu bir üniversite veya on iki ay kesintisiz bürokrasi fazlasıyla 3'e; yerli uzmanlık yerleştiğinde 4'e çıkar. Her aktif program bir kapasite kullanır. Mevcut askerî yardım, antlaşma sona erene kadar askerî program kapasitesini kullanır."
 
- sp_je_learning_from_europe_status_students_fra_ma: "Talebeler Fransa'dadır. Prusya askerî yardımı zaten yürürlüktedir ve askerî programı doldurur. Bu günlük ikinci bir askerî bonus eklemez."
- sp_je_learning_from_europe_status_students_gbr_ma: "Talebeler Britanya'dadır. Prusya askerî yardımı zaten yürürlüktedir ve askerî programı doldurur. Bu günlük ikinci bir askerî bonus eklemez."
- sp_je_learning_from_europe_status_students_ger_ma: "Talebeler Almanya'dadır. Askerî yardım zaten yürürlüktedir ve askerî programı doldurur. Bu günlük ikinci bir askerî bonus eklemez."
- sp_je_learning_from_europe_status_students_pru_ma: "Talebeler Prusya'dadır. Prusya askerî yardımı zaten yürürlüktedir ve askerî programı doldurur. Bu günlük ikinci bir askerî bonus eklemez."
- sp_je_learning_from_europe_status_students_aus_ma: "Talebeler Avusturya'dadır. Prusya askerî yardımı zaten yürürlüktedir ve askerî programı doldurur. Bu günlük ikinci bir askerî bonus eklemez."
+ sp_je_learning_from_europe_status_students_fra_ma: "Talebeler Fransa'da eğitim görüyor. Prusya askerî yardımı yürürlükte olduğundan askerî program kapasitesi dolu."
+ sp_je_learning_from_europe_status_students_gbr_ma: "Talebeler Britanya'da eğitim görüyor. Prusya askerî yardımı yürürlükte olduğundan askerî program kapasitesi dolu."
+ sp_je_learning_from_europe_status_students_ger_ma: "Talebeler Almanya'da eğitim görüyor. Mevcut askerî yardım, askerî program kapasitesini kullanıyor."
+ sp_je_learning_from_europe_status_students_pru_ma: "Talebeler Prusya'da eğitim görüyor. Prusya askerî yardımı yürürlükte olduğundan askerî program kapasitesi dolu."
+ sp_je_learning_from_europe_status_students_aus_ma: "Talebeler Avusturya'da eğitim görüyor. Prusya askerî yardımı yürürlükte olduğundan askerî program kapasitesi dolu."
  sp_je_learning_from_europe_status_students_fra: "Avrupa'daki talebeler: Fransa. Program sürmektedir. Dönen kadrolar program bitince yerleştirilecektir."
  sp_je_learning_from_europe_status_students_gbr: "Avrupa'daki talebeler: Britanya. Program sürmektedir. Dönen kadrolar program bitince yerleştirilecektir."
  sp_je_learning_from_europe_status_students_ger: "Avrupa'daki talebeler: Almanya. Program sürmektedir. Dönen kadrolar program bitince yerleştirilecektir."
@@ -19,9 +19,9 @@
  sp_je_learning_from_europe_status_education_expand: "Eğitim işbirliği Avrupa tarzı mektepleri genişletmektedir. Toplum öğrenimi iyileşir; Dindarlar ve Eşraf bedeli ağır bulur."
  sp_je_learning_from_europe_status_education_limit: "Eğitim işbirliği teknik ve askerî mekteplerle sınırlıdır. Toplum öğrenimi ve vasıf, daha hafif bir siyasi bedelle iyileşir."
  sp_je_learning_from_europe_status_education_integrate: "Eğitim işbirliği mevcut müesseselere entegre edilmektedir. Toplum öğrenimi ve idare iyileşir."
- sp_je_learning_from_europe_status_ma_moltke: "Prusya askerî yardımı zaten yürürlüktedir. Helmuth von Moltke bu antlaşma heyetindedir. Bu günlük onu tanıtır; ekstra bir Moltke düzenleyicisi vermez."
- sp_je_learning_from_europe_status_ma_post_moltke: "Prusyalı eğitmenler mevcut askerî yardım antlaşması altında kalır (Moltke sonrası). Askerî program, antlaşma bitene kadar dolu sayılır. Bu günlük ikinci bir askerî bonus eklemez."
- sp_je_learning_from_europe_status_students_cooldown: "Avrupa'ya talebe programı son kohorttan sonra beklemededir. Bu süre dolmadan yeni bir grup gönderilemez."
+ sp_je_learning_from_europe_status_ma_moltke: "Helmuth von Moltke yönetimindeki Prusya askerî yardımı yürürlükte. Antlaşma sona erene kadar askerî program kapasitesi dolu kalır."
+ sp_je_learning_from_europe_status_ma_post_moltke: "Prusyalı eğitmenler mevcut askerî yardım antlaşması kapsamında görev yapıyor. Antlaşma sona erene kadar askerî program kapasitesi dolu kalır."
+ sp_je_learning_from_europe_status_students_cooldown: "Avrupa'ya talebe programı son talebe grubundan sonra beklemededir. Bu süre dolmadan yeni bir grup gönderilemez."
  sp_je_learning_from_europe_status_technical_cooldown: "Teknik heyet programı son görevden sonra beklemededir. Bu süre dolmadan yeni bir heyet başlatılamaz."
  sp_je_learning_from_europe_status_education_cooldown: "Eğitim işbirliği son programdan sonra beklemededir. Bu süre dolmadan yeni bir odak başlatılamaz."
  sp_je_learning_from_europe_status_cap4: "Aktif program yok. Program kapasitesi: 4. Altın ve diplomasi izin verirse yeni bir program başlatılabilir."
@@ -29,7 +29,7 @@
  sp_je_learning_from_europe_status_cap2: "Avrupa'da talebe yoktur. Program kapasitesi: 2. Devralınan askerî yardım bir programı zaten kullanır; Avrupa'ya talebe hâlâ ikinci program olarak başlatılabilir."
 
  sp_i32_btn_send_students: "Avrupa'ya Talebe Gönder"
- sp_i32_btn_send_students_desc: "Fransa, Britanya, Prusya veya Almanya ya da Avusturya'ya bir talebe heyeti gönder. Peşin hazine masrafını güzergâh seçimi belirler. Yurtdışındayken harcırah ve bürokrasi yükü program düzenleyicisinin parçasıdır.\n\n#bold Kapasite:#! varsayılan 2 program; kadrolu üniversite veya on iki ay üst üste bürokrasi fazlasından sonra 3; 4 yalnızca yerleşik yerli ihtisasla.\nBu, muharebe gücü, inşaat veya ham araştırma hızı vermez."
+ sp_i32_btn_send_students_desc: "Fransa, Britanya, Prusya veya Almanya ya da Avusturya'ya bir talebe grubu gönder. İlk masrafı ev sahibi ülke belirler; talebeler yurtdışında kaldığı sürece harcırah ve idari giderler devam eder.\n\n#bold Kapasite:#! Başlangıçta 2 program; kadrolu bir üniversite veya on iki ay kesintisiz bürokrasi fazlasıyla 3; yerli uzmanlık yerleştiğinde 4."
  sp_i32_btn_send_students_effect_tt: "Güzergâh seçimini açar. Seçilen ev sahibi, aşağıda gösterilen hazine masrafını uygular."
 
  sp_i32_btn_cancel_students: "Talebe Programını Durdur"
@@ -37,7 +37,7 @@
  sp_i32_btn_cancel_students_effect_tt: "Avrupa'ya talebe programını durdurmayı onayla"
 
  sp_i32_btn_send_technical: "Teknik Heyet Başlat"
- sp_i32_btn_send_technical_desc: "Demiryolu, madencilik, tersane veya makine için Avrupalı mühendisler davet et. Mekanik aletler, atmosferik motor veya bir üniversite gerekir. Ortaklar en az Tarafsız olmalıdır. Hazine hareket günü öder; harcırah ve bürokrasi izler.\n\nİnşaat verimliliği veya fabrika üretkenliği vermez."
+ sp_i32_btn_send_technical_desc: "Demiryolu, madencilik, tersane veya makine alanlarında danışmanlık yapacak Avrupalı mühendisler davet et. Mekanik aletler, atmosferik motor veya bir üniversitenin yanı sıra en az Tarafsız ilişkilere sahip bir ortak gerekir. İlk ödemenin ardından harcırah ve idari giderler devam eder."
  sp_i32_btn_send_technical_effect_tt: "Uzmanlık ve ortak seçimini açar. Hazine masrafı aşağıda gösterilir."
 
  sp_i32_btn_cancel_technical: "Teknik Heyeti Durdur"
@@ -164,7 +164,7 @@
  sp_i32_edu_overrun_desc: "Eğitim işbirliği beklenenden pahalıya mal olmaktadır."
 
  sp_i32.11.t: "Nereye Gönderelim?"
- sp_i32.11.d: "Tercüme Odası ve nezaretler bir kohort ayırabilir, dördünü birden değil. Fransa idare ve edebiyât; Britanya sanayi ve mühendislik; Prusya erkân-ı harp mektebi; Avusturya daha yakın bir akademi sunar. Hazine hareket günü öder; kaldıkları her hafta harcırah onları izler."
+ sp_i32.11.d: "Tercüme Odası ve nezaretler bir talebe grubu ayırabilir, dördünü birden değil. Fransa idare ve edebiyât; Britanya sanayi ve mühendislik; Prusya erkân-ı harp mektebi; Avusturya daha yakın bir akademi sunar. Hazine hareket günü öder; kaldıkları her hafta harcırah onları izler."
  sp_i32.11.f: "Bir yanda isim listesi, öbür yanda liman listesi. İkisini de birinin imzalaması gerekir."
  sp_i32.11.fra: "Fransa — Eğitim ve İdare"
  sp_i32.11.gbr: "Britanya — Sanayi ve Mühendislik"
@@ -214,7 +214,7 @@
  sp_i32.32.b: "İşbirliği devam etsin"
 
  sp_i32.40.t: "Talebeler Dönüyor"
- sp_i32.40.d: "Kohort vatana döndü. Defterleri, Bab-ı Ali onları işe koymadıkça tozlanır. Devlet hizmeti, mektepler, teknik daireler veya askerî müesseseler — her yol kısa bir kapasite nabzıdır, kalıcı imtiyaz değil."
+ sp_i32.40.d: "Talebeler vatana döndü. Defterleri, Bâb-ı Âli onları işe koymadıkça tozlanır. Devlet hizmeti, mektepler, teknik daireler veya askerî müesseseler — her yol kısa bir kapasite nabzıdır, kalıcı imtiyaz değil."
  sp_i32.40.f: "Başka bir ülkenin nizamını gördüler. Soru, o nizamın bizde nereye oturacağıdır."
  sp_i32.40.state: "Devlet hizmetine yerleştir"
  sp_i32.40.schools: "Mektep ve üniversitelere yerleştir"
@@ -303,7 +303,7 @@ sp_je_learning_from_europe_status_military_fra: "Fransız kara askerî heyeti s�
  sp_i32_mil_overrun_aus: "Askerî Heyet Aşımı"
  sp_i32_mil_overrun_aus_desc: "Avusturya kara askerî heyeti planlanandan pahalıya mal olmaktadır."
 
- sp_i32_opinion_moltke: "Prusya Askerî Yardımı — Baş Müşavir (Helmuth von Moltke). Yalnızca sunum; bu günlük ekstra Moltke düzenleyicisi vermez."
+ sp_i32_opinion_moltke: "Prusya Askerî Yardımı — Başmüşavir Helmuth von Moltke"
 
  sp_i32.12.t: "Hangi Kara Heyeti?"
  sp_i32.12.d: "Askerî program antlaşma yardımından boşalınca Bab-ı Ali Avrupa kurmay heyeti davet edebilir. Prusya veya Almanya en derin kurmay paketini sunar; Fransa, Mısır krizi engellemediğinde akademi ve topçu; Britanya yalnızca başlıca ortak Britanya ise ve bahriye programı yoksa sınırlı gözlem; Avusturya ikincil teşkilat yolu. Hazine hareket günü öder."
@@ -343,7 +343,7 @@ sp_je_learning_from_europe_status_military_fra: "Fransız kara askerî heyeti s�
  sp_je_learning_from_europe_status_naval_cooldown: "Bahriye ıslah programı son görevden sonra beklemededir. Bu süre dolmadan yeni bir heyet başlatılamaz."
 
  sp_i32_btn_send_industrial: "Sanayi Heyeti Başlat"
- sp_i32_btn_send_industrial_desc: "Mekanik aletler araştırıldıktan ve kadrolu üniversite veya birleşik bir imalat tesisi mevcut olduktan sonra Avrupalı sanayi müşavirleri davet et. Ortaklar en az Tarafsız olmalıdır. Hazine hareket günü öder; harcırah ve bürokrasi izler.\n\nFabrika üretkenliği, inşaat, basım veya vergi gücü vermez."
+ sp_i32_btn_send_industrial_desc: "Mekanik aletleri araştırdıktan ve kadrolu bir üniversite veya imalat tesisi kurduktan sonra Avrupalı sanayi müşavirleri davet et. En az Tarafsız ilişkilere sahip bir ortak gerekir. İlk ödemenin ardından harcırah ve idari giderler devam eder."
  sp_i32_btn_send_industrial_effect_tt: "Ortak seçimini açar. Hazine masrafı aşağıda gösterilir."
 
  sp_i32_btn_cancel_industrial: "Sanayi Heyetini Durdur"
@@ -351,7 +351,7 @@ sp_je_learning_from_europe_status_military_fra: "Fransız kara askerî heyeti s�
  sp_i32_btn_cancel_industrial_effect_tt: "Sanayi heyetini durdurmayı onayla"
 
  sp_i32_btn_send_naval: "Bahriye Islahı Başlat"
- sp_i32_btn_send_naval_desc: "Çarklı vapur veya vida firkateyni araştırıldıktan sonra Avrupalı bir bahriye heyeti davet et. Britanya Samimi ilişkiler veya birincil ortak olmayı ister; Fransa Tarafsız ister. Hazine hareket günü öder; harcırah ve bürokrasi izler.\n\nGemi taarruzu veya muharebe gücü vermez. Askerî teknoloji yayılımı yalnızca kara heyeti veya yardım o kanalı doldurmadığında uygulanır."
+ sp_i32_btn_send_naval_desc: "Çarklı vapur veya uskurlu firkateyn teknolojisini araştırdıktan sonra Avrupalı bir bahriye heyeti davet et. Britanya için Samimi ilişkiler veya birincil ortaklık, Fransa için Tarafsız ilişkiler gerekir. İlk ödemenin ardından harcırah ve idari giderler devam eder. Askerî bilgi, yalnızca mevcut bir kara heyeti veya yardım antlaşması aynı görevi üstlenmiyorsa yayılır."
  sp_i32_btn_send_naval_effect_tt: "Ortak seçimini açar. Hazine masrafı aşağıda gösterilir."
 
  sp_i32_btn_cancel_naval: "Bahriye Islahını Durdur"

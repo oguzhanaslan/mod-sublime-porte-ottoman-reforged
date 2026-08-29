@@ -1,9 +1,9 @@
 ﻿l_turkish:
  sp_je_tanzimat_reforms: "Tanzimat Islahatları"
- sp_je_tanzimat_reforms_reason: "Tanzimat programı sürerken Bab-ı Ali bu günlük kaydından adlı ıslahat kararları çıkarabilir. Bunlar isteğe bağlı destekleyici adımlardır. Tanzimat hedeflerini tamamlamaz ve Tanzimat puanı eklemez."
+ sp_je_tanzimat_reforms_reason: "Tanzimat sürerken Bâbıâli yeni ıslahat fermanları çıkarabilir. Bu düzenlemeler ana programı destekler, ancak Tanzimat'ın temel hedeflerini tamamlamaz."
  sp_je_tanzimat_reforms_status_opening: "Henüz adlı bir ıslahat kararı çıkarılmamıştır. Her karar, istikrarlı bir hükûmet ve buna direnecek çıkar gruplarının zayıflamasını gerektirir."
  sp_je_tanzimat_reforms_status_partial: "Bazı adlı ıslahat kararları çıkarılmıştır. Kalan kararlar hâlâ muhafazakâr muhalefetin engelleyemeyeceği siyasi şartlara bağlıdır."
- sp_je_tanzimat_reforms_status_complete: "Bu günlük kaydından çıkarılabilen adlı Tanzimat ıslahat kararları uygulanmış veya başka yoldan çözülmüştür."
+ sp_je_tanzimat_reforms_status_complete: "Çıkarılabilecek bütün Tanzimat ıslahat fermanları yayımlandı veya başka yoldan sonuçlandı."
 
  sp_i24_abolish_cizye_button: "Cizyeyi Kaldır"
  sp_i24_abolish_cizye_button_desc: "Gayrimüslim tebaa üzerindeki adlı başvergisini sona erdir. Dindarlar hükûmetten çıkmalı ve Bab-ı Ali kararı taşıyacak meşruiyete sahip olmalıdır. Muhafazakâr büyük toprak sahipleri de cemaate dayalı mali ayrıcalığın kaybına tepki gösterecektir.\n\n#bold Gereken:#! hükûmet meşruiyeti en az 60 ve Dindarların hükûmette olmaması.\n#bold Sonuç:#! beş yıl din vergisi azalması, Hıristiyan ve Yahudi cemaatlerinde küçük sadık kazancı, Dindar onayı −3, Büyük Toprak Sahipleri onayı −2.\nBu bir Tanzimat hedefini tamamlamaz."
@@ -12,7 +12,7 @@
  sp_i24_reorganize_education_button: "Maarifi Yeniden Teşkilatlandır"
  sp_i24_reorganize_education_button_desc: "Mevcut okulları daha düzenli bir imparatorluk idaresine bağla. Bu, yeni bir eğitim kurumu kurmaz ve kendi başına bir eğitim yasası çıkarmaz; Okulsuzluk dışında bir eğitim yasası zaten yürürlükte olmalıdır.\n\n#bold Gereken:#! hükûmet meşruiyeti en az 60, Dindarların hükûmette olmaması ve Okulsuzluk dışında bir eğitim yasası.\n#bold Sonuç:#! beş yıl küçük eğitim erişimi ve bürokrasi, Dindar onayı −3, Aydınlar onayı +2.\nBu, Tanzimat eğitim hedefini tamamlamaz."
  sp_i24_suppress_slave_markets_button: "Esir Pazarlarını Kapat"
- sp_i24_suppress_slave_markets_button_desc: "Payitaht ve taşra kasabalarındaki açık esir pazarlarını kapat. Bu, köleliği yasa olarak yasaklamaz; Kölelik Yasaklansın isteniyorsa kölelik yasası hâlâ olağan yasama yoluyla değiştirilmelidir.\n\n#bold Gereken:#! hükûmet meşruiyeti en az 60 ve Büyük Toprak Sahiplerinin hükûmette olmaması. Kölelik zaten yasaksa görünmez.\n#bold Sonuç:#! beş yıl azalmış köle ithalatı, küçük prestij kazancı, Büyük Toprak Sahipleri onayı −3, Dindar onayı −2, Aydınlar onayı +1.\nBu bir Tanzimat hedefini tamamlamaz."
+ sp_i24_suppress_slave_markets_button_desc: "Payitaht ve taşra kasabalarındaki açık esir pazarlarını kapat. Bu, köleliği yasa olarak yasaklamaz; Kölelik Yasaklansın isteniyorsa kölelik yasası hâlâ olağan yasama yoluyla değiştirilmelidir.\n\n#bold Gereken:#! hükûmet meşruiyeti en az 60 ve Büyük Toprak Sahiplerinin hükûmette olmaması. Kölelik zaten yasaksa görünmez.\n#bold Sonuç:#! beş yıl azalmış köle ithalatı, küçük prestij kazancı, Büyük Toprak Sahipleri ve Dindar hoşnutsuzluğu, Aydınlar onayı ve köle ticaretine karşı kamuoyu kayması. Bu baskı, ilgili siyasi hareketler zaten varsa işler.\nBu bir Tanzimat hedefini tamamlamaz."
 
  sp_i24_legitimacy_60_tt: "Hükûmet meşruiyeti en az 60"
  sp_i24_devout_out_of_government_tt: "Dindarlar hükûmette değil"
@@ -32,4 +32,4 @@
  sp_i24_education_reorganized_mod: "Maarif Yeniden Teşkilatlandırıldı"
  sp_i24_education_reorganized_mod_desc: "Mevcut okullar daha düzenli bir imparatorluk idaresine bağlanmıştır. Erişim ve bürokrasi hafifçe iyileşir; bedeli Dindarlar öder."
  sp_i24_slave_markets_suppressed_mod: "Esir Pazarları Kapatıldı"
- sp_i24_slave_markets_suppressed_mod_desc: "Açık esir pazarları kararnameyle kapatılmıştır. Köle ithalatı düşer ve prestij hafifçe yükselir; kölelik yasasının kendisi değişmez."
+ sp_i24_slave_markets_suppressed_mod_desc: "Açık esir pazarları kararnameyle kapatılmıştır. Köle ithalatı düşer, prestij hafifçe yükselir ve kamuoyu ticarete karşı kayar; kölelik yasasının kendisi değişmez."

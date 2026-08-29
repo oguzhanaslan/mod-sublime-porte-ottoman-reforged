@@ -1,9 +1,9 @@
 ﻿l_english:
  sp_je_tanzimat_reforms: "Tanzimat Reforms"
- sp_je_tanzimat_reforms_reason: "While the Tanzimat program is underway, the Porte may issue named reform decrees from this journal. These are optional supporting actions. They do not complete Tanzimat objectives and do not add a Tanzimat point."
+ sp_je_tanzimat_reforms_reason: "While the Tanzimat is underway, the Sublime Porte may issue further reform decrees. These measures support the wider programme but do not fulfil its principal objectives."
  sp_je_tanzimat_reforms_status_opening: "No named reform decree has yet been issued. Each decree requires a stable government and the weakening of the interest groups that would resist it."
  sp_je_tanzimat_reforms_status_partial: "Some named reform decrees have been issued. Remaining decrees still require political conditions that the conservative opposition cannot block."
- sp_je_tanzimat_reforms_status_complete: "The named Tanzimat reform decrees available from this journal have been issued or otherwise resolved."
+ sp_je_tanzimat_reforms_status_complete: "Every available Tanzimat reform decree has been issued or otherwise resolved."
 
  sp_i24_abolish_cizye_button: "Abolish the Cizye"
  sp_i24_abolish_cizye_button_desc: "End the named poll tax levied on non-Muslim subjects. The Devout must leave government, and the Porte must command enough legitimacy to carry the decree. Conservative landowners will also resent the loss of a communal fiscal distinction.\n\n#bold Requires:#! government legitimacy of at least 60, and the Devout out of government.\n#bold Result:#! a five-year reduction in religious tax, small loyalist gains among Christian and Jewish communities, Devout approval −3, Landowners approval −2.\nThis does not complete a Tanzimat objective."
@@ -12,7 +12,7 @@
  sp_i24_reorganize_education_button: "Reorganize Imperial Education"
  sp_i24_reorganize_education_button_desc: "Place existing schools under a more regular imperial administration. This does not found a new education institution or enact an education law by itself; a schools law other than No Schools must already be in force.\n\n#bold Requires:#! government legitimacy of at least 60, the Devout out of government, and an education law other than No Schools.\n#bold Result:#! five years of small education access and bureaucracy, Devout approval −3, Intelligentsia approval +2.\nThis does not complete the Tanzimat education objective."
  sp_i24_suppress_slave_markets_button: "Suppress the Slave Markets"
- sp_i24_suppress_slave_markets_button_desc: "Close the public slave markets of the capital and provincial towns. This does not ban slavery as a law; the slavery law must still be changed through ordinary enactment if the Porte wants Slavery Banned.\n\n#bold Requires:#! government legitimacy of at least 60, and the Landowners out of government. Hidden if slavery is already banned.\n#bold Result:#! five years of reduced slave imports, a small prestige gain, Landowners approval −3, Devout approval −2, Intelligentsia approval +1.\nThis does not complete a Tanzimat objective."
+ sp_i24_suppress_slave_markets_button_desc: "Close the public slave markets of the capital and provincial towns. This does not ban slavery as a law; the slavery law must still be changed through ordinary enactment if the Porte wants Slavery Banned.\n\n#bold Requires:#! government legitimacy of at least 60, and the Landowners out of government. Hidden if slavery is already banned.\n#bold Result:#! five years of reduced slave imports, a small prestige gain, Landowners and Devout disapproval, Intelligentsia approval, and a shift in public agitation against the slave trade. That pressure only registers if the relevant political movements already exist.\nThis does not complete a Tanzimat objective."
 
  sp_i24_legitimacy_60_tt: "Government legitimacy is at least 60"
  sp_i24_devout_out_of_government_tt: "The Devout are not in government"
@@ -32,4 +32,4 @@
  sp_i24_education_reorganized_mod: "Imperial Education Reorganized"
  sp_i24_education_reorganized_mod_desc: "Existing schools have been placed under a more regular imperial administration. Access and bureaucracy improve slightly, at the expense of the Devout."
  sp_i24_slave_markets_suppressed_mod: "Slave Markets Suppressed"
- sp_i24_slave_markets_suppressed_mod_desc: "Public slave markets have been closed by decree. Slave imports fall and prestige rises slightly, without changing the slavery law itself."
+ sp_i24_slave_markets_suppressed_mod_desc: "Public slave markets have been closed by decree. Slave imports fall, prestige rises slightly, and the climate of opinion shifts against the trade. The slavery law itself is unchanged."

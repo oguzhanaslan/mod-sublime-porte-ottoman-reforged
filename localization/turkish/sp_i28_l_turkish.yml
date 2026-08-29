@@ -16,9 +16,9 @@
  dyn_c_sp_great_ottoman_empire: "Büyük Osmanlı"
  dyn_c_sp_great_ottoman_empire_adj: "Büyük Osmanlı"
 
- sp_i28.1.t: "İmparatorluk Kimliği Meselesi"
- sp_i28.1.d: "Tanzimat mücadelesinin ardından Bâbıâli’de fraksiyonlar net bir siyaset ister: ortak Osmanlı vatandaşlığı, İslami bir imparatorluk misyonu veya Türk millî yolu."
- sp_i28.1.f: "Risaleler ve saray müzekkereleri aynı üç cevabı dolaştırır. Seçim, devletin ileride hangi büyük emelleri güdebileceğini belirleyecektir."
+ sp_i28.1.t: "Üç Tarz-ı Siyaset"
+ sp_i28.1.d: "Meşrutiyet Meselesi bir sonuca varmıştır. Bâbıâli'de fraksiyonlar artık net bir siyaset ister: ortak Osmanlı vatandaşlığı, İslami bir imparatorluk misyonu veya Türk millî yolu."
+ sp_i28.1.f: "Matbuatta ve saray müzekkerelerinde aynı üç cevap dolaşır. Seçim, devletin ileride hangi büyük emelleri güdebileceğini belirleyecektir."
  sp_i28.1.a: "Osmanlıcılık İmparatorluğa yol göstersin"
  sp_i28.1.a_tt: "Osmanlıcılık seçilir. Turan fetih içeriği açılmaz."
  sp_i28.1.b: "İslamcılık İmparatorluğa yol göstersin"

@@ -22,3 +22,4 @@
  sp_i23.4.d.present:0 "[SCOPE.sCountry('sp_i23_gbr_scope').GetName] Arabistan ve Yemen kıyılarında zaten vardır. Aden, uzak bir kalemden gelen söylenti değil, Hindistan yolundaki bir durak olarak anılır. Kızıldeniz bir İngiliz meselesi olmuştur. Bâb-ı Âli haberdardır; bu, Yemen'i yeniden fethetmeye çağrı değildir."
  sp_i23.4.f:0 "Kızıldeniz kapısındaki bir kömür durağı, henüz haritada görünmese bile bir imparatorluk vakıasıdır."
  sp_i23.4.a:0 "Kabul et"
+ sp_i23_red_sea_station:0 "Kızıldeniz Gözetimi"

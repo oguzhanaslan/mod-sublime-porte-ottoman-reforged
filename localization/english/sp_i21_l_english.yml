@@ -16,4 +16,7 @@
  sp_i21.4.d:0 "The empire has tightened its hold on eastern Anatolia. What historians will call the Kurdistan Eyalet is, in practice, the extension of direct Ottoman provincial administration into Diyarbakır — governors appointed from the Porte, revenue flowing through imperial channels, and local emirates folded into the provincial order. This is central rule, not a grant of self-government."
  sp_i21.4.f:0 "The eyalet bears an old name. The authority is new."
  sp_i21.4.a:0 "Acknowledge direct provincial rule"
+ sp_i21_eastern_local_authority:0 "Eastern Local Authority"
+ sp_i21_porte_administrative_reach:0 "Porte Administrative Reach"
+ sp_i21_direct_provincial_admin:0 "Direct Provincial Administration"
  sp_i21_local_accommodation:0 "Local Accommodation"

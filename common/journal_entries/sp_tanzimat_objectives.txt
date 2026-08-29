@@ -133,6 +133,12 @@ REPLACE:je_sick_man_economy = {
 
 	immediate = {
 		set_variable = { name = sp_tanzimat_sound_finance_months value = 0 }
+		# Freeze the +25% GDP increment at entry. Live `gdp multiply = 0.25` re-scales
+		# the target with current GDP, so the bar sits at about -25% forever.
+		set_variable = {
+			name = sp_tanzimat_economy_gdp_baseline
+			value = root.gdp
+		}
 	}
 
 	complete = {
@@ -152,6 +158,15 @@ REPLACE:je_sick_man_economy = {
 		effect = {
 			if = {
 				limit = {
+					NOT = { has_variable = sp_tanzimat_economy_gdp_baseline }
+				}
+				set_variable = {
+					name = sp_tanzimat_economy_gdp_baseline
+					value = root.gdp
+				}
+			}
+			if = {
+				limit = {
 					in_default = no
 					net_fixed_income > 0
 				}
@@ -169,8 +184,11 @@ REPLACE:je_sick_man_economy = {
 		change_variable = { name = sick_man_var add = 1 }
 	}
 
-	current_value = { value = gdp }
-	goal_add_value = { value = gdp multiply = 0.25 }
+	current_value = { value = root.gdp }
+	goal_add_value = {
+		value = root.var:sp_tanzimat_economy_gdp_baseline
+		multiply = 0.25
+	}
 
 	invalid = {
 		custom_tooltip = {
@@ -190,7 +208,6 @@ REPLACE:je_sick_man_education = {
 	group = je_group_tanzimat
 
 	complete = {
-		NOT = { has_law_or_variant = law_type:law_no_schools }
 		institution_investment_level = {
 			institution = institution_schools
 			value >= 2
@@ -317,7 +334,6 @@ REPLACE:je_sick_man_army = {
 
 	complete = {
 		has_technology_researched = napoleonic_warfare
-		NOT = { has_law_or_variant = law_type:law_peasant_levies }
 		any_scope_building = {
 			filter = { is_building_type = building_barrack }
 			NOR = {
@@ -365,8 +381,6 @@ REPLACE:je_sick_man_bureaucracy = {
 	}
 
 	complete = {
-		NOT = { has_law_or_variant = law_type:law_hereditary_bureaucrats }
-		NOT = { has_law_or_variant = law_type:law_land_based_taxation }
 		custom_tooltip = {
 			text = sp_tanzimat_funded_administration_12_months_tt
 			var:sp_tanzimat_funded_administration_months >= 12

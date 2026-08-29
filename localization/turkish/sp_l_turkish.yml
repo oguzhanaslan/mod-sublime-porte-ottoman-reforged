@@ -9,6 +9,7 @@
  sickman_syria_egypt: "Aşağı Mısır, Orta Mısır, Yukarı Mısır ve Sina üzerindeki hak iddiaları yenilendi. Mısır takip hedefinin çözülmesi ilave bir Tanzimat hedef puanı kazandırmaz."
  je_sick_man_economy: "Tanzimat: İktisadi Reform"
  je_sick_man_economy_reason: "Daha güçlü bir Osmanlı ekonomisi sürekli büyüme, sağlam kamu maliyesi ve ilhak edilmiş vilayetlerle millî pazar arasında güvenilir erişim gerektirir."
+ je_sick_man_economy_goal: "[concept_gdp] değerini @money![JournalEntry.GetTotalGoalValue|K]#! seviyesine yükselt"
  je_sick_man_education_goal: "Okuryazarlığı bu hedef başladığındaki seviyesinden 10 yüzde puan artır."
  je_sick_man_separatism_goal: "Ayrılık tehlikesini 10 yıl boyunca düşük tut veya eşitlik ya da zorlayıcı idare yoluyla bunu 5 yıl boyunca sürdür. İçişleri, ayrılık ilerlemesini doğrudan yavaşlatır. Kolluk ise dolaylı bir nizam aracıdır: kargaşanın etkilerini sınırlar; Adanmış ve Askerîleştirilmiş Kolluk, siyasi hareketlerin ürettiği radikalleri azaltır. Hızlandırılmış rota, yeterli Hükûmet İdaresiyle desteklendiğinde iki kurumdan birini kabul eder; mekanik etkileri aynı değildir."
  sp_ottoman_balkan_cohesion_guidance: "Balkan Kalkınması"

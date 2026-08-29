@@ -1,16 +1,20 @@
 ﻿# I-18 additive pulses. Do not edit I-10B / I-14 / I-16 on_actions.
+# Relative pacing: monthly list fires at most one event per pulse, in order.
+# .1 debate → (365d) .2 Young Ottomans → next month .4 Kanun if franchise,
+# or (365d) .6 palace path if still no franchise.
 
-on_yearly_pulse_country = {
+on_monthly_pulse_country = {
 	on_actions = {
-		sp_i18_yearly_events
+		sp_i18_monthly_events
 	}
 }
 
-sp_i18_yearly_events = {
+sp_i18_monthly_events = {
 	events = {
 		sp_i18.1
 		sp_i18.2
 		sp_i18.4
+		sp_i18.6
 	}
 }
 

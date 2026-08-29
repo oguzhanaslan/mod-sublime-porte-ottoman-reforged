@@ -1,6 +1,6 @@
 ﻿namespace = sp_i28
 
-# 1 — Post-Tanzimat imperial identity choice (one-shot).
+# 1 — Three Policies choice after the Constitutional Question (one-shot).
 sp_i28.1 = {
 	type = country_event
 	placement = root

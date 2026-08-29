@@ -35,13 +35,23 @@ sp_i18_has_constitutional_government = {
 	}
 }
 
-# Phase I window: 1852 through 1864. Date alone is not enough.
+# Phase I: after Tanzimat resolves. Calendar years do not gate this beat.
 sp_i18_phase_i_eligible = {
 	c:TUR ?= this
 	has_law = law_type:law_monarchy
-	game_date >= 1852.1.1
-	game_date < 1865.1.1
+	has_variable = sick_man_complete
 	sp_i18_has_domestic_tanzimat_reform = yes
 	sp_i18_has_minimum_political_modernization = yes
 	NOT = { has_variable = sp_i18_debate_fired }
+}
+
+# Authoritative I-18 close. Same OR as sp_je_post_tanzimat_era complete:
+# Kanun-i Esasi, Hamidian restoration, or palace path (no franchise after YO wait).
+# No calendar floor.
+sp_i18_arc_complete = {
+	OR = {
+		has_variable = sp_i18_kanun_i_esasi_fired
+		has_variable = sp_i18_hamidian_fired
+		has_variable = sp_i18_palace_path_fired
+	}
 }

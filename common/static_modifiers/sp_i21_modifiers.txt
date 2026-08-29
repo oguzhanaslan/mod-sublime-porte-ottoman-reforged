@@ -1,4 +1,28 @@
-﻿# I-21 timed IG-approval flavor only. Accommodate path; 365 days (very_short_modifier_time).
+﻿# I-21 eastern situation and Bedirhan flavor.
+# Local authority / Porte reach: state situation on Diyarbakır and Mosul until .4 or 1850 timeout.
+# Direct admin: five years (normal_modifier_time). Accommodate: 365 days (very_short_modifier_time).
+# Magnitudes stay below I-12 exemption and I-24 reform; not a starting country buff.
+
+# Notables collect revenue and raise levies in their own names; they also keep local order.
+sp_i21_eastern_local_authority = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	state_tax_collection_mult = -0.08
+	state_conscription_rate_mult = -0.10
+	state_turmoil_effects_mult = -0.10
+}
+
+# Tanzimat registers and provincial councils begin to recover imperial collection.
+sp_i21_porte_administrative_reach = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_tax_collection_mult = 0.04
+}
+
+# Direct provincial administration after the eastern arc closes.
+sp_i21_direct_provincial_admin = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_tax_collection_mult = 0.05
+	state_conscription_rate_mult = 0.05
+}
 
 sp_i21_local_accommodation = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds

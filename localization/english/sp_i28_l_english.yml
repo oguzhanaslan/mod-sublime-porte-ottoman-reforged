@@ -16,9 +16,9 @@
  dyn_c_sp_great_ottoman_empire: "Great Ottoman Empire"
  dyn_c_sp_great_ottoman_empire_adj: "Great Ottoman"
 
- sp_i28.1.t: "The Question of Imperial Identity"
- sp_i28.1.d: "After the Tanzimat struggle, factions at the Porte press for a clear political course: a common Ottoman citizenship, an Islamic imperial mission, or a Turkish national path."
- sp_i28.1.f: "Pamphlets and palace memoranda circulate the same three answers. The choice will shape which grand ambitions the state can later pursue."
+ sp_i28.1.t: "Three Policies"
+ sp_i28.1.d: "The Constitutional Question has run its course. Factions at the Porte now press for a clear political course: a common Ottoman citizenship, an Islamic imperial mission, or a Turkish national path."
+ sp_i28.1.f: "The same three answers circulate in the press and in palace memoranda. The choice will shape which grand ambitions the state can later pursue."
  sp_i28.1.a: "Ottomanism will guide the Empire"
  sp_i28.1.a_tt: "Selects Ottomanism. No Turan conquest content."
  sp_i28.1.b: "Islamism will guide the Empire"

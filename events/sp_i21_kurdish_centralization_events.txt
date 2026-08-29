@@ -3,7 +3,8 @@
 # I-21 Kurdish provincial centralization. Four one-shot TUR events, 1836–1850.
 # No JE, no character spawn, no forced revolt, no Kurdish subject.
 
-# 1 — Eastern local authority, 1836+. Informational only.
+# 1 — Eastern local authority, first monthly pulse on/after 1836.3.1.
+# Monthly so it does not share TUR's autumn yearly pulse with I-23.1/.2.
 sp_i21.1 = {
 	type = country_event
 	placement = scope:sp_i21_eastern_state_scope
@@ -19,6 +20,7 @@ sp_i21.1 = {
 
 	trigger = {
 		sp_i21_arc_active = yes
+		game_date >= 1836.3.1
 		NOT = { has_variable = sp_i21_local_authority_fired }
 		any_scope_state = {
 			sp_i21_is_eastern_core_state = yes
@@ -38,13 +40,22 @@ sp_i21.1 = {
 	option = {
 		name = sp_i21.1.a
 		default_option = yes
+		every_scope_state = {
+			limit = {
+				sp_i21_is_eastern_core_state = yes
+				is_incorporated = yes
+			}
+			add_modifier = {
+				name = sp_i21_eastern_local_authority
+			}
+		}
 		ai_chance = {
 			base = 1
 		}
 	}
 }
 
-# 2 — The reach of the Porte, 1840+. Acknowledgement only.
+# 2 — The reach of the Porte, 1840+. Partial offset of local-authority tax leakage.
 sp_i21.2 = {
 	type = country_event
 	placement = root
@@ -73,6 +84,15 @@ sp_i21.2 = {
 	option = {
 		name = sp_i21.2.a
 		default_option = yes
+		every_scope_state = {
+			limit = {
+				sp_i21_is_eastern_core_state = yes
+				is_incorporated = yes
+			}
+			add_modifier = {
+				name = sp_i21_porte_administrative_reach
+			}
+		}
 		ai_chance = {
 			base = 1
 		}
@@ -177,7 +197,7 @@ sp_i21.3 = {
 	}
 }
 
-# 4 — Direct provincial administration, 1847+. Historical acknowledgement; arc closure only.
+# 4 — Direct provincial administration, 1847+. Clears the eastern situation and grants a short provincial recovery.
 sp_i21.4 = {
 	type = country_event
 	placement = scope:sp_i21_diyarbakir_scope
@@ -229,6 +249,28 @@ sp_i21.4 = {
 	option = {
 		name = sp_i21.4.a
 		default_option = yes
+		every_scope_state = {
+			limit = {
+				has_modifier = sp_i21_eastern_local_authority
+			}
+			remove_modifier = sp_i21_eastern_local_authority
+		}
+		every_scope_state = {
+			limit = {
+				has_modifier = sp_i21_porte_administrative_reach
+			}
+			remove_modifier = sp_i21_porte_administrative_reach
+		}
+		every_scope_state = {
+			limit = {
+				sp_i21_is_eastern_core_state = yes
+				is_incorporated = yes
+			}
+			add_modifier = {
+				name = sp_i21_direct_provincial_admin
+				days = normal_modifier_time
+			}
+		}
 		ai_chance = {
 			base = 1
 		}
