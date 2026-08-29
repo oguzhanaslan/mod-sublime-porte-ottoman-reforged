@@ -13,8 +13,6 @@
  sp_i28_stage_complete_prestige: "Turanian Progress"
  sp_i28_stage_complete_prestige_desc: "A stage of the Turanian Ideal has been secured."
 
- dyn_c_sp_great_ottoman_empire: "Great Ottoman Empire"
- dyn_c_sp_great_ottoman_empire_adj: "Great Ottoman"
 
  sp_i28.1.t: "Three Policies"
  sp_i28.1.d: "The Constitutional Question has run its course. Factions at the Porte now press for a clear political course: a common Ottoman citizenship, an Islamic imperial mission, or a Turkish national path."
@@ -53,4 +51,4 @@
  sp_i28.20.a: "Remain the Ottoman Empire"
  sp_i28.20.a_tt: "Keep the Ottoman Empire name. Gain Unifier of Turan."
  sp_i28.20.b: "Proclaim the Great Ottoman Empire"
- sp_i28.20.b_tt: "Rename to Great Ottoman Empire (tag TUR). Optional map color. No Turan country name; custom flag deferred."
+ sp_i28.20.b_tt: "Rename to Great Ottoman Empire. Map color and flag change. The country is not named Turan."

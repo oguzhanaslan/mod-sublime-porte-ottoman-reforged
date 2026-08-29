@@ -90,8 +90,11 @@ REPLACE:TUR = { # Turkey
 		allow_overlord_canton = yes
 		coa_with_overlord_canton = TUR_subject
 		priority = 2000
+		# Vanilla KOR / ALD / BUL: flag variable checks sit on scope:actor.
 		trigger = {
-			has_variable = sp_great_ottoman_empire_proclaimed
+			scope:actor ?= {
+				has_variable = sp_great_ottoman_empire_proclaimed
+			}
 		}
 	}
 }

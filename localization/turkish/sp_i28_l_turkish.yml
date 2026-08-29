@@ -13,8 +13,6 @@
  sp_i28_stage_complete_prestige: "Turan İlerlemesi"
  sp_i28_stage_complete_prestige_desc: "Turan Ülküsü’nün bir aşaması güvenceye alındı."
 
- dyn_c_sp_great_ottoman_empire: "Büyük Osmanlı"
- dyn_c_sp_great_ottoman_empire_adj: "Büyük Osmanlı"
 
  sp_i28.1.t: "Üç Tarz-ı Siyaset"
  sp_i28.1.d: "Meşrutiyet Meselesi bir sonuca varmıştır. Bâbıâli'de fraksiyonlar artık net bir siyaset ister: ortak Osmanlı vatandaşlığı, İslami bir imparatorluk misyonu veya Türk millî yolu."
@@ -53,4 +51,4 @@
  sp_i28.20.a: "Osmanlı İmparatorluğu kalsın"
  sp_i28.20.a_tt: "Osmanlı İmparatorluğu adı korunur. Turan’ı Birleştiren kazanılır."
  sp_i28.20.b: "Büyük Osmanlı'yı İlan Et"
- sp_i28.20.b_tt: "Ad Büyük Osmanlı olur (etiket TUR). İsteğe bağlı harita rengi. Ülke adı Turan olmaz; özel bayrak ertelenir."
+ sp_i28.20.b_tt: "Ad Büyük Osmanlı olur. Harita rengi ve bayrak değişir. Ülke adı Turan olmaz."
