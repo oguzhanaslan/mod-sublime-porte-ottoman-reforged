@@ -1,0 +1,66 @@
+﻿# I-33 yearly dispatch. At most one event per pulse. Cooldown is set in event
+# immediate, not here: trigger_event may be queued.
+
+sp_fi_set_cooldown = {
+	set_variable = {
+		name = sp_foreign_interference_recent
+		days = 1825
+	}
+}
+
+sp_fi_fire_best_eligible = {
+	if = {
+		limit = {
+			sp_fi_can_fire_armenian = yes
+		}
+		trigger_event = {
+			id = sp_fi.3
+			popup = yes
+		}
+	}
+	else_if = {
+		limit = {
+			sp_fi_can_fire_protectorate = yes
+		}
+		trigger_event = {
+			id = sp_fi.2
+			popup = yes
+		}
+	}
+	else_if = {
+		limit = {
+			sp_fi_can_fire_note = yes
+		}
+		trigger_event = {
+			id = sp_fi.1
+			popup = yes
+		}
+	}
+}
+
+sp_fi_dispatch_yearly = {
+	if = {
+		limit = {
+			sp_fi_any_event_eligible = yes
+		}
+		if = {
+			limit = {
+				sp_fi_pressure_severe = yes
+			}
+			random_list = {
+				82 = { }
+				18 = {
+					sp_fi_fire_best_eligible = yes
+				}
+			}
+		}
+		else = {
+			random_list = {
+				90 = { }
+				10 = {
+					sp_fi_fire_best_eligible = yes
+				}
+			}
+		}
+	}
+}

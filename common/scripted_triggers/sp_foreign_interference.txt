@@ -1,0 +1,223 @@
+﻿# I-33 foreign interference / Şark Meselesi. Russia-only this pass.
+# Independent of Tanzimat, I-22, I-16, Campaign Tree. No daily pulse.
+
+sp_fi_is_tur = {
+	c:TUR ?= this
+}
+
+sp_fi_rus_actor_exists = {
+	exists = c:RUS
+	c:RUS ?= {
+		country_rank >= rank_value:major_power
+	}
+}
+
+# Alliance/DP only. Do not treat guarantee_independence as a block:
+# I-16 Hünkâr İskelesi is a RUS→TUR guarantee while rivalry remains.
+sp_fi_allied_with_rus = {
+	OR = {
+		any_scope_treaty = {
+			binds = c:RUS
+			any_scope_article = {
+				has_type = alliance
+			}
+		}
+		any_scope_treaty = {
+			binds = c:RUS
+			any_scope_article = {
+				has_type = defensive_pact
+			}
+		}
+	}
+}
+
+sp_fi_channel_open = {
+	sp_fi_is_tur = yes
+	sp_fi_rus_actor_exists = yes
+	NOT = { has_variable = sp_foreign_interference_recent }
+	NOT = { has_war_with = c:RUS }
+	NOT = { sp_fi_allied_with_rus = yes }
+}
+
+sp_fi_has_orthodox_pops = {
+	any_scope_pop = {
+		religion = rel:orthodox
+	}
+}
+
+sp_fi_has_armenian_pops = {
+	any_scope_pop = {
+		culture = cu:armenian
+	}
+}
+
+# Inclusive laws plus quiet Orthodox conditions close the Orthodox opening.
+sp_fi_orthodox_well_governed = {
+	OR = {
+		has_law_or_variant = law_type:law_cultural_exclusion
+		has_law_or_variant = law_type:law_multicultural
+		has_law_or_variant = law_type:law_freedom_of_conscience
+		has_law_or_variant = law_type:law_total_separation
+	}
+	NOT = {
+		any_scope_pop = {
+			religion = rel:orthodox
+			pop_acceptance <= acceptance_status_2
+		}
+	}
+	NOT = {
+		any_scope_state = {
+			is_incorporated = yes
+			turmoil >= 0.10
+			any_scope_pop = {
+				religion = rel:orthodox
+			}
+		}
+	}
+}
+
+# Inclusive citizenship plus quiet Armenian conditions close the eastern opening.
+sp_fi_armenian_well_governed = {
+	OR = {
+		has_law_or_variant = law_type:law_cultural_exclusion
+		has_law_or_variant = law_type:law_multicultural
+	}
+	NOT = {
+		any_political_movement = {
+			is_political_movement_type = movement_cultural_minority
+			culture ?= cu:armenian
+		}
+	}
+	cultural_acceptance_base = {
+		target = cu:armenian
+		value > acceptance_status_2
+	}
+	NOT = {
+		any_scope_state = {
+			is_incorporated = yes
+			turmoil >= 0.10
+			any_scope_pop = {
+				culture = cu:armenian
+			}
+		}
+	}
+}
+
+# Internal weakness Russia can exploit. Relations are a diplomatic opening, not a substitute.
+sp_fi_orthodox_opening = {
+	sp_fi_has_orthodox_pops = yes
+	NOT = { sp_fi_orthodox_well_governed = yes }
+	OR = {
+		any_scope_pop = {
+			religion = rel:orthodox
+			pop_acceptance <= acceptance_status_2
+		}
+		any_scope_state = {
+			is_incorporated = yes
+			turmoil >= 0.15
+			any_scope_pop = {
+				religion = rel:orthodox
+			}
+		}
+		c:RUS ?= {
+			relations:root <= relations_threshold:poor
+		}
+		highest_secession_progress >= 0.15
+	}
+}
+
+sp_fi_armenian_opening = {
+	sp_fi_has_armenian_pops = yes
+	NOT = { sp_fi_armenian_well_governed = yes }
+	OR = {
+		cultural_acceptance_base = {
+			target = cu:armenian
+			value <= acceptance_status_2
+		}
+		any_political_movement = {
+			is_political_movement_type = movement_cultural_minority
+			culture ?= cu:armenian
+		}
+		any_scope_state = {
+			is_incorporated = yes
+			turmoil >= 0.15
+			any_scope_pop = {
+				culture = cu:armenian
+			}
+		}
+		highest_secession_progress >= 0.15
+		c:RUS ?= {
+			relations:root <= relations_threshold:poor
+		}
+	}
+}
+
+# Cordial+ Russia has less reason to press. Amicable+ closes the channel.
+sp_fi_rus_relations_block_pressure = {
+	c:RUS ?= {
+		relations:root >= relations_threshold:amicable
+	}
+}
+
+sp_fi_can_fire_note = {
+	sp_fi_channel_open = yes
+	NOT = { sp_fi_rus_relations_block_pressure = yes }
+	sp_fi_orthodox_opening = yes
+}
+
+# Mid-century stronger demand. Not a Crimean War starter.
+sp_fi_can_fire_protectorate = {
+	sp_fi_channel_open = yes
+	game_date >= 1848.1.1
+	c:RUS ?= {
+		relations:root <= relations_threshold:poor
+	}
+	sp_fi_orthodox_opening = yes
+}
+
+# Late/eastern pressure. Truce after a Russo-Ottoman war can open it from 1856.
+# Does not read I-22 or Tanzimat flags.
+sp_fi_can_fire_armenian = {
+	sp_fi_channel_open = yes
+	NOT = { sp_fi_rus_relations_block_pressure = yes }
+	OR = {
+		game_date >= 1870.1.1
+		AND = {
+			game_date >= 1856.1.1
+			has_truce_with = c:RUS
+		}
+	}
+	sp_fi_armenian_opening = yes
+}
+
+sp_fi_any_event_eligible = {
+	OR = {
+		sp_fi_can_fire_note = yes
+		sp_fi_can_fire_protectorate = yes
+		sp_fi_can_fire_armenian = yes
+	}
+}
+
+# Stronger yearly chance only. Does not add extra events.
+sp_fi_pressure_severe = {
+	OR = {
+		c:RUS ?= {
+			relations:root <= relations_threshold:hostile
+		}
+		highest_secession_progress >= 0.25
+		any_scope_state = {
+			is_incorporated = yes
+			turmoil >= 0.25
+			any_scope_pop = {
+				OR = {
+					religion = rel:orthodox
+					culture = cu:armenian
+				}
+			}
+		}
+		cultural_acceptance_base = {
+			target = cu:armenian
+			value <= acceptance_status_1
+		}
+	}
+}

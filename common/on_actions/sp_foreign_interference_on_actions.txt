@@ -1,0 +1,14 @@
+﻿# I-33 additive pulse. Do not edit other sp_* on_action files.
+# No events = {} list: dispatch fires at most one interference event.
+
+on_yearly_pulse_country = {
+	on_actions = {
+		sp_fi_yearly_events
+	}
+}
+
+sp_fi_yearly_events = {
+	effect = {
+		sp_fi_dispatch_yearly = yes
+	}
+}

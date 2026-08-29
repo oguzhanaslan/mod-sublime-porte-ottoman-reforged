@@ -1,0 +1,6 @@
+﻿# I-33 reform/negotiate treasury cost. Tooltips must use gold_reserves /
+# add_treasury — never hardcode the figure in loc.
+
+sp_fi_reform_cost = {
+	value = 8000
+}
