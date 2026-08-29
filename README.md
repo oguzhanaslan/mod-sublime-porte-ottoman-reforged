@@ -35,7 +35,7 @@ Strength still has to be earned through reform, investment, politics, diplomacy,
 - **Everyday Porte.** Schools, telegraph, press, advisers, railways, petitions, ports, and translation — quiet years still feel Ottoman.
 - **People.** Âlî, Fuad, Ahmed Cevdet, and Nâmık Kemal; later Fevzi Çakmak, Mustafa Kemal, and Kâzım Karabekir. Enver stays vanilla Voice of the People content.
 - **Şirket-i Hayriye** on the Bosphorus; a one-shot **Bank-ı Osmanî-i Şahane** concession (cheaper credit vs keeping the treasury in Ottoman hands).
-- **Music.** Five Ottoman mood tracks in the music player while you play as the empire.
+- **Music.** Five original mood tracks composed for this mod, in the music player while you play as the empire.
 
 English and Turkish are both complete.
 
@@ -86,6 +86,6 @@ Vanilla’yı temel alan bir Osmanlı kampanyası: 1836 daha sağlam, Tanzimat y
 
 **Osmanlıcılık** eşitlik ve anayasal imparatorluk (fetih ağacı yok). **İslamcılık** hilafet, Arabistan, Nil–Mağrip ve Halife’nin çağrısı; Büyük Hilafet Osmanlı etiketi üzerinde kalır. **Türkçülük / Turan Ülküsü** kademeli hak iddiası; Osmanlı kalabilir veya Büyük Osmanlı ilan edilebilir — ülke asla Turan adını almaz.
 
-Mısır bunalımı, Hünkâr İskelesi, Baltalimanı, Rusya’nın Şark Meselesi baskısı, Rumeli, Bedirhan, Ermeni Meselesi, Trablus–Tunus–Aden, muhacir iskânı, Topkapı–Dolmabahçe, gündelik Bâb-ı Âli olayları, Şirket-i Hayriye, Bank-ı Osmanî ve Osmanlı müzik parçaları da kampanyanın parçasıdır.
+Mısır bunalımı, Hünkâr İskelesi, Baltalimanı, Rusya’nın Şark Meselesi baskısı, Rumeli, Bedirhan, Ermeni Meselesi, Trablus–Tunus–Aden, muhacir iskânı, Topkapı–Dolmabahçe, gündelik Bâb-ı Âli olayları, Şirket-i Hayriye, Bank-ı Osmanî ve bu mod için bestelenmiş beş Osmanlı ezgisi de kampanyanın parçasıdır.
 
 Yükleme sırası, kayıt ve uyumluluk notları yukarıdaki İngilizce bölümle aynıdır. Yeni kampanya şarttır.
