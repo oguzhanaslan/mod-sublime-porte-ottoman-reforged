@@ -25,3 +25,6 @@
  sp_je_post_tanzimat_era_status_kanun_i_esasi: "The Kanun-i Esasi has named a constitutional order within the monarchy."
  sp_je_post_tanzimat_era_status_palace: "Without a franchise, the Porte has closed the Constitutional Question under palace prerogative."
  sp_je_post_tanzimat_era_status_hamidian: "Hamidian restoration has entered the political conversation after prior constitutional experiments."
+ sp_je_post_tanzimat_era_complete_kanun: "Kanun-i Esasi has been proclaimed"
+ sp_je_post_tanzimat_era_complete_hamidian: "Hamidian restoration has occurred"
+ sp_je_post_tanzimat_era_complete_palace: "The palace path has closed the question without a franchise"

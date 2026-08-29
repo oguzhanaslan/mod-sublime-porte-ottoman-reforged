@@ -257,7 +257,7 @@
  sp_i32.52.d_overrun: "The programme is costing more than intended. Extra expenses will weigh on the treasury for a time."
  sp_i32.52.f: "A syllabus can be amended. A faction cannot."
  sp_i32.52.a: "We will manage it"
-sp_je_learning_from_europe_status_military_fra: "A French land military mission is underway. Staff and academy learning improve while the stipend and bureaucracy weigh on the state."
+ sp_je_learning_from_europe_status_military_fra: "A French land military mission is underway. Staff and academy learning improve while the stipend and bureaucracy weigh on the state."
  sp_je_learning_from_europe_status_military_gbr: "A limited British staff-observation mission is underway. Qualifications improve while the stipend and bureaucracy weigh on the state. No military technology spread is granted."
  sp_je_learning_from_europe_status_military_ger: "A German land military mission is underway. Staff reform advances while the stipend and bureaucracy weigh on the state."
  sp_je_learning_from_europe_status_military_pru: "A Prussian land military mission is underway. Staff reform advances while the stipend and bureaucracy weigh on the state."

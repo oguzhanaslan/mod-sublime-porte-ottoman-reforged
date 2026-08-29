@@ -25,3 +25,6 @@
  sp_je_post_tanzimat_era_status_kanun_i_esasi: "Kanun-i Esasi, monarşi içinde anayasal bir düzeni adlandırmıştır."
  sp_je_post_tanzimat_era_status_palace: "Oy hakkı olmadan Bâb-ı Âli, Meşrutiyet Meselesini saltanat hakkı altında kapatmıştır."
  sp_je_post_tanzimat_era_status_hamidian: "Önceki anayasal denemelerden sonra Hamidian restorasyon siyasi gündeme girmiştir."
+ sp_je_post_tanzimat_era_complete_kanun: "Kanun-i Esasi ilan edildi"
+ sp_je_post_tanzimat_era_complete_hamidian: "Hamidiye restorasyonu gerçekleşti"
+ sp_je_post_tanzimat_era_complete_palace: "Saray yolu, oy hakkı olmadan meseleyi kapattı"

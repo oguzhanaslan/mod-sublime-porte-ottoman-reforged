@@ -173,7 +173,29 @@ sp_je_post_tanzimat_era = {
 	}
 
 	complete = {
-		sp_i18_arc_complete = yes
+		# Same OR as sp_i18_arc_complete. Named custom_tooltip + hidden_trigger
+		# (vanilla 00_cuba_scripted_buttons) so GetCompletionTooltip is not
+		# TRIGGER_HAS_VARIABLE ("Ülke söz konusu etkene sahip").
+		OR = {
+			custom_tooltip = {
+				text = sp_je_post_tanzimat_era_complete_kanun
+				hidden_trigger = {
+					has_variable = sp_i18_kanun_i_esasi_fired
+				}
+			}
+			custom_tooltip = {
+				text = sp_je_post_tanzimat_era_complete_hamidian
+				hidden_trigger = {
+					has_variable = sp_i18_hamidian_fired
+				}
+			}
+			custom_tooltip = {
+				text = sp_je_post_tanzimat_era_complete_palace
+				hidden_trigger = {
+					has_variable = sp_i18_palace_path_fired
+				}
+			}
+		}
 	}
 
 	invalid = {

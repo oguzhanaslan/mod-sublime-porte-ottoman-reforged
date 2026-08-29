@@ -200,7 +200,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_i18_arc_complete_tt" }
 								}
 							}
@@ -212,7 +212,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_identity_chosen').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_identity_chosen').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_identity_chosen_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_identity_chosen" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_identity_chosen_tt" }
 								}
 							}
@@ -224,19 +224,19 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_ottomanism_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_path_ottomanism" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_ottomanism_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_islamism_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_path_islamism" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_islamism_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_turkism_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_path_turkism" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_turkism_tt" }
 								}
 							}
@@ -309,7 +309,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_i18_arc_complete_tt" }
 								}
 							}
@@ -321,7 +321,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_ottomanism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_ottomanism_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_path_ottomanism" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_ottomanism_tt" }
 								}
 							}
@@ -739,7 +739,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_i18_arc_complete_tt" }
 								}
 							}
@@ -751,7 +751,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_islamism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_islamism_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_path_islamism" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_islamism_tt" }
 								}
 							}
@@ -1195,19 +1195,19 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_turkism_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_path_turkism" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_turkism_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_pan_nationalism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_pan_nationalism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_pan_nationalism_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_pan_nationalism" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_pan_nationalism_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
 								}
 							}
@@ -1409,7 +1409,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_post_tanzimat_gate').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_post_tanzimat_gate" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_post_tanzimat_gate_tt" }
 								}
 							}
@@ -1534,7 +1534,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_i18_arc_complete').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_i18_arc_complete" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_i18_arc_complete_tt" }
 								}
 							}
@@ -1546,7 +1546,7 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_req_turkism').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_req_path_turkism_tt" }
+									blockoverride "req_label" { text = "sp_ct_req_path_turkism" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_req_path_turkism_tt" }
 								}
 							}
@@ -1632,25 +1632,25 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_azerbaijan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_azerbaijan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_azerbaijan_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_azerbaijan" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_azerbaijan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_elizavetpol').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_elizavetpol').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_elizavetpol_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_elizavetpol" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_elizavetpol_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_tabriz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_tabriz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_tabriz_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_tabriz" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_tabriz_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_urmia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_urmia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_urmia_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_urmia" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_urmia_tt" }
 								}
 							}
@@ -1744,67 +1744,67 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_irakajemi').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_irakajemi').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_irakajemi_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_irakajemi" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_irakajemi_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_isfahan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_isfahan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_isfahan_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_isfahan" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_isfahan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_fars').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_fars').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_fars_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_fars" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_fars_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_kerman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_kerman').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_kerman_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_kerman" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_kerman_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_khorasan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_khorasan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_khorasan_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_khorasan" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_khorasan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_mazandaran').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_mazandaran').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_mazandaran_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_mazandaran" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_mazandaran_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_semnan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_semnan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_semnan_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_semnan" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_semnan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_laristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_laristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_laristan_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_laristan" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_laristan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_luristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_luristan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_luristan_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_luristan" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_luristan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_persian_kurdistan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_persian_kurdistan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_persian_kurdistan_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_persian_kurdistan" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_persian_kurdistan_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_khuzestan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_khuzestan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_khuzestan_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_khuzestan" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_khuzestan_tt" }
 								}
 							}
@@ -1911,25 +1911,25 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_turkmenia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_turkmenia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_turkmenia_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_turkmenia" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_turkmenia_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_merz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_merz').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_merz_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_merz" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_merz_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_khiva').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_khiva').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_khiva_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_khiva" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_khiva_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_uzbekia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_uzbekia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_uzbekia_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_uzbekia" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_uzbekia_tt" }
 								}
 							}
@@ -2023,61 +2023,61 @@ types sp_ct_inspector_types {
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_fergana').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_fergana').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_fergana_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_fergana" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_fergana_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_kirghizia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_kirghizia').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_kirghizia_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_kirghizia" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_kirghizia_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_syrdarya').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_syrdarya').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_syrdarya_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_syrdarya" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_syrdarya_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_aktobe').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_aktobe').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_aktobe_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_aktobe" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_aktobe_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_akmolinsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_akmolinsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_akmolinsk_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_akmolinsk" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_akmolinsk_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_uralsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_uralsk').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_uralsk_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_uralsk" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_uralsk_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_semireche').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_semireche').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_semireche_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_semireche" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_semireche_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_jetisy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_jetisy').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_jetisy_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_jetisy" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_jetisy_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_dzungaria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_dzungaria').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_dzungaria_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_dzungaria" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_dzungaria_tt" }
 								}
 								sp_ct_insp_req_row = {
 									blockoverride "req_met_icon" { visible = "[GetScriptedGui('sp_ct_vis_ctrl_tianshan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 									blockoverride "req_fail_icon" { visible = "[Not(GetScriptedGui('sp_ct_vis_ctrl_tianshan').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
-									blockoverride "req_label" { text = "sp_ct_terr_tianshan_tt" }
+									blockoverride "req_label" { text = "sp_ct_terr_tianshan" }
 									blockoverride "req_tooltip" { tooltip = "sp_ct_terr_tianshan_tt" }
 								}
 							}

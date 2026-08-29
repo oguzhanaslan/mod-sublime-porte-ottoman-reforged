@@ -104,35 +104,48 @@ types sp_ct_shared_types {
 		}
 	}
 
-	# Requirement / territory row — journal complete-line chrome (entry_bg).
-	# Prefer ExecuteTooltip loc as req_label (native $checkbox_ticked$ + live names).
-	# Icon blocks kept so older callers' blockoverrides stay valid; they occupy no space.
+	# Requirement / territory row — icon communicates met/fail; short loc as label.
+	# ExecuteTooltip loc belongs on req_tooltip (hover only). Vanilla India railway
+	# uses ExecuteTooltip inside JE custom_tooltip / GetCompletionTooltip, not as
+	# a generic textbox body (that dumps the tooltip tree at Y=0 with no hitbox).
+	# Callers override req_met_icon / req_fail_icon visibility and req_label / req_tooltip.
 	type sp_ct_insp_req_row = widget {
+		size = { 100% 28 }
 		layoutpolicy_horizontal = expanding
-		layoutpolicy_vertical = preferred
-		minimumsize = { 460 -1 }
+		block "req_tooltip" {}
 
+		# Shared icon slot (met and fail occupy the same bounds; never both visible).
 		widget = {
-			size = { 0 0 }
+			size = { 20 28 }
+			parentanchor = left|vcenter
+			position = { 8 0 }
 			block "req_met_icon" { visible = no }
+			icon = {
+				size = { 16 16 }
+				parentanchor = center
+				texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
+			}
 		}
 		widget = {
-			size = { 0 0 }
+			size = { 20 28 }
+			parentanchor = left|vcenter
+			position = { 8 0 }
 			block "req_fail_icon" { visible = no }
+			icon = {
+				size = { 16 16 }
+				parentanchor = center
+				texture = "gfx/interface/icons/generic_icons/red_cross.dds"
+			}
 		}
 		textbox = {
 			block "req_label" { text = "sp_ct_node_placeholder" }
-			block "req_tooltip" {}
+			parentanchor = left|vcenter
+			position = { 36 0 }
 			autoresize = yes
-			multiline = yes
-			min_width = 460
-			max_width = 460
-			using = default_list_position
-			align = nobaseline
-			margin = { 15 8 }
-			background = {
-				using = entry_bg
-			}
+			align = left|vcenter|nobaseline
+			using = fontsize_small
+			maximumsize = { 420 -1 }
+			elide = right
 		}
 	}
 
@@ -470,8 +483,65 @@ types sp_ct_shared_types {
 		}
 	}
 
-	# Find JE by type name in active, then inactive groups (vanilla journal.gui both tabs).
-	type sp_ct_insp_je_typed_status = flowcontainer {
+	# Bind one JournalEntryType item to a JournalEntry, then filter like Sick Man:
+	# visible sits on the same flowcontainer as datacontext (JournalEntry.GetName).
+	# A sibling `block { visible }` does not hide neighbouring children — that dumped
+	# every active JE's GetCompletionTooltip / Open-Unpin into the inspector.
+	type sp_ct_insp_je_bind_post_tanzimat_status = flowcontainer {
+		direction = vertical
+		spacing = 6
+		datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+		visible = "[And(JournalEntry.IsValid, EqualTo_string(JournalEntry.GetName, Localize('sp_je_post_tanzimat_era')))]"
+		sp_ct_insp_je_status_lines = {}
+	}
+	type sp_ct_insp_je_bind_post_tanzimat_actions = flowcontainer {
+		direction = vertical
+		datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+		visible = "[And(JournalEntry.IsValid, EqualTo_string(JournalEntry.GetName, Localize('sp_je_post_tanzimat_era')))]"
+		sp_ct_insp_je_action_buttons = {}
+	}
+	type sp_ct_insp_je_bind_turan_status = flowcontainer {
+		direction = vertical
+		spacing = 6
+		datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+		visible = "[And(JournalEntry.IsValid, EqualTo_string(JournalEntry.GetName, Localize('sp_je_turanian_ideal')))]"
+		sp_ct_insp_je_status_lines = {}
+	}
+	type sp_ct_insp_je_bind_turan_actions = flowcontainer {
+		direction = vertical
+		datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+		visible = "[And(JournalEntry.IsValid, EqualTo_string(JournalEntry.GetName, Localize('sp_je_turanian_ideal')))]"
+		sp_ct_insp_je_action_buttons = {}
+	}
+	type sp_ct_insp_je_bind_ottomanism_status = flowcontainer {
+		direction = vertical
+		spacing = 6
+		datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+		visible = "[And(JournalEntry.IsValid, EqualTo_string(JournalEntry.GetName, Localize('sp_je_ottomanism')))]"
+		sp_ct_insp_je_status_lines = {}
+	}
+	type sp_ct_insp_je_bind_ottomanism_actions = flowcontainer {
+		direction = vertical
+		datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+		visible = "[And(JournalEntry.IsValid, EqualTo_string(JournalEntry.GetName, Localize('sp_je_ottomanism')))]"
+		sp_ct_insp_je_action_buttons = {}
+	}
+	type sp_ct_insp_je_bind_islamism_status = flowcontainer {
+		direction = vertical
+		spacing = 6
+		datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+		visible = "[And(JournalEntry.IsValid, EqualTo_string(JournalEntry.GetName, Localize('sp_je_pan_islamic_unity')))]"
+		sp_ct_insp_je_status_lines = {}
+	}
+	type sp_ct_insp_je_bind_islamism_actions = flowcontainer {
+		direction = vertical
+		datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+		visible = "[And(JournalEntry.IsValid, EqualTo_string(JournalEntry.GetName, Localize('sp_je_pan_islamic_unity')))]"
+		sp_ct_insp_je_action_buttons = {}
+	}
+
+	# Vanilla journal.gui: groups -> types. Item is a bind type (not a sibling visibility block).
+	type sp_ct_insp_je_post_tanzimat_status = flowcontainer {
 		direction = vertical
 		flowcontainer = {
 			direction = vertical
@@ -481,13 +551,7 @@ types sp_ct_shared_types {
 					direction = vertical
 					datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
 					item = {
-						flowcontainer = {
-							direction = vertical
-							spacing = 6
-							block "je_type_visible" { visible = no }
-							datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
-							sp_ct_insp_je_status_lines = {}
-						}
+						sp_ct_insp_je_bind_post_tanzimat_status = {}
 					}
 				}
 			}
@@ -500,20 +564,13 @@ types sp_ct_shared_types {
 					direction = vertical
 					datamodel = "[JournalEntryGroup.GetInactiveJournalEntryTypes(GetPlayer.Self)]"
 					item = {
-						flowcontainer = {
-							direction = vertical
-							spacing = 6
-							block "je_type_visible" { visible = no }
-							datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
-							sp_ct_insp_je_status_lines = {}
-						}
+						sp_ct_insp_je_bind_post_tanzimat_status = {}
 					}
 				}
 			}
 		}
 	}
-
-	type sp_ct_insp_je_typed_actions = flowcontainer {
+	type sp_ct_insp_je_post_tanzimat_actions = flowcontainer {
 		direction = vertical
 		datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
 		item = {
@@ -521,56 +578,135 @@ types sp_ct_shared_types {
 				direction = vertical
 				datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
 				item = {
-					flowcontainer = {
-						direction = vertical
-						block "je_type_visible" { visible = no }
-						datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
-						sp_ct_insp_je_action_buttons = {}
+					sp_ct_insp_je_bind_post_tanzimat_actions = {}
+				}
+			}
+		}
+	}
+	type sp_ct_insp_je_turan_status = flowcontainer {
+		direction = vertical
+		flowcontainer = {
+			direction = vertical
+			datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+			item = {
+				flowcontainer = {
+					direction = vertical
+					datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+					item = {
+						sp_ct_insp_je_bind_turan_status = {}
+					}
+				}
+			}
+		}
+		flowcontainer = {
+			direction = vertical
+			datamodel = "[AccessPlayer.GetGroupsForInActiveJournalEntries]"
+			item = {
+				flowcontainer = {
+					direction = vertical
+					datamodel = "[JournalEntryGroup.GetInactiveJournalEntryTypes(GetPlayer.Self)]"
+					item = {
+						sp_ct_insp_je_bind_turan_status = {}
 					}
 				}
 			}
 		}
 	}
-
-	# Thin JE bindings — only override the type-name visibility filter.
-	type sp_ct_insp_je_turan_status = sp_ct_insp_je_typed_status {
-		blockoverride "je_type_visible" {
-			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
+	type sp_ct_insp_je_turan_actions = flowcontainer {
+		direction = vertical
+		datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+		item = {
+			flowcontainer = {
+				direction = vertical
+				datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+				item = {
+					sp_ct_insp_je_bind_turan_actions = {}
+				}
+			}
 		}
 	}
-	type sp_ct_insp_je_turan_actions = sp_ct_insp_je_typed_actions {
-		blockoverride "je_type_visible" {
-			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_turanian_ideal'))]"
+	type sp_ct_insp_je_ottomanism_status = flowcontainer {
+		direction = vertical
+		flowcontainer = {
+			direction = vertical
+			datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+			item = {
+				flowcontainer = {
+					direction = vertical
+					datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+					item = {
+						sp_ct_insp_je_bind_ottomanism_status = {}
+					}
+				}
+			}
+		}
+		flowcontainer = {
+			direction = vertical
+			datamodel = "[AccessPlayer.GetGroupsForInActiveJournalEntries]"
+			item = {
+				flowcontainer = {
+					direction = vertical
+					datamodel = "[JournalEntryGroup.GetInactiveJournalEntryTypes(GetPlayer.Self)]"
+					item = {
+						sp_ct_insp_je_bind_ottomanism_status = {}
+					}
+				}
+			}
 		}
 	}
-	type sp_ct_insp_je_post_tanzimat_status = sp_ct_insp_je_typed_status {
-		blockoverride "je_type_visible" {
-			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_post_tanzimat_era'))]"
+	type sp_ct_insp_je_ottomanism_actions = flowcontainer {
+		direction = vertical
+		datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+		item = {
+			flowcontainer = {
+				direction = vertical
+				datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+				item = {
+					sp_ct_insp_je_bind_ottomanism_actions = {}
+				}
+			}
 		}
 	}
-	type sp_ct_insp_je_post_tanzimat_actions = sp_ct_insp_je_typed_actions {
-		blockoverride "je_type_visible" {
-			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_post_tanzimat_era'))]"
+	type sp_ct_insp_je_islamism_status = flowcontainer {
+		direction = vertical
+		flowcontainer = {
+			direction = vertical
+			datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+			item = {
+				flowcontainer = {
+					direction = vertical
+					datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+					item = {
+						sp_ct_insp_je_bind_islamism_status = {}
+					}
+				}
+			}
+		}
+		flowcontainer = {
+			direction = vertical
+			datamodel = "[AccessPlayer.GetGroupsForInActiveJournalEntries]"
+			item = {
+				flowcontainer = {
+					direction = vertical
+					datamodel = "[JournalEntryGroup.GetInactiveJournalEntryTypes(GetPlayer.Self)]"
+					item = {
+						sp_ct_insp_je_bind_islamism_status = {}
+					}
+				}
+			}
 		}
 	}
-	type sp_ct_insp_je_ottomanism_status = sp_ct_insp_je_typed_status {
-		blockoverride "je_type_visible" {
-			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_ottomanism'))]"
-		}
-	}
-	type sp_ct_insp_je_ottomanism_actions = sp_ct_insp_je_typed_actions {
-		blockoverride "je_type_visible" {
-			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_ottomanism'))]"
-		}
-	}
-	type sp_ct_insp_je_islamism_status = sp_ct_insp_je_typed_status {
-		blockoverride "je_type_visible" {
-			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_pan_islamic_unity'))]"
-		}
-	}
-	type sp_ct_insp_je_islamism_actions = sp_ct_insp_je_typed_actions {
-		blockoverride "je_type_visible" {
-			visible = "[EqualTo_string(JournalEntryType.GetName, Localize('sp_je_pan_islamic_unity'))]"
+	type sp_ct_insp_je_islamism_actions = flowcontainer {
+		direction = vertical
+		datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+		item = {
+			flowcontainer = {
+				direction = vertical
+				datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+				item = {
+					sp_ct_insp_je_bind_islamism_actions = {}
+				}
+			}
 		}
 	}
 
