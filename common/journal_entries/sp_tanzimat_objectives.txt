@@ -133,8 +133,8 @@ REPLACE:je_sick_man_economy = {
 
 	immediate = {
 		set_variable = { name = sp_tanzimat_sound_finance_months value = 0 }
-		# Freeze the +25% GDP increment at entry. Live `gdp multiply = 0.25` re-scales
-		# the target with current GDP, so the bar sits at about -25% forever.
+		# Freeze the GDP increment at entry. Live `gdp multiply = N` re-scales
+		# the target with current GDP, so the bar never catches up.
 		set_variable = {
 			name = sp_tanzimat_economy_gdp_baseline
 			value = root.gdp
@@ -187,7 +187,10 @@ REPLACE:je_sick_man_economy = {
 	current_value = { value = root.gdp }
 	goal_add_value = {
 		value = root.var:sp_tanzimat_economy_gdp_baseline
-		multiply = 0.25
+		# +10% from frozen entry GDP. Was +25% (R19); runtime 2026-08-29 showed
+		# ~£10.1M → £12.7M beside 12-month finance and 60% market access.
+		# Same 0.20→0.10 cut as education literacy vs vanilla.
+		multiply = 0.10
 	}
 
 	invalid = {
