@@ -17,6 +17,16 @@ Desktop.ini
 AGENTS.md
 docs/
 
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Accidental Explorer copies
+*Kopya*
+* - Copy.*
+* - Copy (*).*
+
 # Temporary files and caches
 *.tmp
 *.temp

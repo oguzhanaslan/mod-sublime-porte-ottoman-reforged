@@ -9,11 +9,13 @@ from collections import deque
 
 from PIL import Image
 
-ASSETS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets")
-MOD = r"C:\Users\user\Documents\Paradox Interactive\Victoria 3\mod\Sublime Porte Ottoman Reforged"
+MOD = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ASSETS = os.path.join(MOD, "assets")
 
 
 def find(substr: str) -> str:
+    if not os.path.isdir(ASSETS):
+        raise FileNotFoundError(f"source assets directory not found: {ASSETS}")
     substr = substr.lower()
     for name in os.listdir(ASSETS):
         if substr in name.lower():

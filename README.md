@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="image/sp_keyart_titled.png" alt="Sublime Porte: Ottoman Reforged" width="480">
+</p>
+
 # Sublime Porte: Ottoman Reforged
 
 A vanilla-first Ottoman flavor and rework for **Victoria 3**. The 1836 setup and the nineteenth-century campaign are more historically grounded, without turning the empire into a total overhaul or an overpowered faction.
@@ -49,3 +53,7 @@ Some later events can appear on an already-running Ottoman campaign. Mid-crisis 
 ## Languages
 
 English is the source language. Turkish is fully supported and kept in key parity with English.
+
+## License
+
+See [LICENSE](LICENSE). Original Sublime Porte work may be reused for non-commercial Victoria 3 modding with attribution. Victoria 3 remains Paradox Interactive’s.
