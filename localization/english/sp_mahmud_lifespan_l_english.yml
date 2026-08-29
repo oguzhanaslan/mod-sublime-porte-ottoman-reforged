@@ -1,0 +1,5 @@
+﻿l_english:
+ sp_mahmud.1.t:0 "Death of Mahmud II"
+ sp_mahmud.1.d:0 "[SCOPE.sCharacter('sp_mahmud_scope').GetFullName] has died after a long reign. The court proclaims [SCOPE.sCharacter('sp_mecid_scope').GetFullName] as sultan. The succession follows the existing line; no new campaign is opened today."
+ sp_mahmud.1.f:0 "The cannon of cülûs will speak before the week is out."
+ sp_mahmud.1.a:0 "The sultan is dead. Long live the sultan."

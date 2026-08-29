@@ -1,0 +1,5 @@
+﻿l_turkish:
+ sp_mahmud.1.t:0 "II. Mahmud'un Vefatı"
+ sp_mahmud.1.d:0 "[SCOPE.sCharacter('sp_mahmud_scope').GetFullName] uzun bir saltanattan sonra vefat etti. Saray, padişah olarak [SCOPE.sCharacter('sp_mecid_scope').GetFullName] ilan eder. Veraset mevcut hatta kalır; bugün yeni bir sefer açılmaz."
+ sp_mahmud.1.f:0 "Cülûs topu hafta dolmadan konuşacaktır."
+ sp_mahmud.1.a:0 "Padişah öldü. Padişah çok yaşa."

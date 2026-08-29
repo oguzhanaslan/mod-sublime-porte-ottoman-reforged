@@ -1,0 +1,28 @@
+﻿# Additive Mahmud II lifespan. Do not edit other sp_* on_action files.
+# Monthly so 1849.1.1 is not delayed until TUR's autumn yearly pulse.
+
+on_monthly_pulse_country = {
+	on_actions = {
+		sp_mahmud_monthly
+	}
+}
+
+sp_mahmud_monthly = {
+	effect = {
+		if = {
+			limit = {
+				c:TUR ?= this
+				ruler ?= {
+					has_template = tur_mahmut_osmanoglu_template
+					has_trait = tuberculosis
+				}
+			}
+			ruler = {
+				remove_trait = tuberculosis
+			}
+		}
+	}
+	events = {
+		sp_mahmud.1
+	}
+}

@@ -1,0 +1,19 @@
+﻿# Gameplay: strip vanilla tuberculosis so Mahmud II is not rolled dead at 1836 spawn.
+# Historical death remains 1839.7.1; scripted end of reign is 1849.1.1 (player request).
+
+REPLACE:tur_mahmut_osmanoglu_template = {
+	# Mahmud II of the Ottoman Empire
+	first_name = Mahmut
+	last_name = Osmanoglu
+	historical = yes
+	culture = primary_culture
+	ruler = yes
+	birth_date = 1785.7.20
+	home_region = STATE_EASTERN_THRACE
+	dna = dna_mahmud_02
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+	traits = {
+		ambitious
+	}
+}
