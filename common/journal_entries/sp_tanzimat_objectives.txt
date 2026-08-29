@@ -80,7 +80,12 @@ REPLACE:je_sick_man_egypt = {
 
 	complete = {
 		OR = {
-			has_variable = sp_egyptian_crisis_historical_settlement
+			custom_tooltip = {
+				text = sp_je_sick_man_egypt_complete_settlement
+				hidden_trigger = {
+					has_variable = sp_egyptian_crisis_historical_settlement
+				}
+			}
 			AND = {
 				exists = c:EGY
 				c:EGY ?= {

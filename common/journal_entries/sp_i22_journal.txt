@@ -68,9 +68,31 @@ sp_je_armenian_question = {
 
 	complete = {
 		OR = {
-			sp_i22_integration_path = yes
 			AND = {
-				has_variable = sp_i22_berlin_flavor_fired
+				OR = {
+					has_law_or_variant = law_type:law_cultural_exclusion
+					has_law_or_variant = law_type:law_multicultural
+				}
+				NOT = {
+					any_political_movement = {
+						is_political_movement_type = movement_cultural_minority
+						culture ?= cu:armenian
+					}
+				}
+				highest_secession_progress < 0.15
+				any_scope_state = {
+					state_region = s:STATE_ERZURUM
+					is_incorporated = yes
+					turmoil < 0.10
+				}
+			}
+			AND = {
+				custom_tooltip = {
+					text = sp_je_armenian_question_complete_berlin
+					hidden_trigger = {
+						has_variable = sp_i22_berlin_flavor_fired
+					}
+				}
 				game_date >= 1879.7.1
 			}
 			game_date >= 1890.1.1

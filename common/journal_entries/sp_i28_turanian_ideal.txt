@@ -70,8 +70,60 @@ sp_je_turanian_ideal = {
 
 	progressbar = yes
 
+	# Display = current-stage lands (native owns/subject). Pulse still uses
+	# sp_i28_stage_*_complete. hidden_trigger keeps the JE from completing
+	# when a mid-path stage is fully owned (vanilla GetCompletionTooltip).
 	complete = {
-		has_variable = sp_turan_ideal_complete
+		trigger_if = {
+			limit = { var:sp_turan_stage = 1 }
+			country_or_subject_owns_entire_state_region = STATE_AZERBAIJAN
+			country_or_subject_owns_entire_state_region = STATE_ELIZAVETPOL
+			country_or_subject_owns_entire_state_region = STATE_TABRIZ
+			country_or_subject_owns_entire_state_region = STATE_URMIA
+		}
+		trigger_if = {
+			limit = { var:sp_turan_stage = 2 }
+			calc_true_if = {
+				amount >= 9
+				country_or_subject_owns_entire_state_region = STATE_IRAKAJEMI
+				country_or_subject_owns_entire_state_region = STATE_ISFAHAN
+				country_or_subject_owns_entire_state_region = STATE_FARS
+				country_or_subject_owns_entire_state_region = STATE_KERMAN
+				country_or_subject_owns_entire_state_region = STATE_KHORASAN
+				country_or_subject_owns_entire_state_region = STATE_MAZANDARAN
+				country_or_subject_owns_entire_state_region = STATE_SEMNAN
+				country_or_subject_owns_entire_state_region = STATE_LARISTAN
+				country_or_subject_owns_entire_state_region = STATE_LURISTAN
+				country_or_subject_owns_entire_state_region = STATE_PERSIAN_KURDISTAN
+				country_or_subject_owns_entire_state_region = STATE_KHUZESTAN
+			}
+		}
+		trigger_if = {
+			limit = { var:sp_turan_stage = 3 }
+			country_or_subject_owns_entire_state_region = STATE_TURKMENIA
+			country_or_subject_owns_entire_state_region = STATE_MERZ
+			country_or_subject_owns_entire_state_region = STATE_KHIVA
+			country_or_subject_owns_entire_state_region = STATE_UZBEKIA
+		}
+		trigger_if = {
+			limit = { var:sp_turan_stage = 4 }
+			calc_true_if = {
+				amount >= 8
+				country_or_subject_owns_entire_state_region = STATE_FERGANA
+				country_or_subject_owns_entire_state_region = STATE_KIRGHIZIA
+				country_or_subject_owns_entire_state_region = STATE_SYRDARYA
+				country_or_subject_owns_entire_state_region = STATE_AKTOBE
+				country_or_subject_owns_entire_state_region = STATE_AKMOLINSK
+				country_or_subject_owns_entire_state_region = STATE_URALSK
+				country_or_subject_owns_entire_state_region = STATE_SEMIRECHE
+				country_or_subject_owns_entire_state_region = STATE_JETISY
+				country_or_subject_owns_entire_state_region = STATE_DZUNGARIA
+				country_or_subject_owns_entire_state_region = STATE_TIANSHAN
+			}
+		}
+		hidden_trigger = {
+			has_variable = sp_turan_ideal_complete
+		}
 	}
 
 	on_complete = {

@@ -5,6 +5,7 @@
  sp_je_hunkar_iskelesi_reason: "Rusya, Hünkâr İskelesi Antlaşması uyarınca şu anda Osmanlı bağımsızlığını garanti etmektedir. Bu düzen diplomatik, geçici ve Boğazlar dengesine bağlıdır — kalıcı bir ittifak değildir."
  sp_je_hunkar_iskelesi_status_active: "Rus garantisi yürürlüktedir. Tarihsel olarak bağlayıcı süresi 1841'de sona ermeye işaret ediyordu."
  sp_je_hunkar_iskelesi_status_lapse_window: "Antlaşmanın bağlayıcı süresi tarihsel sonuna ulaştı. Sona ermesi otomatik değil, diplomasi meselesidir."
+ sp_je_hunkar_iskelesi_complete_lapse: "Hünkâr İskelesi garantisi sonuçlanmıştır"
 
  sp_je_eastern_provinces: "Doğu Vilayetleri"
  sp_je_eastern_provinces_reason: "Diyarbakır ve Musul'da devlet otoritesi hâlâ yerel aracılara dayanıyor. Doğrudan idareyi genişletmek için merkezî hükûmetin köklü taşra güçlerini aşması gerekecek."
@@ -15,6 +16,7 @@
  sp_je_eastern_provinces_status_bedirhan_accommodated: "Bâb-ı Âli, açık çatışma yerine Bedirhan Bey ile uzlaşma yolunu tercih etmiştir."
  sp_je_eastern_provinces_status_bedirhan_enforced: "Bâb-ı Âli, Bedirhan Bey'in yerel gücüne karşı doğrudan otorite uygulamıştır."
  sp_je_eastern_provinces_status_direct_admin: "Doğu vilayetlerinin özünde doğrudan vilayet idaresi tesis edilmektedir."
+ sp_je_eastern_provinces_complete_arc: "Doğu vilayetleri meselesi kapanmıştır"
 
  sp_je_post_tanzimat_era: "Meşrutiyet Meselesi"
  sp_je_post_tanzimat_era_reason: "Tanzimat'ın iç ıslahatından sonra siyasi tartışmanın odağında temsil, anayasal düzen ve hükümdarın yetkileri vardır. Islahatçılar ile saray, iktidarın nasıl paylaşılacağına karar vermeli."

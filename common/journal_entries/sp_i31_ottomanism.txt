@@ -69,8 +69,100 @@ sp_je_ottomanism = {
 
 	progressbar = yes
 
+	# Display = current-stage laws/rank/literacy (native). Pulse still uses
+	# sp_i31_ottomanism_stage_*_complete. hidden_trigger blocks mid-path auto-complete.
 	complete = {
-		has_variable = sp_ottomanism_ideal_complete
+		trigger_if = {
+			limit = { var:sp_ottomanism_stage = 1 }
+			OR = {
+				has_law_or_variant = law_type:law_racial_segregation
+				has_law_or_variant = law_type:law_cultural_exclusion
+				has_law_or_variant = law_type:law_multicultural
+			}
+			NOR = {
+				has_law_or_variant = law_type:law_ethnostate
+				has_law_or_variant = law_type:law_national_supremacy
+				has_law_or_variant = law_type:law_subjecthood
+			}
+			OR = {
+				has_law_or_variant = law_type:law_freedom_of_conscience
+				has_law_or_variant = law_type:law_total_separation
+			}
+		}
+		trigger_if = {
+			limit = { var:sp_ottomanism_stage = 2 }
+			has_law = law_type:law_monarchy
+			OR = {
+				has_law_or_variant = law_type:law_landed_voting
+				has_law_or_variant = law_type:law_wealth_voting
+				has_law_or_variant = law_type:law_census_voting
+				has_law_or_variant = law_type:law_universal_suffrage
+			}
+			OR = {
+				has_law_or_variant = law_type:law_right_of_assembly
+				has_law_or_variant = law_type:law_protected_speech
+			}
+			government_legitimacy >= 50
+		}
+		trigger_if = {
+			limit = { var:sp_ottomanism_stage = 3 }
+			OR = {
+				has_law_or_variant = law_type:law_racial_segregation
+				has_law_or_variant = law_type:law_cultural_exclusion
+				has_law_or_variant = law_type:law_multicultural
+			}
+			NOR = {
+				has_law_or_variant = law_type:law_ethnostate
+				has_law_or_variant = law_type:law_national_supremacy
+				has_law_or_variant = law_type:law_subjecthood
+			}
+			highest_secession_progress < 0.20
+			NOT = {
+				any_scope_state = {
+					is_incorporated = yes
+					turmoil >= 0.25
+				}
+			}
+		}
+		trigger_if = {
+			limit = { var:sp_ottomanism_stage = 4 }
+			has_law = law_type:law_monarchy
+			OR = {
+				has_law_or_variant = law_type:law_wealth_voting
+				has_law_or_variant = law_type:law_census_voting
+				has_law_or_variant = law_type:law_universal_suffrage
+			}
+			OR = {
+				has_law_or_variant = law_type:law_racial_segregation
+				has_law_or_variant = law_type:law_cultural_exclusion
+				has_law_or_variant = law_type:law_multicultural
+			}
+			NOR = {
+				has_law_or_variant = law_type:law_ethnostate
+				has_law_or_variant = law_type:law_national_supremacy
+				has_law_or_variant = law_type:law_subjecthood
+			}
+			country_rank >= rank_value:great_power
+			literacy_rate >= 0.35
+			OR = {
+				institution_investment_level = {
+					institution = institution_schools
+					value >= 2
+				}
+				institution_investment_level = {
+					institution = institution_police
+					value >= 2
+				}
+				institution_investment_level = {
+					institution = institution_home_affairs
+					value >= 2
+				}
+			}
+			government_legitimacy >= 60
+		}
+		hidden_trigger = {
+			has_variable = sp_ottomanism_ideal_complete
+		}
 	}
 
 	on_complete = {

@@ -69,8 +69,78 @@ sp_je_pan_islamic_unity = {
 
 	progressbar = yes
 
+	# Display = current-stage lands/laws/alignment (native). Pulse still uses
+	# sp_i31_islamism_stage_*_complete. hidden_trigger blocks mid-path auto-complete.
 	complete = {
-		has_variable = sp_great_caliphate_complete
+		trigger_if = {
+			limit = { var:sp_islamism_stage = 1 }
+			country_or_subject_owns_entire_state_region = STATE_EASTERN_THRACE
+			country_or_subject_owns_entire_state_region = STATE_HEDJAZ
+			has_law = law_type:law_monarchy
+			OR = {
+				has_law = law_type:law_millet_system
+				has_law = law_type:law_people_of_the_book
+				has_law = law_type:law_state_religion
+			}
+			government_legitimacy >= 50
+		}
+		trigger_if = {
+			limit = { var:sp_islamism_stage = 2 }
+			country_or_subject_owns_entire_state_region = STATE_HEDJAZ
+			country_or_subject_owns_entire_state_region = STATE_NEJD
+			country_or_subject_owns_entire_state_region = STATE_HAIL
+			country_or_subject_owns_entire_state_region = STATE_YEMEN
+		}
+		trigger_if = {
+			limit = { var:sp_islamism_stage = 3 }
+			country_or_subject_owns_entire_state_region = STATE_LOWER_EGYPT
+			country_or_subject_owns_entire_state_region = STATE_UPPER_EGYPT
+			country_or_subject_owns_entire_state_region = STATE_SINAI
+			calc_true_if = {
+				amount >= 2
+				country_or_subject_owns_entire_state_region = STATE_DONGOLA
+				country_or_subject_owns_entire_state_region = STATE_KORDOFAN
+				country_or_subject_owns_entire_state_region = STATE_BLUE_NILE
+			}
+			country_or_subject_owns_entire_state_region = STATE_TRIPOLI
+			country_or_subject_owns_entire_state_region = STATE_TUNISIA
+		}
+		trigger_if = {
+			limit = { var:sp_islamism_stage = 4 }
+			any_country = {
+				count >= 8
+				NOT = { THIS = ROOT }
+				OR = {
+					country_has_state_religion = rel:sunni
+					country_has_state_religion = rel:shiite
+					country_has_state_religion = rel:ibadi
+				}
+				OR = {
+					is_subject_of = ROOT
+					any_scope_treaty = {
+						binds = ROOT
+						any_scope_article = {
+							has_type = alliance
+						}
+					}
+					any_scope_treaty = {
+						binds = ROOT
+						any_scope_article = {
+							has_type = defensive_pact
+						}
+					}
+					AND = {
+						is_in_same_power_bloc = ROOT
+						ROOT = {
+							is_power_bloc_leader = yes
+						}
+					}
+				}
+			}
+		}
+		hidden_trigger = {
+			has_variable = sp_great_caliphate_complete
+		}
 	}
 
 	on_complete = {

@@ -29,8 +29,23 @@ sp_je_hunkar_iskelesi = {
 
 	complete = {
 		OR = {
-			has_variable = sp_i16_hunkar_lapse_resolved
-			NOT = { sp_i16_hunkar_guarantee_active = yes }
+			custom_tooltip = {
+				text = sp_je_hunkar_iskelesi_complete_lapse
+				hidden_trigger = {
+					has_variable = sp_i16_hunkar_lapse_resolved
+				}
+			}
+			NOT = {
+				exists = c:RUS
+				any_scope_treaty = {
+					binds = c:RUS
+					any_scope_article = {
+						has_type = guarantee_independence
+						source_country = c:RUS
+						target_country = c:TUR
+					}
+				}
+			}
 			game_date >= 1842.1.1
 		}
 	}
@@ -99,7 +114,12 @@ sp_je_eastern_provinces = {
 	}
 
 	complete = {
-		has_variable = sp_i21_arc_closed
+		custom_tooltip = {
+			text = sp_je_eastern_provinces_complete_arc
+			hidden_trigger = {
+				has_variable = sp_i21_arc_closed
+			}
+		}
 	}
 
 	invalid = {

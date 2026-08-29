@@ -5,6 +5,7 @@
  sp_je_hunkar_iskelesi_reason: "Russia presently guarantees Ottoman independence under the Treaty of Hünkâr İskelesi. The arrangement is diplomatic, temporary, and tied to the balance of power on the Bosporus — not a permanent alliance."
  sp_je_hunkar_iskelesi_status_active: "The Russian guarantee remains in force. Historically, its binding term pointed toward a lapse in 1841."
  sp_je_hunkar_iskelesi_status_lapse_window: "The treaty's binding period has reached its historical end. Its lapse will be a matter of diplomacy, not automatic expiry."
+ sp_je_hunkar_iskelesi_complete_lapse: "The Hünkâr İskelesi guarantee has been resolved"
 
  sp_je_eastern_provinces: "The Eastern Provinces"
  sp_je_eastern_provinces_reason: "In Diyarbakır and Mosul, imperial authority still depends on local intermediaries. Extending direct rule will require the central government to overcome entrenched provincial power."
@@ -15,6 +16,7 @@
  sp_je_eastern_provinces_status_bedirhan_accommodated: "The Porte has sought accommodation with Bedirhan Bey rather than open confrontation."
  sp_je_eastern_provinces_status_bedirhan_enforced: "The Porte has pressed direct authority against Bedirhan Bey's local power."
  sp_je_eastern_provinces_status_direct_admin: "Direct provincial administration is being asserted in the eastern core."
+ sp_je_eastern_provinces_complete_arc: "The eastern provincial question has been closed"
 
  sp_je_post_tanzimat_era: "The Constitutional Question"
  sp_je_post_tanzimat_era_reason: "After the domestic reforms of the Tanzimat, political debate turns toward representation, constitutional order, and the limits of royal prerogative. Reformers and the palace must now decide how power will be shared."

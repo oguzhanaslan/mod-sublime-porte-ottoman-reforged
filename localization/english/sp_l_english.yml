@@ -2,6 +2,7 @@
  sp_mod_name: "Sublime Porte: Ottoman Reforged"
  sp_mod_description: "A historical Ottoman flavor and rework for Victoria 3: a more grounded 1836 setup and a deeper Tanzimat-era campaign, without turning the empire into an overpowered faction."
  sp_egypt_followup_no_tanzimat_point_tt: "The Egyptian follow-up is completed, but does not grant an additional Tanzimat objective point."
+ sp_je_sick_man_egypt_complete_settlement: "A limited European settlement of the Eastern Question has been concluded"
  sp_tanzimat_sound_finance_12_months_tt: "Maintain a positive fixed national income while not in default for 12 consecutive months."
  sp_tanzimat_funded_administration_12_months_tt: "Maintain positive Bureaucracy without approaching a Bureaucracy shortage for 12 consecutive months."
  je_sick_man_egypt: "The Egyptian Question"

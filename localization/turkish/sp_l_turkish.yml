@@ -2,6 +2,7 @@
  sp_mod_name: "Sublime Porte: Ottoman Reforged"
  sp_mod_description: "Victoria 3 için tarihsel bir Osmanlı içerik ve yeniden çalışma modu: daha sağlam bir 1836 kuruluşu ve daha derin bir Tanzimat dönemi seferi; imparatorluğu aşırı güçlü bir hizbe çevirmeden."
  sp_egypt_followup_no_tanzimat_point_tt: "Mısır takip hedefi tamamlanır ancak ilave bir Tanzimat hedef puanı kazandırmaz."
+ sp_je_sick_man_egypt_complete_settlement: "Doğu Meselesi sınırlı bir Avrupa uzlaşmasıyla sonuçlanmıştır"
  sp_tanzimat_sound_finance_12_months_tt: "Temerrüde düşmeden 12 ay boyunca kesintisiz pozitif sabit millî gelir sürdür."
  sp_tanzimat_funded_administration_12_months_tt: "Bürokrasi kıtlığına yaklaşmadan 12 ay boyunca kesintisiz pozitif Bürokrasi sürdür."
  je_sick_man_egypt: "Mısır Meselesi"
