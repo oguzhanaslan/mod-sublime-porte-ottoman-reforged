@@ -1,0 +1,116 @@
+name: Bug report
+description: Something is broken, missing, or behaves wrongly in the campaign.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks. Please fill this in — it saves a round of questions.
+
+        1836 setup is **new campaign only**. Do not enable a local copy and a Workshop subscription of this mod at the same time.
+
+        Load order: **Community Mod Framework → Community State Framework → Sublime Porte: Ottoman Reforged**.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you see? Include journal names, event titles, or UI text if you can.
+      placeholder: Example: After Tanzimat completes, the Campaign Tree node stays locked even though every requirement is green.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      placeholder: Example: The Constitutional Question node should unlock.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: input
+    id: game-year
+    attributes:
+      label: In-game date
+      description: Year and month if you know them.
+      placeholder: "1838-03"
+    validations:
+      required: false
+  - type: dropdown
+    id: vic3-version
+    attributes:
+      label: Victoria 3 version
+      options:
+        - 1.13.11 (tested)
+        - 1.13.10
+        - Other 1.13.*
+        - Not 1.13 (unsupported)
+        - Unsure
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How you installed this mod
+      options:
+        - Steam Workshop
+        - GitHub ZIP / clone
+        - Paradox Mods / launcher
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: setup
+    attributes:
+      label: Setup checks
+      options:
+        - label: This is a **new campaign** started with the mod enabled (not an old save).
+          required: true
+        - label: Load order is Community Mod Framework → Community State Framework → Sublime Porte.
+          required: true
+        - label: I do **not** have both a local copy and a Workshop subscription of this mod enabled.
+          required: true
+  - type: dropdown
+    id: dlc
+    attributes:
+      label: DLC in this run
+      multiple: true
+      options:
+        - National Awakening
+        - Voice of the People
+        - Sphere of Influence
+        - Other / unsure
+        - None of these
+    validations:
+      required: false
+  - type: textarea
+    id: other-mods
+    attributes:
+      label: Other mods
+      description: List anything else enabled besides CMF, CSF, and this mod. Write `none` if that is all.
+      placeholder: none
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: error.log excerpt (optional)
+      description: Documents/Paradox Interactive/Victoria 3/logs/error.log — paste only the relevant lines, not the whole file.
+      render: text
+    validations:
+      required: false
+  - type: textarea
+    id: extras
+    attributes:
+      label: Screenshots or extra notes
+      description: You can drag images into this box.
+    validations:
+      required: false

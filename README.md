@@ -63,6 +63,14 @@ Then:
 
 Do not enable a local copy and a Workshop subscription of the same mod at the same time.
 
+## Bug reports
+
+Use GitHub Issues (sign in required). Pick **Bug report** or **Hata bildirimi** and fill the form:
+
+https://github.com/oguzhanaslan/mod-sublime-porte-ottoman-reforged/issues/new/choose
+
+Please do not open issues for vanilla Victoria 3 bugs, other mods, or an old save that never had this mod at 1836.
+
 ## Compatibility
 
 - No `replace_path`.
@@ -96,3 +104,5 @@ Vanilla’yı temel alan bir Osmanlı kampanyası: 1836 daha sağlam, Tanzimat y
 Mısır bunalımı, Hünkâr İskelesi, Baltalimanı, Rusya’nın Şark Meselesi baskısı, Rumeli, Bedirhan, Ermeni Meselesi, Trablus–Tunus–Aden, muhacir iskânı, Topkapı–Dolmabahçe, gündelik Bâb-ı Âli olayları, Şirket-i Hayriye, Bank-ı Osmanî ve bu mod için bestelenmiş beş Osmanlı ezgisi de kampanyanın parçasıdır.
 
 Yükleme sırası, kayıt ve uyumluluk notları yukarıdaki İngilizce bölümle aynıdır. Yeni kampanya şarttır. Steam Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=3792636720
+
+Hata bildirimi: https://github.com/oguzhanaslan/mod-sublime-porte-ottoman-reforged/issues/new/choose

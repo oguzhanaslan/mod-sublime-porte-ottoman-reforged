@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Steam Workshop
+    url: https://steamcommunity.com/sharedfiles/filedetails/?id=3792636720
+    about: Comments and ratings. Use GitHub Issues for bugs.
+  - name: Steam Workshop (Türkçe)
+    url: https://steamcommunity.com/sharedfiles/filedetails/?id=3792636720
+    about: Yorum ve puan. Hata bildirimi için GitHub Issues kullanın.

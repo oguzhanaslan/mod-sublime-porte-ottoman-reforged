@@ -1,0 +1,116 @@
+name: Hata bildirimi
+description: Kampanyada bir şey kırık, eksik veya yanlış çalışıyor.
+title: "[Hata]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Teşekkürler. Formu doldurursan aynı soruları tekrar sormayız.
+
+        1836 kurulumu **yalnızca yeni kampanya**. Bu modun hem yerel kopyasını hem Workshop aboneliğini aynı anda açma.
+
+        Yükleme sırası: **Community Mod Framework → Community State Framework → Sublime Porte: Ottoman Reforged**.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Ne oldu
+      description: Ne gördün? Günlük adı, olay başlığı veya arayüz metnini yazabilirsen daha iyi.
+      placeholder: Örnek: Tanzimat bitince Kampanya Ağacı düğümü yeşil şartlara rağmen kilitli kalıyor.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Ne olmasını bekliyordun
+      placeholder: Örnek: Meşrutiyet Meselesi düğümü açılmalıydı.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Nasıl tekrarlanır
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: input
+    id: game-year
+    attributes:
+      label: Oyun içi tarih
+      description: Yıl ve ay, biliyorsan.
+      placeholder: "1838-03"
+    validations:
+      required: false
+  - type: dropdown
+    id: vic3-version
+    attributes:
+      label: Victoria 3 sürümü
+      options:
+        - 1.13.11 (test edilen)
+        - 1.13.10
+        - Diğer 1.13.*
+        - 1.13 değil (desteklenmiyor)
+        - Emin değilim
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Modu nasıl kurdun
+      options:
+        - Steam Workshop
+        - GitHub ZIP / clone
+        - Paradox Mods / launcher
+        - Diğer
+    validations:
+      required: true
+  - type: checkboxes
+    id: setup
+    attributes:
+      label: Kurulum kontrolü
+      options:
+        - label: Bu, mod açıkken başlatılmış **yeni bir kampanya** (eski kayıt değil).
+          required: true
+        - label: Yükleme sırası Community Mod Framework → Community State Framework → Sublime Porte.
+          required: true
+        - label: Bu modun **hem yerel kopyası hem Workshop aboneliği** açık değil.
+          required: true
+  - type: dropdown
+    id: dlc
+    attributes:
+      label: Bu koşudaki DLC
+      multiple: true
+      options:
+        - National Awakening
+        - Voice of the People
+        - Sphere of Influence
+        - Diğer / emin değilim
+        - Bunların hiçbiri
+    validations:
+      required: false
+  - type: textarea
+    id: other-mods
+    attributes:
+      label: Diğer modlar
+      description: CMF, CSF ve bu mod dışında açık olan her şeyi yaz. Başka yoksa `yok` yaz.
+      placeholder: yok
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: error.log kesiti (isteğe bağlı)
+      description: Documents/Paradox Interactive/Victoria 3/logs/error.log — tüm dosyayı değil, ilgili satırları yapıştır.
+      render: text
+    validations:
+      required: false
+  - type: textarea
+    id: extras
+    attributes:
+      label: Ekran görüntüsü veya ek not
+      description: Görselleri bu kutuya sürükleyebilirsin.
+    validations:
+      required: false
