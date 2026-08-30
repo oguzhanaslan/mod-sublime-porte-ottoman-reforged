@@ -2,7 +2,6 @@ name: Build Release
 
 # Automated GitHub + optional Steam Workshop release for Sublime Porte: Ottoman Reforged.
 # Validation ALWAYS runs before version bump / GitHub Release / Steam publish.
-# See docs/STEAM_RELEASE.md.
 
 permissions:
   contents: write
@@ -68,7 +67,7 @@ jobs:
         run: |
           if [[ -z "${TIGER_VALIDATION_REPO:-}" || -z "${TIGER_VALIDATION_TOKEN:-}" ]]; then
             echo "::error::Tiger CI requires secrets TIGER_VALIDATION_REPO and TIGER_VALIDATION_TOKEN."
-            echo "See docs/STEAM_RELEASE.md — private game-files validation repository setup."
+            echo "Tiger CI requires secrets TIGER_VALIDATION_REPO and TIGER_VALIDATION_TOKEN (private game-files repo)."
             echo "STOPPING before version bump / GitHub Release / Steam publish."
             exit 1
           fi

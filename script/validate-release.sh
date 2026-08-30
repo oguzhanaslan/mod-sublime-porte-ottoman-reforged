@@ -86,6 +86,12 @@ pass "descriptor.mod version and dependencies match metadata"
 
 # --- STEAM_PAGE + release scripts present ---
 [[ -f "STEAM_PAGE.bbcode" ]] || fail "STEAM_PAGE.bbcode missing"
+python3 -c 'from pathlib import Path
+n = len(Path("STEAM_PAGE.bbcode").read_text(encoding="utf-8"))
+if n > 8000:
+    raise SystemExit(f"STEAM_PAGE.bbcode is {n} chars; SteamCMD max is 8000")
+print(f"STEAM_PAGE.bbcode {n} chars")
+' || fail "STEAM_PAGE.bbcode exceeds Steam description limit"
 [[ -f "script/create-release-vdf.sh" ]] || fail "script/create-release-vdf.sh missing"
 [[ -f "script/package-steam-release.sh" ]] || fail "script/package-steam-release.sh missing"
 pass "Steam release source files present"

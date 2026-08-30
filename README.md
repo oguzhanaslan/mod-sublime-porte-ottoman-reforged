@@ -51,10 +51,17 @@ National Awakening is **not** required. With the DLC off, the campaign still run
 
 ## Installation
 
+- **Steam Workshop:** [Sublime Porte: Ottoman Reforged](https://steamcommunity.com/sharedfiles/filedetails/?id=3792636720)
+- **Manual:** copy this folder into `Documents/Paradox Interactive/Victoria 3/mod/`
+
+Then:
+
 1. Install Community Mod Framework and Community State Framework.
-2. Copy or subscribe to this mod and enable it in the launcher.
+2. Enable this mod in the launcher.
 3. Confirm the load order above.
 4. Start a **new game** as the Ottoman Empire.
+
+Do not enable a local copy and a Workshop subscription of the same mod at the same time.
 
 ## Compatibility
 
@@ -88,4 +95,4 @@ Vanilla’yı temel alan bir Osmanlı kampanyası: 1836 daha sağlam, Tanzimat y
 
 Mısır bunalımı, Hünkâr İskelesi, Baltalimanı, Rusya’nın Şark Meselesi baskısı, Rumeli, Bedirhan, Ermeni Meselesi, Trablus–Tunus–Aden, muhacir iskânı, Topkapı–Dolmabahçe, gündelik Bâb-ı Âli olayları, Şirket-i Hayriye, Bank-ı Osmanî ve bu mod için bestelenmiş beş Osmanlı ezgisi de kampanyanın parçasıdır.
 
-Yükleme sırası, kayıt ve uyumluluk notları yukarıdaki İngilizce bölümle aynıdır. Yeni kampanya şarttır.
+Yükleme sırası, kayıt ve uyumluluk notları yukarıdaki İngilizce bölümle aynıdır. Yeni kampanya şarttır. Steam Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=3792636720

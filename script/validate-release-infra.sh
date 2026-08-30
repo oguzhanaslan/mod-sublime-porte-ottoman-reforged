@@ -16,13 +16,18 @@ required=(
   script/run-tiger-release.sh
   script/vic3-tiger.release.conf
   STEAM_PAGE.bbcode
-  docs/STEAM_RELEASE.md
+  steam-workshop.id
 )
 
 for f in "${required[@]}"; do
   [[ -f "$f" ]] || fail "missing $f"
 done
 pass "required release files present"
+
+WID="$(tr -d ' \t\r\n' < steam-workshop.id)"
+[[ "$WID" =~ ^[0-9]+$ ]] || fail "steam-workshop.id must be numeric"
+[[ "$WID" != "0" ]] || fail "steam-workshop.id must not be 0"
+pass "steam-workshop.id is $WID"
 
 for sh in script/*.sh; do
   bash -n "$sh" || fail "bash -n failed: $sh"
@@ -89,7 +94,15 @@ bash ./script/create-release-vdf.sh "$TMP/mod" "$TMP/desc.bbcode" "999999" "$TMP
 grep -q '"appid" "529340"' "$TMP/workshop.vdf" || fail "VDF missing appid"
 grep -q '"publishedfileid" "999999"' "$TMP/workshop.vdf" || fail "VDF missing publishedfileid"
 grep -q '"description"' "$TMP/workshop.vdf" || fail "VDF missing description field"
-grep -q 'line1\\nline2\\t\\"quote\\"' "$TMP/workshop.vdf" || fail "VDF description escapes incorrect"
+# SteamCMD leaves \n literal on the Workshop page; description must not contain that sequence.
+if grep -q '\\n' "$TMP/workshop.vdf"; then
+  # changenote may still use \n; description line must not.
+  desc_line="$(grep '"description"' "$TMP/workshop.vdf" || true)"
+  if printf '%s' "$desc_line" | grep -q '\\n'; then
+    fail "VDF description still contains literal \\n (SteamCMD would show it on the page)"
+  fi
+fi
+grep -q 'line1line2 \\"quote\\"' "$TMP/workshop.vdf" || fail "VDF description flatten/escape incorrect"
 grep -q '"changenote"' "$TMP/workshop.vdf" || fail "VDF missing changenote"
 grep -q '"title" "Test Mod"' "$TMP/workshop.vdf" || fail "VDF missing title"
 pass "create-release-vdf.sh dry-run (description + escapes)"
@@ -98,5 +111,18 @@ if bash ./script/create-release-vdf.sh "$TMP/mod" "$TMP/desc.bbcode" "0" "$TMP/n
   fail "create-release-vdf.sh should reject publishedfileid=0"
 fi
 pass "create-release-vdf.sh rejects id 0"
+
+CREATE_NEW=1 VISIBILITY=2 bash ./script/create-release-vdf.sh \
+  "$TMP/mod" "$TMP/desc.bbcode" "0" "$TMP/note.txt" "$TMP/first.vdf"
+grep -q '"publishedfileid" "0"' "$TMP/first.vdf" || fail "CREATE_NEW VDF missing publishedfileid 0"
+grep -q '"visibility" "2"' "$TMP/first.vdf" || fail "CREATE_NEW VDF missing hidden visibility"
+pass "create-release-vdf.sh CREATE_NEW=1 allows id 0 (hidden)"
+
+python3 -c 'print("a"*8001, end="")' >"$TMP/too-long.bbcode"
+if CREATE_NEW=1 bash ./script/create-release-vdf.sh \
+  "$TMP/mod" "$TMP/too-long.bbcode" "0" "$TMP/note.txt" "$TMP/long.vdf" 2>/dev/null; then
+  fail "create-release-vdf.sh should reject descriptions over 8000 chars"
+fi
+pass "create-release-vdf.sh rejects description over 8000 chars"
 
 printf '\nRelease infrastructure static validation passed.\n'
