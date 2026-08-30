@@ -46,6 +46,9 @@ validation-output/
 tiger-release-report.txt
 release-infra-tmp/
 
+# Local operator workspace (Steam/Paradox notes, first-upload scripts, generated VDF)
+.local/
+
 # SteamCMD: binary, self-update files, Guard/sentry, and logs.
 # Logs can record typed passwords as "unknown commands". Never commit this tree.
 .steamcmd/
@@ -53,15 +56,15 @@ steamcmd.exe
 ssfn*
 *.mdmp
 
-# Local Workshop VDF (machine paths) and operator checklists
+# Accidental operator files at repo root
 workshop.vdf
 workshop-first.vdf
 workshop-update.vdf
 YOUR_TURN_STEAM.txt
 STEAM_FIRST_UPLOAD.md
 STEAM_RELEASE.md
-script/first-workshop-upload.sh
-script/first-workshop-upload.ps1
+PARADOX_MODS.md
+PARADOX_MODS_PAGE.txt
 
 # Release packaging (local dry runs)
 steam-staging/
