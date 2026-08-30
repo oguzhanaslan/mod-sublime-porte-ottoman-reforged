@@ -63,13 +63,27 @@ Then:
 
 Do not enable a local copy and a Workshop subscription of the same mod at the same time.
 
-## Bug reports
+## A note from the author
 
-Use GitHub Issues (sign in required). Pick **Bug report** or **Hata bildirimi** and fill the form:
+This is my first mod. I have tried to research the subjects carefully and keep the implementation close to working vanilla patterns, but a project of this size will inevitably have areas that need correction or further balancing.
+
+Historical corrections are welcome, especially when accompanied by a source.
+
+For bug reports, please open a GitHub Issue (English or Turkish form):
 
 https://github.com/oguzhanaslan/mod-sublime-porte-ottoman-reforged/issues/new/choose
 
+Please include:
+
+- Your Victoria 3 version
+- Enabled DLC
+- Your full mod list and load order
+- Whether you started a new campaign
+- The relevant save file or `error.log`, if available
+
 Please do not open issues for vanilla Victoria 3 bugs, other mods, or an old save that never had this mod at 1836.
+
+Thank you for reading, and I hope the mod gives the Ottoman campaign the sense of continuity, difficulty and possibility that I felt it was missing.
 
 ## Compatibility
 
@@ -105,4 +119,8 @@ Mısır bunalımı, Hünkâr İskelesi, Baltalimanı, Rusya’nın Şark Meseles
 
 Yükleme sırası, kayıt ve uyumluluk notları yukarıdaki İngilizce bölümle aynıdır. Yeni kampanya şarttır. Steam Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=3792636720
 
-Hata bildirimi: https://github.com/oguzhanaslan/mod-sublime-porte-ottoman-reforged/issues/new/choose
+Bu benim ilk modum. Konuları dikkatle araştırmaya ve uygulamayı çalışan vanilla kalıplarına yakın tutmaya çalıştım; bu ölçekte bir projede düzeltme ve denge isteyen yerler kaçınılmaz. Tarihsel düzeltmeler, özellikle kaynakla gelirse, hoş karşılanır.
+
+Hata bildirimi için GitHub Issue açın (İngilizce veya Türkçe form): https://github.com/oguzhanaslan/mod-sublime-porte-ottoman-reforged/issues/new/choose
+
+Lütfen Victoria 3 sürümünü, açık DLC’leri, tam mod listesi ve yükleme sırasını, yeni kampanya olup olmadığını, varsa ilgili kaydı veya `error.log` dosyasını ekleyin.
